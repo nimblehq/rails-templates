@@ -307,7 +307,7 @@ after_bundle do
     EOF
   end
 
-  inside('spec') do
+  inside 'spec' do
     #modified spec_helper
     remove_file "spec_helper.rb"
     create_file "spec_helper.rb" do
@@ -324,7 +324,7 @@ after_bundle do
     run 'mkdir fabricators'
     run 'mkdir support'
 
-    inside('support') do
+    inside 'support' do
       create_file "capybara.rb" do
         <<-EOF
 require 'capybara'
