@@ -129,31 +129,21 @@ end
 
 def modify_rails_helper
   <<-EOF
-  # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
-# Prevent database truncation if the environment is production
-abort('The Rails environment is running in production mode!') if Rails.env.production?
 
 require 'spec_helper'
 require 'rspec/rails'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
-# Checks for pending migrations before tests are run.
-# If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "\#{::Rails.root}/spec/fabricators"
 
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
   config.use_transactional_fixtures = false
 
-  # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 end
   EOF
@@ -187,61 +177,81 @@ end
 remove_file "Gemfile"
 
 # Create gemfile
-create_file "Gemfile" do
-  <<-EOF
-source 'https://rubygems.org'
-ruby '2.2.3'
+run "touch Gemfile"
+add_source 'https://rubygems.org'
 
 # Backend
-gem 'rails', '4.2.4'           # Latest stable
-gem 'pg'                       # Use Postgresql as database
+gem 'rails', '4.2.4' # Latest stable
+gem 'pg' # Use Postgresql as database
 gem 'active_model_serializers' # ActiveModel::Serializer implementation and Rails hooks
-gem 'carrierwave'              # Classier solution for file uploads for Rails
-gem 'carrierwave-aws'          # Use the officially supported AWS-SDK library for S3 storage
-gem 'mini_magick'              # A ruby wrapper for ImageMagick or GraphicsMagick command line
-gem 'kaminari'                 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Rails 3 and 4
-gem 'chronic'                  # Chronic is a pure Ruby natural language date parser.
-gem 'paranoia', '~> 2.1.3'     # Paranoia is a re-implementation of acts_as_paranoid for Rails 3 and Rails 4. Soft-deletion of records
-gem 'ffaker'                   # A library for generating fake data such as names, addresses, and phone numbers.
-gem 'fabrication'              # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs.
+gem 'carrierwave' # Classier solution for file uploads for Rails
+gem 'carrierwave-aws' # Use the officially supported AWS-SDK library for S3 storage
+gem 'mini_magick' # A ruby wrapper for ImageMagick or GraphicsMagick command line
+gem 'kaminari' # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Rails 3 and 4
+gem 'chronic' # Chronic is a pure Ruby natural language date parser.
+gem 'paranoia', '~> 2.1.3' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3 and Rails 4. Soft-deletion of records
+gem 'ffaker' # A library for generating fake data such as names, addresses, and phone numbers.
+gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs.
 
 # Admin
 gem 'rails_admin', git: 'git://github.com/sferik/rails_admin' # RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data.
 
 # Authentications & Authorizations
-gem 'devise'                   # Authentication solution for Rails with Warden
-gem 'doorkeeper'               # OAuth 2 provider
+gem 'devise' # Authentication solution for Rails with Warden
+gem 'doorkeeper' # OAuth 2 provider
+gem 'cancancan', '~> 1.10'     # Continuation of CanCan, the authorization Gem for Ruby on Rails.
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-underscore'     # Adds Underscore JS to the Rails asset pipeline
-  gem 'rails-assets-jquery.cookie'  # Adds jquery-cookie to the Rails asset pipeline
-  gem 'rails-assets-animate-sass'   # Animate.sass for the Rails assets pipeline
-end
+# Assets
+gem 'jquery-rails'             # Use jquery as the JavaScript library
+gem 'font-awesome-sass'        # Font-Awesome Sass gem for use in Ruby/Rails projects
+gem 'sass-rails'               # SASS
 
-group :development do
-  gem 'better_errors'          # Better error page for Rails and other Rack apps
-  gem 'binding_of_caller'      # Retrieve the binding of a method's caller in MRI 1.9.2+
-  gem 'quiet_assets'           # For cleaner logs
-  gem 'bullet'                 # help to kill N+1 queries and unused eager loading
-  gem 'awesome_print'          # Pretty print your Ruby objects with style -- in full color and with proper indentation
+# Localization
+gem 'phrase'
+
+# Mailers
+gem 'roadie-rails'
+
+gem_group :development do
+  gem 'better_errors' # Better error page for Rails and other Rack apps
+  gem 'binding_of_caller' # Retrieve the binding of a method's caller in MRI 1.9.2+
+  gem 'quiet_assets' # For cleaner logs
+  gem 'bullet' # help to kill N+1 queries and unused eager loading
+  gem 'awesome_print' # Pretty print your Ruby objects with style -- in full color and with proper indentation
   gem 'guard-rubocop'
 end
 
-group :development, :test do
-  gem 'figaro'                 # Simple Rails app configuration
+gem_group :development, :test do
+  gem 'figaro' # Simple Rails app configuration
 
-  gem 'rspec-rails'            # Rails testing engine
-  gem 'guard-rspec'            # Auto-run specs
-  gem 'shoulda-matchers'       # Tests common Rails functionalities
-  gem 'zeus-parallel_tests'    # Speeding up your tests by preloading a Rails app
-  gem 'capybara'               # Integration testing
-  gem 'poltergeist'            # Headless browser
-  gem 'database_cleaner'       # Use Database Cleaner
+  gem 'rspec-rails' # Rails testing engine
+  gem 'guard-rspec' # Auto-run specs
+  gem 'shoulda-matchers' # Tests common Rails functionalities
+  gem 'zeus-parallel_tests' # Speeding up your tests by preloading a Rails app
+  gem 'capybara' # Integration testing
+  gem 'poltergeist' # Headless browser
+  gem 'database_cleaner' # Use Database Cleaner
 
-  gem 'byebug'                 # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'spring'                 # Spring speeds up development by keeping your application running in the background.
-  gem 'letter_opener'          # Preview mail in the browser instead of sending.
+  gem 'byebug' # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'spring' # Spring speeds up development by keeping your application running in the background.
+  gem 'letter_opener' # Preview mail in the browser instead of sending.
 end
+
+inject_into_file 'Gemfile', after: "source 'https://rubygems.org'\n" do
+  <<-EOF
+ruby '2.2.3'
+  EOF
+end
+
+inject_into_file 'Gemfile', after: "gem 'cancancan', '~> 1.10'\n" do
+  <<-EOF
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-underscore' # Adds Underscore JS to the Rails asset pipeline
+  gem 'rails-assets-jquery.cookie' # Adds jquery-cookie to the Rails asset pipeline
+  gem 'rails-assets-animate-sass' # Animate.sass for the Rails assets pipeline
+end
+
   EOF
 end
 
@@ -251,9 +261,21 @@ create_file 'docker-compose.yml' do
   <<-EOF
 db:
   image: postgres:9.4
-  container_name: circle_db
+  container_name: #{app_name}_db
   ports:
     - "5432:5432"
+  EOF
+end
+
+remove_file '.dockerignore'
+create_file '.dockerignore' do
+  <<-EOF
+.git
+log
+tmp
+.rspec
+docker-compose.yml
+README.md
   EOF
 end
 
@@ -285,16 +307,47 @@ after_bundle do
     EOF
   end
 
-  #modified spec_helper
-  remove_file "spec/spec_helper.rb"
-  create_file "spec/spec_helper.rb" do
-    modify_spec_helper
-  end
+  inside('spec') do
+    #modified spec_helper
+    remove_file "spec_helper.rb"
+    create_file "spec_helper.rb" do
+      modify_spec_helper
+    end
 
-  #modified rails_helper
-  remove_file "spec/rails_helper.rb"
-  create_file "spec/rails_helper.rb" do
-    modify_rails_helper
+    #modified rails_helper
+    remove_file "rails_helper.rb"
+    create_file "rails_helper.rb" do
+      modify_rails_helper
+    end
+
+    # folder for fabricators
+    run 'mkdir fabricators'
+    run 'mkdir support'
+
+    inside('support') do
+      create_file "capybara.rb" do
+        <<-EOF
+require 'capybara'
+require 'capybara/poltergeist'
+
+Capybara.default_host = 'http://0.0.0.0:3000'
+Capybara.javascript_driver = :poltergeist
+
+Rails.application.routes.default_url_options[:host] = '0.0.0.0:3000'
+        EOF
+      end
+
+      create_file "shoulda_matchers.rb" do
+        <<-EOF
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+        EOF
+      end
+    end
   end
 
   #guard
@@ -331,6 +384,15 @@ Zeus.plan = CustomPlan.new
     generate_rubocop_yml
   end
 
+  #shell script for run database on docker
+  create_file "envsetup.sh" do
+    <<-EOF
+docker-machine start default
+eval "$(docker-machine env default)"
+docker-compose up -d
+    EOF
+  end
+  FileUtils.chmod 0755, 'envsetup.sh'
 end
 
 
