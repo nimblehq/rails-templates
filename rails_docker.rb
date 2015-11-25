@@ -1,8 +1,26 @@
+require 'shellwords'
 # Add the current directory to the path Thor uses
 # to look up files
+
+def current_directory
+  @current_directory ||=
+      if __FILE__ =~ %r{\Ahttps?://}
+        tempdir = Dir.mktmpdir("rails-templates")
+        at_exit { FileUtils.remove_entry(tempdir) }
+        git clone: [
+                "--quiet",
+                "https://github.com/nimbl3/rails-templates.git",
+                tempdir
+            ].map(&:shellescape).join(" ")
+
+        tempdir
+      else
+        File.expand_path(File.dirname(__FILE__))
+      end
+end
+
 def source_paths
-  Array(super) +
-      [File.expand_path(File.dirname(__FILE__))]
+  Array(super) + [current_directory]
 end
 
 # Gemfile
