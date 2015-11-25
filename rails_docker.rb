@@ -25,46 +25,21 @@ end
 
 # Gemfile
 remove_file "Gemfile"
-copy_file 'Gemfile.txt', 'Gemfile'
+copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
 
 # Docker
 remove_file 'docker-compose.yml'
-copy_file 'docker-compose.yml', 'docker-compose.yml'
+copy_file 'rails_docker/docker-compose.yml', 'docker-compose.yml'
 gsub_file 'docker-compose.yml', '#{app_name}', "#{app_name}"
 
 remove_file '.dockerignore'
-copy_file '.dockerignore', '.dockerignore'
+copy_file 'rails_docker/.dockerignore', '.dockerignore'
 
 
 # Database.yml
-inside 'config' do
-  remove_file 'database.yml'
-  create_file 'database.yml' do
-    <<-EOF
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-
-development:
-  <<: *default
-  host:     <%= ENV['DB_HOST'] %>
-  port:     <%= ENV['DB_PORT'] %>
-  username: postgres
-  database: #{app_name}_development
-
-test:
-  <<: *default
-  host:     <%= ENV['DB_HOST'] %>
-  port:     <%= ENV['DB_PORT'] %>
-  username: postgres
-  database: #{app_name}_test
-
-production:
-  url: <%= ENV['DATABASE_URL'] %>
-    EOF
-  end
-end
+remove_file 'config/database.yml'
+copy_file 'rails_docker/database.yml', 'config/database.yml'
+gsub_file 'config/database.yml', '#{app_name}', "#{app_name}"
 
 after_bundle do
   run "spring stop"
@@ -78,24 +53,24 @@ after_bundle do
   #rspec
   generate "rspec:install"
   remove_file ".rspec"
-  copy_file '.rspec', '.rspec'
+  copy_file 'shared/rspec/.rspec', '.rspec'
 
   #modified spec_helper
   remove_file "spec/spec_helper.rb"
-  copy_file 'rspec/spec_helper.rb', 'spec/spec_helper.rb'
+  copy_file 'shared/rspec/spec_helper.rb', 'spec/spec_helper.rb'
 
   #modified rails_helper
   remove_file "spec/rails_helper.rb"
-  copy_file 'rspec/rails_helper.rb', 'spec/rails_helper.rb'
+  copy_file 'shared/rspec/rails_helper.rb', 'spec/rails_helper.rb'
 
   # folder for fabricators
   run 'mkdir spec/fabricators'
   run 'mkdir spec/support'
 
   # Capybara
-  copy_file 'rspec/support/capybara.rb', 'spec/support/capybara.rb'
+  copy_file 'shared/rspec/support/capybara.rb', 'spec/support/capybara.rb'
   # Shoulda matchers
-  copy_file 'rspec/support/shoulda_matchers.rb', 'spec/support/shoulda_matchers.rb'
+  copy_file 'shared/rspec/support/shoulda_matchers.rb', 'spec/support/shoulda_matchers.rb'
 
   #guard
   run "guard init rspec"
@@ -104,17 +79,17 @@ after_bundle do
 
   #Modified Guardfile
   remove_file "Guardfile"
-  copy_file 'Guardfile', 'Guardfile'
+  copy_file 'shared/Guardfile', 'Guardfile'
 
   #Modified custom_plan.rb
   remove_file "custom_plan.rb"
-  copy_file 'custom_plan.rb', 'custom_plan.rb'
+  copy_file 'shared/custom_plan.rb', 'custom_plan.rb'
 
   #create .rubocop.yml
-  copy_file '.rubocop.yml', '.rubocop.yml'
+  copy_file 'shared/.rubocop.yml', '.rubocop.yml'
 
   #shell script for run database on docker
-  copy_file 'envsetup.sh', 'envsetup.sh'
+  copy_file 'rails_docker/envsetup.sh', 'envsetup.sh'
   FileUtils.chmod 0755, 'envsetup.sh'
 end
 
