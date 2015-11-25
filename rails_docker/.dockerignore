@@ -1,0 +1,6 @@
+.git
+log
+tmp
+.rspec
+docker-compose.yml
+README.md
