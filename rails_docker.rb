@@ -12,7 +12,7 @@ def current_directory
                 "https://github.com/nimbl3/rails-templates.git",
                 tempdir
             ].map(&:shellescape).join(" ")
-p tempdir
+
         tempdir
       else
         File.expand_path(File.dirname(__FILE__))
