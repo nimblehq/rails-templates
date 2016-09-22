@@ -12,7 +12,7 @@ def current_directory
                 "https://github.com/nimbl3/rails-templates.git",
                 tempdir
             ].map(&:shellescape).join(" ")
-
+p tempdir
         tempdir
       else
         File.expand_path(File.dirname(__FILE__))
@@ -28,6 +28,10 @@ remove_file "Gemfile"
 copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
 
 # Docker
+remove_file 'Dockerfile'
+copy_file 'rails_docker/Dockerfile', 'Dockerfile'
+gsub_file 'Dockerfile', '#{app_name}', "#{app_name}"
+
 remove_file 'docker-compose.yml'
 copy_file 'rails_docker/docker-compose.yml', 'docker-compose.yml'
 gsub_file 'docker-compose.yml', '#{app_name}', "#{app_name}"

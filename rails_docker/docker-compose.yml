@@ -1,5 +1,25 @@
-db:
-  image: postgres:9.4
-  container_name: #{app_name}_db
-  ports:
-    - "5432:5432"
+version: '2'
+services:
+  db:
+    image: postgres:9.4.1
+    container_name: #{app_name}_db
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    container_name: #{app_name}_web
+    command: bin/rails server --port 3000 --binding 0.0.0.0
+    ports:
+      - "3000:3000"
+    links:
+      - db
+    volumes:
+      - .:/#{app_name}
+    volumes_from:
+        - bundle
+
+  bundle:
+    image: busybox
+    volumes:
+      - /bundle
