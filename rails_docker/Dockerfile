@@ -1,10 +1,6 @@
 FROM ruby:2.3.1
 
-RUN apt-get update -qq && apt-get install -y build-essential \
-    apt-get install -y libpq-dev \ # for postgres
-    apt-get install -y libxml2-dev libxslt1-dev \ # for nokogiri
-    apt-get install -y libqt4-webkit libqt4-dev xvfb \ # for capybara-webkit
-    apt-get install -y nodejs # for a JS runtime
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
 
 ENV APP_HOME /#{app_name}
 RUN mkdir $APP_HOME
