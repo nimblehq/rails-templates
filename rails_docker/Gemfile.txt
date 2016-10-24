@@ -34,9 +34,6 @@ gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'font-awesome-sass' # Font-Awesome Sass gem for use in Ruby/Rails projects
 gem 'sass-rails' # SASS
 
-# Localization
-gem 'phrase'
-
 group :development do
   gem 'better_errors' # Better error page for Rails and other Rack apps
   gem 'binding_of_caller' # Retrieve the binding of a method's caller in MRI 1.9.2+
@@ -44,6 +41,7 @@ group :development do
   gem 'awesome_print' # Pretty print your Ruby objects with style -- in full color and with proper indentation
   gem 'guard-rubocop'
   gem 'roadie-rails' # Mailers
+  gem 'rubycritic', require: false # A Ruby code quality reporter
 end
 
 group :development, :test do
@@ -62,6 +60,10 @@ group :development, :test do
   gem 'spring-watcher-listen', '~> 2.0.0' # Makes Spring watch the filesystem for changes using Listen
   gem 'listen', '~> 3.0.5' # Listens to file modifications
   gem 'letter_opener' # Preview mail in the browser instead of sending.
+end
+
+group :test do
+  gem 'simplecov', require: false # code coverage analysis tool for Ruby
 end
 
 group :production do

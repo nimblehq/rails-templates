@@ -9,6 +9,8 @@ def current_directory
         at_exit { FileUtils.remove_entry(tempdir) }
         git clone: [
                 "--quiet",
+                "-b",
+                "chore/rails5",
                 "https://github.com/nimbl3/rails-templates.git",
                 tempdir
             ].map(&:shellescape).join(" ")
