@@ -9,6 +9,8 @@ def current_directory
         at_exit { FileUtils.remove_entry(tempdir) }
         git clone: [
                 "--quiet",
+                "-b",
+                "chore/rails5",
                 "https://github.com/nimbl3/rails-templates.git",
                 tempdir
             ].map(&:shellescape).join(" ")
@@ -28,6 +30,10 @@ remove_file "Gemfile"
 copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
 
 # Docker
+remove_file 'Dockerfile'
+copy_file 'rails_docker/Dockerfile', 'Dockerfile'
+gsub_file 'Dockerfile', '#{app_name}', "#{app_name}"
+
 remove_file 'docker-compose.yml'
 copy_file 'rails_docker/docker-compose.yml', 'docker-compose.yml'
 gsub_file 'docker-compose.yml', '#{app_name}', "#{app_name}"
