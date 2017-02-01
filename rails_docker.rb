@@ -28,6 +28,10 @@ remove_file "Gemfile"
 copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
 
 # Docker
+remove_file 'Dockerfile'
+copy_file 'rails_docker/Dockerfile', 'Dockerfile'
+gsub_file 'Dockerfile', '#{app_name}', "#{app_name}"
+
 remove_file 'docker-compose.yml'
 copy_file 'rails_docker/docker-compose.yml', 'docker-compose.yml'
 gsub_file 'docker-compose.yml', '#{app_name}', "#{app_name}"
@@ -92,5 +96,3 @@ after_bundle do
   copy_file 'rails_docker/envsetup.sh', 'envsetup.sh'
   FileUtils.chmod 0755, 'envsetup.sh'
 end
-
-
