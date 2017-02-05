@@ -13,7 +13,8 @@ gem 'kaminari' # A Scope & Engine based, clean, powerful, customizable and sophi
 gem 'chronic' # Chronic is a pure Ruby natural language date parser.
 gem 'paranoia', '~> 2.2.0.pre' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3 and Rails 4. Soft-deletion of records
 gem 'ffaker' # A library for generating fake data such as names, addresses, and phone numbers.
-gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs.
+gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs.\
+gem 'sidekiq' # background processing for Ruby
 
 # Admin
 gem 'rails_admin', git: 'git://github.com/sferik/rails_admin' # RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data.

@@ -24,7 +24,7 @@ def source_paths
 end
 
 # Gemfile
-remove_file "Gemfile"
+remove_file 'Gemfile'
 copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
 
 # Docker
@@ -53,6 +53,15 @@ after_bundle do
   insert_into_file "config/environments/development.rb", after: "config.assets.raise_runtime_errors = true\n\n" do
     "  config.action_mailer.default_url_options = { host: \"localhost\", port: 3000 }"
   end
+
+  inject_into_file 'config/environments/development.rb',
+                   "require 'sidekiq/testing/inline'\n\n",
+                   before: /^Rails.application.configure do/
+
+
+  # sidekiq
+  copy_file 'shared/application.rb', 'config/application.rb', force: true
+  copy_file 'rails_docker/sidekiq.yml', 'config/sidekiq.yml', force: true
 
   #rspec
   generate "rspec:install"
