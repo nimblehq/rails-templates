@@ -39,11 +39,17 @@ gsub_file 'docker-compose.yml', '#{app_name}', "#{app_name}"
 remove_file '.dockerignore'
 copy_file 'rails_docker/.dockerignore', '.dockerignore'
 
+copy_file 'rails_docker/application.yml', 'config/application.yml'
+gsub_file 'config/application.yml', '#{app_name}', "#{app_name}"
 
 # Database.yml
 remove_file 'config/database.yml'
 copy_file 'rails_docker/database.yml', 'config/database.yml'
 gsub_file 'config/database.yml', '#{app_name}', "#{app_name}"
+
+# Removing turbolinks
+remove_file 'app/assets/javascripts/application.js'
+copy_file 'shared/app/assets/javascripts/application.js', 'app/assets/javascripts/application.js'
 
 after_bundle do
   run "spring stop"
@@ -70,29 +76,31 @@ after_bundle do
   # folder for fabricators
   run 'mkdir spec/fabricators'
   run 'mkdir spec/support'
+  run 'mkdir spec/codebase'
 
+  # Codebase checks
+  copy_file 'shared/rspec/codebase/codebase_spec.rb', 'spec/codebase/codebase_spec.rb'
   # Capybara
   copy_file 'shared/rspec/support/capybara.rb', 'spec/support/capybara.rb'
   # Shoulda matchers
   copy_file 'shared/rspec/support/shoulda_matchers.rb', 'spec/support/shoulda_matchers.rb'
-
-  #guard
-  run "guard init rspec"
-  run "guard init rubocop"
-  run "zeus-parallel_tests init"
+  # Database cleaner
+  copy_file 'shared/rspec/support/database_cleaner.rb', 'spec/support/database_cleaner.rb'
 
   #Modified Guardfile
   remove_file "Guardfile"
   copy_file 'shared/Guardfile', 'Guardfile'
-
-  #Modified custom_plan.rb
-  remove_file "custom_plan.rb"
-  copy_file 'shared/custom_plan.rb', 'custom_plan.rb'
 
   #create .rubocop.yml
   copy_file 'shared/.rubocop.yml', '.rubocop.yml'
 
   #shell script for run database on docker
   copy_file 'rails_docker/envsetup.sh', 'envsetup.sh'
+
+  #guard
+  run "bundle exec spring binstub --all"
+  run "bundle exec spring binstub rspec"
+  run "guard"
+
   FileUtils.chmod 0755, 'envsetup.sh'
 end

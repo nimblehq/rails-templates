@@ -7,15 +7,15 @@ development:
   <<: *default
   host:     <%= ENV['DB_HOST'] %>
   port:     <%= ENV['DB_PORT'] %>
-  username: postgres
-  database: #{app_name}_development
+  username: <%= ENV['USERNAME'] %>
+  database: <%= ENV['DB_NAME'] %>
 
 test:
   <<: *default
   host:     <%= ENV['DB_HOST'] %>
   port:     <%= ENV['DB_PORT'] %>
-  username: postgres
-  database: #{app_name}_test
+  username: <%= ENV['USERNAME'] %>
+  database: <%= ENV['DB_NAME'] %>
 
 production:
   url: <%= ENV['DATABASE_URL'] %>

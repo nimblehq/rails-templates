@@ -1,5 +1,4 @@
 AllCops:
-  RunRailsCops: true
   Exclude:
     - 'vendor/**/*'
     - 'db/**/*'
@@ -11,10 +10,24 @@ AllCops:
     - 'Guardfile'
     - 'config/application.rb'
     - 'config/initializers/**/*'
+  TargetRubyVersion: 2.4
+
+Rails:
+  Enabled: true
 
 Documentation:
   Enabled: false
 
 Metrics/LineLength:
   Max: 120
-  EOF
+  Exclude:
+    - 'spec/**/*'
+    # most of the specs file have long line length but readability is still good
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    # most of the specs file have long block length but readability is still good
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
