@@ -39,7 +39,6 @@ gsub_file 'docker-compose.yml', '#{app_name}', "#{app_name}"
 remove_file '.dockerignore'
 copy_file 'rails_docker/.dockerignore', '.dockerignore'
 
-remove_file 'config/application.yml'
 copy_file 'rails_docker/application.yml', 'config/application.yml'
 gsub_file 'config/application.yml', '#{app_name}', "#{app_name}"
 
