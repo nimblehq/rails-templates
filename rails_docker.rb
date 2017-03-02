@@ -39,12 +39,13 @@ gsub_file 'docker-compose.yml', '#{app_name}', "#{app_name}"
 remove_file '.dockerignore'
 copy_file 'rails_docker/.dockerignore', '.dockerignore'
 
-copy_file 'rails_docker/application.yml', 'app/config/application.yml'
+remove_file 'config/application.yml'
+copy_file 'rails_docker/application.yml', 'config/application.yml'
 gsub_file 'config/application.yml', '#{app_name}', "#{app_name}"
 
 # Database.yml
-remove_file 'config/database.yml'
-copy_file 'rails_docker/database.yml', 'app/config/database.yml'
+remove_file 'app/config/database.yml'
+copy_file 'rails_docker/database.yml', 'config/database.yml'
 gsub_file 'config/database.yml', '#{app_name}', "#{app_name}"
 
 # Removing turbolinks
