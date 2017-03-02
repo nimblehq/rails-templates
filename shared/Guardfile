@@ -1,9 +1,9 @@
 rspec_options = {
-  cmd: 'zeus rspec',
-  results_file: 'tmp/guard_rspec_results.txt'
+  cmd: 'spring rspec',
+  results_file: '/tmp/guard_rspec_results.txt'
 }
 
-guard :shared, rspec_options do
+guard :rspec, rspec_options do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 

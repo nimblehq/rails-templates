@@ -21,7 +21,7 @@ gem 'rails_admin', git: 'git://github.com/sferik/rails_admin' # RailsAdmin is a 
 # Authentications & Authorizations
 gem 'devise' # Authentication solution for Rails with Warden
 gem 'doorkeeper' # OAuth 2 provider
-gem 'cancancan', '~> 1.10' # Continuation of CanCan, the authorization Gem for Ruby on Rails.
+gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore' # Adds Underscore JS to the Rails asset pipeline
@@ -33,6 +33,7 @@ end
 gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'font-awesome-sass' # Font-Awesome Sass gem for use in Ruby/Rails projects
 gem 'sass-rails' # SASS
+gem 'uglifier'
 
 group :development do
   gem 'better_errors' # Better error page for Rails and other Rack apps
@@ -42,7 +43,7 @@ group :development do
   gem 'guard-rubocop'
   gem 'roadie-rails' # Mailers
   gem 'rubycritic', require: false # A Ruby code quality reporter
-  gem 'brakeman', require: false # A static analysis security vulnerability scanner for Ruby on Rails applications 
+  gem 'brakeman', require: false # A static analysis security vulnerability scanner for Ruby on Rails applications
 end
 
 group :development, :test do
@@ -51,13 +52,13 @@ group :development, :test do
   gem 'rspec-rails' # Rails testing engine
   gem 'guard-rspec' # Auto-run specs
   gem 'shoulda-matchers' # Tests common Rails functionalities
-  gem 'zeus-parallel_tests' # Speeding up your tests by preloading a Rails app
   gem 'capybara' # Integration testing
   gem 'poltergeist' # Headless browser
   gem 'database_cleaner' # Use Database Cleaner
 
   gem 'byebug' # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'spring' # Spring speeds up development by keeping your application running in the background.
+  gem 'spring-commands-rspec' # This gem implements the rspec command for Spring.
   gem 'spring-watcher-listen', '~> 2.0.0' # Makes Spring watch the filesystem for changes using Listen
   gem 'listen', '~> 3.0.5' # Listens to file modifications
   gem 'letter_opener' # Preview mail in the browser instead of sending.
@@ -70,7 +71,5 @@ end
 group :production do
   gem 'rails_12factor'         # Makes running your Rails app easier. Based on the ideas behind 12factor.net (Heroku)
   gem 'rack-timeout'           # Rack middleware which aborts requests that have been running for longer than a specified timeout.
-  gem 'mandrill-api'           # A Ruby API library for the Mandrill email as a service platform.
   gem 'newrelic_rpm'           # New Relic provides you with deep information about the performance of your web application as it runs in production.
-  gem 'intercom-rails'         # The easiest way to install Intercom in a Rails app
 end
