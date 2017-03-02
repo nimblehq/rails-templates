@@ -84,6 +84,8 @@ after_bundle do
   copy_file 'shared/rspec/support/capybara.rb', 'spec/support/capybara.rb'
   # Shoulda matchers
   copy_file 'shared/rspec/support/shoulda_matchers.rb', 'spec/support/shoulda_matchers.rb'
+  # Database cleaner
+  copy_file 'shared/rspec/support/database_cleaner.rb', 'spec/support/database_cleaner.rb'
 
   #Modified Guardfile
   remove_file "Guardfile"
