@@ -9,8 +9,6 @@ rails new < app_name > -m https://raw.githubusercontent.com/nimbl3/rails-templat
 ```
 
 # TODO:
-Add uglifier
 Create heroku apps for staging and production, asking Y/N
-Remove turbolinks
 Fix letter opener and mailer for development
 Integrate with CI?
