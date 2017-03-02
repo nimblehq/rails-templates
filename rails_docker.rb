@@ -47,6 +47,10 @@ remove_file 'config/database.yml'
 copy_file 'rails_docker/database.yml', 'config/database.yml'
 gsub_file 'config/database.yml', '#{app_name}', "#{app_name}"
 
+# Removing turbolinks
+remove_file 'app/assets/javascripts/application.js'
+copy_file 'shared/app/assets/javascripts/application.js', 'app/assets/javascripts/application.js'
+
 after_bundle do
   run "spring stop"
 
