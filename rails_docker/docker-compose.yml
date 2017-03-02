@@ -9,19 +9,10 @@ services:
       - "5432:5432"
 
   web:
-    build: .
-    container_name: #{app_name}_web
-    command: bin/rails server --port 3000 --binding 0.0.0.0
-    ports:
-      - "3000:3000"
-    links:
+    depends_on:
       - db
+    build: .
+    ports:
+      - '3000:3000'
     volumes:
-      - .:/#{app_name}
-    volumes_from:
-        - bundle
-
-  bundle:
-    image: busybox
-    volumes:
-      - /bundle
+      - '.:/#{app_name}'
