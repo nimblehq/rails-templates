@@ -9,10 +9,15 @@ services:
       - "5432:5432"
 
   web:
+    command: dumb-init bash -c "bundle check || bundle install && rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     depends_on:
       - db
     build: .
     ports:
-      - '3000:3000'
+      - "3000:3000"
     volumes:
       - '.:/#{app_name}'
+      - "ruby-bundle:/usr/local/bundle"
+
+volumes:
+  ruby-bundle:
