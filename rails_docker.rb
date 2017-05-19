@@ -1,4 +1,5 @@
 require 'shellwords'
+require_relative 'lib/rspec'
 # Add the current directory to the path Thor uses
 # to look up files
 
@@ -63,31 +64,7 @@ after_bundle do
   end
 
   #rspec
-  generate "rspec:install"
-  remove_file ".rspec"
-  copy_file 'shared/rspec/.rspec', '.rspec'
-
-  #modified spec_helper
-  remove_file "spec/spec_helper.rb"
-  copy_file 'shared/rspec/spec_helper.rb', 'spec/spec_helper.rb'
-
-  #modified rails_helper
-  remove_file "spec/rails_helper.rb"
-  copy_file 'shared/rspec/rails_helper.rb', 'spec/rails_helper.rb'
-
-  # folder for fabricators
-  run 'mkdir spec/fabricators'
-  run 'mkdir spec/support'
-  run 'mkdir spec/codebase'
-
-  # Codebase checks
-  copy_file 'shared/rspec/codebase/codebase_spec.rb', 'spec/codebase/codebase_spec.rb'
-  # Capybara
-  copy_file 'shared/rspec/support/capybara.rb', 'spec/support/capybara.rb'
-  # Shoulda matchers
-  copy_file 'shared/rspec/support/shoulda_matchers.rb', 'spec/support/shoulda_matchers.rb'
-  # Database cleaner
-  copy_file 'shared/rspec/support/database_cleaner.rb', 'spec/support/database_cleaner.rb'
+  setup_rspec
 
   #Modified Guardfile
   remove_file "Guardfile"
@@ -102,7 +79,6 @@ after_bundle do
   #guard
   run "bundle exec spring binstub --all"
   run "bundle exec spring binstub rspec"
-  run "guard"
 
   FileUtils.chmod 0755, 'envsetup.sh'
 end

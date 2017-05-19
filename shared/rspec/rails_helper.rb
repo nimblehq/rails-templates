@@ -3,7 +3,8 @@ require File.expand_path('../../config/environment', __FILE__)
 
 require 'spec_helper'
 require 'rspec/rails'
-require 'devise'
+require 'json_matchers/rspec'
+require 'pundit/rspec'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
@@ -17,7 +18,4 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include Rails.application.routes.url_helpers
-
-  # Devise
-  config.include Devise::Test::ControllerHelpers, type: :controller
 end
