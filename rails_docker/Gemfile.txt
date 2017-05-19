@@ -16,7 +16,7 @@ gem 'ffaker' # A library for generating fake data such as names, addresses, and 
 gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs.
 
 # Admin
-gem 'rails_admin', git: 'git://github.com/sferik/rails_admin' # RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data.
+gem 'rails_admin'
 
 # Authentications & Authorizations
 gem 'devise' # Authentication solution for Rails with Warden
