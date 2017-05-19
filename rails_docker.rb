@@ -24,7 +24,7 @@ def source_paths
 end
 
 # Gemfile
-remove_file "Gemfile"
+remove_file 'Gemfile'
 copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
 
 # Docker
@@ -41,6 +41,8 @@ copy_file 'rails_docker/.dockerignore', '.dockerignore'
 
 copy_file 'rails_docker/application.yml', 'config/application.yml'
 gsub_file 'config/application.yml', '#{app_name}', "#{app_name}"
+
+copy_file 'rails_docker/test.sh', 'bin/test.sh' # shell script for run tests on docker
 
 # Database.yml
 remove_file 'config/database.yml'
