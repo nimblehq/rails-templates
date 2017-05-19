@@ -38,7 +38,6 @@ gem 'uglifier'
 group :development do
   gem 'better_errors' # Better error page for Rails and other Rack apps
   gem 'binding_of_caller' # Retrieve the binding of a method's caller in MRI 1.9.2+
-  gem 'bullet' # help to kill N+1 queries and unused eager loading
   gem 'awesome_print' # Pretty print your Ruby objects with style -- in full color and with proper indentation
   gem 'guard-rubocop'
   gem 'roadie-rails' # Mailers
@@ -47,13 +46,14 @@ group :development do
 end
 
 group :development, :test do
+  gem 'bullet' # help to kill N+1 queries and unused eager loading
   gem 'figaro' # Simple Rails app configuration
-
   gem 'rspec-rails' # Rails testing engine
   gem 'guard-rspec' # Auto-run specs
   gem 'shoulda-matchers' # Tests common Rails functionalities
   gem 'capybara' # Integration testing
   gem 'poltergeist' # Headless browser
+  gem 'selenium-webdriver', '2.53.4' # Ruby bindings for Selenium/WebDriver
   gem 'database_cleaner' # Use Database Cleaner
 
   gem 'byebug' # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -66,6 +66,11 @@ end
 
 group :test do
   gem 'simplecov', require: false # code coverage analysis tool for Ruby
+  gem 'vcr' # Gem for recording test suite's HTTP interactions
+  gem 'timecop' # Gem for time travel
+  gem 'json_matchers' # Validate the JSON returned by your Rails JSON APIs
+  gem 'rspec-retry' # Retry randomly failing rspec example.
+  gem 'rails-controller-testing' # add helpers for template testing
 end
 
 group :production do
