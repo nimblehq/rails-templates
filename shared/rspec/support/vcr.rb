@@ -5,7 +5,6 @@ VCR.configure do |c|
   c.allow_http_connections_when_no_cassette = false
   c.hook_into :webmock
   c.ignore_localhost = true
-  c.filter_sensitive_data('<GOOGLE_API_KEY>') { ENV['GOOGLE_API_KEY'] }
   c.ignore_request do |request|
     URI(request.uri).port == 9200
   end

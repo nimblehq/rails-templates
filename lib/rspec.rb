@@ -6,7 +6,7 @@ def setup_rspec
   FileUtils.cp_r "#{current_directory}/shared/rspec/.", 'spec/'
   run 'rm -rf spec/.rspec' # remove the .rspec file from rspec folder
 
-  # folder for fabricators
+  # folder for rspec
   run 'mkdir spec/codebase'
   run 'mkdir spec/fabricators'
   run 'mkdir spec/features'
