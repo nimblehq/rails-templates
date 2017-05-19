@@ -1,12 +1,8 @@
 FROM ruby:2.4.0
 
 # Define all the envs here
-ENV NODE_VERSION=6
+ENV NODE_VERSION="6"
 ENV PHANTOMJS_VERSION="2.1.1"
-
-ENV LANG="en_US.UTF-8"
-ENV LC_ALL="en_US.UTF-8"
-ENV LANGUAGE="en_US:en"
 
 ENV APP_HOME /#{app_name}
 
@@ -14,6 +10,10 @@ ENV APP_HOME /#{app_name}
 ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile
 ENV BUNDLE_JOBS=2
 ENV BUNDLE_PATH="/bundle"
+
+ENV LANG="en_US.UTF-8"
+ENV LC_ALL="en_US.UTF-8"
+ENV LANGUAGE="en_US:en"
 
 # Add the PPA (personal package archive) maintained by NodeSource
 # This will have more up-to-date versions of Node.js than the official Debian repositories
