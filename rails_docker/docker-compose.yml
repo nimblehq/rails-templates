@@ -20,7 +20,7 @@ services:
   test:
     build: .
     image: #{app_name}_test
-    entrypoint: script/test.sh
+    entrypoint: bin/test.sh
     stdin_open: true
     tty: true
     volumes:
