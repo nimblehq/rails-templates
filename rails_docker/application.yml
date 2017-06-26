@@ -1,5 +1,5 @@
 default: &default
-  DB_HOST: "192.168.99.100"
+  DB_HOST: "db"
   DB_PORT: "5432"
   USERNAME: "postgres"
   MAILER_DEFAULT_HOST: "localhost"
@@ -15,6 +15,6 @@ development:
 
 test:
   <<: *default
-  DB_NAME: "tankeboksen_test"
+  DB_NAME: "#{app_name}_test"
   DOORKEEPER_CLIENT_REDIRECT_URI: "urn:ietf:wg:oauth:2.0:oob"
   SECRET_KEY_BASE: "#{secret_key_base}"
