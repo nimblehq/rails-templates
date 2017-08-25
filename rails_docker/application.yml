@@ -1,20 +1,17 @@
 default: &default
-  DB_HOST: "192.168.99.100"
+  DB_HOST: "db"
   DB_PORT: "5432"
   USERNAME: "postgres"
   MAILER_DEFAULT_HOST: "localhost"
   MAILER_DEFAULT_PORT: "3000"
-  DOORKEEPER_TOKEN_PATH: "http://localhost:3000/api/oauth/token"
   MAILER_SENDER: "Test <noreply@nimbl3.co>"
 
 development:
   <<: *default
   DB_NAME: "#{app_name}_development"
-  DOORKEEPER_CLIENT_REDIRECT_URI: "urn:ietf:wg:oauth:2.0:oob"
   SECRET_KEY_BASE: "#{secret_key_base}"
 
 test:
   <<: *default
-  DB_NAME: "tankeboksen_test"
-  DOORKEEPER_CLIENT_REDIRECT_URI: "urn:ietf:wg:oauth:2.0:oob"
+  DB_NAME: "#{app_name}_test"
   SECRET_KEY_BASE: "#{secret_key_base}"

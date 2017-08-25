@@ -44,6 +44,7 @@ copy_file 'rails_docker/application.yml', 'config/application.yml'
 gsub_file 'config/application.yml', '#{app_name}', "#{app_name}"
 
 copy_file 'rails_docker/test.sh', 'bin/test.sh' # shell script for run tests on docker
+run 'chmod +x bin/test.sh'
 
 # Database.yml
 remove_file 'config/database.yml'

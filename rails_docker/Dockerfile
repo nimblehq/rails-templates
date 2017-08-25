@@ -17,18 +17,17 @@ ENV LANGUAGE="en_US:en"
 
 # Add the PPA (personal package archive) maintained by NodeSource
 # This will have more up-to-date versions of Node.js than the official Debian repositories
-RUN URL="https://deb.nodesource.com/setup_$NODE_VERSION.x"; FILE=$(mktemp); curl -L "$URL" -o $FILE && bash $FILE; rm $FILE
+RUN URL=https://deb.nodesource.com/setup_"$NODE_VERSION".x; FILE=$(mktemp); curl -L "$URL" -o "$FILE" && bash "$FILE"; rm "$FILE"
 
 # Add Yarn repository
 RUN apt-get install apt-transport-https -y
-RUN curl -sS "https://dl.yarnpkg.com/debian/pubkey.gpg" | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo deb https://dl.yarnpkg.com/debian/ stable main | tee /etc/apt/sources.list.d/yarn.list
 
 # Install node and phantomjs
 RUN apt-get update -qq && \
-    apt-get upgrade -y && \
-    apt-get install -y build-essential libpq-dev nodejs yarn && \
-    apt-get install -y rsync locales build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x && \
+    apt-get install -y --no-install-recommends build-essential libpq-dev nodejs yarn && \
+    apt-get install -y --no-install-recommends rsync locales build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x && \
     curl -L -O https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
     tar xvjf phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
     mv phantomjs-$PHANTOMJS_VERSION-linux-x86_64 /usr/local/share && \
@@ -41,11 +40,11 @@ RUN apt-get update -qq && \
 RUN sed -i "s/^#\ \+\(en_US.UTF-8\)/\1/" /etc/locale.gen
 RUN locale-gen en_US.UTF-8
 
-RUN mkdir $APP_HOME
+RUN mkdir "$APP_HOME"
 WORKDIR $APP_HOME
 
-ADD Gemfile* $APP_HOME/
+COPY Gemfile* "$APP_HOME"/
 
 RUN bundle install
 
-ADD . $APP_HOME
+COPY . $APP_HOME
