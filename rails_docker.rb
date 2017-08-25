@@ -1,5 +1,7 @@
 require 'shellwords'
 require_relative 'lib/rspec'
+require_relative 'lib/test_env'
+
 # Add the current directory to the path Thor uses
 # to look up files
 
@@ -64,6 +66,9 @@ after_bundle do
   insert_into_file "config/environments/development.rb", after: "config.assets.raise_runtime_errors = true\n\n" do
     "  config.action_mailer.default_url_options = { host: \"localhost\", port: 3000 }"
   end
+
+  #setup test env
+  setup_test_env
 
   #rspec
   setup_rspec
