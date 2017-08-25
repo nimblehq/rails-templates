@@ -74,7 +74,5 @@ group :test do
 end
 
 group :production do
-  gem 'rails_12factor'         # Makes running your Rails app easier. Based on the ideas behind 12factor.net (Heroku)
   gem 'rack-timeout'           # Rack middleware which aborts requests that have been running for longer than a specified timeout.
-  gem 'newrelic_rpm'           # New Relic provides you with deep information about the performance of your web application as it runs in production.
 end
