@@ -60,10 +60,13 @@ after_bundle do
   run "spring stop"
 
   # Devise configuration
-  generate "devise:install"
+  run "bundle exec rails generate devise:install"
   insert_into_file "config/environments/development.rb", after: "config.assets.raise_runtime_errors = true\n\n" do
     "  config.action_mailer.default_url_options = { host: \"localhost\", port: 3000 }"
   end
+
+  # Doorkeeper configuration
+  run "bundle exec rails generate doorkeeper:install"
 
   #rspec
   setup_rspec
