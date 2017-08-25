@@ -27,6 +27,7 @@ end
 # Gemfile
 remove_file 'Gemfile'
 copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
+copy_file 'rails_docker/.rvmrc, '.rvmrc'
 
 # Docker
 remove_file 'Dockerfile'
