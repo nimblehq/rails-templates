@@ -4,7 +4,7 @@ module Rack
   # in config/environments/test.rb
   # config.middleware.use Rack::NoAnimations
   class NoAnimations
-    def initialize(app, options = {})
+    def initialize(app, _options = {})
       @app = app
     end
 
@@ -22,9 +22,12 @@ module Rack
     private
 
     def html?
-      @headers["Content-Type"] =~ /html/
+      @headers['Content-Type'] =~ /html/
     end
 
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Naming/HeredocDelimiterNaming
+    # rubocop:disable Layout/IndentHeredoc:
     def inject(fragment)
       disable_animations = <<-EOF
 <script type="text/javascript">(typeof jQuery !== 'undefined') && (jQuery.fx.off = true);</script>
@@ -48,7 +51,7 @@ module Rack
   }
 </style>
       EOF
-      fragment.gsub(%r{</head>}, disable_animations + "</head>")
+      fragment.gsub(%r{</head>}, disable_animations + '</head>')
     end
   end
 end

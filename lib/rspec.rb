@@ -9,7 +9,7 @@ def setup_rspec
   # folder for rspec
   run 'mkdir spec/codebase'
   run 'mkdir spec/fabricators'
-  run 'mkdir spec/features'
+  run 'mkdir spec/systems'
   run 'mkdir spec/requests'
   run 'mkdir spec/support'
 end
