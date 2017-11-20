@@ -20,17 +20,5 @@ services:
       - '.:/#{app_name}'
       - "ruby-bundle:/bundle"
 
-  test:
-    build: .
-    image: #{app_name}_test
-    entrypoint: bin/test.sh
-    stdin_open: true
-    tty: true
-    volumes:
-      - .:/#{app_name}
-      - "ruby-bundle:/bundle"
-    environment:
-      - RAILS_ENV=test
-
 volumes:
   ruby-bundle:

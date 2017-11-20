@@ -2,7 +2,6 @@ FROM ruby:2.4.2
 
 # Define all the envs here
 ENV NODE_VERSION="6"
-ENV PHANTOMJS_VERSION="2.1.1"
 
 ENV APP_HOME /#{app_name}
 
@@ -24,16 +23,10 @@ RUN apt-get install apt-transport-https -y
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo deb https://dl.yarnpkg.com/debian/ stable main | tee /etc/apt/sources.list.d/yarn.list
 
-# Install node and phantomjs
+# Install node
 RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends build-essential libpq-dev nodejs yarn && \
     apt-get install -y --no-install-recommends rsync locales build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x && \
-    curl -L -O https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
-    tar xvjf phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
-    mv phantomjs-$PHANTOMJS_VERSION-linux-x86_64 /usr/local/share && \
-    ln -sf /usr/local/share/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/local/bin && \
-    mkdir -p /root/.phantomjs/$PHANTOMJS_VERSION/x86_64-linux/bin && \
-    ln -sf /usr/local/share/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /root/.phantomjs/$PHANTOMJS_VERSION/x86_64-linux/bin/phantomjs && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
