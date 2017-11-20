@@ -8,6 +8,6 @@ RSpec.configure do |config|
 
   # run retry only on systems tests
   config.around :each, type: :system do |example|
-    example.run_with_retry retry: 3
+    example.run_with_retry retry: ENV.fetch('TEST_RETRY').to_i
   end
 end

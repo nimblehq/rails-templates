@@ -11,8 +11,7 @@ Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  # rubocop:disable Lint/InterpolationCheck
-  config.fixture_path = "\#{::Rails.root}/spec/fabricators"
+  config.fixture_path = Rails.root.join('spec', 'fabricators')
 
   config.use_transactional_fixtures = false
 
