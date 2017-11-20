@@ -1,4 +1,4 @@
-FROM ruby:2.4.1
+FROM ruby:2.4.2
 
 # Define all the envs here
 ENV NODE_VERSION="6"
