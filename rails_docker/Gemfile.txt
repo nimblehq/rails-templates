@@ -20,7 +20,6 @@ gem 'rails_admin'
 
 # Authentications & Authorizations
 gem 'devise' # Authentication solution for Rails with Warden
-gem 'doorkeeper' # OAuth 2 provider
 gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
 
 source 'https://rails-assets.org' do

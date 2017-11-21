@@ -29,7 +29,6 @@ end
 # Gemfile
 remove_file 'Gemfile'
 copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
-copy_file 'rails_docker/.ruby-version', '.ruby-version'
 
 # Docker
 remove_file 'Dockerfile'
@@ -48,6 +47,10 @@ gsub_file 'config/application.yml', '#{app_name}', "#{app_name}"
 
 copy_file 'rails_docker/test.sh', 'bin/test.sh' # shell script for run tests on docker
 run 'chmod +x bin/test.sh'
+
+# rvm
+run 'touch .ruby-version && echo 2.4.2 > .ruby-version'
+run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 
 # Database.yml
 remove_file 'config/database.yml'
