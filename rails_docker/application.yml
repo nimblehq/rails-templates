@@ -1,5 +1,5 @@
 default: &default
-  DB_HOST: "db"
+  DB_HOST: "localhost"
   DB_PORT: "5432"
   USERNAME: "postgres"
   MAILER_DEFAULT_HOST: "localhost"
