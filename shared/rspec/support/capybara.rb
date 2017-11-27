@@ -1,27 +1,15 @@
-require 'capybara'
-require 'capybara/rspec'
-require 'capybara/poltergeist'
+# https://github.com/rails/rails/pull/30876
+Capybara.register_driver(:headless_chrome) do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    chromeOptions: { args: %w[headless disable-gpu window-size=1280,720] }
+  )
 
-Capybara.default_host = 'http://0.0.0.0:3000'
-Capybara.javascript_driver = :poltergeist
-Capybara.default_max_wait_time = 15
-Capybara.wait_on_first_by_default = 15
-
-Capybara.register_driver :poltergeist do |app|
-  options = {
-    js_errors: false,
-    phantomjs_options: [
-      '--ssl-protocol=any'
-    ],
-    window_size: [2048, 2048]
-  }
-  Capybara::Poltergeist::Driver.new(app, options)
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    desired_capabilities: capabilities
+  )
 end
 
-Rails.application.routes.default_url_options[:host] = '0.0.0.0:3000'
-
-RSpec.configure do |config|
-  config.after(:each, js: true) do
-    Capybara.reset_sessions!
-  end
-end
+# https://github.com/rails/rails/pull/30638
+Capybara.server = :puma, { Silent: true }
