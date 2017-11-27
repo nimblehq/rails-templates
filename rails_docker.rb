@@ -90,11 +90,11 @@ after_bundle do
   copy_file 'shared/.rubocop.yml', '.rubocop.yml'
 
   #shell script for run database on docker
-  copy_file 'rails_docker/envsetup.sh', 'bin/envsetup.sh'
+  copy_file 'rails_docker/envsetup', 'bin/envsetup'
 
   #guard
   run 'bundle exec spring binstub --all'
   run 'bundle exec spring binstub rspec'
 
-  FileUtils.chmod 0755, 'bin/envsetup.sh'
+  FileUtils.chmod 0755, 'bin/envsetup'
 end
