@@ -22,12 +22,6 @@ gem 'rails_admin'
 gem 'devise' # Authentication solution for Rails with Warden
 gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-underscore' # Adds Underscore JS to the Rails asset pipeline
-  gem 'rails-assets-jquery.cookie' # Adds jquery-cookie to the Rails asset pipeline
-  gem 'rails-assets-animate-sass' # Animate.sass for the Rails assets pipeline
-end
-
 # Assets
 gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'font-awesome-sass' # Font-Awesome Sass gem for use in Ruby/Rails projects
