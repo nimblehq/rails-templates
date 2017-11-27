@@ -1,8 +1,8 @@
 def setup_test_env
-  _disable_animations
+  disable_animations
 end
 
-def _disable_animations
+def disable_animations
   insert_into_file 'config/environments/test.rb',
                    "require_relative '../../spec/support/disable_animation'\n\n",
                    before: "Rails.application.configure do\n"
