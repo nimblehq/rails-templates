@@ -1,5 +1,7 @@
 require 'shellwords'
 require_relative 'lib/rspec'
+require_relative 'lib/test_env'
+
 # Add the current directory to the path Thor uses
 # to look up files
 
@@ -27,7 +29,6 @@ end
 # Gemfile
 remove_file 'Gemfile'
 copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
-copy_file 'rails_docker/.rvmrc, '.rvmrc'
 
 # Docker
 remove_file 'Dockerfile'
@@ -38,6 +39,9 @@ remove_file 'docker-compose.yml'
 copy_file 'rails_docker/docker-compose.yml', 'docker-compose.yml'
 gsub_file 'docker-compose.yml', '#{app_name}', "#{app_name}"
 
+copy_file 'rails_docker/docker-compose.dev.yml', 'docker-compose.dev.yml'
+gsub_file 'docker-compose.dev.yml', '#{app_name}', "#{app_name}"
+
 remove_file '.dockerignore'
 copy_file 'rails_docker/.dockerignore', '.dockerignore'
 
@@ -46,6 +50,13 @@ gsub_file 'config/application.yml', '#{app_name}', "#{app_name}"
 
 copy_file 'rails_docker/test.sh', 'bin/test.sh' # shell script for run tests on docker
 run 'chmod +x bin/test.sh'
+
+# remove test folder
+run 'rm -rf test/'
+
+# rvm
+run 'touch .ruby-version && echo 2.4.2 > .ruby-version'
+run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 
 # Database.yml
 remove_file 'config/database.yml'
@@ -57,30 +68,33 @@ remove_file 'app/assets/javascripts/application.js'
 copy_file 'shared/app/assets/javascripts/application.js', 'app/assets/javascripts/application.js'
 
 after_bundle do
-  run "spring stop"
+  run 'spring stop'
 
   # Devise configuration
-  generate "devise:install"
-  insert_into_file "config/environments/development.rb", after: "config.assets.raise_runtime_errors = true\n\n" do
+  generate 'devise:install'
+  insert_into_file 'config/environments/development.rb', after: "config.assets.raise_runtime_errors = true\n\n" do
     "  config.action_mailer.default_url_options = { host: \"localhost\", port: 3000 }"
   end
+
+  #setup test env
+  setup_test_env
 
   #rspec
   setup_rspec
 
   #Modified Guardfile
-  remove_file "Guardfile"
+  remove_file 'Guardfile'
   copy_file 'shared/Guardfile', 'Guardfile'
 
   #create .rubocop.yml
   copy_file 'shared/.rubocop.yml', '.rubocop.yml'
 
   #shell script for run database on docker
-  copy_file 'rails_docker/envsetup.sh', 'envsetup.sh'
+  copy_file 'rails_docker/envsetup', 'bin/envsetup'
 
   #guard
-  run "bundle exec spring binstub --all"
-  run "bundle exec spring binstub rspec"
+  run 'bundle exec spring binstub --all'
+  run 'bundle exec spring binstub rspec'
 
-  FileUtils.chmod 0755, 'envsetup.sh'
+  FileUtils.chmod 0755, 'bin/envsetup'
 end

@@ -1,0 +1,9 @@
+version: '3'
+services:
+  db:
+    image: postgres:9.6.1
+    container_name: #{app_name}_db
+    environment:
+      - POSTGRES_DB=#{app_name}_development
+    ports:
+      - "5432:5432"
