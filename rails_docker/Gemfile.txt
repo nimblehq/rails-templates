@@ -66,6 +66,7 @@ group :development, :test do
   gem 'pronto-rails_schema', require: false
   gem 'pronto-reek', require: false
   gem 'pronto-scss', require: false
+  gem 'pronto-eslint_npm', require: false
 end
 
 group :test do

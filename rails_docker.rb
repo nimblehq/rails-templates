@@ -83,9 +83,6 @@ after_bundle do
   #rspec
   setup_rspec
 
-  # setup linters
-  setup_linters
-
   #Modified Guardfile
   remove_file 'Guardfile'
   copy_file 'shared/Guardfile', 'Guardfile'
@@ -98,4 +95,11 @@ after_bundle do
   run 'bundle exec spring binstub rspec'
 
   FileUtils.chmod 0755, 'bin/envsetup'
+
+  # Modified README file
+  remove_file 'README.md'
+  copy_file 'shared/README.md', 'README.md'
+
+  # setup linters
+  setup_linters
 end
