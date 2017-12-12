@@ -6,10 +6,9 @@ AllCops:
     - 'Gemfile'
     - 'Gemfile.lock'
     - 'Rakefile'
-    - 'zeus.rb'
     - 'Guardfile'
-    - 'config/application.rb'
-    - 'config/initializers/**/*'
+    - 'node_modules/**/*'
+    - 'config/**/*'
   TargetRubyVersion: 2.4
 
 Rails:
@@ -22,12 +21,11 @@ Metrics/LineLength:
   Max: 120
   Exclude:
     - 'spec/**/*'
-    # most of the specs file have long line length but readability is still good
+    - 'config/**/*'
 
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
-    # most of the specs file have long block length but readability is still good
 
 Style/FrozenStringLiteralComment:
   Enabled: false

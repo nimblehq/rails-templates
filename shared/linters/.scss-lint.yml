@@ -1,0 +1,6 @@
+linters:
+  SelectorDepth:
+    max_depth: 5
+
+  PropertySortOrder:
+    enabled: false

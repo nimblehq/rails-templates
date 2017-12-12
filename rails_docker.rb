@@ -1,6 +1,7 @@
 require 'shellwords'
 require_relative 'lib/rspec'
 require_relative 'lib/test_env'
+require_relative 'lib/linter'
 
 # Add the current directory to the path Thor uses
 # to look up files
@@ -82,12 +83,12 @@ after_bundle do
   #rspec
   setup_rspec
 
+  # setup linters
+  setup_linters
+
   #Modified Guardfile
   remove_file 'Guardfile'
   copy_file 'shared/Guardfile', 'Guardfile'
-
-  #create .rubocop.yml
-  copy_file 'shared/.rubocop.yml', '.rubocop.yml'
 
   #shell script for run database on docker
   copy_file 'rails_docker/envsetup', 'bin/envsetup'
