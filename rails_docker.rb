@@ -1,4 +1,5 @@
 require 'shellwords'
+require_relative 'lib/config'
 require_relative 'lib/rspec'
 require_relative 'lib/test_env'
 
@@ -45,9 +46,6 @@ gsub_file 'docker-compose.dev.yml', '#{app_name}', "#{app_name}"
 remove_file '.dockerignore'
 copy_file 'rails_docker/.dockerignore', '.dockerignore'
 
-copy_file 'rails_docker/application.yml', 'config/application.yml'
-gsub_file 'config/application.yml', '#{app_name}', "#{app_name}"
-
 copy_file 'rails_docker/test.sh', 'bin/test.sh' # shell script for run tests on docker
 run 'chmod +x bin/test.sh'
 
@@ -58,14 +56,16 @@ run 'rm -rf test/'
 run 'touch .ruby-version && echo 2.4.2 > .ruby-version'
 run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 
-# Database.yml
-remove_file 'config/database.yml'
-copy_file 'rails_docker/database.yml', 'config/database.yml'
-gsub_file 'config/database.yml', '#{app_name}', "#{app_name}"
+# Add custom configs
+setup_config
 
 # Removing turbolinks
 remove_file 'app/assets/javascripts/application.js'
 copy_file 'shared/app/assets/javascripts/application.js', 'app/assets/javascripts/application.js'
+
+# Add Procfile
+copy_file 'shared/Procfile', 'Procfile'
+copy_file 'shared/Procfile.dev', 'Procfile.dev'
 
 after_bundle do
   run 'spring stop'
