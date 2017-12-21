@@ -48,12 +48,25 @@ group :development, :test do
   gem 'selenium-webdriver', '3.7.0' # Ruby bindings for Selenium/WebDriver
   gem 'database_cleaner' # Use Database Cleaner
 
-  gem 'byebug' # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'pry-rails' # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
   gem 'spring' # Spring speeds up development by keeping your application running in the background.
   gem 'spring-commands-rspec' # This gem implements the rspec command for Spring.
   gem 'spring-watcher-listen', '2.0.1' # Makes Spring watch the filesystem for changes using Listen
   gem 'listen', '3.1.5' # Listens to file modifications
   gem 'letter_opener' # Preview mail in the browser instead of sending.
+
+  gem 'sassc-rails' # Gem to generate scss source maps
+
+  gem 'pronto'
+  gem 'pronto-rubocop', require: false
+  gem 'pronto-flay', require: false # analyzes code for structural similarities
+  gem 'pronto-brakeman', require: false # analyzes code for security vulnerabilities
+  gem 'pronto-dirty_words', require: false # analyzes code for  Seven Dirty Words
+  gem 'pronto-rails_best_practices', require: false
+  gem 'pronto-rails_schema', require: false
+  gem 'pronto-reek', require: false
+  gem 'pronto-scss', require: false
+  gem 'pronto-eslint_npm', require: false
 end
 
 group :test do
