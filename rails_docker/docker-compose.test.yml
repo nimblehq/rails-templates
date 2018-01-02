@@ -1,0 +1,32 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres:10.1
+    container_name: #{app_name}_db
+    environment:
+      - POSTGRES_DB=#{app_name}_test
+    ports:
+      - "5432:5432"
+
+  test:
+    build:
+      context: .
+      cache_from:
+        - ${DOCKER_IMAGE}:${BRANCH_TAG}
+    image: ${DOCKER_IMAGE}:${BRANCH_TAG}
+    container_name: #{app_name}_test
+    command: bin/test.sh
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    volumes:
+      - "ruby-bundle:/bundle"
+    environment:
+      - RACK_ENV=test
+      - RAILS_ENV=test
+      - DB_HOST=db
+
+volumes:
+  ruby-bundle:
