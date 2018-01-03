@@ -35,12 +35,17 @@ RUN sed -i "s/^#\ \+\(en_US.UTF-8\)/\1/" /etc/locale.gen
 RUN locale-gen en_US.UTF-8
 
 RUN mkdir "$APP_HOME"
+# Replace by the following if the application uses Rails engines
+# RUN mkdir "$APP_HOME" "$APP_HOME/engines"
 WORKDIR $APP_HOME
 
 # Only copy the dependency definition files (Gemfile and packages) to use Docker cache for these steps
 # Install Ruby dependencies
 COPY Gemfile* ./
-COPY engines ./engines/
+# Copy each engine lib/, Gemfile and .gemspec files
+# Example:
+# COPY engines/app_auth/lib/ ./engines/app_auth/lib/
+# COPY engines/app_auth/Gemfile engines/app_auth/app_auth.gemspec ./engines/app_auth/
 RUN bundle install --jobs $BUNDLE_JOBS --path $BUNDLE_PATH
 
 # Install JS dependencies
