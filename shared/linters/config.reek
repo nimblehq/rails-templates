@@ -9,6 +9,9 @@ DataClump:
   min_clump_size: 3
 
 ### Directory specific configuration
+"app/controllers":
+  InstanceVariableAssumption:
+    enabled: false
 "db/migrate/":
   FeatureEnvy:
     enabled: false
