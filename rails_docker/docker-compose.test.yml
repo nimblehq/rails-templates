@@ -5,20 +5,18 @@ services:
     image: postgres:10.1
     container_name: #{app_name}_db
     environment:
-      - POSTGRES_DB=#{app_name}_production
+      - POSTGRES_DB=#{app_name}_test
     ports:
       - "5432"
 
-  web:
+  test:
     build:
       context: .
       cache_from:
-        - ${DOCKER_IMAGE}
-    image: ${DOCKER_IMAGE}
-    container_name: #{app_name}_web
-    command: bin/start.sh
-    ports:
-      - "${PORT}:${PORT}"
+        - ${DOCKER_IMAGE}:${BRANCH_TAG}
+    image: ${DOCKER_IMAGE}:${BRANCH_TAG}
+    container_name: #{app_name}_test
+    command: bin/test.sh
     stdin_open: true
     tty: true
     depends_on:
@@ -26,12 +24,9 @@ services:
     volumes:
       - "ruby-bundle:/bundle"
     environment:
-      - RACK_ENV=production
-      - RAILS_ENV=production
+      - RACK_ENV=test
+      - RAILS_ENV=test
       - DB_HOST=db
-      - PORT=80
-      - MAILER_SENDER=
-      - SECRET_KEY_BASE=
 
 volumes:
   ruby-bundle:

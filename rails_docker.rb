@@ -4,8 +4,7 @@ require_relative 'lib/rspec'
 require_relative 'lib/test_env'
 require_relative 'lib/linter'
 
-# Add the current directory to the path Thor uses
-# to look up files
+# Add the current directory to the path Thor uses to look up files
 
 def current_directory
   @current_directory ||=
@@ -44,10 +43,22 @@ gsub_file 'docker-compose.yml', '#{app_name}', "#{app_name}"
 copy_file 'rails_docker/docker-compose.dev.yml', 'docker-compose.dev.yml'
 gsub_file 'docker-compose.dev.yml', '#{app_name}', "#{app_name}"
 
+copy_file 'rails_docker/docker-compose.test.yml', 'docker-compose.test.yml'
+gsub_file 'docker-compose.test.yml', '#{app_name}', "#{app_name}"
+
 remove_file '.dockerignore'
 copy_file 'rails_docker/.dockerignore', '.dockerignore'
+gsub_file '.dockerignore', '#{app_name}', "#{app_name}"
 
-copy_file 'rails_docker/test.sh', 'bin/test.sh' # shell script for run tests on docker
+remove_file '.env'
+copy_file 'rails_docker/.env', '.env'
+
+# Shell script for boot the app inside the Docker image (production)
+copy_file 'rails_docker/start.sh', 'bin/start.sh'
+run 'chmod +x bin/start.sh'
+
+# Shell script for run tests inside the Docker image
+copy_file 'rails_docker/test.sh', 'bin/test.sh'
 run 'chmod +x bin/test.sh'
 
 # remove test folder
@@ -77,20 +88,20 @@ after_bundle do
     "  config.action_mailer.default_url_options = { host: \"localhost\", port: 3000 }"
   end
 
-  #setup test env
+  # Setup test env
   setup_test_env
 
-  #rspec
+  # rspec
   setup_rspec
 
-  #Modified Guardfile
+  # Modified Guardfile
   remove_file 'Guardfile'
   copy_file 'shared/Guardfile', 'Guardfile'
 
-  #shell script for run database on docker
+  # Shell script to setup the Docker-based development environment
   copy_file 'rails_docker/envsetup', 'bin/envsetup'
 
-  #guard
+  # guard
   run 'bundle exec spring binstub --all'
   run 'bundle exec spring binstub rspec'
 
@@ -100,6 +111,6 @@ after_bundle do
   remove_file 'README.md'
   copy_file 'shared/README.md', 'README.md'
 
-  # setup linters
+  # Setup linters
   setup_linters
 end
