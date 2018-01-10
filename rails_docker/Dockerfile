@@ -1,17 +1,18 @@
 FROM ruby:2.4.2-slim
 
 # Define all the envs here
-ENV APP_HOME /#{app_name}
-ENV PORT 80
+ENV APP_HOME=/#{app_name} \
+    PORT=80
 
-ENV BUNDLE_JOBS=4
-ENV BUNDLE_PATH="/bundle"
+ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
+    BUNDLE_JOBS=4 \
+    BUNDLE_PATH="/bundle"
 
 ENV NODE_VERSION="8"
 
-ENV LANG="en_US.UTF-8"
-ENV LC_ALL="en_US.UTF-8"
-ENV LANGUAGE="en_US:en"
+ENV LANG="en_US.UTF-8" \
+    LC_ALL="en_US.UTF-8" \
+    LANGUAGE="en_US:en"
 
 RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends apt-transport-https curl
@@ -50,14 +51,14 @@ RUN bundle install --jobs $BUNDLE_JOBS --path $BUNDLE_PATH
 
 # Install JS dependencies
 COPY package.json yarn.lock ./
-RUN yarn install
+RUN yarn install --network-timeout 100000
 
 # Copying the app files must be placed after the dependencies setup
 # since the app files always change thus cannot be cached
 COPY . ./
 
 # Compile assets
-RUN RAILS_ENV=$RAILS_ENV bundle exec rake assets:precompile
+RUN RAILS_ENV=$RAILS_ENV bundle exec rails assets:precompile
 
 # Make the init file executable
 RUN chmod +x ./bin/start.sh
