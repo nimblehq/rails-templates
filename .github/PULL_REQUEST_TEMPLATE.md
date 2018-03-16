@@ -1,5 +1,3 @@
-https://merchantlabs.atlassian.net/browse/AMZ-??
- 
 ## What happened
 Describe the big picture of your changes here to communicate to team why we should accept this pull request. 
  
