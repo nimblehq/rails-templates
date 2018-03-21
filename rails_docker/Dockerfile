@@ -10,6 +10,9 @@ ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
 
 ENV NODE_VERSION="8"
 
+ENV CHROMEDRIVER_VERSION="2.35" \
+    CHROMEDRIVER_DIR=/chromedriver
+
 ENV LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     LANGUAGE="en_US:en"
@@ -26,11 +29,24 @@ RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg && \
 # This will have more up-to-date versions of Node.js than the official Debian repositories
 RUN curl -sL https://deb.nodesource.com/setup_"$NODE_VERSION".x | bash -
 
-# Install Node JS related packages & general required core packages
-RUN apt-get install -y --no-install-recommends build-essential libpq-dev nodejs yarn && \
-    apt-get install -y --no-install-recommends rsync locales chrpath pkg-config libfreetype6 libfontconfig1 && \
+# Set up the Chrome PPA to install Chrome Headless
+ADD https://dl-ssl.google.com/linux/linux_signing_key.pub /tmp/google-pubkey.gpg
+RUN apt-key add /tmp/google-pubkey.gpg && rm /tmp/google-pubkey.gpg  && \
+    echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list.d/google.list
+
+# Install general required core packages, Node JS related packages and Chrome (testing)
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends build-essential libpq-dev nodejs yarn google-chrome-stable && \
+    apt-get install -y --no-install-recommends rsync locales chrpath pkg-config libfreetype6 libfontconfig1 git cmake wget unzip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Download and install Chromedriver
+RUN mkdir "$CHROMEDRIVER_DIR" && \
+    wget -q --continue -P $CHROMEDRIVER_DIR "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip" && \
+    unzip $CHROMEDRIVER_DIR/chromedriver* -d $CHROMEDRIVER_DIR
+
+ENV PATH $CHROMEDRIVER_DIR:$PATH
 
 RUN sed -i "s/^#\ \+\(en_US.UTF-8\)/\1/" /etc/locale.gen
 RUN locale-gen en_US.UTF-8
