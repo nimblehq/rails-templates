@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.5'
 
 services:
   db:
@@ -12,6 +12,7 @@ services:
   test:
     build:
       context: .
+      shm_size: '512m'
       cache_from:
         - ${DOCKER_IMAGE}:${BRANCH_TAG}
     image: ${DOCKER_IMAGE}:${BRANCH_TAG}
@@ -22,7 +23,7 @@ services:
     depends_on:
       - db
     volumes:
-      - "ruby-bundle:/bundle"
+      - ruby-bundle:/bundle
     environment:
       - RACK_ENV=test
       - RAILS_ENV=test

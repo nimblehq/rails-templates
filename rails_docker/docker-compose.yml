@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
     volumes:
-      - "ruby-bundle:/bundle"
+      - ruby-bundle:/bundle
     environment:
       - RACK_ENV=production
       - RAILS_ENV=production
