@@ -22,7 +22,8 @@ services:
     depends_on:
       - db
     volumes:
-      - "ruby-bundle:/bundle"
+      - ruby-bundle:/bundle
+      - /dev/shm:/dev/shm
     environment:
       - RACK_ENV=test
       - RAILS_ENV=test
