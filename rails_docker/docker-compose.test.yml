@@ -12,6 +12,7 @@ services:
   test:
     build:
       context: .
+      shm_size: '512m'
       cache_from:
         - ${DOCKER_IMAGE}:${BRANCH_TAG}
     image: ${DOCKER_IMAGE}:${BRANCH_TAG}
