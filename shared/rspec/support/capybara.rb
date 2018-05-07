@@ -35,10 +35,10 @@ Capybara.register_driver(:headless_chrome) do |app|
   options.add_argument('disable-dev-shm-usage') if ENV['TEST_CI_SERVER']
 
   Capybara::Selenium::Driver.new(
-      app,
-      browser: :chrome,
-      desired_capabilities: capabilities,
-      options: options
+    app,
+    browser: :chrome,
+    desired_capabilities: capabilities,
+    options: options
   )
 end
 
