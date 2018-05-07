@@ -50,8 +50,8 @@ remove_file '.dockerignore'
 copy_file 'rails_docker/.dockerignore', '.dockerignore'
 gsub_file '.dockerignore', '#{app_name}', "#{app_name}"
 
-remove_file '.env'
-copy_file 'rails_docker/.env', '.env'
+copy_file 'rails_docker/.env.test', '.env.test'
+gsub_file '.env.test', '#{app_name}', "#{app_name}"
 
 # Shell script for boot the app inside the Docker image (production)
 copy_file 'rails_docker/start.sh', 'bin/start.sh'
