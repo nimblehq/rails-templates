@@ -3,7 +3,7 @@ require 'capybara'
 require 'capybara/rspec'
 
 # Give CI some extra time
-CAPYBARA_TIMEOUT = ENV['TEST_CI_SERVER'] ? 60 : 30
+CAPYBARA_TIMEOUT = ENV['CI'] ? 60 : 30
 
 # https://github.com/rails/rails/pull/30876
 Capybara.register_driver(:headless_chrome) do |app|
@@ -32,7 +32,7 @@ Capybara.register_driver(:headless_chrome) do |app|
   # rubocop:enable Performance/RegexpMatch
 
   # Disable /dev/shm use in CI
-  options.add_argument('disable-dev-shm-usage') if ENV['TEST_CI_SERVER']
+  options.add_argument('disable-dev-shm-usage') if ENV['CI']
 
   Capybara::Selenium::Driver.new(
     app,
