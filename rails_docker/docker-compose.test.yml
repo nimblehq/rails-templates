@@ -23,10 +23,7 @@ services:
       - db
     volumes:
       - "ruby-bundle:/bundle"
-    environment:
-      - RACK_ENV=test
-      - RAILS_ENV=test
-      - DB_HOST=db
+    env_file: .env.test
 
 volumes:
   ruby-bundle:
