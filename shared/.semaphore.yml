@@ -3,7 +3,6 @@
 
 project_settings:
   env_variables:
-    NODE_ENV: production
     DOCKER_IMAGE: <The docker image name on the registry>
     AWS_ACCESS_KEY_ID: # (Optional) For uploading the failed example screenshots
     AWS_SECRET_ACCESS_KEY: # (Optional) For uploading the failed example screenshots
