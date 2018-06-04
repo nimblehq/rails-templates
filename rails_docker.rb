@@ -113,4 +113,7 @@ after_bundle do
 
   # Setup linters
   setup_linters
+
+  # CI configuration
+  copy_file 'shared/.semaphore.yml', '.semaphore.yml'
 end

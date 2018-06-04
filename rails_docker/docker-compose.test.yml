@@ -22,7 +22,8 @@ services:
     depends_on:
       - db
     volumes:
-      - "ruby-bundle:/bundle"
+      - ruby-bundle:/bundle
+      - ${PWD}/tmp/screenshots:/#{app_name}/tmp/screenshots
     env_file: .env.test
 
 volumes:

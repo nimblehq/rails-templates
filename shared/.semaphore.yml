@@ -1,0 +1,37 @@
+# Setting for Semaphore CI
+# Copy these configurations to the settings on Semaphore CI
+
+project_settings:
+  env_variables:
+    DOCKER_IMAGE: <The docker image name on the registry>
+    AWS_ACCESS_KEY_ID: # (Optional) For uploading the failed example screenshots
+    AWS_SECRET_ACCESS_KEY: # (Optional) For uploading the failed example screenshots
+    AWS_ARTIFACTS_BUCKET: s3://nimbl3-semaphore-artifacts # (Optional) For uploading the failed example screenshots
+
+  build_settings:
+    setup:
+      - export BRANCH_TAG=${BRANCH_NAME/\//-}
+      - if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then (echo "Pulling built image for the branch"; docker pull $DOCKER_IMAGE:$BRANCH_TAG || true); else (echo "Skipping docker pull"); fi || true
+      - docker-compose -f docker-compose.test.yml build
+      - docker push $DOCKER_IMAGE:$BRANCH_TAG
+
+    # In order to run proto, the `.pronto.yml` needs to be set
+    unit_tests:
+      - if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then (echo "Running pronto"; docker-compose -f docker-compose.test.yml run test bundle exec pronto run -f bitbucket_pr -c origin/development); else (echo "Escaping pronto"); fi || true
+      - docker-compose -f docker-compose.test.yml run test yarn lint
+      - docker-compose -f docker-compose.test.yml run test yarn test
+      - docker-compose -f docker-compose.test.yml run test rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
+
+    system_tests:
+      - docker-compose -f docker-compose.test.yml run test rspec spec/systems/ --profile
+
+    # (Optional) For uploading the failed example screenshots
+    # Add the `After Job` command on Semaphore to execute this after each job is completed
+    # The screenshots will be uploaded to S3 Bucket and the url will be printed out
+    after_job:
+      - export SCREENSHOTS_DIR=$SEMAPHORE_PROJECT_DIR/tmp/screenshots/
+      - if [[ "$(ls -A $SCREENSHOTS_DIR)" ]]; then echo "Failed example screenshots:" && aws s3 cp $SCREENSHOTS_DIR $AWS_ARTIFACTS_BUCKET/$SEMAPHORE_PROJECT_NAME/$BRANCH_TAG --recursive | grep -o "s3://.*" | tr " " "\n" | xargs -L 1 aws s3 presign --expires-in 86400 | while read line; do echo -e "\n$line\n"; done; fi
+
+server_settings:
+  deployment:
+    - heroku container:push --arg BRANCH_TAG=${BRANCH_NAME/\//-} --recursive
