@@ -1,0 +1,8 @@
+bitbucket:
+  slug: nimbl3/#{app_name}-web
+  username: [EMAIL]
+  password: [PASSWORD]
+  web_endpoint: https://bitbucket.org/
+max_warnings: 150
+verbose: true
+format: "[%{runner}]-[%{level}]-%{msg}"

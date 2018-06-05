@@ -1,6 +1,10 @@
-.git
-log
-tmp
-.rspec
+.gitignore
+.semaphore-cache
+log/
+tmp/
+node_modules/
+coverage/
+docker-compose.dev.yml
+docker-compose.test.yml
 docker-compose.yml
 README.md

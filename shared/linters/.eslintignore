@@ -1,0 +1,8 @@
+/node_modules/**
+/config/**
+/coverage/**
+/public/**
+/tmp/**
+/vendor/**
+
+app/assets/javascripts/cable.js

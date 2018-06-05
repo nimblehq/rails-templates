@@ -1,9 +1,10 @@
 require 'shellwords'
+require_relative 'lib/config'
 require_relative 'lib/rspec'
 require_relative 'lib/test_env'
+require_relative 'lib/linter'
 
-# Add the current directory to the path Thor uses
-# to look up files
+# Add the current directory to the path Thor uses to look up files
 
 def current_directory
   @current_directory ||=
@@ -42,13 +43,22 @@ gsub_file 'docker-compose.yml', '#{app_name}', "#{app_name}"
 copy_file 'rails_docker/docker-compose.dev.yml', 'docker-compose.dev.yml'
 gsub_file 'docker-compose.dev.yml', '#{app_name}', "#{app_name}"
 
+copy_file 'rails_docker/docker-compose.test.yml', 'docker-compose.test.yml'
+gsub_file 'docker-compose.test.yml', '#{app_name}', "#{app_name}"
+
 remove_file '.dockerignore'
 copy_file 'rails_docker/.dockerignore', '.dockerignore'
+gsub_file '.dockerignore', '#{app_name}', "#{app_name}"
 
-copy_file 'rails_docker/application.yml', 'config/application.yml'
-gsub_file 'config/application.yml', '#{app_name}', "#{app_name}"
+copy_file 'rails_docker/.env.test', '.env.test'
+gsub_file '.env.test', '#{app_name}', "#{app_name}"
 
-copy_file 'rails_docker/test.sh', 'bin/test.sh' # shell script for run tests on docker
+# Shell script for boot the app inside the Docker image (production)
+copy_file 'rails_docker/start.sh', 'bin/start.sh'
+run 'chmod +x bin/start.sh'
+
+# Shell script for run tests inside the Docker image
+copy_file 'rails_docker/test.sh', 'bin/test.sh'
 run 'chmod +x bin/test.sh'
 
 # remove test folder
@@ -58,14 +68,16 @@ run 'rm -rf test/'
 run 'touch .ruby-version && echo 2.4.2 > .ruby-version'
 run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 
-# Database.yml
-remove_file 'config/database.yml'
-copy_file 'rails_docker/database.yml', 'config/database.yml'
-gsub_file 'config/database.yml', '#{app_name}', "#{app_name}"
+# Add custom configs
+setup_config
 
 # Removing turbolinks
 remove_file 'app/assets/javascripts/application.js'
 copy_file 'shared/app/assets/javascripts/application.js', 'app/assets/javascripts/application.js'
+
+# Add Procfile
+copy_file 'shared/Procfile', 'Procfile'
+copy_file 'shared/Procfile.dev', 'Procfile.dev'
 
 after_bundle do
   run 'spring stop'
@@ -76,25 +88,32 @@ after_bundle do
     "  config.action_mailer.default_url_options = { host: \"localhost\", port: 3000 }"
   end
 
-  #setup test env
+  # Setup test env
   setup_test_env
 
-  #rspec
+  # rspec
   setup_rspec
 
-  #Modified Guardfile
+  # Modified Guardfile
   remove_file 'Guardfile'
   copy_file 'shared/Guardfile', 'Guardfile'
 
-  #create .rubocop.yml
-  copy_file 'shared/.rubocop.yml', '.rubocop.yml'
-
-  #shell script for run database on docker
+  # Shell script to setup the Docker-based development environment
   copy_file 'rails_docker/envsetup', 'bin/envsetup'
 
-  #guard
+  # guard
   run 'bundle exec spring binstub --all'
   run 'bundle exec spring binstub rspec'
 
   FileUtils.chmod 0755, 'bin/envsetup'
+
+  # Modified README file
+  remove_file 'README.md'
+  copy_file 'shared/README.md', 'README.md'
+
+  # Setup linters
+  setup_linters
+
+  # CI configuration
+  copy_file 'shared/.semaphore.yml', '.semaphore.yml'
 end

@@ -1,7 +1,8 @@
-version: '3'
+version: '3.2'
+
 services:
   db:
-    image: postgres:9.6.1
+    image: postgres:10.1
     container_name: #{app_name}_db
     environment:
       - POSTGRES_DB=#{app_name}_development
