@@ -1,6 +1,17 @@
 FROM ruby:2.4.2-slim
 
+ARG RUBY_ENV=development
+ARG NODE_ENV=development
+ARG BUILD_ENV=development
+ARG ASSET_HOST=http://localhost
+
 # Define all the envs here
+ENV RACK_ENV=$RUBY_ENV \
+    RAILS_ENV=$RUBY_ENV \
+    NODE_ENV=$NODE_ENV \
+    BUILD_ENV=$BUILD_ENV \
+    ASSET_HOST=$ASSET_HOST
+
 ENV APP_HOME=/#{app_name} \
     PORT=80
 
@@ -10,7 +21,7 @@ ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
 
 ENV NODE_VERSION="8"
 
-ENV CHROMEDRIVER_VERSION="2.35" \
+ENV CHROMEDRIVER_VERSION="2.39" \
     CHROMEDRIVER_DIR=/chromedriver
 
 ENV LANG="en_US.UTF-8" \
@@ -63,7 +74,8 @@ COPY Gemfile* ./
 # Example:
 # COPY engines/app_auth/lib/ ./engines/app_auth/lib/
 # COPY engines/app_auth/Gemfile engines/app_auth/app_auth.gemspec ./engines/app_auth/
-RUN bundle install --jobs $BUNDLE_JOBS --path $BUNDLE_PATH
+
+RUN if [ "$BUILD_ENV" = "production" ]; then bundle install --jobs $BUNDLE_JOBS --path $BUNDLE_PATH --without test ; else bundle install --jobs $BUNDLE_JOBS --path $BUNDLE_PATH ; fi
 
 # Install JS dependencies
 COPY package.json yarn.lock ./
@@ -74,7 +86,7 @@ RUN yarn install --network-timeout 100000
 COPY . ./
 
 # Compile assets
-RUN RAILS_ENV=$RAILS_ENV bundle exec rails assets:precompile
+RUN bundle exec rails assets:precompile
 
 # Make the init file executable
 RUN chmod +x ./bin/start.sh
