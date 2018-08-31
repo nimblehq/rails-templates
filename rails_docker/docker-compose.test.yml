@@ -28,6 +28,7 @@ services:
     volumes:
       - "ruby-bundle:/bundle"
       - "${PWD}/tmp/screenshots:/#{app_name}/tmp/screenshots"
+      - "${PWD}/log:/#{app_name}/log"
     environment:
       - RACK_ENV=test
       - RAILS_ENV=test
