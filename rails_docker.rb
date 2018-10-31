@@ -5,6 +5,7 @@ require 'shellwords'
 def current_directory
   @current_directory ||=
       if __FILE__ =~ %r{\Ahttps?://}
+        require 'tmpdir'
         tempdir = Dir.mktmpdir("rails-templates")
         at_exit { FileUtils.remove_entry(tempdir) }
         git clone: [
