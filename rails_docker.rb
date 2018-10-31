@@ -1,8 +1,4 @@
 require 'shellwords'
-require_relative 'lib/config'
-require_relative 'lib/rspec'
-require_relative 'lib/test_env'
-require_relative 'lib/linter'
 
 # Add the current directory to the path Thor uses to look up files
 
@@ -27,6 +23,13 @@ def source_paths
   Array(super) + [current_directory]
 end
 
+current_directory
+
+require_relative 'lib/config.rb'
+require_relative 'lib/rspec'
+require_relative 'lib/test_env'
+require_relative 'lib/linter'
+
 # Gemfile
 remove_file 'Gemfile'
 copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
@@ -50,8 +53,8 @@ remove_file '.dockerignore'
 copy_file 'rails_docker/.dockerignore', '.dockerignore'
 gsub_file '.dockerignore', '#{app_name}', "#{app_name}"
 
-copy_file 'rails_docker/.env.test', '.env.test'
-gsub_file '.env.test', '#{app_name}', "#{app_name}"
+copy_file 'rails_docker/.env', '.env'
+gsub_file '.env', '#{app_name}', "#{app_name}"
 
 # Shell script for boot the app inside the Docker image (production)
 copy_file 'rails_docker/start.sh', 'bin/start.sh'
