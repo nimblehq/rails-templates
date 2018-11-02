@@ -24,12 +24,10 @@ def source_paths
   Array(super) + [current_directory]
 end
 
-current_directory
-
-require_relative 'lib/config.rb'
-require_relative 'lib/rspec'
-require_relative 'lib/test_env'
-require_relative 'lib/linter'
+apply 'lib/config.rb'
+apply 'lib/rspec'
+apply 'lib/test_env'
+apply 'lib/linter'
 
 # Gemfile
 remove_file 'Gemfile'
