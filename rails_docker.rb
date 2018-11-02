@@ -25,9 +25,9 @@ def source_paths
 end
 
 apply 'lib/config.rb'
-apply 'lib/rspec'
-apply 'lib/test_env'
-apply 'lib/linter'
+apply 'lib/rspec.rb'
+apply 'lib/test_env.rb'
+apply 'lib/linter.rb'
 
 # Gemfile
 remove_file 'Gemfile'
