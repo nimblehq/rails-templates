@@ -7,7 +7,13 @@ services:
     environment:
       - POSTGRES_DB=#{app_name}_test
     ports:
-      - "5432:5432"
+      - "5432"
+
+  redis:
+    image: redis:4.0.9
+    container_name: #{app_name}_redis
+    ports:
+      - "6379"
 
   test:
     build:
