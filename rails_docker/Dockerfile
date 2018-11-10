@@ -1,4 +1,4 @@
-FROM ruby:2.5.1-slim
+FROM ruby:2.5.3-slim
 
 ARG RUBY_ENV=development
 ARG NODE_ENV=development
