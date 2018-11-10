@@ -67,7 +67,7 @@ run 'chmod +x bin/test.sh'
 run 'rm -rf test/'
 
 # rvm
-run 'touch .ruby-version && echo 2.4.2 > .ruby-version'
+run 'touch .ruby-version && echo 2.5.1 > .ruby-version'
 run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 
 # Add custom configs
