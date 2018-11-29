@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.5.3'
 
 # Backend
-gem 'rails', '5.1.4' # Latest stable
+gem 'rails', '5.1.6' # Latest stable
 gem 'pg' # Use Postgresql as database
 gem 'puma' # Use Puma as the app server
 gem 'active_model_serializers' # ActiveModel::Serializer implementation and Rails hooks
