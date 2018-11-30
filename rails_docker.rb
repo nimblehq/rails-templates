@@ -1,14 +1,11 @@
 require 'shellwords'
-require_relative 'lib/config'
-require_relative 'lib/rspec'
-require_relative 'lib/test_env'
-require_relative 'lib/linter'
 
 # Add the current directory to the path Thor uses to look up files
 
 def current_directory
   @current_directory ||=
       if __FILE__ =~ %r{\Ahttps?://}
+        require 'tmpdir'
         tempdir = Dir.mktmpdir("rails-templates")
         at_exit { FileUtils.remove_entry(tempdir) }
         git clone: [
@@ -26,6 +23,11 @@ end
 def source_paths
   Array(super) + [current_directory]
 end
+
+apply 'lib/config.rb'
+apply 'lib/rspec.rb'
+apply 'lib/test_env.rb'
+apply 'lib/linter.rb'
 
 # Gemfile
 remove_file 'Gemfile'
@@ -50,8 +52,8 @@ remove_file '.dockerignore'
 copy_file 'rails_docker/.dockerignore', '.dockerignore'
 gsub_file '.dockerignore', '#{app_name}', "#{app_name}"
 
-copy_file 'rails_docker/.env.test', '.env.test'
-gsub_file '.env.test', '#{app_name}', "#{app_name}"
+copy_file 'rails_docker/.env', '.env'
+gsub_file '.env', '#{app_name}', "#{app_name}"
 
 # Shell script for boot the app inside the Docker image (production)
 copy_file 'rails_docker/start.sh', 'bin/start.sh'
@@ -65,7 +67,7 @@ run 'chmod +x bin/test.sh'
 run 'rm -rf test/'
 
 # rvm
-run 'touch .ruby-version && echo 2.4.2 > .ruby-version'
+run 'touch .ruby-version && echo 2.5.3 > .ruby-version'
 run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 
 # Add custom configs
