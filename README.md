@@ -2,6 +2,11 @@
   <img alt="Nimble logo" src="https://assets.nimblehq.co/logo/light/logo-light-text-320.png" />
 </p>
 
+<p align="center">
+    <strong>Rails Templates</strong>
+</p>
+
+
 ---
 
 Our templates offer a rich boilerplate to jump start Rails-based application development and are based on our experience 
