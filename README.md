@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-    <strong>Rails Templates</strong>
+  <strong>Rails Templates</strong>
 </p>
 
 
