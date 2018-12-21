@@ -81,6 +81,18 @@ copy_file 'shared/app/assets/javascripts/application.js', 'app/assets/javascript
 copy_file 'shared/Procfile', 'Procfile'
 copy_file 'shared/Procfile.dev', 'Procfile.dev'
 
+# Setup npm packages
+remove_file 'package.json'
+copy_file 'shared/package.json', 'package.json'
+gsub_file 'package.json', '#{app_name}', "#{app_name}"
+
+# Setup jasmine
+copy_file 'shared/jasmine/karma.conf.js', 'karma.conf.js'
+directory 'shared/jasmine/spec', 'spec'
+
+# Setup linters
+setup_linters
+
 after_bundle do
   run 'spring stop'
 
@@ -112,9 +124,6 @@ after_bundle do
   # Modified README file
   remove_file 'README.md'
   copy_file 'shared/README.md', 'README.md'
-
-  # Setup linters
-  setup_linters
 
   # CI configuration
   copy_file 'shared/.semaphore.yml', '.semaphore.yml'

@@ -1,0 +1,25 @@
+{
+  "name": "#{app_name}",
+  "private": true,
+  "scripts": {
+    "lint": "eslint ./ --color",
+    "lint:fix": "eslint ./ --color --fix",
+    "test": "NODE_ENV=test karma start --browsers ChromeHeadless",
+    "test:debug": "NODE_ENV=test karma start --browsers Chrome --singleRun=false"
+  },
+  "devDependencies": {
+    "@nimbl3/eslint-config-nimbl3": "^2.1.0",
+    "jasmine-core": "^3.3.0",
+    "karma": "^3.1.4",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-html2js-preprocessor": "^1.1.0",
+    "karma-spec-reporter": "^0.0.32",
+    "karma-jasmine": "^2.0.1",
+    "karma-jquery": "^0.2.3",
+    "karma-jasmine-jquery": "^0.1.1",
+    "//": {
+      "//": "TODO: Enable if the project use webpack to bundle app assets",
+      "karma-webpack": "^3.0.5"
+    }
+  }
+}
