@@ -14,6 +14,8 @@ with building complex applications over the years.
 
 ## Get Started
 
+Install ruby and set your local ruby version to `2.5.3`
+
 The main template is `rails_docker`. In order to use it, initialize a new app with the following parameters:
 
 ```

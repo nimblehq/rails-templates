@@ -103,10 +103,6 @@ after_bundle do
   # Shell script to setup the Docker-based development environment
   copy_file 'rails_docker/envsetup', 'bin/envsetup'
 
-  # guard
-  run 'bundle exec spring binstub --all'
-  run 'bundle exec spring binstub rspec'
-
   FileUtils.chmod 0755, 'bin/envsetup'
 
   # Modified README file
