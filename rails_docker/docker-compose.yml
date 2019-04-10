@@ -9,6 +9,12 @@ services:
     ports:
       - "5432:5432"
 
+  redis:
+    image: redis:4.0.9
+    container_name: #{app_name}_redis
+    ports:
+      - "6379:6379"
+
   web:
     build:
       context: .
