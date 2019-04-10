@@ -15,7 +15,8 @@ ENV RACK_ENV=$RUBY_ENV \
 ENV APP_HOME=/#{app_name} \
     PORT=80
 
-ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
+ENV BUNDLE_VERSION=#{bundler_version} \
+    BUNDLE_GEMFILE=$APP_HOME/Gemfile \
     BUNDLE_JOBS=4 \
     BUNDLE_PATH="/bundle"
 
@@ -83,6 +84,7 @@ COPY Gemfile* ./
 # COPY engines/app_auth/lib/ ./engines/app_auth/lib/
 # COPY engines/app_auth/Gemfile engines/app_auth/app_auth.gemspec ./engines/app_auth/
 
+RUN gem install bundler -v $BUNDLE_VERSION
 RUN if [ "$BUILD_ENV" = "production" ]; then \
       bundle install --jobs $BUNDLE_JOBS --path $BUNDLE_PATH --without development test --deployment ; \
     else \
@@ -99,9 +101,6 @@ COPY . ./
 
 # Compile assets
 RUN bundle exec rails assets:precompile
-
-# Make the init file executable
-RUN chmod +x ./bin/start.sh
 
 EXPOSE $PORT
 
