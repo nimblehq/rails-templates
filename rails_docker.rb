@@ -73,9 +73,12 @@ run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 # Add custom configs
 setup_config
 
-# Removing turbolinks
+# Setup Javascript and Stylesheets
 remove_file 'app/assets/javascripts/application.js'
-copy_file 'shared/app/assets/javascripts/application.js', 'app/assets/javascripts/application.js'
+directory 'shared/app/assets/javascripts', 'app/assets/javascripts'
+
+remove_file 'app/assets/stylesheets/application.css'
+directory 'shared/app/assets/stylesheets', 'app/assets/stylesheets'
 
 # Add Procfile
 copy_file 'shared/Procfile', 'Procfile'
