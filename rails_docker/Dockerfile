@@ -29,7 +29,7 @@ ENV LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
 RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends apt-transport-https curl
+    apt-get install -y --no-install-recommends apt-transport-https curl gnupg
 
 # Add Yarn repository
 ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
