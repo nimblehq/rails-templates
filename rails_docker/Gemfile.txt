@@ -49,7 +49,6 @@ group :development, :test do
   gem 'shoulda-matchers' # Tests common Rails functionalities
   gem 'capybara', '>= 2.15' # Integration testing
   gem 'selenium-webdriver', '3.7.0' # Ruby bindings for Selenium/WebDriver
-  gem 'chromedriver-helper' # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'database_cleaner' # Use Database Cleaner
 
   gem 'pry-rails' # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
