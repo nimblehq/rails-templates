@@ -11,6 +11,7 @@ module Rack
     def call(env)
       @status, @headers, @body = @app.call(env)
       return [@status, @headers, @body] unless html?
+
       response = Rack::Response.new([], @status, @headers)
 
       @body.each { |fragment| response.write inject(fragment) }
@@ -53,5 +54,8 @@ module Rack
       EOF
       fragment.gsub(%r{</head>}, disable_animations + '</head>')
     end
+    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Naming/HeredocDelimiterNaming
+    # rubocop:enable Layout/IndentHeredoc:
   end
 end
