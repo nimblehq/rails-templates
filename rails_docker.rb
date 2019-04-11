@@ -24,11 +24,6 @@ def source_paths
   Array(super) + [current_directory]
 end
 
-def bundle_version
-  version_string = `bundle --version`
-  version_string.split(' ').last
-end
-
 apply 'lib/config.rb'
 apply 'lib/rspec.rb'
 apply 'lib/test_env.rb'
@@ -42,7 +37,6 @@ copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
 remove_file 'Dockerfile'
 copy_file 'rails_docker/Dockerfile', 'Dockerfile'
 gsub_file 'Dockerfile', '#{app_name}', "#{app_name}"
-gsub_file 'Dockerfile', '#{bundler_version}', "#{bundle_version}"
 
 remove_file 'docker-compose.yml'
 copy_file 'rails_docker/docker-compose.yml', 'docker-compose.yml'
