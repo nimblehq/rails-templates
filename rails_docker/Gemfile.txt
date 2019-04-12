@@ -75,7 +75,6 @@ group :test do
   gem 'timecop' # Gem for time travel
   gem 'json_matchers' # Validate the JSON returned by your Rails JSON APIs
   gem 'rspec-retry' # Retry randomly failing rspec example.
-  gem 'rails-controller-testing' # add helpers for template testing
 end
 
 group :production do
