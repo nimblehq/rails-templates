@@ -29,6 +29,7 @@ apply 'lib/rspec.rb'
 apply 'lib/test_env.rb'
 apply 'lib/linter.rb'
 apply 'lib/bullet.rb'
+apply 'lib/i18n_js.rb'
 
 # Gemfile
 remove_file 'Gemfile'
@@ -91,6 +92,9 @@ copy_file 'shared/.editorconfig', '.editorconfig'
 
 after_bundle do
   run 'spring stop'
+
+  # Setup I18n js configurations
+  setup_i18n_js
 
   # Devise configuration
   generate 'devise:install'
