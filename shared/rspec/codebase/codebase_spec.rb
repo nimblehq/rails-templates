@@ -5,7 +5,7 @@ describe 'Codebase', codebase: true do
     expect(`rubocop --format simple`).to include 'no offenses detected'
   end
 
-  it 'satisfies Breakman' do
+  it 'satisfies Brakeman' do
     expect(`brakeman -w2`).not_to include '+SECURITY WARNINGS+'
   end
 
