@@ -94,6 +94,15 @@ after_bundle do
     "  config.action_mailer.default_url_options = { host: \"localhost\", port: 3000 }"
   end
 
+  # Add Rack Deflater to reduce response size to `config/application.rb`
+  environment do
+    <<~EOT
+      # Compress the responses to reduce the size of html/json controller responses.
+      config.middleware.use Rack::Deflater
+
+    EOT
+  end
+
   # Setup test env
   setup_test_env
 
