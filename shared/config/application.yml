@@ -1,4 +1,5 @@
 default: &default
+  DB_NAME: "#{app_name}"
   DB_HOST: "localhost"
   DB_PORT: "5432"
   USERNAME: "postgres"
@@ -8,11 +9,9 @@ default: &default
 
 development:
   <<: *default
-  DB_NAME: "#{app_name}_development"
   SECRET_KEY_BASE: "#{secret_key_base}"
 
 test:
   <<: *default
-  DB_NAME: "#{app_name}_test"
   TEST_RETRY: "0"
   SECRET_KEY_BASE: "#{secret_key_base}"
