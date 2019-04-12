@@ -44,7 +44,7 @@ services:
       - ASSET_HOST=
       - DEFAULT_HOST=
       - MAILER_SENDER=
-      - SECRET_KEY_BASE=
+      - RAILS_MASTER_KEY=
 
 volumes:
   ruby-bundle:

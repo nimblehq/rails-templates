@@ -9,9 +9,7 @@ default: &default
 
 development:
   <<: *default
-  SECRET_KEY_BASE: "#{secret_key_base}"
 
 test:
   <<: *default
   TEST_RETRY: "0"
-  SECRET_KEY_BASE: "#{secret_key_base}"
