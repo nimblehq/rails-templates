@@ -14,15 +14,11 @@ gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schem
 gem 'sidekiq' # background processing for Ruby
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
 
-# Admin
-gem 'rails_admin'
-
 # Authentications & Authorizations
 gem 'devise' # Authentication solution for Rails with Warden
 gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
 
 # Assets
-gem 'jquery-rails' # Use jquery as the JavaScript library
 gem 'sass-rails' # SASS
 gem 'uglifier'
 

@@ -74,7 +74,8 @@ run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 setup_config
 
 # Setup Javascript and Stylesheets
-remove_file 'app/assets/javascripts/application.js'
+# Remove Turbolinks from `application.js` file
+gsub_file 'app/assets/javascripts/application.js', %r{^\/\/= require turbolinks\n}, ''
 directory 'shared/app/assets/javascripts', 'app/assets/javascripts'
 
 remove_file 'app/assets/stylesheets/application.css'
