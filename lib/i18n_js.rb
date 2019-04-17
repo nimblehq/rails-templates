@@ -1,5 +1,5 @@
 def setup_i18n_js
-  environment(nil, env: "development") do
+  environment(nil, env: 'development') do
     <<~EOT
       # Automatically generate the `translation.js` files
       config.middleware.use I18n::JS::Middleware
