@@ -22,6 +22,10 @@ gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
 gem 'sass-rails' # SASS
 gem 'uglifier'
 
+# Translations
+# gem 'rails-i18n', '~> 5.1' # Translations for Rails
+# gem 'devise-i18n' # Translations for the Devise
+
 group :development do
   gem 'foreman' # Manage Procfile-based applications
   gem 'better_errors' # Better error page for Rails and other Rack apps
