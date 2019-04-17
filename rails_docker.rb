@@ -85,6 +85,9 @@ directory 'shared/app/assets/stylesheets', 'app/assets/stylesheets'
 copy_file 'shared/Procfile', 'Procfile'
 copy_file 'shared/Procfile.dev', 'Procfile.dev'
 
+# Setup EditorConfig
+copy_file 'shared/.editorconfig', '.editorconfig'
+
 after_bundle do
   run 'spring stop'
 
