@@ -21,9 +21,6 @@ ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
 
 ENV NODE_VERSION="8"
 
-ENV CHROMEDRIVER_VERSION="2.39" \
-    CHROMEDRIVER_DIR=/chromedriver
-
 ENV LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     LANGUAGE="en_US:en"
@@ -57,15 +54,6 @@ RUN if [ "$BUILD_ENV" = "test" ]; then \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/* ; \
     fi
-
-# Download and install Chromedriver
-RUN if [ "$BUILD_ENV" = "test" ]; then \
-      mkdir "$CHROMEDRIVER_DIR" && \
-      wget -q --continue -P $CHROMEDRIVER_DIR "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip" && \
-      unzip $CHROMEDRIVER_DIR/chromedriver* -d $CHROMEDRIVER_DIR ; \
-    fi
-
-ENV PATH $CHROMEDRIVER_DIR:$PATH
 
 RUN sed -i "s/^#\ \+\(en_US.UTF-8\)/\1/" /etc/locale.gen
 RUN locale-gen en_US.UTF-8
