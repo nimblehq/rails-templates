@@ -13,5 +13,14 @@ def setup_i18n_js
       //= require translations/translations
     EOT
   end
+
+  append_to_file '.gitignore' do
+    <<~EOT
+      
+      # Ignore i18n.js generated files
+      /vendor/assets/javascripts/i18n.js
+      /app/assets/javascripts/translations/translations.js
+    EOT
+  end
 end
 

@@ -93,7 +93,7 @@ copy_file 'shared/.editorconfig', '.editorconfig'
 after_bundle do
   run 'spring stop'
 
-  # Setup I18n js configurations
+  # Setup i18n.js configurations
   setup_i18n_js
 
   # Devise configuration
