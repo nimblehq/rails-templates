@@ -24,7 +24,7 @@ gem 'uglifier'
 
 # Translations
 # gem 'rails-i18n', '~> 5.1' # Translations for Rails
-# gem 'devise-i18n' # Translations for the Devise
+# gem 'devise-i18n' # Translations for Devise
 
 group :development do
   gem 'foreman' # Manage Procfile-based applications

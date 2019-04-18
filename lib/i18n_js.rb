@@ -18,6 +18,7 @@ def setup_i18n_js
     <<~EOT
       
       # Ignore i18n.js generated files
+      # If deploy to heroku with git, please remove this as it prevents the files to be committed
       /vendor/assets/javascripts/i18n.js
       /app/assets/javascripts/translations/translations.js
     EOT
