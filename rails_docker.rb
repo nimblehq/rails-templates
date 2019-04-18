@@ -28,6 +28,7 @@ apply 'lib/config.rb'
 apply 'lib/rspec.rb'
 apply 'lib/test_env.rb'
 apply 'lib/linter.rb'
+apply 'lib/bullet.rb'
 
 # Gemfile
 remove_file 'Gemfile'
@@ -105,6 +106,9 @@ after_bundle do
 
   # Setup test env
   setup_test_env
+
+  # Setup Bullet gem to detect N+1 queries
+  setup_bullet
 
   # rspec
   setup_rspec
