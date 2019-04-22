@@ -1,3 +1,11 @@
+def setup_rails_i18n
+  inject_into_class 'app/controllers/application_controller.rb', 'ApplicationController' do
+    "  include Localization\n"
+  end
+
+  gsub_file 'app/views/layouts/application.html.erb', /<html>/, "<html lang='<%= I18n.locale %>'>"
+end
+
 def setup_i18n_js
   environment(nil, env: 'development') do
     <<~EOT
