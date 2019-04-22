@@ -45,12 +45,12 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 # Set up the Chrome PPA and install Chrome Headless
-ADD https://dl-ssl.google.com/linux/linux_signing_key.pub /tmp/google-pubkey.gpg
 RUN if [ "$BUILD_ENV" = "test" ]; then \
-      apt-key add /tmp/google-pubkey.gpg && rm /tmp/google-pubkey.gpg  && \
-      echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list.d/google.list && \
+      wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+      echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list.d/google-chrome.list && \
       apt-get update -qq && \
-      apt-get install -y --allow-unauthenticated --no-install-recommends google-chrome-stable && \
+      apt-get install -y --no-install-recommends google-chrome-stable && \
+      rm /etc/apt/sources.list.d/google-chrome.list && \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/* ; \
     fi
