@@ -28,6 +28,8 @@ apply 'lib/config.rb'
 apply 'lib/rspec.rb'
 apply 'lib/test_env.rb'
 apply 'lib/linter.rb'
+apply 'lib/bullet.rb'
+apply 'lib/i18n.rb'
 
 # Gemfile
 remove_file 'Gemfile'
@@ -67,22 +69,43 @@ run 'chmod +x bin/test.sh'
 run 'rm -rf test/'
 
 # rvm
-run 'touch .ruby-version && echo 2.5.3 > .ruby-version'
+run 'touch .ruby-version && echo 2.6.2 > .ruby-version'
 run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 
 # Add custom configs
 setup_config
 
-# Removing turbolinks
-remove_file 'app/assets/javascripts/application.js'
-copy_file 'shared/app/assets/javascripts/application.js', 'app/assets/javascripts/application.js'
+# Setup Javascript and Stylesheets
+# Remove Turbolinks from `application.js` file
+gsub_file 'app/assets/javascripts/application.js', %r{^\/\/= require turbolinks\n}, ''
+directory 'shared/app/assets/javascripts', 'app/assets/javascripts'
+gsub_file('app/assets/javascripts/application.js', %r{\/\/= require_tree .\n}, '')
+insert_into_file 'app/assets/javascripts/application.js', after: "//= require activestorage\n" do
+  <<~EOT
+    //= require initializers/index
+    //= require screens/index
+  EOT
+end
+
+remove_file 'app/assets/stylesheets/application.css'
+directory 'shared/app/assets/stylesheets', 'app/assets/stylesheets'
+
+# Setup base application controller including the useful concerns
+directory 'shared/app/controllers', 'app/controllers'
 
 # Add Procfile
 copy_file 'shared/Procfile', 'Procfile'
 copy_file 'shared/Procfile.dev', 'Procfile.dev'
 
+# Setup EditorConfig
+copy_file 'shared/.editorconfig', '.editorconfig'
+
 after_bundle do
   run 'spring stop'
+
+  # Setup i18n configurations
+  setup_rails_i18n
+  setup_i18n_js
 
   # Devise configuration
   generate 'devise:install'
@@ -90,8 +113,20 @@ after_bundle do
     "  config.action_mailer.default_url_options = { host: \"localhost\", port: 3000 }"
   end
 
+  # Add Rack Deflater to reduce response size to `config/application.rb`
+  environment do
+    <<~EOT
+      # Compress the responses to reduce the size of html/json controller responses.
+      config.middleware.use Rack::Deflater
+
+    EOT
+  end
+
   # Setup test env
   setup_test_env
+
+  # Setup Bullet gem to detect N+1 queries
+  setup_bullet
 
   # rspec
   setup_rspec
@@ -102,10 +137,6 @@ after_bundle do
 
   # Shell script to setup the Docker-based development environment
   copy_file 'rails_docker/envsetup', 'bin/envsetup'
-
-  # guard
-  run 'bundle exec spring binstub --all'
-  run 'bundle exec spring binstub rspec'
 
   FileUtils.chmod 0755, 'bin/envsetup'
 
@@ -118,4 +149,19 @@ after_bundle do
 
   # CI configuration
   copy_file 'shared/.semaphore.yml', '.semaphore.yml'
+
+  append_to_file '.gitignore' do
+    <<~EOT
+
+      # Ignore folder information and IDE-specific files
+      .DS_Store
+      .idea/*
+
+      # Ignore the test coverage results from SimpleCov
+      /coverage
+
+      # Ignore pronto configuration files
+      .pronto.yml
+    EOT
+  end
 end

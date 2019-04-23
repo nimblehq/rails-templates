@@ -8,14 +8,14 @@ development:
   host:     <%= ENV['DB_HOST'] %>
   port:     <%= ENV['DB_PORT'] %>
   username: <%= ENV['USERNAME'] %>
-  database: <%= ENV['DB_NAME'] %>
+  database: <%= ENV['DB_NAME'] %>_development
 
 test:
   <<: *default
   host:     <%= ENV['DB_HOST'] %>
   port:     <%= ENV['DB_PORT'] %>
   username: <%= ENV['USERNAME'] %>
-  database: <%= ENV['DB_NAME'] %>
+  database: <%= ENV['DB_NAME'] %>_test
 
 production:
   url: <%= ENV['DATABASE_URL'] %>
