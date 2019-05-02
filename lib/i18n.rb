@@ -1,6 +1,6 @@
 def setup_rails_i18n
   inject_into_class 'app/controllers/application_controller.rb', 'ApplicationController' do
-    "\tinclude Localization\n"
+    "  include Localization\n"
   end
 end
 
@@ -19,8 +19,8 @@ def setup_i18n_js
 
   insert_into_file 'app/views/layouts/application.html.erb', after: /<%= stylesheet_link_tag.*\n/ do
     <<~EOT
-      \t\t<%= javascript_include_tag 'i18n' %>
-      \t\t<%= javascript_include_tag 'translations/translations' %>
+          <%= javascript_include_tag 'i18n' %>
+          <%= javascript_include_tag 'translations/translations' %>
     EOT
   end
 
@@ -30,7 +30,7 @@ def setup_i18n_js
 
   append_to_file '.gitignore' do
     <<~EOT
-      
+
       # Ignore i18n.js generated files
       # If deploy to heroku with git, please remove this as it prevents the files to be committed
       /vendor/assets/javascripts/i18n.js
