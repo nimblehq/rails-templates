@@ -12,7 +12,7 @@ def current_directory
       git clone: [
               '--quiet',
               '--depth=1',
-              'https://github.com/nimbl3/rails-templates.git',
+              'https://github.com/nimblehq/rails-templates.git',
               tempdir
           ].map(&:shellescape).join(' ')
       tempdir
