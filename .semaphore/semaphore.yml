@@ -32,9 +32,9 @@ blocks:
       jobs:
         - name: Build App
           commands:
-            - make Run
+            - make run
 
-  - name: "Smoke Test"
+  - name: "Test"
     task:
       prologue:
         commands:
