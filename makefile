@@ -6,6 +6,7 @@ run:
 	docker-compose -f docker-compose.test.yml run test
 
 smoke-test:
+	cd $(APP_NAME) && \
 	docker-compose -f docker-compose.test.yml up && \
 	./bin/wait_for.sh 80
 
