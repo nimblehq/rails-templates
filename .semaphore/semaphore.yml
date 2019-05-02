@@ -39,6 +39,7 @@ blocks:
       prologue:
         commands:
           - checkout
+          - cache restore $SEMAPHORE_PROJECT_NAME-deps
       jobs:
         - name: "Smoke Test"
           commands:
