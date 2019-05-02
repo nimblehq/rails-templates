@@ -34,17 +34,3 @@ blocks:
           commands:
             - make run
 
-  - name: "Test"
-    task:
-      env_vars:
-        - name: APP_NAME
-          value: "test_app"
-      prologue:
-        commands:
-          - checkout
-          - cache restore $SEMAPHORE_PROJECT_NAME-deps
-      jobs:
-        - name: "Smoke Test"
-          commands:
-            - make smoke-test
-
