@@ -1,24 +1,27 @@
 require 'shellwords'
+require 'fileutils'
 
 # Add the current directory to the path Thor uses to look up files
 
 def current_directory
   @current_directory ||=
-      if __FILE__ =~ %r{\Ahttps?://}
-        require 'tmpdir'
-        tempdir = Dir.mktmpdir("rails-templates")
-        at_exit { FileUtils.remove_entry(tempdir) }
-        git clone: [
-                "--quiet",
-                "https://github.com/nimbl3/rails-templates.git",
-                tempdir
-            ].map(&:shellescape).join(" ")
-
-        tempdir
-      else
-        File.expand_path(File.dirname(__FILE__))
-      end
+    if __FILE__ =~ %r{\Ahttps?://}
+      require 'tmpdir'
+      tempdir = Dir.mktmpdir("rails-templates")
+      at_exit { FileUtils.remove_entry(tempdir) }
+      git clone: [
+              '--quiet',
+              '--depth=1',
+              'https://github.com/nimbl3/rails-templates.git',
+              tempdir
+          ].map(&:shellescape).join(' ')
+      tempdir
+    else
+      File.expand_path(File.dirname(__FILE__))
+    end
 end
+
+FileUtils.rm_rf("#{current_directory}/#{app_name}/.git")
 
 def source_paths
   Array(super) + [current_directory]
@@ -136,9 +139,8 @@ after_bundle do
   copy_file 'shared/Guardfile', 'Guardfile'
 
   # Shell script to setup the Docker-based development environment
-  copy_file 'rails_docker/envsetup', 'bin/envsetup'
-
-  FileUtils.chmod 0755, 'bin/envsetup'
+  copy_file 'rails_docker/envsetup.sh', 'bin/envsetup.sh'
+  run 'chmod +x bin/envsetup.sh'
 
   # Modified README file
   remove_file 'README.md'
