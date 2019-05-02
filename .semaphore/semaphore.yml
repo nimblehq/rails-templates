@@ -20,7 +20,7 @@ blocks:
             - make create
             - cache store $SEMAPHORE_PROJECT_NAME-deps test_app
 
-  - name: "Build"
+  - name: "Run"
     task:
       env_vars:
         - name: APP_NAME
@@ -32,19 +32,15 @@ blocks:
       jobs:
         - name: Build App
           commands:
-            - make build
+            - make Run
 
-  - name: "RSpec"
+  - name: "Smoke Test"
     task:
-      env_vars:
-        - name: APP_NAME
-          value: "test_app"
       prologue:
         commands:
           - checkout
-          - cache restore $SEMAPHORE_PROJECT_NAME-deps
       jobs:
-        - name: Run RSpec
+        - name: "Smoke Test"
           commands:
-            - make rspec
+            - make smoke-test
 
