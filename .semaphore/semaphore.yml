@@ -36,6 +36,9 @@ blocks:
 
   - name: "Test"
     task:
+      env_vars:
+        - name: APP_NAME
+          value: "test_app"
       prologue:
         commands:
           - checkout
