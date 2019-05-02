@@ -63,6 +63,12 @@ RUN mkdir "$APP_HOME"
 
 # Replace by the following if the application uses Rails engines
 # RUN mkdir "$APP_HOME" "$APP_HOME/engines"
+
+# Copy each engine lib/, Gemfile and .gemspec files
+# Example:
+# COPY engines/app_auth/lib/ ./engines/app_auth/lib/
+# COPY engines/app_auth/Gemfile engines/app_auth/app_auth.gemspec ./engines/app_auth/
+
 WORKDIR $APP_HOME
 
 # Move gemfile into place
