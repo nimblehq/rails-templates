@@ -3,7 +3,7 @@ ruby '2.6.2'
 
 # Backend
 gem 'rails', '5.2.3' # Latest stable
-gem 'pg', '1.1.4' # Use Postgresql as database
+gem 'pg' # Use Postgresql as database
 gem 'puma' # Use Puma as the app server
 gem 'mini_magick' # A ruby wrapper for ImageMagick or GraphicsMagick command line
 gem 'pagy' # A pagination gem that is very light and fast
@@ -73,7 +73,6 @@ group :test do
   gem 'simplecov', require: false # code coverage analysis tool for Ruby
   gem 'vcr' # Gem for recording test suite's HTTP interactions
   gem 'timecop' # Gem for time travel
-  gem 'public_suffix'
 end
 
 group :production do
