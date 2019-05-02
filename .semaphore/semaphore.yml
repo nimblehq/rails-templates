@@ -6,15 +6,14 @@ agent:
 blocks:
   - name: "Setup"
     task:
+      prologue:
+        commands:
+          - sem-version ruby 2.6.0
+          - gem install rails
       env_vars:
         - name: APP_NAME
           value: "test_app"
       jobs:
-        - name: Bundle
-          commands:
-            - sem-version ruby 2.6.0
-            - gem install rails
-
         - name: Create App
           commands:
             - checkout
