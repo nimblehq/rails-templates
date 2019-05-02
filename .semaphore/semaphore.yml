@@ -1,0 +1,54 @@
+version: v1.0
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: "Setup"
+    task:
+      env_vars:
+        - name: APP_NAME
+          value: "test_app"
+      jobs:
+        - name: Bundle
+          commands:
+            - sem-version ruby 2.6.0
+            - gem install rails
+
+        - name: Create App
+          commands:
+            - checkout
+            - make create
+
+  - name: "Build"
+    task:
+      env_vars:
+        - name: APP_NAME
+          value: "test_app"
+      jobs:
+        - name: Build App
+          commands:
+            - checkout
+            - make build
+
+  - name: "RSpec"
+    task:
+      env_vars:
+        - name: APP_NAME
+          value: "test_app"
+      jobs:
+        - name: Run RSpec
+          commands:
+            - checkout
+            - make rspec
+
+  # - name: "Ports"
+    # task:
+      # env_vars:
+        # - name: APP_NAME
+          # value: "test_app"
+      # jobs:
+        # - name: Check availability
+          # commands:
+            # - checkout
+            # - make ports
