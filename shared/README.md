@@ -2,7 +2,7 @@
 
 ## Introduction
 
-App introduction goes here ...
+> *App introduction goes here ...*
 
 ## Project Setup
 
@@ -12,8 +12,8 @@ App introduction goes here ...
 
 * Setup and boot the Docker containers:
 
-```
-./bin/envsetup
+```sh
+./bin/envsetup.sh
 ```
 
 ### Development
@@ -22,13 +22,13 @@ App introduction goes here ...
 
     * Postgres:
 
-    ```
+    ```sh
     rake db:setup
     ```
 
 * Run the Rails app
 
-```
+```sh
 foreman start -f Procfile.dev
 ```
 
@@ -40,7 +40,7 @@ Add the following build settings to run the tests in the Docker environment via 
 
 * Configure the environment variable `BRANCH_TAG` to tag Docker images per branch:
 
-```
+```sh
 export BRANCH_TAG=$SEMAPHORE_BRANCH_ID
 ```
 
@@ -51,7 +51,7 @@ An alternative is to use a unique identifier such as PR_ID or BRANCH_ID on the C
 
 * Pull the latest version the Docker image for the branch:
 
-```
+```sh
 docker pull $DOCKER_IMAGE:$BRANCH_TAG || true
 ```
 
@@ -60,7 +60,7 @@ it first to leverage the `cache_from` settings of Docker Compose which avoids re
 
 * Build the Docker image:
 
-```
+```sh
 docker-compose -f docker-compose.test.yml build
 ```
 
@@ -68,13 +68,13 @@ Upon the first build, the whole Docker image is built from the ground up and tag
 
 * Push the latest version of the Docker image for this branch:
 
-```
+```sh
 docker push $DOCKER_IMAGE:$BRANCH_TAG
 ```
 
 * Setup the test database:
 
-```
+```sh
 docker-compose -f docker-compose.test.yml run test rake db:test:prepare
 ```
 
@@ -82,13 +82,13 @@ docker-compose -f docker-compose.test.yml run test rake db:test:prepare
 
 * Run all tests:
 
-```
+```sh
 docker-compose -f docker-compose.test.yml run test
 ```
 
 * Run a specific test:
 
-```
+```sh
 docker-compose -f docker-compose.test.yml run test [rspec-params]
 ```
 
@@ -98,6 +98,8 @@ docker-compose -f docker-compose.test.yml run test [rspec-params]
 
 * In the CI build script, add the following command:
 
-```
-if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then (echo "Running pronto"; bundle exec pronto run -f bitbucket_pr -c origin/development); else (echo "Escaping pronto"); fi
+```sh
+if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then \ 
+  (echo "Running pronto"; bundle exec pronto run -f bitbucket_pr -c origin/development);  else \ (echo "Escaping pronto"); \
+fi
 ```
