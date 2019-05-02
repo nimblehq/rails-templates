@@ -28,6 +28,7 @@ blocks:
       jobs:
         - name: Build App
           commands:
+            - checkout
             - cache restore test_app
             - make build
 
@@ -39,6 +40,7 @@ blocks:
       jobs:
         - name: Run RSpec
           commands:
+            - checkout
             - cache restore test_app
             - make rspec
 
