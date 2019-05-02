@@ -4,7 +4,7 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: "Test"
+  - name: "Setup"
     task:
       prologue:
         commands:
@@ -16,11 +16,39 @@ blocks:
       jobs:
         - name: Create App
           commands:
+            - checkout
             - make create
+            - cache store test_app
+
+  - name: "Build"
+    task:
+      env_vars:
+        - name: APP_NAME
+          value: "test_app"
+      jobs:
         - name: Build App
           commands:
+            - cache restore test_app
             - make build
+
+  - name: "RSpec"
+    task:
+      env_vars:
+        - name: APP_NAME
+          value: "test_app"
+      jobs:
         - name: Run RSpec
           commands:
+            - cache restore test_app
             - make rspec
 
+  # - name: "Ports"
+    # task:
+      # env_vars:
+        # - name: APP_NAME
+          # value: "test_app"
+      # jobs:
+        # - name: Check availability
+          # commands:
+            # - checkout
+            # - make ports
