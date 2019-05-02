@@ -28,7 +28,7 @@ blocks:
       prologue:
         commands:
           - checkout
-          - cache restore $SEMAPHORE_PROJECT_NAME-deps test_app
+          - cache restore $SEMAPHORE_PROJECT_NAME-deps
       jobs:
         - name: Build App
           commands:
@@ -42,7 +42,7 @@ blocks:
       prologue:
         commands:
           - checkout
-          - cache restore $SEMAPHORE_PROJECT_NAME-deps test_app
+          - cache restore $SEMAPHORE_PROJECT_NAME-deps
       jobs:
         - name: Run RSpec
           commands:
