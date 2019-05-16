@@ -77,15 +77,16 @@ setup_config
 
 # Setup Javascript and Stylesheets
 # Remove Turbolinks from `application.js` file
-gsub_file 'app/assets/javascripts/application.js', %r{^\/\/= require turbolinks\n}, ''
-directory 'shared/app/assets/javascripts', 'app/assets/javascripts'
-gsub_file('app/assets/javascripts/application.js', %r{\/\/= require_tree .\n}, '')
-insert_into_file 'app/assets/javascripts/application.js', after: "//= require activestorage\n" do
-  <<~EOT
-    //= require initializers/index
-    //= require screens/index
-  EOT
-end
+# TODO: Recheck the Rails 6 update
+# gsub_file 'app/assets/javascripts/application.js', %r{^\/\/= require turbolinks\n}, ''
+# directory 'shared/app/assets/javascripts', 'app/assets/javascripts'
+# gsub_file('app/assets/javascripts/application.js', %r{\/\/= require_tree .\n}, '')
+# insert_into_file 'app/assets/javascripts/application.js', after: "//= require activestorage\n" do
+#   <<~EOT
+#     //= require initializers/index
+#     //= require screens/index
+#   EOT
+# end
 
 remove_file 'app/assets/stylesheets/application.css'
 directory 'shared/app/assets/stylesheets', 'app/assets/stylesheets'

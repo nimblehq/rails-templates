@@ -2,12 +2,12 @@ source 'https://rubygems.org'
 ruby '2.6.2'
 
 # Backend
-gem 'rails', '5.2.3' # Latest stable
+gem 'rails', '6.0.0.rc1' # Latest stable
 gem 'pg' # Use Postgresql as database
 gem 'puma' # Use Puma as the app server
 gem 'mini_magick' # A ruby wrapper for ImageMagick or GraphicsMagick command line
 gem 'pagy' # A pagination gem that is very light and fast
-gem 'paranoia', '2.4.1' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3 and Rails 4. Soft-deletion of records
+gem 'paranoia', '2.4.2' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3 and Rails 4. Soft-deletion of records
 gem 'ffaker' # A library for generating fake data such as names, addresses, and phone numbers.
 gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs.
 gem 'sidekiq' # background processing for Ruby
@@ -34,7 +34,6 @@ group :development do
   gem 'guard-rubocop'
   gem 'guard-rspec' # Auto-run specs
   gem 'roadie-rails' # Mailers
-  gem 'rubycritic', require: false # A Ruby code quality reporter
   gem 'spring' # Spring speeds up development by keeping your application running in the background.
   gem 'spring-commands-rspec' # This gem implements the rspec command for Spring.
   gem 'spring-watcher-listen', '2.0.1' # Makes Spring watch the filesystem for changes using Listen
@@ -53,9 +52,7 @@ group :development, :test do
   gem 'pronto-rubocop', require: false
   gem 'pronto-flay', require: false # analyzes code for structural similarities
   gem 'pronto-brakeman', require: false # analyzes code for security vulnerabilities
-  gem 'pronto-dirty_words', require: false # analyzes code for  Seven Dirty Words
   gem 'pronto-rails_best_practices', require: false
-  gem 'pronto-rails_schema', require: false
   gem 'pronto-reek', require: false
   gem 'pronto-scss', require: false
   gem 'pronto-eslint_npm', require: false
