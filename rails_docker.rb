@@ -75,19 +75,21 @@ run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 # Add custom configs
 setup_config
 
-# Setup Javascript and Stylesheets
+# Setup Javascript
+directory 'shared/app/assets/javascripts', 'app/javascript/src'
 # Remove Turbolinks from `application.js` file
-# TODO: Recheck the Rails 6 update
-# gsub_file 'app/assets/javascripts/application.js', %r{^\/\/= require turbolinks\n}, ''
-# directory 'shared/app/assets/javascripts', 'app/assets/javascripts'
-# gsub_file('app/assets/javascripts/application.js', %r{\/\/= require_tree .\n}, '')
-# insert_into_file 'app/assets/javascripts/application.js', after: "//= require activestorage\n" do
-#   <<~EOT
-#     //= require initializers/index
-#     //= require screens/index
-#   EOT
-# end
+gsub_file('app/javascript/packs/application.js', %r{^require\(\"turbolinks\"\).start\(\)\n}, '')
+append_to_file 'app/javascript/packs/application.js' do
+  <<~EOT
 
+      import '../translations/translations'
+
+      import '../src/initializers/'
+      import '../src/screens/'
+  EOT
+end
+
+# Setup Stylesheets
 remove_file 'app/assets/stylesheets/application.css'
 directory 'shared/app/assets/stylesheets', 'app/assets/stylesheets'
 
