@@ -1,0 +1,18 @@
+{
+  "name": "#{app_name}",
+  "scripts": {
+    "lint": "eslint . --color",
+    "lint:fix": "eslint . --color --fix"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "6.2.2",
+    "@nimbl3/eslint-config-nimbl3": "2.1.1",
+    "husky": "3.0.4"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "sh .hooks/commit-msg.sh $HUSKY_GIT_PARAMS"
+    }
+  }
+}

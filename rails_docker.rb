@@ -75,6 +75,14 @@ run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 # Add custom configs
 setup_config
 
+# Replace default package.json
+remove_file 'package.json'
+copy_file 'rails_docker/package.json', 'package.json'
+gsub_file 'package.json', '#{app_name}', "#{app_name}"
+
+# Git hooks
+directory 'rails_docker/.hooks', '.hooks/'
+
 # Setup Javascript and Stylesheets
 # Remove Turbolinks from `application.js` file
 gsub_file 'app/assets/javascripts/application.js', %r{^\/\/= require turbolinks\n}, ''
