@@ -1,5 +1,6 @@
 {
   "name": "#{app_name}",
+  "private": true,
   "scripts": {
     "lint": "eslint . --color",
     "lint:fix": "eslint . --color --fix"
