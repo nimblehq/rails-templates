@@ -75,7 +75,7 @@ docker push $DOCKER_IMAGE:$BRANCH_TAG
 * Setup the test database:
 
 ```sh
-docker-compose -f docker-compose.test.yml run test rake db:test:prepare
+docker-compose -f docker-compose.test.yml run test bin/bundle exec rake db:test:prepare
 ```
 
 ### Test
@@ -89,7 +89,7 @@ docker-compose -f docker-compose.test.yml run test
 * Run a specific test:
 
 ```sh
-docker-compose -f docker-compose.test.yml run test [rspec-params]
+docker-compose -f docker-compose.test.yml run test bin/bundle exec spec [rspec-params]
 ```
 
 ### Automated Code Review Setup
