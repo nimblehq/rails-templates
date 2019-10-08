@@ -105,6 +105,7 @@ RUN yarn install --network-timeout 100000
 COPY . ./
 
 # Compile assets
+RUN bundle exec rails i18n:js:export
 RUN bundle exec rails assets:precompile
 
 EXPOSE $PORT
