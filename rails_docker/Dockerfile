@@ -1,4 +1,4 @@
-FROM ruby:2.6.2-alpine3.9
+FROM ruby:2.6.2-slim
 
 ARG RUBY_ENV=development
 ARG NODE_ENV=development
@@ -12,52 +12,48 @@ ENV RACK_ENV=$RUBY_ENV \
     BUILD_ENV=$BUILD_ENV \
     ASSET_HOST=$ASSET_HOST
 
-ENV APP_HOME=/usr/src/#{app_name}/
-ENV PORT=80
+ENV APP_HOME=/#{app_name} \
+    PORT=80
 
-ENV BUNDLE_JOBS=4 \
+ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
+    BUNDLE_JOBS=4 \
     BUNDLE_PATH="/bundle"
+
+ENV NODE_VERSION="8"
 
 ENV LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
-# Install dependencies
-RUN apk add \
-  --no-cache \
-  --update build-base \
-    build-base \
-    linux-headers \
-    bash \
-    make \
-    cmake \
-    imagemagick \
-    ruby \
-    ruby-bundler \
-    ruby-irb \
-    libxml2-dev \
-    libxslt-dev \
-    libffi-dev \
-    postgresql-dev \
-    zlib-dev \
-    git \
-    nodejs-current \
-    nodejs-npm \
-    tzdata && \
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends apt-transport-https curl gnupg
+
+# Add Yarn repository
+ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
+RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg && \
+    echo "deb http://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
+
+# Add the PPA (personal package archive) maintained by NodeSource
+# This will have more up-to-date versions of Node.js than the official Debian repositories
+RUN curl -sL https://deb.nodesource.com/setup_"$NODE_VERSION".x | bash -
+
+# Install general required core packages, Node JS related packages and Chrome (testing)
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends build-essential libpq-dev nodejs yarn && \
+    apt-get install -y --no-install-recommends rsync locales chrpath pkg-config libfreetype6 libfontconfig1 git cmake wget unzip && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Installs Chromium package from edge.
+# Set up the Chrome PPA and install Chrome Headless
 RUN if [ "$BUILD_ENV" = "test" ]; then \
-  echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
-    && echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
-    && apk add --no-cache \
-    chromium@edge \
-    harfbuzz@edge \
-    nss@edge \
-    freetype@edge \
-    ttf-freefont@edge && \
-    rm -rf /var/lib/apt/lists/* ; \
-fi
+      wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+      echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' >> /etc/apt/sources.list.d/google-chrome.list && \
+      apt-get update -qq && \
+      apt-get install -y --no-install-recommends google-chrome-stable && \
+      rm /etc/apt/sources.list.d/google-chrome.list && \
+      apt-get clean && \
+      rm -rf /var/lib/apt/lists/* ; \
+    fi
 
 RUN mkdir "$APP_HOME"
 
@@ -72,9 +68,9 @@ RUN mkdir "$APP_HOME"
 WORKDIR $APP_HOME
 
 # Move gemfile into place
-COPY Gemfile* $APP_HOME
+COPY Gemfile* ./
 
-# skip installing gem documentation
+# Skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
 	&& { \
     echo '---'; \
@@ -101,12 +97,12 @@ else \
 fi
 
 # Install JS dependencies
-COPY package.json $APP_HOME
-RUN npm install
+COPY package.json yarn.lock ./
+RUN yarn install --network-timeout 100000
 
 # Copying the app files must be placed after the dependencies setup
 # since the app files always change thus cannot be cached
-COPY . $APP_HOME
+COPY . ./
 
 # Compile assets
 RUN bundle exec rails assets:precompile
