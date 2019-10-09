@@ -108,7 +108,7 @@ end
 insert_into_file 'package.json', before: %r{"version": .+\n} do
   <<~EOT
       "devDependencies": {
-        "@nimbl3/eslint-config-nimbl3": "^2.1.1"
+        "@nimbl3/eslint-config-nimbl3": "2.1.1"
       },
   EOT
 end
@@ -126,6 +126,9 @@ copy_file 'shared/Procfile.dev', 'Procfile.dev'
 
 # Setup EditorConfig
 copy_file 'shared/.editorconfig', '.editorconfig'
+
+# Setup .npmrc
+copy_file 'shared/.npmrc', '.npmrc'
 
 after_bundle do
   run 'spring stop'
