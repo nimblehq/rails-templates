@@ -23,7 +23,7 @@ gem 'webpacker', '4.0' # Transpile app-like JavaScript
 gem 'sass-rails' # SASS
 
 # Translations
-# gem 'rails-i18n', '~> 5.1' # Translations for Rails
+# gem 'rails-i18n', '~> 6.0.0' # Translations for Rails
 # gem 'devise-i18n' # Translations for Devise
 
 group :development do
