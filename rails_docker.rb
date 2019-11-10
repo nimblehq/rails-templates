@@ -209,4 +209,13 @@ after_bundle do
       environment.config.set('plugins', plugins);
     EOT
   end
+
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  environment(nil, env: 'test') do
+    <<~EOT
+      # Do not fallback to assets pipeline if a precompiled asset is missed.
+      config.assets.compile = false
+
+    EOT
+  end
 end
