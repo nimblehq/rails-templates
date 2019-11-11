@@ -88,11 +88,13 @@ RUN mkdir -p /usr/local/etc \
 
 # Install Ruby gems
 RUN if [ "$BUILD_ENV" = "production" ]; then \
+  gem install bundler && \
   bundle install --jobs $BUNDLE_JOBS \
                  --path $BUNDLE_PATH \
                  --without development test \
                  --deployment ; \
 else \
+  gem install bundler && \
   bundle install --jobs $BUNDLE_JOBS \
                  --path $BUNDLE_PATH ; \
 fi
