@@ -1,5 +1,4 @@
 require 'shellwords'
-require 'fileutils'
 
 # Add the current directory to the path Thor uses to look up files
 
@@ -72,24 +71,49 @@ run 'chmod +x bin/test.sh'
 run 'rm -rf test/'
 
 # rvm
-run 'touch .ruby-version && echo 2.6.2 > .ruby-version'
+run 'touch .ruby-version && echo 2.6.5 > .ruby-version'
 run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 
 # Add custom configs
 setup_config
 
-# Setup Javascript and Stylesheets
+# Remove Turbolink attributes from `application.html.erb` file
+gsub_file('app/views/layouts/application.html.erb', %r{, 'data-turbolinks-track': 'reload'}, '')
+
+# Setup Javascript
+directory 'shared/app/javascript', 'app/javascript'
 # Remove Turbolinks from `application.js` file
-gsub_file 'app/assets/javascripts/application.js', %r{^\/\/= require turbolinks\n}, ''
-directory 'shared/app/assets/javascripts', 'app/assets/javascripts'
-gsub_file('app/assets/javascripts/application.js', %r{\/\/= require_tree .\n}, '')
-insert_into_file 'app/assets/javascripts/application.js', after: "//= require activestorage\n" do
+gsub_file('app/javascript/packs/application.js', %r{^require\(\"turbolinks\"\).start\(\)\n}, '')
+# Remove Turbolinks from `package.json` file
+gsub_file('package.json', %r{"turbolinks": .+\n}, '')
+
+insert_into_file 'app/javascript/packs/application.js', after: "require\(\"channels\"\)\n" do
   <<~EOT
-    //= require initializers/index
-    //= require screens/index
+
+    import 'translations/translations';
+    
+    import 'initializers/';
+    import 'screens/';
   EOT
 end
 
+# Add i18n-js plugin to package.json
+insert_into_file 'package.json', after: %r{"@rails/ujs": .+\n} do
+  <<~EOT
+    "i18n-js": "^3.0.11",
+  EOT
+end
+
+# Add @nimbl3/eslint-config-nimbl3 plugin to package.json
+insert_into_file 'package.json', before: %r{"version": .+\n} do
+  <<~EOT
+      "devDependencies": {
+        "@nimbl3/eslint-config-nimbl3": "2.1.1"
+      },
+  EOT
+end
+
+# Setup Stylesheets
 remove_file 'app/assets/stylesheets/application.css'
 directory 'shared/app/assets/stylesheets', 'app/assets/stylesheets'
 
@@ -102,6 +126,9 @@ copy_file 'shared/Procfile.dev', 'Procfile.dev'
 
 # Setup EditorConfig
 copy_file 'shared/.editorconfig', '.editorconfig'
+
+# Setup .npmrc
+copy_file 'shared/.npmrc', '.npmrc'
 
 after_bundle do
   run 'spring stop'
@@ -164,6 +191,22 @@ after_bundle do
 
       # Ignore pronto configuration files
       .pronto.yml
+    EOT
+  end
+
+  # Add i18n-js plugin to webpack
+  insert_into_file 'config/webpack/environment.js', after: "const { environment } = require('@rails/webpacker')\n" do
+    <<~EOT
+      const webpack = require('webpack');
+      
+      const plugins = [
+        new webpack.ProvidePlugin({
+          // Translations
+          I18n: 'i18n-js',
+        })
+      ]
+  
+      environment.config.set('plugins', plugins);
     EOT
   end
 end

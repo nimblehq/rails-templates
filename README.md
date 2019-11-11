@@ -14,7 +14,7 @@ with building complex applications over the years.
 
 ## Get Started
 
-Install ruby and set your local ruby version to `2.6.2`
+Install ruby and set your local ruby version to `2.6.5`
 
 The main template is `rails_docker`. In order to use it, initialize a new app with the following parameters:
 
@@ -26,7 +26,7 @@ Read more about Rails Application Template in the [official Rails Guides](https:
 
 ## License
 
-This project is Copyright (c) 2014-2018 Nimble. It is free software,
+This project is Copyright (c) 2014-2019 Nimble. It is free software,
 and may be redistributed under the terms specified in the [LICENSE] file.
 
 [LICENSE]: /LICENSE

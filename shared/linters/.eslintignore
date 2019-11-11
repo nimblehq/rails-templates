@@ -5,4 +5,12 @@
 /tmp/**
 /vendor/**
 
-app/assets/javascripts/cable.js
+postcss.config.js
+babel.config.js
+
+app/javascript/channels/*
+app/javascript/translations/translations.js
+
+engines/*/node_modules/**
+engines/*/vendor/**
+engines/*/app/javascript/*/translations/translations.js

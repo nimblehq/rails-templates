@@ -1,4 +1,4 @@
-FROM ruby:2.6.2-slim
+FROM ruby:2.6.5-slim
 
 ARG RUBY_ENV=development
 ARG NODE_ENV=development
@@ -105,6 +105,7 @@ RUN yarn install --network-timeout 100000
 COPY . ./
 
 # Compile assets
+RUN bundle exec rails i18n:js:export
 RUN bundle exec rails assets:precompile
 
 EXPOSE $PORT
