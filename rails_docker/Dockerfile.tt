@@ -4,6 +4,9 @@ ARG RUBY_ENV=development
 ARG NODE_ENV=development
 ARG BUILD_ENV=development
 ARG ASSET_HOST=http://localhost
+ARG AVAILABLE_LOCALES
+ARG DEFAULT_LOCALE
+ARG FALLBACK_LOCALES
 
 # Define all the envs here
 ENV RACK_ENV=$RUBY_ENV \

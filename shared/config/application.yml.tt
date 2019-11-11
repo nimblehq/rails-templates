@@ -6,6 +6,9 @@ default: &default
   MAILER_DEFAULT_HOST: "localhost"
   MAILER_DEFAULT_PORT: "3000"
   MAILER_SENDER: "Test <noreply@nimblehq.co>"
+  AVAILABLE_LOCALES: "en"
+  DEFAULT_LOCALE: "en"
+  FALLBACK_LOCALES: "en"
 
 development:
   <<: *default

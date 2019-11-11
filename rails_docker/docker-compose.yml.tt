@@ -25,6 +25,9 @@ services:
         - NODE_ENV=production
         - BUILD_ENV=production
         - ASSET_HOST=
+        - AVAILABLE_LOCALES
+        - DEFAULT_LOCALE
+        - FALLBACK_LOCALES
     image: ${DOCKER_IMAGE}:${BRANCH_TAG}
     container_name: <%= APP_NAME %>_web
     command: bin/start.sh
