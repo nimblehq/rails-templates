@@ -90,10 +90,10 @@ gsub_file('package.json', %r{"turbolinks": .+\n}, '')
 insert_into_file 'app/javascript/packs/application.js', after: "require\(\"channels\"\)\n" do
   <<~EOT
 
-    import 'translations/translations'
+    import 'translations/translations';
     
-    import 'initializers/'
-    import 'screens/'
+    import 'initializers/';
+    import 'screens/';
   EOT
 end
 
@@ -101,6 +101,15 @@ end
 insert_into_file 'package.json', after: %r{"@rails/ujs": .+\n} do
   <<~EOT
     "i18n-js": "^3.0.11",
+  EOT
+end
+
+# Add @nimbl3/eslint-config-nimbl3 plugin to package.json
+insert_into_file 'package.json', before: %r{"version": .+\n} do
+  <<~EOT
+      "devDependencies": {
+        "@nimbl3/eslint-config-nimbl3": "2.1.1"
+      },
   EOT
 end
 
@@ -117,6 +126,9 @@ copy_file 'shared/Procfile.dev', 'Procfile.dev'
 
 # Setup EditorConfig
 copy_file 'shared/.editorconfig', '.editorconfig'
+
+# Setup .npmrc
+copy_file 'shared/.npmrc', '.npmrc'
 
 after_bundle do
   run 'spring stop'
