@@ -1,5 +1,3 @@
-Webdrivers::Chromedriver.required_version = '2.46'
-
 # Configure VCR and WebMock to work with webdrivers
 # https://github.com/titusfortner/webdrivers/wiki/Using-with-VCR-or-WebMock
 if defined?(VCR)
