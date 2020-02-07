@@ -130,6 +130,9 @@ copy_file 'shared/.editorconfig', '.editorconfig'
 # Setup .npmrc
 copy_file 'shared/.npmrc', '.npmrc'
 
+# Install dependencies
+run 'yarn install'
+
 after_bundle do
   run 'spring stop'
 
