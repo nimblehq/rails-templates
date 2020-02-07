@@ -28,7 +28,7 @@ module Rack
 
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Naming/HeredocDelimiterNaming
-    # rubocop:disable Layout/IndentHeredoc:
+    # rubocop:disable Layout/HeredocIndentation
     def inject(fragment)
       disable_animations = <<-EOF
 <script type="text/javascript">(typeof jQuery !== 'undefined') && (jQuery.fx.off = true);</script>
@@ -56,6 +56,6 @@ module Rack
     end
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Naming/HeredocDelimiterNaming
-    # rubocop:enable Layout/IndentHeredoc:
+    # rubocop:enable Layout/HeredocIndentation
   end
 end
