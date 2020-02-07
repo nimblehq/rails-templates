@@ -2,11 +2,11 @@ require 'rails_helper'
 
 describe 'Codebase', codebase: true do
   it 'does not offend Rubocop' do
-    expect(`rubocop --format simple`).to include 'no offenses detected'
+    expect(system('rubocop --format simple', out: :close)).to be_truthy
   end
 
   it 'satisfies Brakeman' do
-    expect(`brakeman -w2`).not_to include '+SECURITY WARNINGS+'
+    expect(system('brakeman -w2', out: :close)).to be_truthy
   end
 
   context 'respond_to blocks' do
