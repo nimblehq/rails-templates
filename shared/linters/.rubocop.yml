@@ -1,3 +1,5 @@
+require: rubocop-rails
+
 AllCops:
   Exclude:
     - 'vendor/**/*'
@@ -11,10 +13,7 @@ AllCops:
     - 'config/**/*'
   TargetRubyVersion: 2.6
 
-Rails:
-  Enabled: true
-
-Documentation:
+Style/Documentation:
   Enabled: false
 
 Metrics/LineLength:
@@ -29,3 +28,6 @@ Metrics/BlockLength:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: template

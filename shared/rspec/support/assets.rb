@@ -5,4 +5,3 @@ RSpec.configure do |config|
     `bundle exec rails assets:precompile RAILS_ENV=test NODE_ENV=test` unless ENV['CI']
   end
 end
-  

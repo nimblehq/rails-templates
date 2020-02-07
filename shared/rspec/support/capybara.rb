@@ -27,9 +27,7 @@ Capybara.register_driver(:headless_chrome) do |app|
   options.add_argument('no-sandbox')
 
   # Run headless by default unless CHROME_HEADLESS specified
-  # rubocop:disable Performance/RegexpMatch
   options.add_argument('headless') unless ENV['CHROME_HEADLESS'] =~ /^(false|no|0)$/i
-  # rubocop:enable Performance/RegexpMatch
 
   # Disable /dev/shm use in CI
   options.add_argument('disable-dev-shm-usage') if ENV['CI']

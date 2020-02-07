@@ -47,6 +47,8 @@ group :development, :test do
   gem 'letter_opener' # Preview mail in the browser instead of sending.
   gem 'sassc-rails' # Gem to generate scss source maps
   gem 'brakeman', require: false # A static analysis security vulnerability scanner for Ruby on Rails applications
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
 
   gem 'pronto'
   gem 'pronto-rubocop', require: false
