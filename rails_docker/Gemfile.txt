@@ -43,6 +43,7 @@ group :development, :test do
   gem 'bullet' # help to kill N+1 queries and unused eager loading
   gem 'figaro' # Simple Rails app configuration
   gem 'pry-rails' # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
+  gem 'pry-byebug' # Step by step debugging and stack navigation in Pry
   gem 'listen', '3.1.5' # Listens to file modifications
   gem 'letter_opener' # Preview mail in the browser instead of sending.
   gem 'sassc-rails' # Gem to generate scss source maps
