@@ -13,7 +13,7 @@ module Localization
     end
 
     def extract_locale_from_param
-      I18n.available_locales.include?(params[:locale]&.to_sym) ? params[:locale].to_sym : nil
+      I18n.locale_available?(params[:locale]) ? params[:locale].to_sym : nil
     end
 
     private
