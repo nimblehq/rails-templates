@@ -1,5 +1,5 @@
 bitbucket:
-  slug: nimblehq/<%= app_name %>-web
+  slug: nimblehq/<%= APP_NAME %>-web
   username: [EMAIL]
   password: [PASSWORD]
   web_endpoint: https://bitbucket.org/

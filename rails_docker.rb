@@ -1,5 +1,9 @@
 require 'shellwords'
 
+# Variables
+APP_NAME = app_name
+RUBY_VERSION = '2.6.5'
+
 # Add the current directory to the path Thor uses to look up files
 def current_directory
   @current_directory ||=
@@ -19,6 +23,8 @@ def current_directory
     end
 end
 
+FileUtils.rm_rf("#{current_directory}/#{app_name}/.git")
+
 def source_paths
   Array(super) + [current_directory]
 end
@@ -31,23 +37,16 @@ apply 'lib/bullet.rb'
 apply 'lib/i18n.rb'
 
 # Gemfile
-copy_file 'rails_docker/Gemfile.tt', 'Gemfile', force: true
-directory 'rails_docker', './'
+ directory 'rails_docker', './', force: true, recursive: false
 
 # Shell script for boot the app inside the Docker image (production)
-copy_file 'rails_docker/start.sh', 'bin/start.sh'
-run 'chmod +x bin/start.sh'
+copy_file 'rails_docker/bin/start.sh', 'bin/start.sh', mode: :preserve
 
 # Shell script for run tests inside the Docker image
-copy_file 'rails_docker/test.sh', 'bin/test.sh'
-run 'chmod +x bin/test.sh'
+copy_file 'rails_docker/bin/test.sh', 'bin/test.sh', mode: :preserve
 
 # remove test folder
 run 'rm -rf test/'
-
-# rvm
-run 'touch .ruby-version && echo 2.6.5 > .ruby-version'
-run "touch .ruby-gemset && echo #{app_name} > .ruby-gemset"
 
 # Add custom configs
 setup_config
@@ -140,8 +139,7 @@ after_bundle do
   copy_file 'shared/Guardfile', 'Guardfile', force: true
 
   # Shell script to setup the Docker-based development environment
-  copy_file 'rails_docker/envsetup.sh', 'bin/envsetup.sh'
-  run 'chmod +x bin/envsetup.sh'
+  copy_file 'rails_docker/bin/envsetup.sh', 'bin/envsetup.sh', mode: :preserve
 
   # Modified README file
   copy_file 'shared/README.md', 'README.md', force: true
