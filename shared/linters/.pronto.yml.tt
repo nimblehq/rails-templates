@@ -1,5 +1,5 @@
 bitbucket:
-  slug: nimbl3/#{app_name}-web
+  slug: nimbl3/<%= app_name %>-web
   username: [EMAIL]
   password: [PASSWORD]
   web_endpoint: https://bitbucket.org/

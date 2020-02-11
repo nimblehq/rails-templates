@@ -12,7 +12,7 @@ ENV RACK_ENV=$RUBY_ENV \
     BUILD_ENV=$BUILD_ENV \
     ASSET_HOST=$ASSET_HOST
 
-ENV APP_HOME=/#{app_name} \
+ENV APP_HOME=/<%= app_name %> \
     PORT=80
 
 ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \

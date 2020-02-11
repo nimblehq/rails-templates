@@ -3,15 +3,15 @@ version: '3.2'
 services:
   db:
     image: postgres:10.1
-    container_name: #{app_name}_db
+    container_name: <%= app_name %>_db
     environment:
-      - POSTGRES_DB=#{app_name}_production
+      - POSTGRES_DB=<%= app_name %>_production
     ports:
       - "5432:5432"
 
   redis:
     image: redis:4.0.9
-    container_name: #{app_name}_redis
+    container_name: <%= app_name %>_redis
     ports:
       - "6379:6379"
 
@@ -26,7 +26,7 @@ services:
         - BUILD_ENV=production
         - ASSET_HOST=http://athena.nimbl3.com
     image: ${DOCKER_IMAGE}:${BRANCH_TAG}
-    container_name: #{app_name}_web
+    container_name: <%= app_name %>_web
     command: bin/start.sh
     ports:
       - "${PORT}:${PORT}"
@@ -40,7 +40,7 @@ services:
       - RACK_ENV=production
       - RAILS_ENV=production
       - NODE_ENV=production
-      - DATABASE_URL=postgres://postgres@db/#{app_name}_production
+      - DATABASE_URL=postgres://postgres@db/<%= app_name %>_production
       - ASSET_HOST=
       - DEFAULT_HOST=
       - MAILER_SENDER=

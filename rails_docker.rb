@@ -1,7 +1,6 @@
 require 'shellwords'
 
 # Add the current directory to the path Thor uses to look up files
-
 def current_directory
   @current_directory ||=
     if __FILE__ =~ %r{\Ahttps?://}
@@ -20,8 +19,6 @@ def current_directory
     end
 end
 
-FileUtils.rm_rf("#{current_directory}/#{app_name}/.git")
-
 def source_paths
   Array(super) + [current_directory]
 end
@@ -34,30 +31,8 @@ apply 'lib/bullet.rb'
 apply 'lib/i18n.rb'
 
 # Gemfile
-remove_file 'Gemfile'
-copy_file 'rails_docker/Gemfile.txt', 'Gemfile'
-
-# Docker
-remove_file 'Dockerfile'
-copy_file 'rails_docker/Dockerfile', 'Dockerfile'
-gsub_file 'Dockerfile', '#{app_name}', "#{app_name}"
-
-remove_file 'docker-compose.yml'
-copy_file 'rails_docker/docker-compose.yml', 'docker-compose.yml'
-gsub_file 'docker-compose.yml', '#{app_name}', "#{app_name}"
-
-copy_file 'rails_docker/docker-compose.dev.yml', 'docker-compose.dev.yml'
-gsub_file 'docker-compose.dev.yml', '#{app_name}', "#{app_name}"
-
-copy_file 'rails_docker/docker-compose.test.yml', 'docker-compose.test.yml'
-gsub_file 'docker-compose.test.yml', '#{app_name}', "#{app_name}"
-
-remove_file '.dockerignore'
-copy_file 'rails_docker/.dockerignore', '.dockerignore'
-gsub_file '.dockerignore', '#{app_name}', "#{app_name}"
-
-copy_file 'rails_docker/.env', '.env'
-gsub_file '.env', '#{app_name}', "#{app_name}"
+copy_file 'rails_docker/Gemfile.tt', 'Gemfile', force: true
+directory 'rails_docker', './'
 
 # Shell script for boot the app inside the Docker image (production)
 copy_file 'rails_docker/start.sh', 'bin/start.sh'
@@ -162,16 +137,14 @@ after_bundle do
   setup_rspec
 
   # Modified Guardfile
-  remove_file 'Guardfile'
-  copy_file 'shared/Guardfile', 'Guardfile'
+  copy_file 'shared/Guardfile', 'Guardfile', force: true
 
   # Shell script to setup the Docker-based development environment
   copy_file 'rails_docker/envsetup.sh', 'bin/envsetup.sh'
   run 'chmod +x bin/envsetup.sh'
 
   # Modified README file
-  remove_file 'README.md'
-  copy_file 'shared/README.md', 'README.md'
+  copy_file 'shared/README.md', 'README.md', force: true
 
   # Setup linters
   setup_linters

@@ -1,5 +1,5 @@
 default: &default
-  DB_NAME: "#{app_name}"
+  DB_NAME: "<%= app_name %>"
   DB_HOST: "localhost"
   DB_PORT: "5432"
   USERNAME: "postgres"
