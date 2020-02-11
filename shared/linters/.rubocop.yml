@@ -31,3 +31,6 @@ Style/FrozenStringLiteralComment:
 
 Style/FormatStringToken:
   EnforcedStyle: template
+
+Rails/FilePath:
+  EnforcedStyle: arguments
