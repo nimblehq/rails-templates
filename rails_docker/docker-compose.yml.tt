@@ -24,7 +24,7 @@ services:
         - RUBY_ENV=production
         - NODE_ENV=production
         - BUILD_ENV=production
-        - ASSET_HOST=http://athena.nimbl3.com
+        - ASSET_HOST=
     image: ${DOCKER_IMAGE}:${BRANCH_TAG}
     container_name: <%= app_name %>_web
     command: bin/start.sh
