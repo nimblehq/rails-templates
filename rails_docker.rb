@@ -37,7 +37,7 @@ apply 'lib/bullet.rb'
 apply 'lib/i18n.rb'
 
 # Gemfile
- directory 'rails_docker', './', force: true, recursive: false
+directory 'rails_docker', './', force: true, recursive: false
 
 # Shell script for boot the app inside the Docker image (production)
 copy_file 'rails_docker/bin/start.sh', 'bin/start.sh', mode: :preserve
