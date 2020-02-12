@@ -1,5 +1,5 @@
 create:
-	rails new $(APP_NAME) -m ./rails_docker.rb -T
+	rails new $(APP_NAME) -m ./template.rb -T
 
 run:
 	cd $(APP_NAME) && \

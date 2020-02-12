@@ -1,3 +1,11 @@
+# Follow following steps to setup automated code reviews:
+#
+# 1) Replace [EMAIL] and [PASSWORD] in `pronto.yml` with valid user credentials.
+# 2) In the CI build script, add the following command:
+#  ```
+#  if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then (echo "Running pronto"; bundle exec pronto run -f bitbucket_pr -c origin/development); else (echo "Escaping pronto"); fi
+#  ```
+#
 bitbucket:
   slug: nimblehq/<%= APP_NAME %>-web
   username: [EMAIL]
