@@ -7,14 +7,14 @@ development:
   <<: *default
   host:     <%= ENV['DB_HOST'] %>
   port:     <%= ENV['DB_PORT'] %>
-  username: <%= ENV['USERNAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>
   database: <%= ENV['DB_NAME'] %>_development
 
 test:
   <<: *default
   host:     <%= ENV['DB_HOST'] %>
   port:     <%= ENV['DB_PORT'] %>
-  username: <%= ENV['USERNAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>
   database: <%= ENV['DB_NAME'] %>_test
 
 production:

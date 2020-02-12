@@ -2,7 +2,7 @@ default: &default
   DB_NAME: "<%= APP_NAME %>"
   DB_HOST: "localhost"
   DB_PORT: "5432"
-  USERNAME: "postgres"
+  DB_USERNAME: "postgres"
   MAILER_DEFAULT_HOST: "localhost"
   MAILER_DEFAULT_PORT: "3000"
   MAILER_SENDER: "Test <noreply@nimblehq.co>"
