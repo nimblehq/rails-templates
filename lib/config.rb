@@ -11,9 +11,9 @@ def setup_config
 end
 
 def add_sidekiq_config
-  insert_into_file 'config/application.rb', after: '# -- all .rb files in that directory are automatically loaded.' do
+  insert_into_file 'config/application.rb', after: %r{config.generators.system_tests.+\n} do
     <<-EOT
-    \n
+    
     # Set the queuing backend to `Sidekiq`
     # 
     # Be sure to have the adapter's gem in your Gemfile

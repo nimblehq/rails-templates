@@ -107,9 +107,9 @@ end
 # Add @nimbl3/eslint-config-nimbl3 plugin to package.json
 insert_into_file 'package.json', before: %r{"version": .+\n} do
   <<~EOT
-      "devDependencies": {
-        "@nimbl3/eslint-config-nimbl3": "2.1.1"
-      },
+    "devDependencies": {
+      "@nimbl3/eslint-config-nimbl3": "2.1.1"
+    },
   EOT
 end
 
@@ -139,8 +139,14 @@ after_bundle do
 
   # Devise configuration
   generate 'devise:install'
-  insert_into_file 'config/environments/development.rb', after: "config.assets.raise_runtime_errors = true\n\n" do
-    "  config.action_mailer.default_url_options = { host: \"localhost\", port: 3000 }"
+  insert_into_file 'config/environments/development.rb', after: %r{config.action_mailer.perform_caching.+\n} do
+    <<-EOT
+
+  config.action_mailer.default_url_options = { 
+    host: ENV.fetch('MAILER_DEFAULT_HOST'), 
+    port: ENV.fetch('MAILER_DEFAULT_PORT')
+  }
+    EOT
   end
 
   # Add Rack Deflater to reduce response size to `config/application.rb`
