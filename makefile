@@ -8,7 +8,7 @@ run:
 smoke-test:
 	cd $(APP_NAME) && \
 	docker-compose -f docker-compose.test.yml up && \
-  ../bin/wait_for.sh 80
+  ../.template/bin/wait_for.sh 80
 
 cleanup:
 	rm -rf $(APP_NAME)

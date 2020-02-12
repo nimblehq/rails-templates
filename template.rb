@@ -9,9 +9,34 @@ def apply_template!
   delete_git
   delete_test_folder
 
-  directory 'rails_docker', './', force: true, recursive: false
-  directory 'rails_docker/bin', 'bin', mode: :preserve
-  directory 'shared', './', force: true, recursive: false
+  template 'Gemfile.tt', force: true
+
+  template 'Dockerfile.tt'
+  template 'docker-compose.dev.yml.tt'
+  template 'docker-compose.test.yml.tt'
+  template 'docker-compose.yml.tt'
+  template '.env.tt'
+  template '.dockerignore'
+
+  template '.eslintignore'
+  template '.eslintrc'
+  template '.flayignore'
+  template '.pronto.yml.tt'
+  template '.pronto_eslint_npm.yml'
+  template '.rubocop.yml'
+  template '.scss-lint.yml'
+  template 'config.reek'
+
+  template '.semaphore.yml'
+  template '.ruby-gemset.tt'
+  template '.ruby-version.tt'
+  template '.editorconfig'
+  template '.rspec'
+  template '.npmrc'
+  template 'Procfile'
+  template 'Procfile.dev'
+  template 'Guardfile'
+  template 'README.md.tt', force: true
 
   # Setup config
   remove_file 'config/database.yml'
