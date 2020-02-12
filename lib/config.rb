@@ -1,11 +1,7 @@
 def setup_config
   remove_file 'config/database.yml'
 
-  FileUtils.cp_r "#{current_directory}/shared/config/.", 'config/'
-
-  # Replace app_name
-  gsub_file 'config/application.yml', '#{app_name}', "#{app_name}"
-  gsub_file 'config/database.yml', '#{app_name}', "#{app_name}"
+  directory 'shared/config', 'config'
 
   add_sidekiq_config
 end

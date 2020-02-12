@@ -1,7 +1,5 @@
 def setup_linters
-  FileUtils.cp_r "#{current_directory}/shared/linters/.", './', verbose: true
-
-  gsub_file '.pronto.yml', '#{app_name}', "#{app_name}"
+  directory 'shared/linters', './'
 
   puts <<-EOT
     #{'=' * 80}

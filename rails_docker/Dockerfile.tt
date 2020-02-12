@@ -1,4 +1,4 @@
-FROM ruby:2.6.5-slim
+FROM ruby:<%= RUBY_VERSION %>-slim
 
 ARG RUBY_ENV=development
 ARG NODE_ENV=development
@@ -12,7 +12,7 @@ ENV RACK_ENV=$RUBY_ENV \
     BUILD_ENV=$BUILD_ENV \
     ASSET_HOST=$ASSET_HOST
 
-ENV APP_HOME=/#{app_name} \
+ENV APP_HOME=/<%= APP_NAME %> \
     PORT=80
 
 ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
