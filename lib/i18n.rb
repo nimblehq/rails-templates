@@ -2,6 +2,10 @@ def setup_rails_i18n
   inject_into_class 'app/controllers/application_controller.rb', 'ApplicationController' do
     "  include Localization\n"
   end
+
+  gsub_file 'app/views/layouts/application.html.erb', /<html>/ do
+    "<html lang='<%= I18n.locale %>'>"
+  end
 end
 
 def setup_i18n_js
@@ -13,8 +17,17 @@ def setup_i18n_js
     EOT
   end
 
-  gsub_file 'app/views/layouts/application.html.erb', /<html>/ do
-    "<html lang='<%= I18n.locale %>'>"
+  insert_into_file 'app/javascript/packs/application.js', after: "require\(\"channels\"\)\n" do
+    <<~EOT
+
+    import 'translations/translations';
+    EOT
+  end
+
+  insert_into_file 'package.json', after: %r{"@rails/ujs": .+\n} do
+    <<~EOT
+    "i18n-js": "^3.0.11",
+    EOT
   end
 
   append_to_file '.gitignore' do

@@ -1,6 +1,14 @@
 def setup_linters
   directory 'shared/linters', './'
 
+  insert_into_file 'package.json', before: %r{"version": .+\n} do
+    <<~EOT
+      "devDependencies": { 
+        "@nimbl3/eslint-config-nimbl3": "2.1.1"
+      },
+    EOT
+  end
+
   puts <<-EOT
     #{'=' * 80}
     Follow following steps to setup automated code reviews:
