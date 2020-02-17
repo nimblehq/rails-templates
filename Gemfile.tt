@@ -12,15 +12,10 @@ gem 'ffaker' # A library for generating fake data such as names, addresses, and 
 gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs.
 gem 'sidekiq' # background processing for Ruby
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
-gem 'i18n-js' # A library to provide the I18n translations on the Javascript
 
 # Authentications & Authorizations
 gem 'devise' # Authentication solution for Rails with Warden
 gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
-
-# Assets
-gem 'webpacker', '4.0' # Transpile app-like JavaScript
-gem 'sass-rails' # SASS
 
 # Translations
 # gem 'rails-i18n', '~> 6.0.0' # Translations for Rails
@@ -44,7 +39,6 @@ group :development, :test do
   gem 'pry-byebug' # Step by step debugging and stack navigation in Pry
   gem 'listen', '3.1.5' # Listens to file modifications
   gem 'letter_opener' # Preview mail in the browser instead of sending.
-  gem 'sassc-rails' # Gem to generate scss source maps
   gem 'brakeman', require: false # A static analysis security vulnerability scanner for Ruby on Rails applications
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
@@ -55,15 +49,11 @@ group :development, :test do
   gem 'pronto-brakeman', require: false # analyzes code for security vulnerabilities
   gem 'pronto-rails_best_practices', require: false
   gem 'pronto-reek', require: false
-  gem 'pronto-scss', require: false
-  gem 'pronto-eslint_npm', require: false
 end
 
 group :test do
   gem 'rspec-rails', '>=4.0.0.beta2' # Rails testing engine
   gem 'rspec-retry' # Retry randomly failing rspec example.
-  gem 'capybara', '>= 2.15' # Integration testing
-  gem 'webdrivers' # Run Selenium tests more easily with automatic installation and updates for all supported webdrivers
   gem 'database_cleaner' # Use Database Cleaner
   gem 'shoulda-matchers' # Tests common Rails functionalities
   gem 'json_matchers' # Validate the JSON returned by your Rails JSON APIs
