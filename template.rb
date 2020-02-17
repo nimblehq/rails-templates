@@ -32,7 +32,6 @@ def apply_template!
   copy_file '.npmrc'
   copy_file 'Procfile'
   copy_file 'Procfile.dev'
-  copy_file 'Guardfile'
   template 'README.md.tt', force: true
 
   apply 'app/template.rb'
