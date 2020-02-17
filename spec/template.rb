@@ -1,5 +1,5 @@
 generate 'rspec:install'
 
-directory 'spec'
+directory 'spec', force: true
 
 copy_file '.rspec', force: true
