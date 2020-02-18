@@ -12,7 +12,6 @@ WEB_VARIANT = !options[:api]
 def apply_template!
   use_source_paths [current_directory]
 
-  # TODO: Read the `--skip-test` option
   delete_test_folder
 
   template 'Gemfile.tt', force: true
