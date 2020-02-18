@@ -42,12 +42,6 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 <%- if WEB_VARIANT -%>
-# Install Node JS related packages and Chrome (testing)
-RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends nodejs yarn && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
 # Add Yarn repository
 ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
 RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg && \
@@ -67,6 +61,12 @@ RUN if [ "$BUILD_ENV" = "test" ]; then \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/* ; \
     fi
+
+# Install Node JS related packages and Chrome (testing)
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends nodejs yarn && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 <%- end -%>
 
 RUN mkdir "$APP_HOME"
