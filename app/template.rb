@@ -18,7 +18,9 @@ directory 'app/assets/stylesheets'
 # Controllers
 directory 'app/controllers/concerns'
 inject_into_class 'app/controllers/application_controller.rb', 'ApplicationController' do
-  "  include Localization\n"
+  <<-EOT
+  include Localization
+  EOT
 end
 
 # Views
