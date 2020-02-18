@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   db:
-    image: postgres:12.1
+    image: postgres:<%= POSTGRES_VERSION %>
     container_name: <%= APP_NAME %>_db
     environment:
       - POSTGRES_DB=<%= APP_NAME %>_production
@@ -22,7 +22,9 @@ services:
         - ${DOCKER_IMAGE}:${BRANCH_TAG}
       args:
         - RUBY_ENV=production
+        <%- if WEB_VARIANT -%>
         - NODE_ENV=production
+        <%- end -%>
         - BUILD_ENV=production
         - ASSET_HOST=
     image: ${DOCKER_IMAGE}:${BRANCH_TAG}
@@ -39,7 +41,9 @@ services:
     environment:
       - RACK_ENV=production
       - RAILS_ENV=production
+      <%- if WEB_VARIANT -%>
       - NODE_ENV=production
+      <%- end -%>
       - DATABASE_URL=postgres://postgres@db/<%= APP_NAME %>_production
       - ASSET_HOST=
       - DEFAULT_HOST=

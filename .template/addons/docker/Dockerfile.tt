@@ -1,14 +1,18 @@
 FROM ruby:<%= RUBY_VERSION %>-slim
 
 ARG RUBY_ENV=development
+<%- if WEB_VARIANT -%>
 ARG NODE_ENV=development
+<%- end -%>
 ARG BUILD_ENV=development
 ARG ASSET_HOST=http://localhost
 
 # Define all the envs here
 ENV RACK_ENV=$RUBY_ENV \
     RAILS_ENV=$RUBY_ENV \
+    <%- if WEB_VARIANT -%>
     NODE_ENV=$NODE_ENV \
+    <%- end -%>
     BUILD_ENV=$BUILD_ENV \
     ASSET_HOST=$ASSET_HOST
 
@@ -19,7 +23,9 @@ ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
     BUNDLE_JOBS=4 \
     BUNDLE_PATH="/bundle"
 
+<%- if WEB_VARIANT -%>
 ENV NODE_VERSION="12"
+<%- end -%>
 
 ENV LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
@@ -27,6 +33,20 @@ ENV LANG="en_US.UTF-8" \
 
 RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends apt-transport-https curl gnupg
+
+# Install general required core packages
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends build-essential libpq-dev && \
+    apt-get install -y --no-install-recommends rsync locales chrpath pkg-config libfreetype6 libfontconfig1 git cmake wget unzip && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+<%- if WEB_VARIANT -%>
+# Install Node JS related packages and Chrome (testing)
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends nodejs yarn && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Add Yarn repository
 ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
@@ -36,13 +56,6 @@ RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg && \
 # Add the PPA (personal package archive) maintained by NodeSource
 # This will have more up-to-date versions of Node.js than the official Debian repositories
 RUN curl -sL https://deb.nodesource.com/setup_"$NODE_VERSION".x | bash -
-
-# Install general required core packages, Node JS related packages and Chrome (testing)
-RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends build-essential libpq-dev nodejs yarn && \
-    apt-get install -y --no-install-recommends rsync locales chrpath pkg-config libfreetype6 libfontconfig1 git cmake wget unzip && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 # Set up the Chrome PPA and install Chrome Headless
 RUN if [ "$BUILD_ENV" = "test" ]; then \
@@ -54,6 +67,7 @@ RUN if [ "$BUILD_ENV" = "test" ]; then \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/* ; \
     fi
+<%- end -%>
 
 RUN mkdir "$APP_HOME"
 
@@ -96,17 +110,21 @@ else \
                  --path $BUNDLE_PATH ; \
 fi
 
+<%- if WEB_VARIANT -%>
 # Install JS dependencies
 COPY package.json yarn.lock ./
 RUN yarn install --network-timeout 100000
+<%- end -%>
 
 # Copying the app files must be placed after the dependencies setup
 # since the app files always change thus cannot be cached
 COPY . ./
 
+<%- if WEB_VARIANT -%>
 # Compile assets
 RUN bundle exec rails i18n:js:export
 RUN bundle exec rails assets:precompile
+<%- end -%>
 
 EXPOSE $PORT
 

@@ -3,22 +3,19 @@ require 'shellwords'
 # Variables
 APP_NAME = app_name
 RUBY_VERSION = '2.6.5'
-# Options
-OPTION_API_ONLY = options[:api]
+POSTGRES_VERSION = '12.1'
+REDIS_VERSION = '5.0.7'
+# Variants
+API_VARIANT = options[:api]
+WEB_VARIANT = !options[:api]
 
 def apply_template!
   use_source_paths [current_directory]
 
+  # TODO: Read the `--skip-test` option
   delete_test_folder
 
   template 'Gemfile.tt', force: true
-
-  template 'Dockerfile.tt'
-  template 'docker-compose.dev.yml.tt'
-  template 'docker-compose.test.yml.tt'
-  template 'docker-compose.yml.tt'
-  template '.env.tt'
-  copy_file '.dockerignore'
 
   copy_file '.flayignore'
   template '.pronto.yml.tt'
@@ -48,17 +45,20 @@ def apply_template!
     apply 'spec/template.rb'
   end
 
+  # Add-ons - [Default]
+  apply '.template/addons/docker/template.rb'
+
   # Variants
-  apply 'variants/web/template.rb' unless OPTION_API_ONLY
+  apply '.template/variants/web/template.rb' if WEB_VARIANT
 end
 
+# Set Thor::Actions source path for looking up the files
 def source_paths
   @source_paths ||= []
 end
 
-# Set Thor::Actions source path for looking up the files
 def use_source_paths(source_paths)
-  @source_paths = source_paths
+  @source_paths.unshift(*source_paths)
 end
 
 def current_directory

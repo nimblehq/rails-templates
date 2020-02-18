@@ -2,7 +2,7 @@ version: '3.2'
 
 services:
   db:
-    image: postgres:12.1
+    image: postgres:<%= POSTGRES_VERSION %>
     container_name: <%= APP_NAME %>_db
     environment:
       - POSTGRES_DB=<%= APP_NAME %>_test
@@ -10,7 +10,7 @@ services:
       - "5432"
 
   redis:
-    image: redis:5.0.7
+    image: redis:<%= REDIS_VERSION %>
     container_name: <%= APP_NAME %>_redis
     ports:
       - "6379"
@@ -22,7 +22,9 @@ services:
         - ${DOCKER_IMAGE}:${BRANCH_TAG}
       args:
         - RUBY_ENV=test
+        <%- if WEB_VARIANT -%>
         - NODE_ENV=test
+        <%- end -%>
         - BUILD_ENV=test
     image: ${DOCKER_IMAGE}:${BRANCH_TAG}
     container_name: <%= APP_NAME %>_test
@@ -33,12 +35,16 @@ services:
       - db
     volumes:
       - "ruby-bundle:/bundle"
+      <%- if WEB_VARIANT -%>
       - "${PWD}/tmp/screenshots:/<%= APP_NAME %>/tmp/screenshots"
+      <%- end -%>
       - "${PWD}/log:/<%= APP_NAME %>/log"
     environment:
       - RACK_ENV=test
       - RAILS_ENV=test
+      <%- if WEB_VARIANT -%>
       - NODE_ENV=test
+      <%- end -%>
       - DB_HOST=db
       - CI=$CI
       - TEST_RETRY=$TEST_RETRY

@@ -2,8 +2,10 @@
 .semaphore-cache
 log/
 tmp/
-node_modules/
 coverage/
+<%- if WEB_VARIANT -%>
+node_modules/
+<%- end -%>
 docker-compose.dev.yml
 docker-compose.test.yml
 docker-compose.yml
