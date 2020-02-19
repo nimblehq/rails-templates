@@ -76,6 +76,10 @@ def remote_repository
     tempdir
   ].map(&:shellescape).join(' ')
 
+  if (branch = __FILE__[%r{rails-templates/(.+)/template.rb}, 1])
+    Dir.chdir(tempdir) { git checkout: branch }
+  end
+
   tempdir
 end
 
