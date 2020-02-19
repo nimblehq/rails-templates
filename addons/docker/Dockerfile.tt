@@ -1,20 +1,19 @@
 FROM ruby:<%= RUBY_VERSION %>-slim
 
+ARG BUILD_ENV=development
 ARG RUBY_ENV=development
 <%- if WEB_VARIANT -%>
 ARG NODE_ENV=development
-<%- end -%>
-ARG BUILD_ENV=development
 ARG ASSET_HOST=http://localhost
+<%- end -%>
 
 # Define all the envs here
-ENV RACK_ENV=$RUBY_ENV \
-    RAILS_ENV=$RUBY_ENV \
-    <%- if WEB_VARIANT -%>
+ENV BUILD_ENV=$BUILD_ENV \
+    RACK_ENV=$RUBY_ENV \
+    RAILS_ENV=$RUBY_ENV<%- if WEB_VARIANT -%> \
     NODE_ENV=$NODE_ENV \
-    <%- end -%>
-    BUILD_ENV=$BUILD_ENV \
     ASSET_HOST=$ASSET_HOST
+    <%- end -%>
 
 ENV APP_HOME=/<%= APP_NAME %> \
     PORT=80
@@ -25,8 +24,8 @@ ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
 
 <%- if WEB_VARIANT -%>
 ENV NODE_VERSION="12"
-<%- end -%>
 
+<%- end -%>
 ENV LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     LANGUAGE="en_US:en"
@@ -67,8 +66,8 @@ RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends nodejs yarn && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-<%- end -%>
 
+<%- end -%>
 RUN mkdir "$APP_HOME"
 
 # Replace by the following if the application uses Rails engines
@@ -114,8 +113,8 @@ fi
 # Install JS dependencies
 COPY package.json yarn.lock ./
 RUN yarn install --network-timeout 100000
-<%- end -%>
 
+<%- end -%>
 # Copying the app files must be placed after the dependencies setup
 # since the app files always change thus cannot be cached
 COPY . ./
@@ -124,8 +123,8 @@ COPY . ./
 # Compile assets
 RUN bundle exec rails i18n:js:export
 RUN bundle exec rails assets:precompile
-<%- end -%>
 
+<%- end -%>
 EXPOSE $PORT
 
 CMD ./bin/start.sh

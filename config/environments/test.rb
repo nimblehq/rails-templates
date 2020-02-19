@@ -18,8 +18,5 @@ insert_into_file 'config/environments/test.rb', before: %r{^end} do
     Bullet.raise                       = true
     Bullet.unused_eager_loading_enable = false
   end
-
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
   EOT
 end

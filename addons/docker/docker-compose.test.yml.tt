@@ -21,11 +21,11 @@ services:
       cache_from:
         - ${DOCKER_IMAGE}:${BRANCH_TAG}
       args:
+        - BUILD_ENV=test
         - RUBY_ENV=test
         <%- if WEB_VARIANT -%>
         - NODE_ENV=test
         <%- end -%>
-        - BUILD_ENV=test
     image: ${DOCKER_IMAGE}:${BRANCH_TAG}
     container_name: <%= APP_NAME %>_test
     command: bin/test.sh

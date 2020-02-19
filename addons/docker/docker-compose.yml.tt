@@ -21,12 +21,12 @@ services:
       cache_from:
         - ${DOCKER_IMAGE}:${BRANCH_TAG}
       args:
+        - BUILD_ENV=production
         - RUBY_ENV=production
         <%- if WEB_VARIANT -%>
         - NODE_ENV=production
-        <%- end -%>
-        - BUILD_ENV=production
         - ASSET_HOST=
+        <%- end -%>
     image: ${DOCKER_IMAGE}:${BRANCH_TAG}
     container_name: <%= APP_NAME %>_web
     command: bin/start.sh
@@ -45,7 +45,9 @@ services:
       - NODE_ENV=production
       <%- end -%>
       - DATABASE_URL=postgres://postgres@db/<%= APP_NAME %>_production
+      <%- if WEB_VARIANT -%>
       - ASSET_HOST=
+      <%- end -%>
       - DEFAULT_HOST=
       - MAILER_SENDER=
       - RAILS_MASTER_KEY=
