@@ -56,6 +56,7 @@ def source_paths
   @source_paths ||= []
 end
 
+# Prepend the required paths to the source paths to make the template files in those paths available
 def use_source_paths(source_paths)
   @source_paths.unshift(*source_paths)
 end
