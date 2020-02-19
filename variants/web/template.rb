@@ -18,6 +18,9 @@ def apply_web_variant!
   after_bundle do
     use_source_paths [__dir__]
 
+    # Fix the default rails template that does not put trailing commas
+    run 'yarn run lint --fix'
+
     apply 'config/webpack/template.rb'
     apply 'spec/template.rb'
   end
