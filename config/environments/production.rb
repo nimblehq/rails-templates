@@ -1,6 +1,4 @@
-PRODUCTION_CONFIG = 'config/environments/production.rb'
-
-insert_into_file PRODUCTION_CONFIG, after: %r{config.action_mailer.perform_caching.+\n} do
+insert_into_file 'config/environments/production.rb', after: %r{config.action_mailer.perform_caching.+\n} do
   <<-EOT
 
   config.action_mailer.asset_host = ENV.fetch('MAILER_DEFAULT_HOST')

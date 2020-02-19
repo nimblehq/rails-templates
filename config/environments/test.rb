@@ -1,6 +1,4 @@
-TEST_CONFIG = 'config/environments/test.rb'
-
-insert_into_file TEST_CONFIG, after: %r{config.action_mailer.perform_caching.+\n} do
+insert_into_file 'config/environments/test.rb', after: %r{config.action_mailer.perform_caching.+\n} do
   <<-EOT
 
   config.action_mailer.default_url_options = { 
@@ -10,7 +8,7 @@ insert_into_file TEST_CONFIG, after: %r{config.action_mailer.perform_caching.+\n
   EOT
 end
 
-insert_into_file TEST_CONFIG, before: %r{^end} do
+insert_into_file 'config/environments/test.rb', before: %r{^end} do
   <<-EOT
   
   # Configure Bullet gem to detect N+1 queries
