@@ -48,6 +48,7 @@ def apply_template!
   apply 'addons/docker/template.rb'
 
   # Variants
+  apply 'variants/api/template.rb' if API_VARIANT
   apply 'variants/web/template.rb' if WEB_VARIANT
 end
 
