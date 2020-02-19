@@ -72,7 +72,6 @@ def remote_repository
 
   git clone: [
     '--quiet',
-    '--depth=1',
     'https://github.com/nimblehq/rails-templates.git',
     tempdir
   ].map(&:shellescape).join(' ')
