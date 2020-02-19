@@ -31,8 +31,6 @@ group :development do
   gem 'better_errors' # Better error page for Rails and other Rack apps
   gem 'binding_of_caller' # Retrieve the binding of a method's caller in MRI 1.9.2+
   gem 'awesome_print' # Pretty print your Ruby objects with style -- in full color and with proper indentation
-  gem 'guard-rubocop'
-  gem 'guard-rspec' # Auto-run specs
   gem 'roadie-rails' # Mailers
   gem 'spring' # Spring speeds up development by keeping your application running in the background.
   gem 'spring-commands-rspec' # This gem implements the rspec command for Spring.
