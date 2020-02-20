@@ -1,6 +1,6 @@
 insert_into_file 'Gemfile', after: %r{gem 'bootsnap'.*\n} do
   <<~EOT
-    gem 'i18n-js' # A library to provide the I18n translations on the Javascript
+    gem 'i18n-js', '3.5.1' # A library to provide the I18n translations on the Javascript
   EOT
 end
 
