@@ -11,7 +11,7 @@ insert_into_file 'config/environments/test.rb', before: %r{^end} do
   # Disable all animation during tests
   config.middleware.use Rack::NoAnimations
 
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  # Do not fallback to assets pipeline if a precompiled asset is missing.
   config.assets.compile = false
   EOT
 end
