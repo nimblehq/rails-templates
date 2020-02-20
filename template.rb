@@ -9,9 +9,6 @@ REDIS_VERSION = '5.0.7'
 API_VARIANT = options[:api]
 WEB_VARIANT = !options[:api]
 
-p '======'
-p self
-
 def apply_template!
   use_source_paths [current_directory]
 
