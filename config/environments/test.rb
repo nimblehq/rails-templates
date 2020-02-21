@@ -1,13 +1,4 @@
-TEST_CONFIG = 'config/environments/test.rb'
-
-insert_into_file TEST_CONFIG, before: %r{Rails.application.configure do} do
-  <<~EOT
-      require_relative '../../spec/support/disable_animation'
-
-  EOT
-end
-
-insert_into_file TEST_CONFIG, after: %r{config.action_mailer.perform_caching.+\n} do
+insert_into_file 'config/environments/test.rb', after: %r{config.action_mailer.perform_caching.+\n} do
   <<-EOT
 
   config.action_mailer.default_url_options = { 
@@ -17,7 +8,7 @@ insert_into_file TEST_CONFIG, after: %r{config.action_mailer.perform_caching.+\n
   EOT
 end
 
-insert_into_file TEST_CONFIG, before: %r{^end} do
+insert_into_file 'config/environments/test.rb', before: %r{^end} do
   <<-EOT
   
   # Configure Bullet gem to detect N+1 queries
@@ -27,11 +18,5 @@ insert_into_file TEST_CONFIG, before: %r{^end} do
     Bullet.raise                       = true
     Bullet.unused_eager_loading_enable = false
   end
-
-  # Disable all animation during tests
-  config.middleware.use Rack::NoAnimations
-
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
   EOT
 end

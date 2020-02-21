@@ -19,7 +19,7 @@ Install ruby and set your local ruby version to `2.6.5`
 The main template is `rails_docker`. In order to use it, initialize a new app with the following parameters:
 
 ```
-rails new < app_name > -m https://raw.githubusercontent.com/nimblehq/rails-templates/master/rails_docker.rb -T
+rails new <app_name> -m https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb -T
 ```
 
 Read more about Rails Application Template in the [official Rails Guides](https://guides.rubyonrails.org/rails_application_templates.html).

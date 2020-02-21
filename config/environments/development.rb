@@ -1,6 +1,4 @@
-DEVELOPMENT_CONFIG = 'config/environments/development.rb'
-
-insert_into_file DEVELOPMENT_CONFIG, after: %r{config.action_mailer.perform_caching.+\n} do
+insert_into_file 'config/environments/development.rb', after: %r{config.action_mailer.perform_caching.+\n} do
   <<-EOT
 
   config.action_mailer.delivery_method = :letter_opener
@@ -14,7 +12,7 @@ insert_into_file DEVELOPMENT_CONFIG, after: %r{config.action_mailer.perform_cach
   EOT
 end
 
-insert_into_file DEVELOPMENT_CONFIG, before: %r{^end} do
+insert_into_file 'config/environments/development.rb', before: %r{^end} do
   <<-EOT
   
   # Configure Bullet gem to detect N+1 queries
