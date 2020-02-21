@@ -3,5 +3,3 @@ source 'https://rubygems.org'
 gem 'rspec' # BDD for Ruby
 gem 'serverspec' # RSpec tests for your servers
 gem 'docker-api' # A lightweight Ruby client for the Docker Remote API
-gem 'docker-compose-api' # A Docker Compose parser for Ruby
-gem 'minitest-around'
