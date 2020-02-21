@@ -1,13 +1,4 @@
-require 'serverspec'
-require 'docker-api'
-require 'docker-compose-api'
-
 describe 'Generated Rails App' do
-  # Prebuild the image before running the test
-  set :os, family: :debian
-  set :backend, :docker
-  set :docker_image, 'nimblehq/test_app'
-
   it 'creates pronto linters configuration files' do
     expect(file('.flayignore')).to exist
     expect(file('.pronto.yml')).to exist
