@@ -45,11 +45,11 @@ def apply_template!
   end
 
   # Add-ons - [Default]
-  apply 'addons/docker/template.rb'
+  apply '.template/addons/docker/template.rb'
 
   # Variants
-  apply 'variants/api/template.rb' if API_VARIANT
-  apply 'variants/web/template.rb' if WEB_VARIANT
+  apply '.template/variants/api/template.rb' if API_VARIANT
+  apply '.template/variants/web/template.rb' if WEB_VARIANT
 end
 
 # Set Thor::Actions source path for looking up the files
