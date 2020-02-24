@@ -9,6 +9,10 @@ describe 'Codebase', codebase: true do
     expect(`brakeman -w2`).not_to include '+SECURITY WARNINGS+'
   end
 
+  it 'does NOT break zeitwerk loading' do
+    expect(`bundle exec rake zeitwerk:check`).to include 'All is good!'
+  end
+
   context 'respond_to blocks' do
     it 'does not contain respond_to blocks' do
       find_results = `grep -r 'respond_to do' app/`
