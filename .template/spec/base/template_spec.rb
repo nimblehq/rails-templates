@@ -1,4 +1,4 @@
-describe 'Generated Rails App' do
+describe 'Base template spec' do
   it 'creates pronto linters configuration files' do
     expect(file('.flayignore')).to exist
     expect(file('.pronto.yml')).to exist
@@ -26,19 +26,5 @@ describe 'Generated Rails App' do
 
   it 'creates the common project bash scripts' do
     expect(file('bin/envsetup.sh')).to exist
-  end
-
-  describe '/config' do
-    it 'creates the Figaro configuration for application variables' do
-      expect(file('/test_app/config/application.yml')).to exist
-    end
-
-    it 'creates the database configuration' do
-      expect(file('/test_app/config/database.yml')).to exist
-    end
-
-    it 'creates the Sidekiq configuration' do
-      expect(file('/test_app/config/sidekiq.yml')).to exist
-    end
   end
 end
