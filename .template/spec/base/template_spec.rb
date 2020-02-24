@@ -23,8 +23,4 @@ describe 'Base template spec' do
     expect(file('Procfile')).to exist
     expect(file('Procfile.dev')).to exist
   end
-
-  it 'creates the common project bash scripts' do
-    expect(file('bin/envsetup.sh')).to exist
-  end
 end

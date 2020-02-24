@@ -13,7 +13,9 @@ unit-test:
 	cd .template; \
 		bundle install; \
 		bundle exec rspec spec/docker_image_spec.rb; \
+		bundle exec rspec spec/base; \
 	if [ $(VARIANT) = web ]; then bundle exec rspec spec/variants/web; fi;
+	if [ $(VARIANT) = api ]; then bundle exec rspec spec/variants/api; fi;
 
 cleanup:
 	rm -rf $(APP_NAME)

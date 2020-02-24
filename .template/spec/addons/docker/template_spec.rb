@@ -1,4 +1,4 @@
-describe 'Docker addon template' do
+describe 'Docker addon - template' do
   it 'creates the Dockerfile' do
     expect(file('Dockerfile')).to exist
   end
