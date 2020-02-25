@@ -15,8 +15,7 @@ test:
 	bundle install; \
 	if [ $(VARIANT) = web ]; then \
 	  bundle exec rspec --pattern="$(base_spec),spec/variants/web/**/*_spec.rb"; \
-	fi; \
-	if [ $(VARIANT) = api ]; then \
+	elif [ $(VARIANT) = api ]; then \
 	  bundle exec rspec --pattern="$(base_spec),spec/variants/api/**/*_spec.rb"; \
 	fi;
 
