@@ -31,7 +31,7 @@ ENV LANG="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
 RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends apt-transport-https curl gnupg
+    apt-get install -y --no-install-recommends apt-transport-https curl gnupg iproute2
 
 # Install general required core packages
 RUN apt-get update -qq && \
