@@ -6,7 +6,7 @@ RSpec.configure do |config|
     # Prebuild docker image before running the test
     # Because the docker api does not support docker compose
     image = Docker::Image.get("nimblehq/#{ENV.fetch('APP_NAME')}")
-    $container = image.run('bin/rails s')
+    $container = image.run('bin/start.sh')
 
     set :os, family: :debian
     set :backend, :docker
