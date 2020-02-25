@@ -11,7 +11,6 @@ describe 'Docker addon - template' do
     expect(file('.dockerignore')).to exist
   end
 
-  # These files are ignored in `.dockerignore`
   it 'does not add the docker compose file' do
     expect(file('docker-compose.yml')).not_to exist
     expect(file('docker-compose.dev.yml')).not_to exist

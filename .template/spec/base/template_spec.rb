@@ -1,4 +1,4 @@
-describe 'Base template spec' do
+describe 'Base template' do
   it 'creates pronto linters configuration files' do
     expect(file('.flayignore')).to exist
     expect(file('.pronto.yml')).to exist
