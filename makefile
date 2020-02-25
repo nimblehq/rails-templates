@@ -10,7 +10,7 @@ run:
 	docker-compose -f docker-compose.test.yml run test
 
 base_spec = spec/base/**/*_spec.rb,spec/addons/docker/**/*_spec.rb
-unit-test:
+test:
 	cd .template; \
 	bundle install; \
 	if [ $(VARIANT) = web ]; then \
