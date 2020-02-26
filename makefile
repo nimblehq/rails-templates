@@ -11,7 +11,10 @@ run:
 
 base_spec = spec/base/**/*_spec.rb,spec/addons/docker/**/*_spec.rb
 test:
-	cd .template; \
+	cd $(APP_NAME) && \
+	docker-compose -f docker-compose.test.yml up --detach db redis && \
+	docker-compose -f docker-compose.test.yml run --detach test bin/start.sh && \
+	cd ../.template && \
 	bundle install; \
 	if [ $(VARIANT) = web ]; then \
 	  bundle exec rspec --pattern="$(base_spec),spec/variants/web/**/*_spec.rb"; \
