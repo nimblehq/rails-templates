@@ -1,16 +1,19 @@
 describe 'Base template' do
-  it 'creates pronto linters configuration files' do
+  it 'creates Rubocop configuration files' do
+    expect(file('.rubocop.yml')).to exist
+  end
+
+  it 'creates Pronto linters configuration files' do
     expect(file('.flayignore')).to exist
     expect(file('.pronto.yml')).to exist
-    expect(file('.rubocop.yml')).to exist
     expect(file('config.reek')).to exist
   end
 
-  it 'creates semaphore configuration example file' do
+  it 'creates Semaphore configuration example file' do
     expect(file('.semaphore.yml')).to exist
   end
 
-  it 'creates ruby configuration files' do
+  it 'creates Ruby configuration files' do
     expect(file('.ruby-gemset')).to exist
     expect(file('.ruby-version')).to exist
   end
