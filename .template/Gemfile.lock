@@ -27,6 +27,8 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
+    rspec-wait (0.0.9)
+      rspec (>= 3, < 4)
     serverspec (2.41.5)
       multi_json
       rspec (~> 3.0)
@@ -45,6 +47,7 @@ PLATFORMS
 DEPENDENCIES
   docker-api
   rspec
+  rspec-wait
   serverspec
 
 BUNDLED WITH

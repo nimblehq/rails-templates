@@ -1,3 +1,5 @@
+require 'rspec/wait'
+
 Dir[[__dir__, 'support', '**', '*.rb'].join('/')].each { |f| require f }
 
 RSpec.configure do |config|

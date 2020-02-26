@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rspec' # BDD for Ruby
+gem 'rspec-wait' # Wait for conditions in RSpec
 gem 'serverspec' # RSpec tests for your servers
 gem 'docker-api' # A lightweight Ruby client for the Docker Remote API
