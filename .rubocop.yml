@@ -1,0 +1,36 @@
+require: rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - 'Rakefile'
+    - 'Guardfile'
+    - 'node_modules/**/*'
+    - 'config/**/*'
+  TargetRubyVersion: 2.6
+
+Style/Documentation:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - 'spec/**/*'
+    - 'config/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: template
+
+Rails/FilePath:
+  EnforcedStyle: arguments

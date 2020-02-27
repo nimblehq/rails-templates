@@ -1,5 +1,0 @@
-{
-  "extends": [
-    "@nimbl3/eslint-config-nimbl3"
-  ]
-}

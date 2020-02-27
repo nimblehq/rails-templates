@@ -1,0 +1,53 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres:<%= POSTGRES_VERSION %>
+    container_name: <%= APP_NAME %>_db
+    environment:
+      - POSTGRES_DB=<%= APP_NAME %>_test
+    ports:
+      - "5432"
+
+  redis:
+    image: redis:<%= REDIS_VERSION %>
+    container_name: <%= APP_NAME %>_redis
+    ports:
+      - "6379"
+
+  test:
+    build:
+      context: .
+      cache_from:
+        - ${DOCKER_IMAGE}:${BRANCH_TAG}
+      args:
+        - BUILD_ENV=test
+        - RUBY_ENV=test
+        <%- if WEB_VARIANT -%>
+        - NODE_ENV=test
+        <%- end -%>
+    image: ${DOCKER_IMAGE}:${BRANCH_TAG}
+    container_name: <%= APP_NAME %>_test
+    command: bin/test.sh
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    volumes:
+      - "ruby-bundle:/bundle"
+      <%- if WEB_VARIANT -%>
+      - "${PWD}/tmp/screenshots:/<%= APP_NAME %>/tmp/screenshots"
+      <%- end -%>
+      - "${PWD}/log:/<%= APP_NAME %>/log"
+    environment:
+      - RACK_ENV=test
+      - RAILS_ENV=test
+      <%- if WEB_VARIANT -%>
+      - NODE_ENV=test
+      <%- end -%>
+      - DB_HOST=db
+      - CI=$CI
+      - TEST_RETRY=$TEST_RETRY
+
+volumes:
+  ruby-bundle:

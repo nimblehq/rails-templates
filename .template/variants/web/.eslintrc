@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "@nimbl3/eslint-config-nimbl3"
+  ],
+  "globals": {
+    "I18n": true
+  }
+}

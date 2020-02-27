@@ -1,0 +1,12 @@
+.gitignore
+.semaphore-cache
+log/
+tmp/
+coverage/
+<%- if WEB_VARIANT -%>
+node_modules/
+<%- end -%>
+docker-compose.dev.yml
+docker-compose.test.yml
+docker-compose.yml
+README.md
