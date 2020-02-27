@@ -1,0 +1,72 @@
+version: v1.0
+
+name: Rails Templates
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+auto_cancel:
+  running:
+    when: "branch != 'master'"
+
+global_job_config:
+  prologue:
+    commands:
+      - checkout
+      - sem-version ruby 2.6.5
+      - sem-version node 12.16.1
+      - gem install rails -v 6.0.1 --no-document
+      - echo "$DOCKER_HUB_TOKEN" | docker login --username=$DOCKER_HUB_USERNAME --password-stdin
+  env_vars:
+    - name: APP_NAME
+      value: rails_app
+    - name: COMPOSE_FILE
+      value: docker-compose.test.yml
+  secrets:
+    - name: dockerhub-secrets
+
+blocks:
+  - name: Api Variant Template
+    dependencies: []
+    task:
+      jobs:
+        - name: Create and Run tests
+          commands:
+            - make create OPTIONS="--api"
+            - make build
+            - make test VARIANT=api
+            - make run
+
+  - name: Web Variant - Create
+    dependencies: []
+    task:
+      jobs:
+        - name: Create
+          commands:
+            - make create
+            - cache store web-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID $APP_NAME/
+
+  - name: Web Variant - Build
+    dependencies: ["Web Variant - Create"]
+    task:
+      jobs:
+        - name: Build
+          commands:
+            - cache restore web-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
+            - make build
+            - (cd $APP_NAME && docker-compose push test)
+
+  - name: Web Variant - Test
+    dependencies: ["Web Variant - Build"]
+    task:
+      prologue:
+        commands:
+          - cache restore web-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
+          - (cd $APP_NAME && docker-compose pull test)
+      jobs:
+        - name: Run template specs
+          commands:
+            - make test VARIANT=web
+        - name: Run codebase specs
+          commands:
+            - make run
