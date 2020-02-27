@@ -29,7 +29,7 @@ Read more about Rails Application Template in the [official Rails Guides](https:
 
 ## How to contribute
 
-#### Template structure
+### Template structure
 
 ```
 .
@@ -60,12 +60,12 @@ Other files including the template options are in `.template` folder.
 
 There are 2 kinds of the template options:
 
-1. **Variants** - For the app main options, which is `web` and `api`.
+1. **Variants** - For the app main options, which are `web` and `api`.
     
-2. **Addons** - For other extra options that we can add to the project like `docker` or `bootstrap`. 
-The questions will be prompted before generating the project.
+2. **Addons** - For other extra options that we can add to the project like `docker` or `bootstrap`, 
+use the prompt `ask` to generate a question before generating the project.
     
-#### Template files
+### Template files
 
 There are 2 template file types:
 
@@ -80,10 +80,10 @@ There are 2 template file types:
     The file name should be the same as on the generated app. 
     If it is not a ruby file, append the `.rb` as an extension e.g. `Gemfile.rb`
     
-#### Template specs
+### Template specs
 
 We are using [Serverspec](https://serverspec.org/) to test the template.
-For any changes made, please add a spec for it. We also keep the same structure as the template.
+For any changes made, you **must** a spec for it.
 
 ## License
 
