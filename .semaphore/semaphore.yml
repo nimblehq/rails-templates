@@ -15,7 +15,6 @@ global_job_config:
       - checkout
       - sem-version ruby 2.6.5
       - sem-version node 12.16.1
-      - gem install rails -v 6.0.1 --no-document
       - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
       - echo "$DOCKER_HUB_TOKEN" | docker login --username=$DOCKER_HUB_USERNAME --password-stdin
   env_vars:
@@ -23,6 +22,8 @@ global_job_config:
       value: rails_app
     - name: COMPOSE_FILE
       value: docker-compose.test.yml
+    - name: RAILS_VERSION
+      value: 6.0.1
   secrets:
     - name: dockerhub-secrets
 
@@ -33,6 +34,7 @@ blocks:
       jobs:
         - name: Create
           commands:
+            - gem install rails -v $RAILS_VERSION --no-document
             - make create
             - cache store web-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID $APP_NAME/
 
@@ -69,6 +71,7 @@ blocks:
       jobs:
         - name: Create
           commands:
+            - gem install rails -v $RAILS_VERSION --no-document
             - make create OPTIONS="--api"
             - cache store api-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID $APP_NAME/
 
