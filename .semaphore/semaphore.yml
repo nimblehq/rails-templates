@@ -16,6 +16,7 @@ global_job_config:
       - sem-version ruby 2.6.5
       - sem-version node 12.16.1
       - gem install rails -v 6.0.1 --no-document
+      - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
       - echo "$DOCKER_HUB_TOKEN" | docker login --username=$DOCKER_HUB_USERNAME --password-stdin
   env_vars:
     - name: APP_NAME
@@ -26,17 +27,6 @@ global_job_config:
     - name: dockerhub-secrets
 
 blocks:
-  - name: Api Variant Template
-    dependencies: []
-    task:
-      jobs:
-        - name: Create and Run tests
-          commands:
-            - make create OPTIONS="--api"
-            - make build
-            - make test VARIANT=api
-            - make run
-
   - name: Web Variant - Create
     dependencies: []
     task:
@@ -52,6 +42,7 @@ blocks:
       jobs:
         - name: Build
           commands:
+            - export BRANCH_TAG=web-$BRANCH_TAG
             - cache restore web-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
             - make build
             - (cd $APP_NAME && docker-compose push test)
@@ -61,12 +52,49 @@ blocks:
     task:
       prologue:
         commands:
+          - export BRANCH_TAG=web-$BRANCH_TAG
           - cache restore web-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
           - (cd $APP_NAME && docker-compose pull test)
       jobs:
         - name: Run template specs
           commands:
             - make test VARIANT=web
+        - name: Run codebase specs
+          commands:
+            - make run
+
+  - name: Api Variant - Create
+    dependencies: []
+    task:
+      jobs:
+        - name: Create
+          commands:
+            - make create OPTIONS="--api"
+            - cache store api-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID $APP_NAME/
+
+  - name: Api Variant - Build
+    dependencies: ["Api Variant - Create"]
+    task:
+      jobs:
+        - name: Build
+          commands:
+            - export BRANCH_TAG=api-$BRANCH_TAG
+            - cache restore api-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
+            - make build
+            - (cd $APP_NAME && docker-compose push test)
+
+  - name: Api Variant - Test
+    dependencies: ["Api Variant - Build"]
+    task:
+      prologue:
+        commands:
+          - export BRANCH_TAG=api-$BRANCH_TAG
+          - cache restore api-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
+          - (cd $APP_NAME && docker-compose pull test)
+      jobs:
+        - name: Run template specs
+          commands:
+            - make test VARIANT=api
         - name: Run codebase specs
           commands:
             - make run
