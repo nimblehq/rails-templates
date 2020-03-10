@@ -104,6 +104,12 @@ RUN yarn install --network-timeout 100000
 COPY . ./
 
 <%- if WEB_VARIANT -%>
+# Set environment to development in order to precompile the assets
+# Because it initializes the app, so all variables need to be exist
+ARG MAILER_DEFAULT_HOST=http://localhost
+ARG MAILER_DEFAULT_PORT=3000
+ARG SECRET_KEY_BASE=secret_key_base
+
 # Compile assets
 RUN bundle exec rails i18n:js:export && \
     bundle exec rails assets:precompile
