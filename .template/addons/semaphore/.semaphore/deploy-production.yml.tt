@@ -1,0 +1,48 @@
+version: v1.0
+
+name: <%= APP_NAME_STRING %> Production
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+global_job_config:
+  env_vars:
+    - name: HEROKU_APP
+      value: <%= APP_NAME %>-production
+    - name: HEROKU_IMAGE
+      value: registry.heroku.com/<%= APP_NAME %>-production
+  secrets:
+    - name: <%= APP_NAME %>
+  prologue:
+    commands:
+      - checkout
+      - echo "$DOCKER_HUB_TOKEN" | docker login --username=$DOCKER_HUB_USERNAME --password-stdin
+      - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
+
+blocks:
+  - name: Build
+    task:
+      prologue:
+        commands:
+          # Install Phraseapp CLI
+          - mkdir ~/bin
+          - curl -L -o ~/bin/phraseapp https://github.com/phrase/phraseapp-client/releases/download/1.15.0/phraseapp_linux_amd64
+          - chmod +x ~/bin/phraseapp
+      jobs:
+        - name: Build
+          commands:
+            - ~/bin/phraseapp pull -t $PHRASEAPP_ACCESS_TOKEN
+            - docker-compose build
+            - docker-compose push web
+
+  - name: Deploy
+    task:
+      prologue:
+        commands:
+          - heroku container:login
+      jobs:
+        - name: Heroku
+          commands:
+            - heroku container:push --arg BRANCH_TAG=$BRANCH_TAG --recursive
+            - heroku container:release web worker

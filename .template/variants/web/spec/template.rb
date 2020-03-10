@@ -6,4 +6,4 @@ copy_file 'spec/support/disable_animation.rb'
 copy_file 'spec/support/system.rb'
 copy_file 'spec/support/webdrivers.rb'
 
-directory 'spec/system'
+directory 'spec/systems'
