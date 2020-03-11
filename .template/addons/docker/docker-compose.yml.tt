@@ -27,9 +27,6 @@ services:
         - NODE_ENV=production
         - ASSET_HOST
         <%- end -%>
-        - MAILER_DEFAULT_HOST
-        - MAILER_DEFAULT_PORT
-        - SECRET_KEY_BASE
     image: ${DOCKER_IMAGE}:${BRANCH_TAG}
     container_name: <%= APP_NAME %>_web
     command: bin/start.sh
