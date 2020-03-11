@@ -1,6 +1,6 @@
 version: v1.0
 
-name: <%= HUMAN_APP_NAME %> Staging
+name: <%= APP_NAME_HUMANIZED %> Staging
 agent:
   machine:
     type: e1-standard-2

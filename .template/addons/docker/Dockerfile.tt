@@ -5,6 +5,11 @@ ARG RUBY_ENV=development
 <%- if WEB_VARIANT -%>
 ARG NODE_ENV=development
 ARG ASSET_HOST=http://localhost
+# These environment variables are required in the initializers.
+# Because when precompiling the assets, it initializes the app.
+ARG MAILER_DEFAULT_HOST=http://localhost
+ARG MAILER_DEFAULT_PORT=3000
+ARG SECRET_KEY_BASE=secret_key_base
 <%- end -%>
 
 # Define all the envs here
@@ -104,12 +109,6 @@ RUN yarn install --network-timeout 100000
 COPY . ./
 
 <%- if WEB_VARIANT -%>
-# Set environment to development in order to precompile the assets
-# Because it initializes the app, so all variables need to be exist
-ARG MAILER_DEFAULT_HOST=http://localhost
-ARG MAILER_DEFAULT_PORT=3000
-ARG SECRET_KEY_BASE=secret_key_base
-
 # Compile assets
 RUN bundle exec rails i18n:js:export && \
     bundle exec rails assets:precompile

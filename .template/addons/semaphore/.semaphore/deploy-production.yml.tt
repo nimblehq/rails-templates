@@ -1,6 +1,6 @@
 version: v1.0
 
-name: <%= HUMAN_APP_NAME %> Production
+name: <%= APP_NAME_HUMANIZED %> Production
 agent:
   machine:
     type: e1-standard-2

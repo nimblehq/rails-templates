@@ -25,8 +25,11 @@ services:
         - RUBY_ENV=production
         <%- if WEB_VARIANT -%>
         - NODE_ENV=production
-        - ASSET_HOST=
+        - ASSET_HOST
         <%- end -%>
+        - MAILER_DEFAULT_HOST
+        - MAILER_DEFAULT_PORT
+        - SECRET_KEY_BASE
     image: ${DOCKER_IMAGE}:${BRANCH_TAG}
     container_name: <%= APP_NAME %>_web
     command: bin/start.sh
@@ -46,11 +49,11 @@ services:
       <%- end -%>
       - DATABASE_URL=postgres://postgres@db/<%= APP_NAME %>_production
       <%- if WEB_VARIANT -%>
-      - ASSET_HOST=
+      - ASSET_HOST
       <%- end -%>
-      - DEFAULT_HOST=
-      - MAILER_SENDER=
-      - RAILS_MASTER_KEY=
+      - DEFAULT_HOST
+      - MAILER_SENDER
+      - RAILS_MASTER_KEY
 
 volumes:
   ruby-bundle:

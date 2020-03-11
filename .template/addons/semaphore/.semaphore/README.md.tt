@@ -7,7 +7,6 @@ Secret name: `<%= APP_NAME %>`
 - DOCKER_HUB_USERNAME
 - DOCKER_HUB_TOKEN
 - HEROKU_API_KEY
-- PHRASEAPP_ACCESS_TOKEN
 
 ## Deployment dashboard
 
