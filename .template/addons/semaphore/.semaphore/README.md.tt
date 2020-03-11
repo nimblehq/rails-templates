@@ -30,11 +30,11 @@ spec:
   - name: Production
     type: list_pipelines
     filters:
-      pipeline_file: .semaphore/deploy-production.yml
+      pipeline_file: .semaphore/promotion-production.yml
       project_id: <project_id>
   - name: Staging
     type: list_pipelines
     filters:
-      pipeline_file: .semaphore/deploy-staging.yml
+      pipeline_file: .semaphore/promotion-staging.yml
       project_id: <project_id>
 ```
