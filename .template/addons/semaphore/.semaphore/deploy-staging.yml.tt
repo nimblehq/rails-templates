@@ -10,8 +10,6 @@ global_job_config:
   env_vars:
     - name: HEROKU_APP
       value: <%= APP_NAME %>-staging
-    - name: HEROKU_IMAGE
-      value: registry.heroku.com/<%= APP_NAME %>-staging
   secrets:
     - name: <%= APP_NAME %>
   prologue:

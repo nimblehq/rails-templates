@@ -4,4 +4,3 @@ directory '.semaphore'
 
 template 'Dockerfile.web.tt'
 template 'Dockerfile.worker.tt'
-
