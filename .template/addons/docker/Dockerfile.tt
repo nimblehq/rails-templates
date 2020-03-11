@@ -5,8 +5,8 @@ ARG RUBY_ENV=development
 <%- if WEB_VARIANT -%>
 ARG NODE_ENV=development
 ARG ASSET_HOST=http://localhost
-# These environment variables are required in the initializers.
-# Because when precompiling the assets, it initializes the app.
+# Set environment varaibles required in the initializers in order to precompile the assets.
+# Because it initializes the app, so all variables need to exist in the build stage.
 ARG MAILER_DEFAULT_HOST=http://localhost
 ARG MAILER_DEFAULT_PORT=3000
 ARG SECRET_KEY_BASE=secret_key_base
