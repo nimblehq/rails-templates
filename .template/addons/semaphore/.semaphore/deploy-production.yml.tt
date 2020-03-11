@@ -1,6 +1,6 @@
 version: v1.0
 
-name: <%= APP_NAME_STRING %> Production
+name: <%= HUMAN_APP_NAME %> Production
 agent:
   machine:
     type: e1-standard-2
@@ -21,16 +21,9 @@ global_job_config:
 blocks:
   - name: Build
     task:
-      prologue:
-        commands:
-          # Install Phraseapp CLI
-          - mkdir ~/bin
-          - curl -L -o ~/bin/phraseapp https://github.com/phrase/phraseapp-client/releases/download/1.15.0/phraseapp_linux_amd64
-          - chmod +x ~/bin/phraseapp
       jobs:
         - name: Build
           commands:
-            - ~/bin/phraseapp pull -t $PHRASEAPP_ACCESS_TOKEN
             - docker-compose build
             - docker-compose push web
 

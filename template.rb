@@ -3,7 +3,7 @@ require 'shellwords'
 # Variables
 APP_NAME = app_name
 # Transform the app name from slug to human-readable name e.g. nimble-web -> Nimble
-APP_NAME_STRING = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
+HUMAN_APP_NAME = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
 DOCKER_IMAGE = "nimblehq/#{APP_NAME}"
 RUBY_VERSION = '2.6.5'
 POSTGRES_VERSION = '12.1'
