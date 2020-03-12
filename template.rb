@@ -13,7 +13,7 @@ API_VARIANT = options[:api]
 WEB_VARIANT = !options[:api]
 
 def apply_template!
-  use_source_paths [current_directory]
+  use_source_path __dir__
 
   delete_test_folder
 
@@ -39,7 +39,7 @@ def apply_template!
   apply '.gitignore.rb'
 
   after_bundle do
-    use_source_paths [current_directory]
+    use_source_path __dir__
 
     # Stop the spring before using the generators as it might hang for a long time
     # Issue: https://github.com/rails/spring/issues/486
@@ -64,12 +64,8 @@ def source_paths
 end
 
 # Prepend the required paths to the source paths to make the template files in those paths available
-def use_source_paths(source_paths)
-  @source_paths.unshift(*source_paths)
-end
-
-def current_directory
-  @current_directory ||= __FILE__ =~ %r{\Ahttps?://} ? remote_repository : __dir__
+def use_source_path(source_path)
+  @source_paths.unshift(source_path)
 end
 
 def remote_repository
@@ -94,4 +90,14 @@ def delete_test_folder
   FileUtils.rm_rf('test')
 end
 
-apply_template!
+# Setup the template root path
+# If the template file is the url, clone the repo to the tmp directory
+template_root = __FILE__ =~ %r{\Ahttps?://} ? remote_repository : __dir__
+use_source_path template_root
+
+if ENV['ADDON']
+  apply ".template/addons/#{ENV['ADDON']}/template.rb"
+else
+  apply_template!
+end
+
