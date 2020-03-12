@@ -22,7 +22,7 @@ describe 'config/environments/development.rb' do
   def mailer_default_url_config
     <<~EOT
       config.action_mailer.default_url_options = {
-        host: ENV.fetch('MAILER_DEFAULT_HOST'), 
+        host: ENV.fetch('MAILER_DEFAULT_HOST'),
         port: ENV.fetch('MAILER_DEFAULT_PORT')
       }
     EOT
