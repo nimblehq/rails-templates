@@ -98,7 +98,11 @@ template_root = __FILE__ =~ %r{\Ahttps?://} ? remote_repository : __dir__
 use_source_path template_root
 
 if ENV['ADDON']
-  apply ".template/addons/#{ENV['ADDON']}/template.rb"
+  addon_template_path = ".template/addons/#{ENV['ADDON']}/template.rb"
+
+  abort 'This addon is not supported' unless File.exist?(addon_template_path)
+
+  apply addon_template_path
 else
   apply_template!(template_root)
 end
