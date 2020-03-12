@@ -9,8 +9,8 @@ RUBY_VERSION = '2.6.5'
 POSTGRES_VERSION = '12.1'
 REDIS_VERSION = '5.0.7'
 # Variants
-API_VARIANT = options[:api]
-WEB_VARIANT = !options[:api]
+API_VARIANT = options[:api] || ENV['API'] == 'true'
+WEB_VARIANT = !API_VARIANT
 
 def apply_template!(template_root)
   use_source_path template_root

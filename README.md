@@ -35,6 +35,9 @@ To apply the template on an existing application, run following rails command:
 ```
 rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb
 
+# To apply on an api application
+rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb API=true
+
 # To apply a specific addon
 rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb ADDON=<addon name>
 ```
