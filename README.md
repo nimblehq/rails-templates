@@ -19,7 +19,9 @@ with building complex applications over the years.
 - Install ruby and set your local ruby version to `2.6.5`
 - Install rails > `6.0.0`, recommended version `6.0.1`
 
-The main template is `rails_docker`. In order to use it, initialize a new app with the following parameters:
+### Use the template
+
+In order to use the template, initialize a new app with the following parameters:
 
 ```
 rails new <app_name> -m https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb
@@ -28,11 +30,17 @@ rails new <app_name> -m https://raw.githubusercontent.com/nimblehq/rails-templat
 Supported template options:
 - `--api` - create an api-only application
 
-To apply a single template
+To apply the template on an existing application, run following rails command:
 
 ```
 rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb
+
+# To apply a specific addon
+rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb ADDON=<addon name>
 ```
+
+Available Addons:
+- `docker`
 
 Read more about Rails Application Template in the [official Rails Guides](https://guides.rubyonrails.org/rails_application_templates.html).
 
