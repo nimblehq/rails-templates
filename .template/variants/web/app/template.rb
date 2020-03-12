@@ -1,14 +1,17 @@
 # Javascript
-directory 'app/javascript'
 
-insert_into_file 'app/javascript/packs/application.js', after: %r{require\("channels"\)\n} do
-  <<~EOT
+if Dir.exist?('app/javascript')
+  directory 'app/javascript'
 
-    import 'translations/translations';
+  insert_into_file 'app/javascript/packs/application.js', after: %r{require\("channels"\)\n} do
+    <<~EOT
 
-    import 'initializers/';
-    import 'screens/';
-  EOT
+      import 'translations/translations';
+
+      import 'initializers/';
+      import 'screens/';
+    EOT
+  end
 end
 
 # Stylesheets
@@ -24,6 +27,13 @@ inject_into_class 'app/controllers/application_controller.rb', 'ApplicationContr
 end
 
 # Views
-gsub_file 'app/views/layouts/application.html.erb', /<html>/ do
-  "<html lang='<%= I18n.locale %>'>"
+if File.exist?('app/views/layouts/application.html.erb')
+  gsub_file 'app/views/layouts/application.html.erb', /<html>/ do
+    "<html lang='<%= I18n.locale %>'>"
+  end
+else
+  @template_errors.add <<~EOT
+    Cannot insert the lang attribute into html tag into `app/views/layouts/application.html.erb`
+    Content: <html lang='<%= I18n.locale %>'>
+  EOT
 end

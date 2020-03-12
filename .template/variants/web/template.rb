@@ -27,8 +27,24 @@ def apply_web_variant!
 end
 
 def remove_turbolinks
-  gsub_file('app/views/layouts/application.html.erb', %r{, 'data-turbolinks-track': 'reload'}, '')
-  gsub_file('app/javascript/packs/application.js', %r{^require\(\"turbolinks\"\).start\(\)\n}, '')
+  if File.exist?('app/views/layouts/application.html.erb')
+    gsub_file('app/views/layouts/application.html.erb', %r{, 'data-turbolinks-track': 'reload'}, '')
+  else
+    @template_errors.add <<~EOT
+      Cannot Remove turbolinks from application.html.erb file
+      Content: 'data-turbolinks-track': 'reload'
+    EOT
+  end
+  
+  if File.exist?('app/javascript/packs/application.js')
+    gsub_file('app/javascript/packs/application.js', %r{^require\(\"turbolinks\"\).start\(\)\n}, '')
+  else
+    @template_errors.add <<~EOT
+      Cannot Remove turbolinks from packs/application.js
+      Content: require("turbolinks").start()
+    EOT
+  end
+
   gsub_file('package.json', %r{"turbolinks": .+\n}, '')
 end
 

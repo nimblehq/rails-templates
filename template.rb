@@ -90,12 +90,29 @@ def delete_test_folder
   FileUtils.rm_rf('test')
 end
 
+def print_error_message
+  puts <<~EOT
+    #{'=' * 80}
+
+    There are some errors when templating the application, Please fix them manually:
+
+    #{@template_errors}
+
+    #{'=' * 80}
+  EOT
+end
+
 # Init the source path
 @source_paths ||= []
+
 # Setup the template root path
 # If the template file is the url, clone the repo to the tmp directory
 template_root = __FILE__ =~ %r{\Ahttps?://} ? remote_repository : __dir__
 use_source_path template_root
+
+# Init the template error
+require_relative '.template/lib/template/errors'
+@template_errors = Template::Errors.new
 
 if ENV['ADDON']
   addon_template_path = ".template/addons/#{ENV['ADDON']}/template.rb"
@@ -106,3 +123,5 @@ if ENV['ADDON']
 else
   apply_template!(template_root)
 end
+
+print_error_message unless @template_errors.empty?
