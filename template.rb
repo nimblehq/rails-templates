@@ -12,8 +12,11 @@ REDIS_VERSION = '5.0.7'
 API_VARIANT = options[:api]
 WEB_VARIANT = !options[:api]
 
-def apply_template!
-  use_source_path __dir__
+def apply_template!(template_root)
+  p '*'*10
+  p template_root
+  p '*'*10
+  use_source_path template_root
 
   delete_test_folder
 
@@ -39,7 +42,11 @@ def apply_template!
   apply '.gitignore.rb'
 
   after_bundle do
-    use_source_path __dir__
+    p '='*10
+    p template_root
+    p '='*10
+
+    use_source_path template_root
 
     # Stop the spring before using the generators as it might hang for a long time
     # Issue: https://github.com/rails/spring/issues/486
@@ -65,6 +72,9 @@ end
 
 # Prepend the required paths to the source paths to make the template files in those paths available
 def use_source_path(source_path)
+  p @source_paths
+  p source_path
+
   @source_paths.unshift(source_path)
 end
 
@@ -95,9 +105,12 @@ end
 template_root = __FILE__ =~ %r{\Ahttps?://} ? remote_repository : __dir__
 use_source_path template_root
 
+p '='*10
+p template_root
+p '='*10
+
 if ENV['ADDON']
   apply ".template/addons/#{ENV['ADDON']}/template.rb"
 else
-  apply_template!
+  apply_template!(template_root)
 end
-
