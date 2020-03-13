@@ -5,6 +5,7 @@ describe 'Web variant - /spec template' do
     expect(file('spec/support/disable_animation.rb')).to exist
     expect(file('spec/support/system.rb')).to exist
     expect(file('spec/support/webdrivers.rb')).to exist
+    expect(file('spec/support/webpacker.rb')).to exist
   end
 
   it 'creates system spec directory' do
