@@ -1,0 +1,110 @@
+version: v1.0
+
+name: Rails Templates
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+auto_cancel:
+  running:
+    when: "branch != 'master'"
+
+global_job_config:
+  prologue:
+    commands:
+      - checkout
+      - sem-version ruby 2.6.5
+      - sem-version node 12.16.1
+      - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
+      - export CACHE_NAME=$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
+      - echo "$DOCKER_HUB_TOKEN" | docker login --username=$DOCKER_HUB_USERNAME --password-stdin
+  env_vars:
+    - name: APP_NAME
+      value: rails_app
+    - name: COMPOSE_FILE
+      value: docker-compose.test.yml
+    - name: RAILS_VERSION
+      value: 6.0.1
+  secrets:
+    - name: rails-templates
+
+blocks:
+  #############################
+  ######## Web Variant ########
+  #############################
+  - name: Web Variant - Create
+    dependencies: []
+    task:
+      jobs:
+        - name: Create
+          commands:
+            - gem install rails -v $RAILS_VERSION --no-document
+            - make create
+            - cache store web-$CACHE_NAME $APP_NAME/
+
+  - name: Web Variant - Build
+    dependencies: ["Web Variant - Create"]
+    task:
+      jobs:
+        - name: Build
+          commands:
+            - export BRANCH_TAG=web-$BRANCH_TAG
+            - cache restore web-$CACHE_NAME
+            - make build
+            - cd $APP_NAME && docker-compose push test
+
+  - name: Web Variant - Test
+    dependencies: ["Web Variant - Build"]
+    task:
+      prologue:
+        commands:
+          - export BRANCH_TAG=web-$BRANCH_TAG
+          - cache restore web-$CACHE_NAME
+          - cd $APP_NAME && docker-compose pull test && cd ..
+      jobs:
+        - name: Run template specs
+          commands:
+            - make test VARIANT=web
+        - name: Run codebase specs
+          commands:
+            - make run
+
+  #############################
+  ######## Api Variant ########
+  #############################
+  - name: Api Variant - Create
+    dependencies: []
+    task:
+      jobs:
+        - name: Create
+          commands:
+            - gem install rails -v $RAILS_VERSION --no-document
+            - make create OPTIONS="--api"
+            - cache store api-$CACHE_NAME $APP_NAME/
+
+  - name: Api Variant - Build
+    dependencies: ["Api Variant - Create"]
+    task:
+      jobs:
+        - name: Build
+          commands:
+            - export BRANCH_TAG=api-$BRANCH_TAG
+            - cache restore api-$CACHE_NAME
+            - make build
+            - cd $APP_NAME && docker-compose push test
+
+  - name: Api Variant - Test
+    dependencies: ["Api Variant - Build"]
+    task:
+      prologue:
+        commands:
+          - export BRANCH_TAG=api-$BRANCH_TAG
+          - cache restore api-$CACHE_NAME
+          - cd $APP_NAME && docker-compose pull test && cd ..
+      jobs:
+        - name: Run template specs
+          commands:
+            - make test VARIANT=api
+        - name: Run codebase specs
+          commands:
+            - make run
