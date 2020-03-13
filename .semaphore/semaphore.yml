@@ -16,7 +16,7 @@ global_job_config:
       - sem-version ruby 2.6.5
       - sem-version node 12.16.1
       - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
-      - export CACHE_NAME=$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID $APP_NAME/
+      - export CACHE_NAME=$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
       - echo "$DOCKER_HUB_TOKEN" | docker login --username=$DOCKER_HUB_USERNAME --password-stdin
   env_vars:
     - name: APP_NAME
@@ -40,7 +40,7 @@ blocks:
           commands:
             - gem install rails -v $RAILS_VERSION --no-document
             - make create
-            - cache store web-$CACHE_NAME
+            - cache store web-$CACHE_NAME $APP_NAME/
 
   - name: Web Variant - Build
     dependencies: ["Web Variant - Create"]
@@ -80,7 +80,7 @@ blocks:
           commands:
             - gem install rails -v $RAILS_VERSION --no-document
             - make create OPTIONS="--api"
-            - cache store api-$CACHE_NAME
+            - cache store api-$CACHE_NAME $APP_NAME/
 
   - name: Api Variant - Build
     dependencies: ["Api Variant - Create"]
