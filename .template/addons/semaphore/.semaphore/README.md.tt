@@ -1,6 +1,14 @@
-## Secrets
+# Semaphore CI 2.0
 
-Setup the following secrets in order to run the pipeline
+## Requirements:
+
+- Install [Semaphore CLI](https://docs.semaphoreci.com/reference/sem-command-line-tool/)
+
+## Setup the CI
+
+### Secrets
+
+Setup the following secrets in order to run the pipeline:
 
 Secret name: `<%= APP_NAME %>`
 
@@ -8,10 +16,10 @@ Secret name: `<%= APP_NAME %>`
 - DOCKER_HUB_TOKEN
 - HEROKU_API_KEY
 
-## Deployment dashboard
+### Deployment dashboard
 
-After the project is created on Semaphore CI (on first push)
-Use the sem CLI to create the deployment dashboard
+After the project is created on Semaphore CI (on first push),
+use the sem CLI to create the deployment dashboard.
 
 ```
 # Get the project id
@@ -22,7 +30,7 @@ Use the sem CLI to create the deployment dashboard
 > sem edit dashboard <%= APP_NAME %>
 ```
 
-Config the widget
+Configure the widgets to show the deployment pipelines
 
 ```
 spec:
