@@ -14,6 +14,8 @@ def apply_template!
 
   delete_test_folder
 
+  directory '.github'
+
   template 'Gemfile.tt', force: true
 
   copy_file '.flayignore'
@@ -34,7 +36,7 @@ def apply_template!
   apply '.gitignore.rb'
 
   after_bundle do
-    use_source_paths [__dir__]
+    use_source_paths [current_directory]
 
     # Stop the spring before using the generators as it might hang for a long time
     # Issue: https://github.com/rails/spring/issues/486
