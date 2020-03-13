@@ -16,6 +16,7 @@ global_job_config:
       - sem-version ruby 2.6.5
       - sem-version node 12.16.1
       - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
+      - export CACHE_NAME=$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID $APP_NAME/
       - echo "$DOCKER_HUB_TOKEN" | docker login --username=$DOCKER_HUB_USERNAME --password-stdin
   env_vars:
     - name: APP_NAME
@@ -28,6 +29,9 @@ global_job_config:
     - name: dockerhub-secrets
 
 blocks:
+  #############################
+  ######## Web Variant ########
+  #############################
   - name: Web Variant - Create
     dependencies: []
     task:
@@ -36,7 +40,7 @@ blocks:
           commands:
             - gem install rails -v $RAILS_VERSION --no-document
             - make create
-            - cache store web-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID $APP_NAME/
+            - cache store web-$CACHE_NAME
 
   - name: Web Variant - Build
     dependencies: ["Web Variant - Create"]
@@ -45,9 +49,9 @@ blocks:
         - name: Build
           commands:
             - export BRANCH_TAG=web-$BRANCH_TAG
-            - cache restore web-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
+            - cache restore web-$CACHE_NAME
             - make build
-            - (cd $APP_NAME && docker-compose push test)
+            - cd $APP_NAME && docker-compose push test
 
   - name: Web Variant - Test
     dependencies: ["Web Variant - Build"]
@@ -55,8 +59,8 @@ blocks:
       prologue:
         commands:
           - export BRANCH_TAG=web-$BRANCH_TAG
-          - cache restore web-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
-          - (cd $APP_NAME && docker-compose pull test)
+          - cache restore web-$CACHE_NAME
+          - cd $APP_NAME && docker-compose pull test && cd ..
       jobs:
         - name: Run template specs
           commands:
@@ -65,6 +69,9 @@ blocks:
           commands:
             - make run
 
+  #############################
+  ######## Api Variant ########
+  #############################
   - name: Api Variant - Create
     dependencies: []
     task:
@@ -73,7 +80,7 @@ blocks:
           commands:
             - gem install rails -v $RAILS_VERSION --no-document
             - make create OPTIONS="--api"
-            - cache store api-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID $APP_NAME/
+            - cache store api-$CACHE_NAME
 
   - name: Api Variant - Build
     dependencies: ["Api Variant - Create"]
@@ -82,9 +89,9 @@ blocks:
         - name: Build
           commands:
             - export BRANCH_TAG=api-$BRANCH_TAG
-            - cache restore api-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
+            - cache restore api-$CACHE_NAME
             - make build
-            - (cd $APP_NAME && docker-compose push test)
+            - cd $APP_NAME && docker-compose push test
 
   - name: Api Variant - Test
     dependencies: ["Api Variant - Build"]
@@ -92,8 +99,8 @@ blocks:
       prologue:
         commands:
           - export BRANCH_TAG=api-$BRANCH_TAG
-          - cache restore api-$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
-          - (cd $APP_NAME && docker-compose pull test)
+          - cache restore api-$CACHE_NAME
+          - cd $APP_NAME && docker-compose pull test && cd ..
       jobs:
         - name: Run template specs
           commands:
