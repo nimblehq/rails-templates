@@ -31,7 +31,7 @@ def remove_turbolinks
     gsub_file('app/views/layouts/application.html.erb', %r{, 'data-turbolinks-track': 'reload'}, '')
   else
     @template_errors.add <<~EOT
-      Cannot Remove turbolinks from application.html.erb file
+      Cannot Remove turbolinks from `application.html.erb` file
       Content: 'data-turbolinks-track': 'reload'
     EOT
   end
@@ -40,7 +40,7 @@ def remove_turbolinks
     gsub_file('app/javascript/packs/application.js', %r{^require\(\"turbolinks\"\).start\(\)\n}, '')
   else
     @template_errors.add <<~EOT
-      Cannot Remove turbolinks from packs/application.js
+      Cannot Remove turbolinks from `app/javascript/packs/application.js`
       Content: require("turbolinks").start()
     EOT
   end

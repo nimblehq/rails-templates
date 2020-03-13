@@ -1,8 +1,7 @@
 # Javascript
+directory 'app/javascript'
 
-if Dir.exist?('app/javascript')
-  directory 'app/javascript'
-
+if File.exist?('app/javascript/packs/application.js')
   insert_into_file 'app/javascript/packs/application.js', after: %r{require\("channels"\)\n} do
     <<~EOT
 
@@ -12,6 +11,14 @@ if Dir.exist?('app/javascript')
       import 'screens/';
     EOT
   end
+else
+  @template_errors.add <<~EOT
+    Cannot import the dependencies to `app/javascript/packs/application.js`
+    Content: import 'translations/translations';
+
+             import 'initializers/';
+             import 'screens/';
+  EOT
 end
 
 # Stylesheets

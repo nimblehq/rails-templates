@@ -97,7 +97,6 @@ def print_error_message
     There are some errors when templating the application, Please fix them manually:
 
     #{@template_errors}
-
     #{'=' * 80}
   EOT
 end
@@ -110,8 +109,8 @@ end
 template_root = __FILE__ =~ %r{\Ahttps?://} ? remote_repository : __dir__
 use_source_path template_root
 
-# Init the template error
-require_relative '.template/lib/template/errors'
+# Init the template errors
+require "#{template_root}/.template/lib/template/errors"
 @template_errors = Template::Errors.new
 
 if ENV['ADDON']
