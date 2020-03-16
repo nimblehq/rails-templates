@@ -2,6 +2,9 @@ require 'shellwords'
 
 # Variables
 APP_NAME = app_name
+# Transform the app name from slug to human-readable name e.g. nimble-web -> Nimble
+APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
+DOCKER_IMAGE = "nimblehq/#{APP_NAME}"
 RUBY_VERSION = '2.6.5'
 POSTGRES_VERSION = '12.1'
 REDIS_VERSION = '5.0.7'
@@ -48,6 +51,7 @@ def apply_template!
 
   # Add-ons - [Default]
   apply '.template/addons/docker/template.rb'
+  apply '.template/addons/semaphore/template.rb'
 
   # Variants
   apply '.template/variants/api/template.rb' if API_VARIANT

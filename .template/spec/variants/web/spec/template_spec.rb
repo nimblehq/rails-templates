@@ -8,6 +8,6 @@ describe 'Web variant - /spec template' do
   end
 
   it 'creates system spec directory' do
-    expect(file('spec/system')).to be_directory
+    expect(file('spec/systems')).to be_directory
   end
 end

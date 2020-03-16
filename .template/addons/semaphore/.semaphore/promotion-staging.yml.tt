@@ -1,0 +1,39 @@
+version: v1.0
+
+name: <%= APP_NAME_HUMANIZED %> Staging
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+global_job_config:
+  env_vars:
+    - name: HEROKU_APP
+      value: <%= APP_NAME %>-staging
+  secrets:
+    - name: <%= APP_NAME %>
+  prologue:
+    commands:
+      - checkout
+      - echo "$DOCKER_HUB_TOKEN" | docker login --username=$DOCKER_HUB_USERNAME --password-stdin
+      - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
+
+blocks:
+  - name: Build
+    task:
+      jobs:
+        - name: Build
+          commands:
+            - docker-compose build
+            - docker-compose push web
+
+  - name: Deploy
+    task:
+      prologue:
+        commands:
+          - heroku container:login
+      jobs:
+        - name: Heroku
+          commands:
+            - heroku container:push --arg BRANCH_TAG=$BRANCH_TAG --recursive
+            - heroku container:release web worker
