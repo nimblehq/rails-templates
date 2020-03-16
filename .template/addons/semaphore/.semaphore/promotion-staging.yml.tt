@@ -24,6 +24,7 @@ blocks:
       jobs:
         - name: Build
           commands:
+            - bin/docker-prepare
             - docker-compose build
             - docker-compose push web
 
