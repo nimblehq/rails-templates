@@ -1,4 +1,4 @@
-use_source_paths [__dir__]
+use_source_path __dir__
 
 directory '.semaphore'
 

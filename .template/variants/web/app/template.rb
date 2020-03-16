@@ -3,9 +3,9 @@ directory 'app/javascript'
 
 insert_into_file 'app/javascript/packs/application.js', after: %r{require\("channels"\)\n} do
   <<~EOT
-  
+
     import 'translations/translations';
-    
+
     import 'initializers/';
     import 'screens/';
   EOT

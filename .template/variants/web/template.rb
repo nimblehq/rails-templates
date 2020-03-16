@@ -1,5 +1,5 @@
 def apply_web_variant!
-  use_source_paths [__dir__]
+  use_source_path __dir__
 
   copy_file '.eslintignore'
   copy_file '.eslintrc'
@@ -16,7 +16,7 @@ def apply_web_variant!
   remove_turbolinks
 
   after_bundle do
-    use_source_paths [__dir__]
+    use_source_path __dir__
 
     # Fix the default rails template that does not put trailing commas
     run 'yarn run lint --fix'

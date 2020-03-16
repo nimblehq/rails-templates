@@ -4,16 +4,16 @@ require 'shellwords'
 APP_NAME = app_name
 # Transform the app name from slug to human-readable name e.g. nimble-web -> Nimble
 APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
-DOCKER_IMAGE = "nimblehq/#{APP_NAME}"
-RUBY_VERSION = '2.6.5'
-POSTGRES_VERSION = '12.1'
-REDIS_VERSION = '5.0.7'
+DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
+RUBY_VERSION = '2.6.5'.freeze
+POSTGRES_VERSION = '12.1'.freeze
+REDIS_VERSION = '5.0.7'.freeze
 # Variants
-API_VARIANT = options[:api]
-WEB_VARIANT = !options[:api]
+API_VARIANT = options[:api] || ENV['API'] == 'true'
+WEB_VARIANT = !API_VARIANT
 
-def apply_template!
-  use_source_paths [current_directory]
+def apply_template!(template_root)
+  use_source_path template_root
 
   delete_test_folder
 
@@ -39,7 +39,7 @@ def apply_template!
   apply '.gitignore.rb'
 
   after_bundle do
-    use_source_paths [current_directory]
+    use_source_path template_root
 
     # Stop the spring before using the generators as it might hang for a long time
     # Issue: https://github.com/rails/spring/issues/486
@@ -60,16 +60,12 @@ end
 
 # Set Thor::Actions source path for looking up the files
 def source_paths
-  @source_paths ||= []
+  @source_paths
 end
 
 # Prepend the required paths to the source paths to make the template files in those paths available
-def use_source_paths(source_paths)
-  @source_paths.unshift(*source_paths)
-end
-
-def current_directory
-  @current_directory ||= __FILE__ =~ %r{\Ahttps?://} ? remote_repository : __dir__
+def use_source_path(source_path)
+  @source_paths.unshift(source_path)
 end
 
 def remote_repository
@@ -94,4 +90,19 @@ def delete_test_folder
   FileUtils.rm_rf('test')
 end
 
-apply_template!
+# Init the source path
+@source_paths ||= []
+# Setup the template root path
+# If the template file is the url, clone the repo to the tmp directory
+template_root = __FILE__ =~ %r{\Ahttps?://} ? remote_repository : __dir__
+use_source_path template_root
+
+if ENV['ADDON']
+  addon_template_path = ".template/addons/#{ENV['ADDON']}/template.rb"
+
+  abort 'This addon is not supported' unless File.exist?(addon_template_path)
+
+  apply addon_template_path
+else
+  apply_template!(template_root)
+end
