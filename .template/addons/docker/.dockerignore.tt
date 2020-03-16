@@ -4,6 +4,7 @@
 .semaphore-cache
 log/
 tmp/
+!tmp/docker
 coverage/
 <%- if WEB_VARIANT -%>
 node_modules/

@@ -32,6 +32,7 @@ blocks:
                 then (echo "Pulling built image for the branch"; docker-compose pull test || true);
                 else (echo "Skipping docker pull");
               fi || true
+            - bin/docker-prepare
             - docker-compose build
             - docker-compose push test
 

@@ -3,6 +3,7 @@ create:
 
 build:
 	cd $(APP_NAME) && \
+	bin/docker-prepare && \
 	docker-compose -f docker-compose.test.yml build
 
 run:

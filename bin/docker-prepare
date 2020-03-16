@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+
+# Copy the project dependencies to build the docker image
+DOCKER_TMP_FOLDER = 'tmp/docker'
+ENGINES_DIRECTORY = 'engines'
+
+FileUtils.rm_rf DOCKER_TMP_FOLDER
+FileUtils.mkdir DOCKER_TMP_FOLDER
+FileUtils.cp 'Gemfile', DOCKER_TMP_FOLDER
+FileUtils.cp 'Gemfile.lock', DOCKER_TMP_FOLDER
+
+exit unless File.directory?(ENGINES_DIRECTORY)
+
+engines = Dir.children(ENGINES_DIRECTORY)
+
+engines.each do |engine|
+  engine_directory = "#{DOCKER_TMP_FOLDER}/engines/#{engine}"
+
+  FileUtils.mkdir_p engine_directory
+
+  FileUtils.cp_r "engines/#{engine}/lib/", engine_directory
+  FileUtils.cp "engines/#{engine}/Gemfile", engine_directory
+  FileUtils.cp "engines/#{engine}/#{engine}.gemspec", engine_directory
+end
