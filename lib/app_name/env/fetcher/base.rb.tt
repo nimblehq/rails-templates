@@ -1,0 +1,20 @@
+module <%= APP_NAMESPACE %>
+  module Env
+    module Fetcher
+      class Base
+        def self.fetch(key, default: nil, type: :string, required: true)
+          value = fetch_key(key, default: default)
+          raise KeyError, "Key not found: #{key}" if value.blank? && required
+
+          TypeCaster.cast(value, type)
+        end
+
+        # rubocop:disable Lint/UnusedMethodArgument
+        def self.fetch_key(key, default: nil)
+          raise NotImplementedError
+        end
+        # rubocop:enable Lint/UnusedMethodArgument
+      end
+    end
+  end
+end

@@ -1,0 +1,18 @@
+module <%= APP_NAMESPACE %>
+  module Env
+    module Fetcher
+      def self.for(source)
+        return DockerBuild if ENV['DOCKER_BUILD']
+
+        case source
+        when :environment
+          Environment
+        when :credentials
+          Credentials
+        else
+          raise 'Unsupported source'
+        end
+      end
+    end
+  end
+end

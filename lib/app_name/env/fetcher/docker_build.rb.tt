@@ -1,0 +1,12 @@
+module <%= APP_NAMESPACE %>
+  module Env
+    module Fetcher
+      # For building the docker image as the variables are required when precompiling the assets
+      class DockerBuild < Base
+        def self.fetch(*)
+          'dummy_value'
+        end
+      end
+    end
+  end
+end

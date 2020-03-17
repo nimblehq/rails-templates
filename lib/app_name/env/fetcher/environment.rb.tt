@@ -1,0 +1,11 @@
+module <%= APP_NAMESPACE %>
+  module Env
+    module Fetcher
+      class Environment < Base
+        def self.fetch_key(key, default: nil)
+          ENV.fetch(key, default)
+        end
+      end
+    end
+  end
+end
