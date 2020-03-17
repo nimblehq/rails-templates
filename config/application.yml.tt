@@ -13,3 +13,11 @@ development:
 test:
   <<: *default
   TEST_RETRY: "0"
+
+# Set environment variables required in the initializers in order to precompile the assets.
+# Because it initializes the app, so all variables need to exist in the build stage.
+production:
+  <<: *default
+  MAILER_DEFAULT_HOST:
+  MAILER_DEFAULT_PORT:
+  SECRET_KEY_BASE:
