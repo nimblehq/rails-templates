@@ -1,6 +1,8 @@
 module Template
   class Errors
-    delegate :empty?, to: :errors
+    extend Forwardable
+
+    def_delegators :errors, :empty?
 
     def initialize
       @errors = []
