@@ -103,8 +103,7 @@ RUN rm -rf tmp/docker
 
 <%- if WEB_VARIANT -%>
 # Compile assets
-RUN SECRET_KEY_BASE=1 DOCKER_BUILD=true bundle exec rails i18n:js:export && \
-    SECRET_KEY_BASE=1 DOCKER_BUILD=true bundle exec rails assets:precompile
+RUN bin/assets-precompile
 
 <%- end -%>
 EXPOSE $PORT

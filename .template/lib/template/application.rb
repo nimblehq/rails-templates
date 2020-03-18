@@ -1,5 +1,7 @@
 module Template
   class Application
+    APP_NAME_SUFFIX = / Web$/.freeze
+
     attr_reader :app_name
 
     def initialize(app_name = ENV['APP_NAME'])
@@ -9,10 +11,10 @@ module Template
     # Transform the app name from slug to human-readable name e.g. my-nimble-web -> My Nimble
     def humanized_name
       @humanized_name = app_name
-                          .split(/[-_]/)
-                          .map(&:capitalize)
-                          .join(' ')
-                          .gsub(/ Web$/, '')
+                        .split(/[-_]/)
+                        .map(&:capitalize)
+                        .join(' ')
+                        .gsub(APP_NAME_SUFFIX, '')
     end
 
     # Transform the name to use for creating the app directory in the project e.g. my-nimble-web -> my_nimble

@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+# Set required variables to precompile the assets during the docker build process.
+# Because the application is initialized when precompiling the assets
+ENV['SECRET_KEY_BASE'] = '1'
+ENV['DOCKER_BUILD'] = 'true'
+
+exit system(
+  <<~SCRIPT
+    bundle exec rails i18n:js:export && \
+    bundle exec rails assets:precompile
+  SCRIPT
+)
