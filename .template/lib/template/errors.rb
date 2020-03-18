@@ -1,3 +1,5 @@
+require 'forwardable'
+
 module Template
   class Errors
     extend Forwardable

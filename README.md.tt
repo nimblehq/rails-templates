@@ -82,6 +82,37 @@ docker-compose -f docker-compose.test.yml run test bin/bundle exec rake db:test:
 
 To setup the semaphore CI 2.0 for the project, please follow [this guideline](.semaphore/README.md)
 
+### App Environments
+
+Use the `<%= @template_application.namespace %>::Env` to fetch the environment variables and credentials.
+
+To fetch the environment variables:
+
+```ruby
+  <%= @template_application.namespace %>::Env.fetch('VARIABLE')
+
+  # Cast the variables to a specific type
+  <%= @template_application.namespace %>::Env.fetch('VARIABLE', type: :integer)
+
+  # Assign the default value for the variable
+  <%= @template_application.namespace %>::Env.fetch('VARIABLE', type: :integer, default: 0)
+```
+
+To fetch the credentials:
+
+```ruby
+# file: `config/credentials.yml.enc`
+#
+# development:
+#   aws:
+#     access_key_id: <my_access_key>
+
+App::Env.fetch('aws.access_key_id', source: :credentials)
+```
+
+During the docker build process, where `DOCKER_BUILD` is set, this will yield the dummy value in order to precompile the assets.
+Because the app is initialized, when doing the assets precompile. So all variables need to be available.
+
 ### Test
 
 * Run all tests:

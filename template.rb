@@ -13,8 +13,6 @@ WEB_VARIANT = !API_VARIANT
 def apply_template!(template_root)
   use_source_path template_root
 
-  delete_test_folder
-
   directory '.github'
 
   template 'Gemfile.tt', force: true
@@ -35,6 +33,7 @@ def apply_template!(template_root)
   apply 'bin/template.rb'
   apply 'config/template.rb'
   apply 'lib/template.rb'
+  apply 'test/template.rb'
   apply '.gitignore.rb'
 
   after_bundle do
@@ -83,10 +82,6 @@ def remote_repository
   end
 
   tempdir
-end
-
-def delete_test_folder
-  FileUtils.rm_rf('test')
 end
 
 def print_error_message
