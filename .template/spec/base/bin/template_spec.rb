@@ -18,4 +18,9 @@ describe '/bin template' do
     expect(file('bin/docker-prepare')).to exist
     expect(file('bin/docker-prepare')).to be_executable
   end
+
+  it 'creates the assets precompile script' do
+    expect(file('bin/assets-precompile')).to exist
+    expect(file('bin/assets-precompile')).to be_executable
+  end
 end

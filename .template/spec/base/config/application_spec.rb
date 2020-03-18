@@ -12,4 +12,12 @@ describe 'config/application.rb' do
   it 'configures the middleware for rack deflater' do
     expect(subject).to contain('config.middleware.use Rack::Deflater')
   end
+
+  it 'configures the autoload paths' do
+    expect(subject).to contain("config.autoload_paths << Rails.root.join('lib')")
+  end
+
+  it 'configures the eager load paths' do
+    expect(subject).to contain("config.eager_load_paths << Rails.root.join('lib')")
+  end
 end

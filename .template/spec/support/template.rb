@@ -1,4 +1,6 @@
-require File.expand_path('../../lib/template/application', __dir__)
+# Explicitly require the module uses in lib for testing
+require 'active_support/core_ext/module/delegation'
+Dir.glob(File.expand_path('../../lib/template/**/*.rb', __dir__)).sort.each { |f| require f }
 
 module TemplateApplicationHelpers
   def template_application
