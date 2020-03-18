@@ -3,11 +3,11 @@ insert_into_file 'config/environments/development.rb', after: %r{config.action_m
 
   config.action_mailer.delivery_method = :letter_opener
 
-  config.action_mailer.asset_host = #{APP_NAMESPACE}::Env.fetch('MAILER_DEFAULT_HOST')
+  config.action_mailer.asset_host = #{@template_application.namespace}::Env.fetch('MAILER_DEFAULT_HOST')
 
   config.action_mailer.default_url_options = { 
-    host: #{APP_NAMESPACE}::Env.fetch('MAILER_DEFAULT_HOST'), 
-    port: #{APP_NAMESPACE}::Env.fetch('MAILER_DEFAULT_PORT')
+    host: #{@template_application.namespace}::Env.fetch('MAILER_DEFAULT_HOST'), 
+    port: #{@template_application.namespace}::Env.fetch('MAILER_DEFAULT_PORT')
   }
   EOT
 end

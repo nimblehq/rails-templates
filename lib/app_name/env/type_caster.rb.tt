@@ -1,4 +1,4 @@
-module <%= APP_NAMESPACE %>
+module <%= @template_application.namespace %>
   module Env
     class TypeCaster
       BOOLEAN_VALUE = %w[true].freeze

@@ -1,1 +1,1 @@
-directory 'lib/app_name', "lib/#{APP_DIRECTORY_NAME}"
+directory 'lib/app_name', "lib/#{@template_application.directory_name}"

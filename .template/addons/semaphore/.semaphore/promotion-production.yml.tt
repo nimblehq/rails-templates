@@ -1,6 +1,6 @@
 version: v1.0
 
-name: <%= APP_NAME_HUMANIZED %> Production
+name: <%= @template_application.humanized_name %> Production
 agent:
   machine:
     type: e1-standard-2

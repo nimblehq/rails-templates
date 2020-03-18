@@ -1,5 +1,62 @@
 require 'shellwords'
 
+# Variables
+APP_NAME = app_name
+DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
+RUBY_VERSION = '2.6.5'.freeze
+POSTGRES_VERSION = '12.1'.freeze
+REDIS_VERSION = '5.0.7'.freeze
+# Variants
+API_VARIANT = options[:api] || ENV['API'] == 'true'
+WEB_VARIANT = !API_VARIANT
+
+def apply_template!(template_root)
+  use_source_path template_root
+
+  delete_test_folder
+
+  directory '.github'
+
+  template 'Gemfile.tt', force: true
+
+  copy_file '.flayignore'
+  template '.pronto.yml.tt'
+  copy_file '.rubocop.yml'
+  copy_file 'config.reek'
+
+  copy_file '.semaphore.yml'
+  template '.ruby-gemset.tt'
+  template '.ruby-version.tt'
+  copy_file '.editorconfig'
+  copy_file 'Procfile'
+  copy_file 'Procfile.dev'
+  template 'README.md.tt', force: true
+
+  apply 'bin/template.rb'
+  apply 'config/template.rb'
+  apply 'lib/template.rb'
+  apply '.gitignore.rb'
+
+  after_bundle do
+    use_source_path template_root
+
+    # Stop the spring before using the generators as it might hang for a long time
+    # Issue: https://github.com/rails/spring/issues/486
+    run 'spring stop'
+
+    generate 'devise:install'
+    apply 'spec/template.rb'
+  end
+
+  # Add-ons - [Default]
+  apply '.template/addons/docker/template.rb'
+  apply '.template/addons/semaphore/template.rb'
+
+  # Variants
+  apply '.template/variants/api/template.rb' if API_VARIANT
+  apply '.template/variants/web/template.rb' if WEB_VARIANT
+end
+
 # Set Thor::Actions source path for looking up the files
 def source_paths
   @source_paths
@@ -57,67 +114,6 @@ require "#{template_root}/.template/lib/template/errors"
 # Init the source path
 @source_paths ||= []
 use_source_path template_root
-
-# Variables
-APP_NAME = @template_application.app_name
-# Transform the app name from slug to human-readable name e.g. nimble-web -> Nimble
-APP_NAME_HUMANIZED =  @template_application.humanized_name
-APP_DIRECTORY_NAME = @template_application.directory_name
-APP_NAMESPACE = @template_application.namespace
-DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
-RUBY_VERSION = '2.6.5'.freeze
-POSTGRES_VERSION = '12.1'.freeze
-REDIS_VERSION = '5.0.7'.freeze
-# Variants
-API_VARIANT = options[:api] || ENV['API'] == 'true'
-WEB_VARIANT = !API_VARIANT
-
-def apply_template!(template_root)
-  use_source_path template_root
-
-  delete_test_folder
-
-  directory '.github'
-
-  template 'Gemfile.tt', force: true
-
-  copy_file '.flayignore'
-  template '.pronto.yml.tt'
-  copy_file '.rubocop.yml'
-  copy_file 'config.reek'
-
-  copy_file '.semaphore.yml'
-  template '.ruby-gemset.tt'
-  template '.ruby-version.tt'
-  copy_file '.editorconfig'
-  copy_file 'Procfile'
-  copy_file 'Procfile.dev'
-  template 'README.md.tt', force: true
-
-  apply 'bin/template.rb'
-  apply 'config/template.rb'
-  apply 'lib/template.rb'
-  apply '.gitignore.rb'
-
-  after_bundle do
-    use_source_path template_root
-
-    # Stop the spring before using the generators as it might hang for a long time
-    # Issue: https://github.com/rails/spring/issues/486
-    run 'spring stop'
-
-    generate 'devise:install'
-    apply 'spec/template.rb'
-  end
-
-  # Add-ons - [Default]
-  apply '.template/addons/docker/template.rb'
-  apply '.template/addons/semaphore/template.rb'
-
-  # Variants
-  apply '.template/variants/api/template.rb' if API_VARIANT
-  apply '.template/variants/web/template.rb' if WEB_VARIANT
-end
 
 if ENV['ADDON']
   addon_template_path = ".template/addons/#{ENV['ADDON']}/template.rb"

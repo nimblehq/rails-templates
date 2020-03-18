@@ -2,8 +2,8 @@ insert_into_file 'config/environments/test.rb', after: %r{config.action_mailer.p
   <<-EOT
 
   config.action_mailer.default_url_options = { 
-    host: #{APP_NAMESPACE}::Env.fetch('MAILER_DEFAULT_HOST'), 
-    port: #{APP_NAMESPACE}::Env.fetch('MAILER_DEFAULT_PORT')
+    host: #{@template_application.namespace}::Env.fetch('MAILER_DEFAULT_HOST'), 
+    port: #{@template_application.namespace}::Env.fetch('MAILER_DEFAULT_PORT')
   }
   EOT
 end
