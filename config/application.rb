@@ -13,9 +13,5 @@ insert_into_file 'config/application.rb', before: %r{end\nend\Z} do
   
     # Compress the responses to reduce the size of html/json controller responses.
     config.middleware.use Rack::Deflater
-
-    # Configure the autoload and eager load paths
-    config.autoload_paths << Rails.root.join('lib')
-    config.eager_load_paths << Rails.root.join('lib')
   EOT
 end
