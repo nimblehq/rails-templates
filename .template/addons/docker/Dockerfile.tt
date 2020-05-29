@@ -83,15 +83,13 @@ COPY tmp/docker ./
 
 # Install Ruby gems
 RUN gem install bundler && \
+    bundle config set jobs $BUNDLE_JOBS && \
+    bundle config set path $BUNDLE_PATH && \
     if [ "$BUILD_ENV" = "production" ]; then \
-      bundle install --jobs $BUNDLE_JOBS \
-                     --path $BUNDLE_PATH \
-                     --without development test \
-                     --deployment ; \
-    else \
-      bundle install --jobs $BUNDLE_JOBS \
-                     --path $BUNDLE_PATH ; \
-    fi
+      bundle config set deployment yes && \
+      bundle config set without 'development test' ; \
+    fi && \
+    bundle install
 
 <%- if WEB_VARIANT -%>
 # Install JS dependencies
