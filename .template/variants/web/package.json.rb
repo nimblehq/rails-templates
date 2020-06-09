@@ -16,7 +16,7 @@ end
 insert_into_file 'package.json', before: %r{"version":.+\n} do
   <<~EOT
       "devDependencies": {
-        "@nimbl3/eslint-config-nimbl3": "2.1.1"
+        "@nimblehq/eslint-config-nimble": "2.1.1"
       },
   EOT
 end
