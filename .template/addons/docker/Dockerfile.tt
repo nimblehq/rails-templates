@@ -5,36 +5,34 @@ ARG RUBY_ENV=development
 <%- if WEB_VARIANT -%>
 ARG NODE_ENV=development
 ARG ASSET_HOST=http://localhost
+# Set environment varaibles required in the initializers in order to precompile the assets.
+# Because it initializes the app, so all variables need to exist in the build stage.
+ARG MAILER_DEFAULT_HOST=http://localhost
+ARG MAILER_DEFAULT_PORT=3000
+ARG SECRET_KEY_BASE=secret_key_base
 <%- end -%>
 
 # Define all the envs here
 ENV BUILD_ENV=$BUILD_ENV \
     RACK_ENV=$RUBY_ENV \
-    RAILS_ENV=$RUBY_ENV<%- if WEB_VARIANT -%> \
+    RAILS_ENV=$RUBY_ENV \
+    <%- if WEB_VARIANT -%>
     NODE_ENV=$NODE_ENV \
-    ASSET_HOST=$ASSET_HOST
+    ASSET_HOST=$ASSET_HOST \
     <%- end -%>
-
-ENV APP_HOME=/<%= APP_NAME %> \
-    PORT=80
-
-ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
+    APP_HOME=/<%= APP_NAME %> \
+    PORT=80 \
     BUNDLE_JOBS=4 \
-    BUNDLE_PATH="/bundle"
-
-<%- if WEB_VARIANT -%>
-ENV NODE_VERSION="12"
-
-<%- end -%>
-ENV LANG="en_US.UTF-8" \
+    BUNDLE_PATH="/bundle" \
+    <%- if WEB_VARIANT -%>
+    NODE_VERSION="12" \
+    <%- end -%>
+    LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
 RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends apt-transport-https curl gnupg net-tools
-
-# Install general required core packages
-RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends apt-transport-https curl gnupg net-tools && \
     apt-get install -y --no-install-recommends build-essential libpq-dev && \
     apt-get install -y --no-install-recommends rsync locales chrpath pkg-config libfreetype6 libfontconfig1 git cmake wget unzip && \
     apt-get clean && \
@@ -42,13 +40,16 @@ RUN apt-get update -qq && \
 
 <%- if WEB_VARIANT -%>
 # Add Yarn repository
-ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
-RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg && \
-    echo "deb http://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
-
 # Add the PPA (personal package archive) maintained by NodeSource
 # This will have more up-to-date versions of Node.js than the official Debian repositories
-RUN curl -sL https://deb.nodesource.com/setup_"$NODE_VERSION".x | bash -
+ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
+RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg && \
+    echo "deb http://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+    curl -sL https://deb.nodesource.com/setup_"$NODE_VERSION".x | bash - && \
+    apt-get update -qq && \
+    apt-get install -y --no-install-recommends nodejs yarn && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set up the Chrome PPA and install Chrome Headless
 RUN if [ "$BUILD_ENV" = "test" ]; then \
@@ -61,27 +62,8 @@ RUN if [ "$BUILD_ENV" = "test" ]; then \
       rm -rf /var/lib/apt/lists/* ; \
     fi
 
-# Install Node JS related packages and Chrome (testing)
-RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends nodejs yarn && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
 <%- end -%>
-RUN mkdir "$APP_HOME"
-
-# Replace by the following if the application uses Rails engines
-# RUN mkdir "$APP_HOME" "$APP_HOME/engines"
-
-# Copy each engine lib/, Gemfile and .gemspec files
-# Example:
-# COPY engines/app_auth/lib/ ./engines/app_auth/lib/
-# COPY engines/app_auth/Gemfile engines/app_auth/app_auth.gemspec ./engines/app_auth/
-
 WORKDIR $APP_HOME
-
-# Move gemfile into place
-COPY Gemfile* ./
 
 # Skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
@@ -96,18 +78,18 @@ RUN mkdir -p /usr/local/etc \
 		echo 'update: --no-document'; \
 	} >> /usr/local/etc/gemrc
 
+# Copy all denpendencies from app and engines into tmp/docker to install
+COPY tmp/docker ./
+
 # Install Ruby gems
-RUN if [ "$BUILD_ENV" = "production" ]; then \
-  gem install bundler && \
-  bundle install --jobs $BUNDLE_JOBS \
-                 --path $BUNDLE_PATH \
-                 --without development test \
-                 --deployment ; \
-else \
-  gem install bundler && \
-  bundle install --jobs $BUNDLE_JOBS \
-                 --path $BUNDLE_PATH ; \
-fi
+RUN gem install bundler && \
+    bundle config set jobs $BUNDLE_JOBS && \
+    bundle config set path $BUNDLE_PATH && \
+    if [ "$BUILD_ENV" = "production" ]; then \
+      bundle config set deployment yes && \
+      bundle config set without 'development test' ; \
+    fi && \
+    bundle install
 
 <%- if WEB_VARIANT -%>
 # Install JS dependencies
@@ -119,10 +101,13 @@ RUN yarn install --network-timeout 100000
 # since the app files always change thus cannot be cached
 COPY . ./
 
+# Remove tmp/docker in the final image
+RUN rm -rf tmp/docker
+
 <%- if WEB_VARIANT -%>
 # Compile assets
-RUN bundle exec rails i18n:js:export
-RUN bundle exec rails assets:precompile
+RUN bundle exec rails i18n:js:export && \
+    bundle exec rails assets:precompile
 
 <%- end -%>
 EXPOSE $PORT

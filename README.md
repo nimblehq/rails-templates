@@ -9,14 +9,19 @@
 
 ---
 
-Our templates offer a rich boilerplate to jump start Rails-based application development and are based on our experience 
+Our templates offer a rich boilerplate to jump start Rails-based application development and are based on our experience
 with building complex applications over the years.
 
 ## Get Started
 
-Install ruby and set your local ruby version to `2.6.5`
+### Requirements
 
-The main template is `rails_docker`. In order to use it, initialize a new app with the following parameters:
+- Install ruby and set your local ruby version to `2.6.5`
+- Install rails > `6.0.0`, recommended version `6.0.1`
+
+### Use the template
+
+In order to use the template, initialize a new app with the following parameters:
 
 ```
 rails new <app_name> -m https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb
@@ -24,6 +29,21 @@ rails new <app_name> -m https://raw.githubusercontent.com/nimblehq/rails-templat
 
 Supported template options:
 - `--api` - create an api-only application
+
+To apply the template on an existing application, run following rails command:
+
+```
+rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb
+
+# To apply on an api application
+rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb API=true
+
+# To apply a specific addon
+rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb ADDON=<addon name>
+```
+
+Available Addons:
+- `docker`
 
 Read more about Rails Application Template in the [official Rails Guides](https://guides.rubyonrails.org/rails_application_templates.html).
 
@@ -55,31 +75,31 @@ Read more about Rails Application Template in the [official Rails Guides](https:
 └── template.rb
 ```
 
-We keep the Rails-app-like structure. On the root, there are base project file templates. 
+We keep the Rails-app-like structure. On the root, there are base project file templates.
 Other files including the template options are in `.template` folder.
 
 There are 2 kinds of the template options:
 
 1. **Variants** - For the app main options, which are `web` and `api`.
-    
-2. **Addons** - For other extra options that we can add to the project like `docker` or `bootstrap`, 
+
+2. **Addons** - For other extra options that we can add to the project like `docker` or `bootstrap`,
 use the prompt `ask` to generate a question before generating the project.
-    
+
 ### Template files
 
 There are 2 template file types:
 
 1. **`.tt` files**
 
-    This file is used for templating the whole new file. 
+    This file is used for templating the whole new file.
     In case if we want to create a new file that Rails does not generated.
-    
+
 2. **`.rb` files**
 
     This is used for modifying the files that Rails has generated.
-    The file name should be the same as on the generated app. 
+    The file name should be the same as on the generated app.
     If it is not a ruby file, append the `.rb` as an extension e.g. `Gemfile.rb`
-    
+
 ### Template specs
 
 We are using [Serverspec](https://serverspec.org/) to test the template.

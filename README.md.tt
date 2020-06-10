@@ -78,6 +78,10 @@ docker push $DOCKER_IMAGE:$BRANCH_TAG
 docker-compose -f docker-compose.test.yml run test bin/bundle exec rake db:test:prepare
 ```
 
+#### Semaphore CI 2.0
+
+To setup the semaphore CI 2.0 for the project, please follow [this guideline](.semaphore/README.md)
+
 ### Test
 
 * Run all tests:
@@ -99,7 +103,7 @@ docker-compose -f docker-compose.test.yml run test bin/bundle exec spec [rspec-p
 * In the CI build script, add the following command:
 
 ```sh
-if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then \ 
+if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then \
   (echo "Running pronto"; bundle exec pronto run -f bitbucket_pr -c origin/development);  else \ (echo "Escaping pronto"); \
 fi
 ```

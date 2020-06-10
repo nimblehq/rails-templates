@@ -1,6 +1,6 @@
 {
   "extends": [
-    "@nimbl3/eslint-config-nimbl3"
+    "@nimblehq/eslint-config-nimble"
   ],
   "globals": {
     "I18n": true

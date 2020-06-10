@@ -1,0 +1,67 @@
+version: v1.0
+
+name: <%= APP_NAME_HUMANIZED %>
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+auto_cancel:
+  running:
+    when: "branch != 'master'"
+
+global_job_config:
+  env_vars:
+    - name: COMPOSE_FILE
+      value: docker-compose.test.yml
+  secrets:
+    - name: <%= APP_NAME %>
+  prologue:
+    commands:
+      - checkout
+      - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
+      - echo "$DOCKER_HUB_TOKEN" | docker login --username=$DOCKER_HUB_USERNAME --password-stdin
+
+blocks:
+  - name: Build
+    task:
+      jobs:
+        - name: Build
+          commands:
+            - >-
+              if ([ $SEMAPHORE_GIT_BRANCH != 'master' ] && [ $SEMAPHORE_GIT_BRANCH != 'development' ]);
+                then (echo "Pulling built image for the branch"; docker-compose pull test || true);
+                else (echo "Skipping docker pull");
+              fi || true
+            - bin/docker-prepare
+            - docker-compose build
+            - docker-compose push test
+
+  - name: Tests
+    task:
+      prologue:
+        commands:
+          - docker-compose pull
+      jobs:
+        - name: Linters
+          commands:
+            - docker-compose run test yarn lint
+        - name: Unit tests
+          commands:
+            - docker-compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
+        - name: System tests
+          commands:
+            - docker-compose run test bundle exec rspec spec/systems --profile
+      epilogue:
+        on_fail:
+          commands:
+            - artifact push job tmp/screenshots
+
+promotions:
+  - name: Staging
+    pipeline_file: promotion-staging.yml
+    auto_promote:
+      when: "branch = 'development' AND result = 'passed'"
+  - name: Production
+    pipeline_file: promotion-production.yml
+    auto_promote:
+      when: "branch = 'master' AND result = 'passed'"
