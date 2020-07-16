@@ -5,7 +5,7 @@ APP_NAME = app_name
 # Transform the app name from slug to human-readable name e.g. nimble-web -> Nimble
 APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
 DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
-RUBY_VERSION = '2.6.5'.freeze
+RUBY_VERSION = '2.7.1'.freeze
 POSTGRES_VERSION = '12.1'.freeze
 REDIS_VERSION = '5.0.7'.freeze
 # Variants
