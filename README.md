@@ -16,8 +16,8 @@ with building complex applications over the years.
 
 ### Requirements
 
-- Install ruby and set your local ruby version to `2.6.5`
-- Install rails > `6.0.0`, recommended version `6.0.1`
+- Install ruby and set your local ruby version to `2.7.1`
+- Install rails > `6.0.0`, recommended version `6.0.3.2`
 
 ### Use the template
 
