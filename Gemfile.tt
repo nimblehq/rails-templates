@@ -42,13 +42,6 @@ group :development, :test do
   gem 'brakeman', require: false # A static analysis security vulnerability scanner for Ruby on Rails applications
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
-
-  gem 'pronto'
-  gem 'pronto-rubocop', require: false
-  gem 'pronto-flay', require: false # analyzes code for structural similarities
-  gem 'pronto-brakeman', require: false # analyzes code for security vulnerabilities
-  gem 'pronto-rails_best_practices', require: false
-  gem 'pronto-reek', require: false
 end
 
 group :test do

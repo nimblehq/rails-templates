@@ -2,7 +2,7 @@ describe 'Web variant - template' do
   it 'creates the eslint configuration files' do
     expect(file('.eslintignore')).to exist
     expect(file('.eslintrc')).to exist
-    expect(file('.pronto_eslint_npm.yml')).to exist
+    # todo: check if Dangerfile exists
   end
 
   it 'creates sass lint configuration file' do

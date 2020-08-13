@@ -3,12 +3,6 @@ describe 'Base template' do
     expect(file('.rubocop.yml')).to exist
   end
 
-  it 'creates Pronto linters configuration files' do
-    expect(file('.flayignore')).to exist
-    expect(file('.pronto.yml')).to exist
-    expect(file('config.reek')).to exist
-  end
-
   it 'creates Semaphore configuration example file' do
     expect(file('.semaphore.yml')).to exist
   end
