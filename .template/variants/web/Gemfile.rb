@@ -27,6 +27,7 @@ insert_into_file 'Gemfile', after: %r{gem 'rubocop-rails', require: false.*\n} d
   <<-EOT
   gem 'danger-slim_lint' # Lint Slim template files.
   gem 'danger-eslint' # Eslint
+  gem 'scss_lint' # Scss lint
   EOT
 end
 
