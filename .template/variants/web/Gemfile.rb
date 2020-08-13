@@ -23,10 +23,10 @@ insert_into_file 'Gemfile', after: %r{gem 'letter_opener'.*\n} do
   EOT
 end
 
-insert_into_file 'Gemfile', after: %r{gem 'pronto-reek'.*\n} do
+insert_into_file 'Gemfile', after: %r{gem 'rubocop-rails', require: false.*\n} do
+  # todo: add danger gems here
   <<-EOT
-  gem 'pronto-scss', require: false
-  gem 'pronto-eslint_npm', require: false
+
   EOT
 end
 

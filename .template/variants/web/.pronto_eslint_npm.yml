@@ -1,3 +1,0 @@
-# Configuration for pronto-eslint-npm.
-
-eslint_executable: 'node_modules/.bin/eslint'

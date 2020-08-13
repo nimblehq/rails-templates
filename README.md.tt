@@ -98,12 +98,4 @@ docker-compose -f docker-compose.test.yml run test bin/bundle exec spec [rspec-p
 
 ### Automated Code Review Setup
 
-* Make sure that the config file `pronto.yml` for pronto has been added as a configuration file.
-
-* In the CI build script, add the following command:
-
-```sh
-if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then \
-  (echo "Running pronto"; bundle exec pronto run -f bitbucket_pr -c origin/development);  else \ (echo "Escaping pronto"); \
-fi
-```
+# todo: Edit Readme for Danger
