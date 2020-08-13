@@ -24,9 +24,9 @@ insert_into_file 'Gemfile', after: %r{gem 'letter_opener'.*\n} do
 end
 
 insert_into_file 'Gemfile', after: %r{gem 'rubocop-rails', require: false.*\n} do
-  # todo: add danger gems here
   <<-EOT
-
+  gem 'danger-slim_lint' # Lint Slim template files.
+  gem 'danger-eslint' # Eslint
   EOT
 end
 

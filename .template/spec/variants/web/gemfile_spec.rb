@@ -18,7 +18,13 @@ describe 'Web variant - Gemfile' do
       expect(subject).to contain('sassc-rails').after('^group :development, :test')
     end
 
-    # todo: spec added gemfiles for danger
+    it 'adds danger-slim_lint gem' do
+      expect(subject).to contain('danger-slim_lint').after('^group :development, :test')
+    end
+
+    it 'adds danger-eslint gem' do
+      expect(subject).to contain('danger-eslint').after('^group :development, :test')
+    end
   end
 
   describe 'Test Environment' do
