@@ -52,7 +52,7 @@ module Rack
   }
 </style>
       EOF
-      fragment.gsub(%r{</head>}, disable_animations + '</head>')
+      fragment.gsub(%r{</head>}, "#{disable_animations}</head>")
     end
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Naming/HeredocDelimiterNaming
