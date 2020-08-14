@@ -3,7 +3,6 @@ def apply_web_variant!
 
   copy_file '.eslintignore'
   copy_file '.eslintrc'
-  # todo: copy Dangerfile for web variant
   copy_file '.scss-lint.yml'
 
   copy_file '.npmrc'
@@ -12,6 +11,7 @@ def apply_web_variant!
   apply 'app/template.rb'
   apply 'config/template.rb'
   apply 'package.json.rb'
+  apply 'Dangerfile.rb'
 
   remove_turbolinks
 

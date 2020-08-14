@@ -22,7 +22,7 @@ def apply_template!(template_root)
   template 'Gemfile.tt', force: true
 
   copy_file '.flayignore'
-  # todo: copy global Dangerfile
+  copy_file 'Dangerfile'
   copy_file '.rubocop.yml'
   copy_file 'config.reek'
 
