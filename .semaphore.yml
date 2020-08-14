@@ -16,9 +16,8 @@ project_settings:
       - docker-compose -f docker-compose.test.yml build
       - docker push $DOCKER_IMAGE:$BRANCH_TAG
 
-    # todo: need to replace pronto with danger here
     unit_tests:
-      - if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then (echo "Running pronto"; docker-compose -f docker-compose.test.yml run test bundle exec pronto run -f bitbucket_pr -c origin/development); else (echo "Escaping pronto"); fi || true
+      - if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then (echo "Running Danger"; docker-compose -f docker-compose.test.yml run test bundle exec danger); else (echo "Escaping Danger"); fi || true
       - docker-compose -f docker-compose.test.yml run test yarn lint
       - docker-compose -f docker-compose.test.yml run test yarn test
       - docker-compose -f docker-compose.test.yml run test rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
