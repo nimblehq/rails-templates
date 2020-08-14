@@ -1,4 +1,4 @@
-insert_into_file 'Dangerfile', after: %r{commit_lint.check.*\n} do
+insert_into_file 'Dangerfile', after: %r{suggester.suggest.*\n} do
   <<~EOT
 
     # Runs slim-lint on modified and added files in the PR
