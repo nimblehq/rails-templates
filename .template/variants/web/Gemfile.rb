@@ -25,7 +25,6 @@ end
 
 insert_into_file 'Gemfile', after: %r{gem 'danger'.*\n} do
   <<-EOT
-  gem 'danger-slim_lint' # Lint Slim template files.
   gem 'danger-eslint' # ESLint
   gem 'scss_lint' # SCSS lint
   EOT
