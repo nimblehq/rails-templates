@@ -25,6 +25,18 @@ describe 'Web variant - /app template' do
         expect(file('app/javascript/screens/index.js')).to exist
       end
     end
+
+    context 'packs/application.js' do
+      it 'includes necessary modules' do
+        expect(file('app/javascript/packs/application.js')).to contain('import \'core-js/stable\';')
+        expect(file('app/javascript/packs/application.js')).to contain('import \'regenerator-runtime/runtime\';')
+
+        expect(file('app/javascript/packs/application.js')).to contain('import \'translations/translations\';')
+        
+        expect(file('app/javascript/packs/application.js')).to contain('import \'initializers/\';')
+        expect(file('app/javascript/packs/application.js')).to contain('import \'screens/\';')
+      end
+    end
   end
 
   context 'Stylesheets' do
