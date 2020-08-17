@@ -20,4 +20,8 @@ describe 'Base template' do
     expect(file('Procfile')).to exist
     expect(file('Procfile.dev')).to exist
   end
+
+  it 'creates Reek configuration files' do
+    expect(file('.reek.yml')).to exist
+  end
 end
