@@ -97,5 +97,6 @@ docker-compose -f docker-compose.test.yml run test bin/bundle exec spec [rspec-p
 ```
 
 ### Automated Code Review Setup
+- Add a bot to this repository or to the organization. The bot requires permission level “Write” to be able to set a PR’s status
 
-# todo: Edit Readme for Danger
+- Create a token from bot account with public_repo scope, and use it to create a DANGER_GITHUB_API_TOKEN secret on this repository
