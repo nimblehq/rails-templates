@@ -2,6 +2,10 @@ FROM ruby:<%= RUBY_VERSION %>-slim
 
 ARG BUILD_ENV=development
 ARG RUBY_ENV=development
+ARG APP_HOME=/<%= APP_NAME %>
+ARG BUNDLE_JOBS=4
+ARG BUNDLE_PATH="/bundle"
+ARG SECRET_KEY_BASE=secret_key_base
 <%- if WEB_VARIANT -%>
 ARG NODE_ENV=development
 ARG ASSET_HOST=http://localhost
@@ -9,22 +13,16 @@ ARG ASSET_HOST=http://localhost
 # Because it initializes the app, so all variables need to exist in the build stage.
 ARG MAILER_DEFAULT_HOST=http://localhost
 ARG MAILER_DEFAULT_PORT=3000
-ARG SECRET_KEY_BASE=secret_key_base
 <%- end -%>
 
 # Define all the envs here
 ENV BUILD_ENV=$BUILD_ENV \
     RACK_ENV=$RUBY_ENV \
     RAILS_ENV=$RUBY_ENV \
-    <%- if WEB_VARIANT -%>
-    NODE_ENV=$NODE_ENV \
-    ASSET_HOST=$ASSET_HOST \
-    <%- end -%>
-    APP_HOME=/<%= APP_NAME %> \
     PORT=80 \
-    BUNDLE_JOBS=4 \
-    BUNDLE_PATH="/bundle" \
     <%- if WEB_VARIANT -%>
+    ASSET_HOST=$ASSET_HOST \
+    NODE_ENV=$NODE_ENV \
     NODE_VERSION="12" \
     <%- end -%>
     LANG="en_US.UTF-8" \
