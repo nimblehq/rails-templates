@@ -56,6 +56,9 @@ def apply_template!(template_root)
   # Variants
   apply '.template/variants/api/template.rb' if API_VARIANT
   apply '.template/variants/web/template.rb' if WEB_VARIANT
+
+  # Fix the rubocop
+  run 'rubocop -a'
 end
 
 # Set Thor::Actions source path for looking up the files
