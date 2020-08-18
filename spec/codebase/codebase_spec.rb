@@ -17,7 +17,7 @@ describe 'Codebase', codebase: true do
     engine_paths = Dir[File.expand_path(Rails.root.join('engines', '*'))]
                    .select { |f| File.directory? f }
                    .map { |path| path.split('/').last }
-    invalid_engine_paths = engine_paths.reject { |path| path.start_with?("APP_NAME_HERE") }
+    invalid_engine_paths = engine_paths.reject { |path| path.start_with?("APP_NAME_HERE_") }
 
     expect(invalid_engine_paths).to be_empty
   end
