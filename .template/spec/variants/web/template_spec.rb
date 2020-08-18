@@ -8,8 +8,8 @@ describe 'Web variant - template' do
     expect(file('.scss-lint.yml')).to exist
   end
 
-  it 'creates the .npmrc file' do
-    expect(file('.npmrc'))
+  it 'creates the .nvmrc file' do
+    expect(file('.nvmrc'))
   end
 
   it 'creates the npm configuration file' do
