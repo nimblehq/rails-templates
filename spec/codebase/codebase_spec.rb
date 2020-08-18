@@ -13,6 +13,15 @@ describe 'Codebase', codebase: true do
     expect(`bundle exec rake zeitwerk:check`).to include 'All is good!'
   end
 
+  it 'does not offend engine prefix name' do
+    engine_paths = Dir[File.expand_path(Rails.root.join('engines', '*'))]
+                   .select { |f| File.directory? f }
+                   .map { |path| path.split('/').last }
+    invalid_engine_paths = engine_paths.reject { |path| path.start_with?("APP_NAME_HERE") }
+
+    expect(invalid_engine_paths).to be_empty
+  end
+
   context 'respond_to blocks' do
     it 'does not contain respond_to blocks' do
       find_results = `grep -r 'respond_to do' app/`
