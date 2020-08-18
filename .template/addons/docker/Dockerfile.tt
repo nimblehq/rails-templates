@@ -23,7 +23,7 @@ ENV BUILD_ENV=$BUILD_ENV \
     <%- if WEB_VARIANT -%>
     ASSET_HOST=$ASSET_HOST \
     NODE_ENV=$NODE_ENV \
-    NODE_VERSION="12" \
+    NODE_VERSION=<%= NODE_SOURCE_VERSION %> \
     <%- end -%>
     LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
