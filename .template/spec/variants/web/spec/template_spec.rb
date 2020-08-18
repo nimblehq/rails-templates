@@ -6,6 +6,7 @@ describe 'Web variant - /spec template' do
     expect(file('spec/support/system.rb')).to exist
     expect(file('spec/support/webdrivers.rb')).to exist
     expect(file('spec/support/webpack.rb')).to exist
+    expect(file('spec/support/sanitize.rb')).to exist
   end
 
   it 'creates system spec directory' do
