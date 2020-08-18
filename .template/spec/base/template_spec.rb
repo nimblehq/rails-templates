@@ -21,7 +21,12 @@ describe 'Base template' do
     expect(file('Procfile.dev')).to exist
   end
 
+  it 'creates Danger configuration files' do
+    expect(file('Dangerfile')).to exist
+  end
+
   it 'creates Reek configuration files' do
     expect(file('.reek.yml')).to exist
   end
+
 end
