@@ -48,7 +48,7 @@ services:
       - DB_HOST=db
       - CI=$CI
       - TEST_RETRY=$TEST_RETRY
-      - DANGER_GITHUB_API_TOKEN=$TOKEN
+      - DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN
 
 volumes:
   ruby-bundle:
