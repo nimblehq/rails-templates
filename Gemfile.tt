@@ -40,6 +40,7 @@ group :development, :test do
   gem 'listen', '3.1.5' # Listens to file modifications
   gem 'letter_opener' # Preview mail in the browser instead of sending.
   gem 'brakeman', require: false # A static analysis security vulnerability scanner for Ruby on Rails applications
+  gem 'rspec-rails', '~> 4.0.1' # Rails testing engine
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
 
@@ -52,7 +53,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails', '>=4.0.0.beta2' # Rails testing engine
   gem 'rspec-retry' # Retry randomly failing rspec example.
   gem 'database_cleaner' # Use Database Cleaner
   gem 'shoulda-matchers' # Tests common Rails functionalities
