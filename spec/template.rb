@@ -10,8 +10,8 @@ if File.exist?('spec/codebase/codebase_spec.rb')
     app_name
   end
 else
-  @template_errors.add <<~EOT
-    Cannot insert the app name into `spec/codebase/codebase_spec.rb`
+  @template_errors.add <<~ERROR
+    Cannot insert the app_name into `spec/codebase/codebase_spec.rb`
     Content: #{app_name}
-  EOT
+  ERROR
 end
