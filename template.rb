@@ -47,6 +47,10 @@ def apply_template!(template_root)
 
     generate 'devise:install'
     apply 'spec/template.rb'
+
+    # Adding "frozen_string_literal: true" and an empty line after it
+    run 'rubocop --only Style/FrozenStringLiteralComment --auto-correct-all'
+    run 'rubocop --only Layout/EmptyLineAfterMagicComment --auto-correct-all'
   end
 
   # Add-ons - [Default]
@@ -56,9 +60,6 @@ def apply_template!(template_root)
   # Variants
   apply '.template/variants/api/template.rb' if API_VARIANT
   apply '.template/variants/web/template.rb' if WEB_VARIANT
-
-  # Fix the rubocop
-  run 'rubocop -a'
 end
 
 # Set Thor::Actions source path for looking up the files
