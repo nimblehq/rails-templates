@@ -3,7 +3,6 @@ def apply_web_variant!
 
   copy_file '.eslintignore'
   copy_file '.eslintrc'
-  copy_file '.pronto_eslint_npm.yml'
   copy_file '.scss-lint.yml'
 
   copy_file '.npmrc'
@@ -12,6 +11,7 @@ def apply_web_variant!
   apply 'app/template.rb'
   apply 'config/template.rb'
   apply 'package.json.rb'
+  apply 'Dangerfile.rb'
 
   remove_turbolinks
 
@@ -35,7 +35,7 @@ def remove_turbolinks
       Content: 'data-turbolinks-track': 'reload'
     EOT
   end
-  
+
   if File.exist?('app/javascript/packs/application.js')
     gsub_file('app/javascript/packs/application.js', %r{^require\(\"turbolinks\"\).start\(\)\n}, '')
   else

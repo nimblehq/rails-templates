@@ -43,12 +43,12 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
 
-  gem 'pronto'
-  gem 'pronto-rubocop', require: false
-  gem 'pronto-flay', require: false # analyzes code for structural similarities
-  gem 'pronto-brakeman', require: false # analyzes code for security vulnerabilities
-  gem 'pronto-rails_best_practices', require: false
-  gem 'pronto-reek', require: false
+  gem 'danger' # Automated code review.
+  gem 'danger-rubocop' # A Danger plugin for Rubocop.
+  gem 'danger-rails_best_practices' # Analyze code regarding best practices.
+  gem 'danger-reek' # Detect code smell.
+  gem 'danger-brakeman_scanner' # Security static analysis scanner in danger.
+  gem 'danger-suggester' # Suggest code changes based on configured code formatter.
 end
 
 group :test do

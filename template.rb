@@ -22,9 +22,9 @@ def apply_template!(template_root)
   template 'Gemfile.tt', force: true
 
   copy_file '.flayignore'
-  template '.pronto.yml.tt'
+  copy_file 'Dangerfile'
   copy_file '.rubocop.yml'
-  copy_file 'config.reek'
+  copy_file '.reek.yml'
 
   copy_file '.semaphore.yml'
   template '.ruby-gemset.tt'
