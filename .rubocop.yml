@@ -2,15 +2,15 @@ require: rubocop-rails
 
 AllCops:
   Exclude:
-    - "vendor/**/*"
-    - "db/**/*"
-    - "bin/**/*"
-    - "Gemfile"
-    - "Gemfile.lock"
-    - "Rakefile"
-    - "Guardfile"
-    - "node_modules/**/*"
-    - "config/**/*"
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - 'Rakefile'
+    - 'Guardfile'
+    - 'node_modules/**/*'
+    - 'config/**/*'
   TargetRubyVersion: 2.7
   NewCops: enable
 
@@ -20,12 +20,12 @@ Style/Documentation:
 Layout/LineLength:
   Max: 120
   Exclude:
-    - "spec/**/*"
-    - "config/**/*"
+    - 'spec/**/*'
+    - 'config/**/*'
 
 Metrics/BlockLength:
   Exclude:
-    - "spec/**/*"
+    - 'spec/**/*'
 
 Style/FormatStringToken:
   EnforcedStyle: template
