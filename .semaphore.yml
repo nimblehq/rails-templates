@@ -7,6 +7,7 @@ project_settings:
     AWS_ACCESS_KEY_ID: # (Optional) For uploading the failed example screenshots
     AWS_SECRET_ACCESS_KEY: # (Optional) For uploading the failed example screenshots
     AWS_ARTIFACTS_BUCKET: s3://nimbl3-semaphore-artifacts # (Optional) For uploading the failed example screenshots
+    DANGER_GITHUB_API_TOKEN: <The github bot account api token for Danger> # Required
 
   build_settings:
     setup:
