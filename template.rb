@@ -28,7 +28,7 @@ def apply_template!(template_root)
 
   copy_file '.semaphore.yml'
   template '.ruby-gemset.tt'
-  template '.ruby-version.tt'
+  template '.ruby-version.tt', force: true
   copy_file '.editorconfig'
   copy_file 'Procfile'
   copy_file 'Procfile.dev'
