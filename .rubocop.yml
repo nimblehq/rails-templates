@@ -27,9 +27,6 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 Style/FormatStringToken:
   EnforcedStyle: template
 
