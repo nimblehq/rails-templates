@@ -5,6 +5,7 @@ def apply_web_variant!
   copy_file '.eslintrc'
   copy_file '.scss-lint.yml'
 
+  template '.nvmrc.tt'
   copy_file '.npmrc'
 
   apply 'Gemfile.rb'
