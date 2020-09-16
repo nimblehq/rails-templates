@@ -14,9 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        variant: [web, api]
         ruby: [2.7.1]
         rails: [6.0.3.3]
-        variant: [web, api]
     steps:
       - uses: actions/checkout@v2
 
