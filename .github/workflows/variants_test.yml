@@ -25,6 +25,14 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
 
+      - name: Gems cache
+        uses: actions/cache@v2
+        with:
+          path: /home/runner/.rubies/ruby-${{ matrix.ruby }}
+          key: use-ruby-${{ runner.os }}-${{ matrix.ruby }}-${{ matrix.rails }}-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            use-ruby-${{ runner.os }}-${{ matrix.ruby }}-${{ matrix.rails }}-
+
       - name: Create rails app
         run: |
           gem install rails -v ${{ matrix.rails }} --no-document
@@ -55,6 +63,14 @@ jobs:
       - uses: ruby/setup-ruby@v1.45.0
         with:
           ruby-version: ${{ matrix.ruby }}
+
+      - name: Gems cache
+        uses: actions/cache@v2
+        with:
+          path: /home/runner/.rubies/ruby-${{ matrix.ruby }}
+          key: use-ruby-${{ runner.os }}-${{ matrix.ruby }}-${{ matrix.rails }}-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            use-ruby-${{ runner.os }}-${{ matrix.ruby }}-${{ matrix.rails }}-
 
       - name: Create rails app
         run: |
