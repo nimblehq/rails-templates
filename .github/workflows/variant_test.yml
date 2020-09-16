@@ -1,0 +1,67 @@
+name: Variants test
+
+on: push
+
+env:
+  DOCKER_REGISTRY: docker.io
+  COMPOSE_FILE: docker-compose.test.yml
+  DOCKER_IMAGE: ${{ github.repository }}
+  APP_NAME: rails_app
+
+jobs:
+  test:
+    name: Build docker image
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        variant: [web, api]
+        ruby: [2.7.1]
+        rails: [6.0.3.3]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: nimblehq/branch-tag-action@v1.1
+
+      - uses: ruby/setup-ruby@v1.45.0
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - name: Create rails app
+        run: |
+          gem install rails -v ${{ matrix.rails }} --no-document
+          make create OPTIONS="--${{ matrix.variant }}"
+
+      - name: Docker build
+        run: |
+          make build
+
+      - name: Test
+        run: |
+          make test VARIANT=${{ matrix.variant }}
+          make run
+
+  build_production:
+    name: Build docker production image
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        variant: [web, api]
+        ruby: [2.7.1]
+        rails: [6.0.3.3]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: nimblehq/branch-tag-action@v1.1
+
+      - uses: ruby/setup-ruby@v1.45.0
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - name: Create rails app
+        run: |
+          gem install rails -v ${{ matrix.rails }} --no-document
+          make create OPTIONS="--${{ matrix.variant }}"
+
+      - name: Docker build production image
+        run: |
+          make build_production
