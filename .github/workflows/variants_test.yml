@@ -3,20 +3,19 @@ name: Variants test
 on: push
 
 env:
-  DOCKER_REGISTRY: docker.io
   COMPOSE_FILE: docker-compose.test.yml
   DOCKER_IMAGE: ${{ github.repository }}
   APP_NAME: rails_app
 
 jobs:
   test:
-    name: Build docker image
+    name: Test ${{ matrix.variant }} variant
     runs-on: ubuntu-latest
     strategy:
       matrix:
         variant: [web, api]
         ruby: [2.7.1]
-        rails: [6.0.3.3]
+        rails: [6.0.3.2]
     steps:
       - uses: actions/checkout@v2
 
@@ -41,13 +40,13 @@ jobs:
           make run
 
   build_production:
-    name: Build docker production image
+    name: Build docker production image for ${{ matrix.variant }} variant
     runs-on: ubuntu-latest
     strategy:
       matrix:
         variant: [web, api]
         ruby: [2.7.1]
-        rails: [6.0.3.3]
+        rails: [6.0.3.2]
     steps:
       - uses: actions/checkout@v2
 
