@@ -1,15 +1,14 @@
-name: Variants test
+name: Variants docker build test
 
 on: push
 
 env:
-  COMPOSE_FILE: docker-compose.test.yml
   DOCKER_IMAGE: ${{ github.repository }}
   APP_NAME: rails_templates
 
 jobs:
-  test:
-    name: Test ${{ matrix.variant }} variant with rails ${{ matrix.rails }}
+  build_production:
+    name: Build docker production image for ${{ matrix.variant }} variant with rails ${{ matrix.rails }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -38,11 +37,6 @@ jobs:
           gem install rails -v ${{ matrix.rails }} --no-document
           make create OPTIONS="--${{ matrix.variant }}"
 
-      - name: Docker build
+      - name: Docker build production image
         run: |
-          make build
-
-      - name: Test
-        run: |
-          make test VARIANT=${{ matrix.variant }}
-          make run
+          make build_production
