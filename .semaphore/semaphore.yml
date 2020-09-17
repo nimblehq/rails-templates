@@ -17,7 +17,7 @@ global_job_config:
       - sem-version node 12.16.1
       - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
       - export CACHE_NAME=$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
-      - echo "$DOCKER_HUB_TOKEN" | docker login --username=$DOCKER_HUB_USERNAME --password-stdin
+      - echo "$DOCKER_TOKEN" | docker login $DOCKER_REGISTRY --username=$DOCKER_USERNAME --password-stdin
   env_vars:
     - name: APP_NAME
       value: rails_app
