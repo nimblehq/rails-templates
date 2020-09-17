@@ -3,8 +3,11 @@ name: Variants docker build test
 on: push
 
 env:
-  DOCKER_IMAGE: ${{ github.repository }}
   APP_NAME: rails_templates
+  DOCKER_IMAGE: ${{ github.repository }}
+  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+  DOCKER_USERNAME: ${{ github.repository_owner }}
+  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
 
 jobs:
   build_production:
@@ -37,6 +40,15 @@ jobs:
           gem install rails -v ${{ matrix.rails }} --no-document
           make create OPTIONS="--${{ matrix.variant }}"
 
+      - name: Docker login
+        run: echo "$DOCKER_TOKEN" | docker login $DOCKER_REGISTRY --username=$DOCKER_USERNAME --password-stdin
+
+      - name: Docker pull
+        run: docker-compose pull web || true
+        env:
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ matrix.ruby }}-${{ matrix.rails }}
+
       - name: Docker build production image
-        run: |
-          make build_production
+        run: make build_production
+        env:
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ matrix.ruby }}-${{ matrix.rails }}

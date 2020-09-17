@@ -4,8 +4,11 @@ on: push
 
 env:
   COMPOSE_FILE: docker-compose.test.yml
-  DOCKER_IMAGE: ${{ github.repository }}
   APP_NAME: rails_templates
+  DOCKER_IMAGE: ${{ github.repository }}
+  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+  DOCKER_USERNAME: ${{ github.repository_owner }}
+  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
 
 jobs:
   test:
@@ -38,9 +41,18 @@ jobs:
           gem install rails -v ${{ matrix.rails }} --no-document
           make create OPTIONS="--${{ matrix.variant }}"
 
+      - name: Docker login
+        run: echo "$DOCKER_TOKEN" | docker login $DOCKER_REGISTRY --username=$DOCKER_USERNAME --password-stdin
+
+      - name: Docker pull
+        run: docker-compose pull test || true
+        env:
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ matrix.ruby }}-${{ matrix.rails }}-test
+
       - name: Docker build
-        run: |
-          make build
+        run: make build
+        env:
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ matrix.ruby }}-${{ matrix.rails }}-test
 
       - name: Test
         run: |
