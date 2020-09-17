@@ -67,7 +67,7 @@ jobs:
           cd $APP_NAME
           docker-compose pull test || true
         env:
-          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}-test
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}
 
       - name: Docker build
         run: |
@@ -75,7 +75,7 @@ jobs:
           cd $APP_NAME
           docker-compose push test
         env:
-          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}-test
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}
 
       - name: Test
         run: |
