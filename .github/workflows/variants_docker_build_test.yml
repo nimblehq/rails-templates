@@ -50,14 +50,14 @@ jobs:
 
       - name: Docker pull
         env:
-          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}
         run: |
           cd $APP_NAME
           docker-compose pull web || true
 
       - name: Docker build production image
         env:
-          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}
         run: |
           make build_production
           cd $APP_NAME
