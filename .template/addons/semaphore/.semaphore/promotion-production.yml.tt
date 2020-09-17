@@ -15,7 +15,7 @@ global_job_config:
   prologue:
     commands:
       - checkout
-      - echo "$DOCKER_HUB_TOKEN" | docker login --username=$DOCKER_HUB_USERNAME --password-stdin
+      - echo "$DOCKER_TOKEN" | docker login $DOCKER_REGISTRY --username=$DOCKER_USERNAME --password-stdin
       - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
 
 blocks:

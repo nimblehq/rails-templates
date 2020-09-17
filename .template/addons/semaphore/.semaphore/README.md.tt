@@ -12,8 +12,9 @@ Setup the following secrets in order to run the pipeline:
 
 Secret name: `<%= APP_NAME %>`
 
-- DOCKER_HUB_USERNAME
-- DOCKER_HUB_TOKEN
+- DOCKER_REGISTRY
+- DOCKER_USERNAME
+- DOCKER_TOKEN
 - HEROKU_API_KEY
 
 ### Deployment dashboard
