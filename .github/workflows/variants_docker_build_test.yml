@@ -8,17 +8,17 @@ env:
   DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
   DOCKER_USERNAME: ${{ github.repository_owner }}
   DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+  RUBY_VERSION: 2.7.1
+  RAILS_VERSION: 6.0.3
+  NODE_VERSION: 12
 
 jobs:
   build_production:
-    name: Build docker production image for ${{ matrix.variant }} variant with rails ${{ matrix.rails }}
+    name: Build docker production image for ${{ matrix.variant }} variant
     runs-on: ubuntu-latest
     strategy:
       matrix:
         variant: [web, api]
-        ruby: [2.7.1]
-        rails: [6.0.0, 6.0.3]
-        node: [12]
     steps:
       - uses: actions/checkout@v2
 
@@ -26,19 +26,19 @@ jobs:
 
       - uses: ruby/setup-ruby@v1.45.0
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: ${{ env.RUBY_VERSION }}
 
       - uses: actions/setup-node@v2-beta
         with:
-          node-version: ${{ matrix.node }}
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Gems cache
         uses: actions/cache@v2
         with:
-          path: /home/runner/.rubies/ruby-${{ matrix.ruby }}
-          key: use-ruby-${{ runner.os }}-${{ matrix.ruby }}-${{ hashFiles('**/Gemfile.lock') }}
+          path: /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
+          key: use-ruby-${{ runner.os }}-${{ env.RUBY_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
-            use-ruby-${{ runner.os }}-${{ matrix.ruby }}-
+            use-ruby-${{ runner.os }}-${{ env.RUBY_VERSION }}-
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -49,13 +49,13 @@ jobs:
         id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
-          key: yarn-${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('**/yarn.lock') }}
+          key: yarn-${{ runner.os }}-${{ env.NODE_VERSION }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            yarn-${{ runner.os }}-${{ matrix.node }}-
+            yarn-${{ runner.os }}-${{ env.NODE_VERSION }}-
 
       - name: Create rails app
         run: |
-          gem install rails -v ${{ matrix.rails }} --no-document
+          gem install rails -v ${{ env.RAILS_VERSION }} --no-document
           make create OPTIONS="--${{ matrix.variant }}"
 
       - name: Docker login
@@ -64,9 +64,9 @@ jobs:
       - name: Docker pull
         run: docker-compose pull web || true
         env:
-          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ matrix.ruby }}-${{ matrix.rails }}
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}
 
       - name: Docker build production image
         run: make build_production
         env:
-          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ matrix.ruby }}-${{ matrix.rails }}
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}
