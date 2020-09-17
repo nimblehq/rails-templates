@@ -10,6 +10,8 @@ global_job_config:
   env_vars:
     - name: HEROKU_APP
       value: <%= APP_NAME %>-staging
+    - name: DOCKER_IMAGE
+      value: <%= DOCKER_IMAGE %>
   secrets:
     - name: <%= APP_NAME %>
   prologue:
@@ -36,5 +38,5 @@ blocks:
       jobs:
         - name: Heroku
           commands:
-            - heroku container:push --arg BRANCH_TAG=$BRANCH_TAG --recursive
+            - heroku container:push --arg DOCKER_REGISTRY=$DOCKER_REGISTRY,DOCKER_IMAGE=$DOCKER_IMAGE,BRANCH_TAG=$BRANCH_TAG --recursive
             - heroku container:release web worker
