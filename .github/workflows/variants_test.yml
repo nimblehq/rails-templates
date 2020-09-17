@@ -72,21 +72,23 @@ jobs:
         run: echo "$DOCKER_TOKEN" | docker login $DOCKER_REGISTRY --username=$DOCKER_USERNAME --password-stdin
 
       - name: Docker pull
+        env:
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}
         run: |
           cd $APP_NAME
           docker-compose pull test || true
-        env:
-          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}
 
       - name: Docker build
+        env:
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}
         run: |
           make build
           cd $APP_NAME
           docker-compose push test
-        env:
-          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}
 
       - name: Test
+        env:
+          BRANCH_TAG: ${{ env.BRANCH_TAG }}-${{ matrix.variant }}-${{ env.RUBY_VERSION }}-${{ env.RAILS_VERSION }}
         run: |
           make test VARIANT=${{ matrix.variant }}
           make run
