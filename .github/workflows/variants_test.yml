@@ -15,7 +15,7 @@ jobs:
       matrix:
         variant: [web, api]
         ruby: [2.7.1]
-        rails: [6.0.3.2]
+        rails: [6.0.0, 6.0.3]
     steps:
       - uses: actions/checkout@v2
 
@@ -29,9 +29,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /home/runner/.rubies/ruby-${{ matrix.ruby }}
-          key: use-ruby-${{ runner.os }}-${{ matrix.ruby }}-${{ matrix.rails }}-${{ hashFiles('**/Gemfile.lock') }}
+          key: use-ruby-${{ runner.os }}-${{ matrix.ruby }}-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
-            use-ruby-${{ runner.os }}-${{ matrix.ruby }}-${{ matrix.rails }}-
+            use-ruby-${{ runner.os }}-${{ matrix.ruby }}-
 
       - name: Create rails app
         run: |
@@ -68,9 +68,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: /home/runner/.rubies/ruby-${{ matrix.ruby }}
-          key: use-ruby-${{ runner.os }}-${{ matrix.ruby }}-${{ matrix.rails }}-${{ hashFiles('**/Gemfile.lock') }}
+          key: use-ruby-${{ runner.os }}-${{ matrix.ruby }}-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
-            use-ruby-${{ runner.os }}-${{ matrix.ruby }}-${{ matrix.rails }}-
+            use-ruby-${{ runner.os }}-${{ matrix.ruby }}-
 
       - name: Create rails app
         run: |
