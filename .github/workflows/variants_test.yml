@@ -9,7 +9,7 @@ env:
 
 jobs:
   test:
-    name: Test ${{ matrix.variant }} variant
+    name: Test ${{ matrix.variant }} variant with rails ${{ matrix.rails }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -48,13 +48,13 @@ jobs:
           make run
 
   build_production:
-    name: Build docker production image for ${{ matrix.variant }} variant
+    name: Build docker production image for ${{ matrix.variant }} variant with rails ${{ matrix.rails }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         variant: [web, api]
         ruby: [2.7.1]
-        rails: [6.0.3.2]
+        rails: [6.0.0, 6.0.3]
     steps:
       - uses: actions/checkout@v2
 
