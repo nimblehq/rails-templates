@@ -42,11 +42,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-${{ env.RUBY_VERSION }}-
 
-      - name: Bundle settings
-        run: |
-          bundle config --global path vendor/bundle
-          bundle config --global set with 'development'
-
       - name: Create app folder
         if: ${{ matrix.variant == 'web' }}
         run: mkdir $APP_NAME
