@@ -1,10 +1,14 @@
 name: Deploy
 
 on:
-  push:
+  workflow_run:
+    workflows:
+      - Test
     branches:
       - master
       - development
+    types:
+      - completed
   workflow_dispatch:
 
 env:
@@ -17,14 +21,20 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.5.0
+        with:
+          access_token: ${{ github.token }}
+
       - uses: actions/checkout@v2.3.2
 
       - uses: nimblehq/branch-tag-action@v1.1
 
       - name: Set HEROKU_APP
         run: |
-          if [[ $BRANCH_TAG = "master" ]]
+          if [[ $BRANCH_TAG = "latest" ]]
           then
             echo "::set-env name=HEROKU_APP::<%= APP_NAME %>"
           else
