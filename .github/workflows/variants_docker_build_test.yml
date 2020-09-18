@@ -32,9 +32,6 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Create app folder
-        run: mkdir $APP_NAME
-
       - name: Gems cache
         uses: actions/cache@v2
         with:
@@ -43,7 +40,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-use-ruby-${{ env.RUBY_VERSION }}-
 
+      - name: Create app folder
+        if: ${{ matrix.variant == 'web' }}
+        run: mkdir $APP_NAME
+
       - name: yarn.lock cache
+        if: ${{ matrix.variant == 'web' }}
         uses: actions/cache@v2
         with:
           path: ${{ env.APP_NAME }}/yarn.lock
@@ -52,12 +54,13 @@ jobs:
             ${{ runner.os }}-yarn-lock-
 
       - name: Get yarn cache directory path
+        if: ${{ matrix.variant == 'web' }}
         id: yarn-cache-dir-path
         run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
 
       - name: Yarn cache
+        if: ${{ matrix.variant == 'web' }}
         uses: actions/cache@v2
-        id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -65,7 +68,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: node_modules cache
-        id: node-modules-cache
+        if: ${{ matrix.variant == 'web' }}
         uses: actions/cache@v2
         with:
           path: ${{ env.APP_NAME }}/node_modules
