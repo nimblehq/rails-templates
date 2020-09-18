@@ -35,9 +35,7 @@ jobs:
       - name: Gems cache
         uses: actions/cache@v2
         with:
-          path: |
-            /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
-            vendor/bundle
+          path: /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
           key: ${{ runner.os }}-gems-${{ env.RUBY_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-${{ env.RUBY_VERSION }}-
