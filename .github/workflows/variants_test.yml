@@ -45,7 +45,7 @@ jobs:
 
       - name: Bundle settings
         run: |
-          bundle config path vendor/bundle
+          bundle config path ${{ env.APP_NAME }}/vendor/bundle
           bundle config set with 'development'
 
       - name: Create app folder
