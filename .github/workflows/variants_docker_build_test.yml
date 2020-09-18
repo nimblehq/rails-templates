@@ -38,12 +38,14 @@ jobs:
           path: |
             /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
             vendor/bundle
-          key: use-ruby-${{ runner.os }}-${{ env.RUBY_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
+          key: ${{ runner.os }}-gems-${{ env.RUBY_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
-            ${{ runner.os }}-use-ruby-${{ env.RUBY_VERSION }}-
+            ${{ runner.os }}-gems-${{ env.RUBY_VERSION }}-
 
-      - name: Set bundle path
-        run: bundle config path vendor/bundle
+      - name: Bundle settings
+        run: |
+          bundle config path vendor/bundle
+          bundle config set with 'development'
 
       - name: Create app folder
         if: ${{ matrix.variant == 'web' }}
