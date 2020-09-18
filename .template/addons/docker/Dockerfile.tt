@@ -3,8 +3,6 @@ FROM ruby:<%= RUBY_VERSION %>-slim
 ARG BUILD_ENV=development
 ARG RUBY_ENV=development
 ARG APP_HOME=/<%= APP_NAME %>
-ARG BUNDLE_JOBS=4
-ARG BUNDLE_PATH="/bundle"
 ARG SECRET_KEY_BASE=secret_key_base
 <%- if WEB_VARIANT -%>
 ARG NODE_ENV=development
@@ -20,6 +18,8 @@ ENV BUILD_ENV=$BUILD_ENV \
     RACK_ENV=$RUBY_ENV \
     RAILS_ENV=$RUBY_ENV \
     PORT=80 \
+    BUNDLE_JOBS=4 \
+    BUNDLE_PATH="/bundle" \
     <%- if WEB_VARIANT -%>
     ASSET_HOST=$ASSET_HOST \
     NODE_ENV=$NODE_ENV \
