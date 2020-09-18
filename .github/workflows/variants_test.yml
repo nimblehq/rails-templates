@@ -36,48 +36,36 @@ jobs:
       - name: Gems cache
         uses: actions/cache@v2
         with:
-          path: /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
+          path: |
+            /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
+            vendor/bundle
           key: use-ruby-${{ runner.os }}-${{ env.RUBY_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-use-ruby-${{ env.RUBY_VERSION }}-
 
+      - name: Set bundle path
+        run: bundle config path vendor/bundle
+
       - name: Create app folder
         if: ${{ matrix.variant == 'web' }}
         run: mkdir $APP_NAME
-
-      - name: yarn.lock cache
-        if: ${{ matrix.variant == 'web' }}
-        uses: actions/cache@v2
-        with:
-          path: |
-            **/yarn.lock
-          key: ${{ runner.os }}-yarn-lock-${{ hashFiles('**/package.json*') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-lock-
 
       - name: Get yarn cache directory path
         if: ${{ matrix.variant == 'web' }}
         id: yarn-cache-dir-path
         run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
 
-      - name: Yarn cache
-        if: ${{ matrix.variant == 'web' }}
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json*') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: node_modules cache
+      - name: npm packages cache
         if: ${{ matrix.variant == 'web' }}
         uses: actions/cache@v2
         with:
           path: |
+            ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
+            **/yarn.lock
             **/node_modules
-          key: ${{ runner.os }}-nodemodules-${{ hashFiles('**/package.json*') }}
+          key: ${{ runner.os }}-npm-packages-${{ hashFiles('**/package.json*') }}
           restore-keys: |
-            ${{ runner.os }}-nodemodules-
+            ${{ runner.os }}-npm-packages-
 
       - name: Create rails app
         run: |
