@@ -44,8 +44,8 @@ jobs:
 
       - name: Bundle settings
         run: |
-          bundle config path ${{ env.APP_NAME }}/vendor/bundle
-          bundle config set with 'development'
+          bundle config --global path vendor/bundle
+          bundle config --global set with 'development'
 
       - name: Create app folder
         if: ${{ matrix.variant == 'web' }}
