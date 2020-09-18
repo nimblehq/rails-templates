@@ -33,13 +33,46 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
+      - name: Create app folder
+        run: mkdir $APP_NAME
+
       - name: Gems cache
         uses: actions/cache@v2
         with:
           path: /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
           key: use-ruby-${{ runner.os }}-${{ env.RUBY_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
-            use-ruby-${{ runner.os }}-${{ env.RUBY_VERSION }}-
+            ${{ runner.os }}-use-ruby-${{ env.RUBY_VERSION }}-
+
+      - name: yarn.lock cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.APP_NAME }}/yarn.lock
+          key: ${{ runner.os }}-yarn-lock-${{ hashFiles('**/package.json*') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-lock-
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
+
+      - name: Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: node_modules cache
+        id: node-modules-cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.APP_NAME }}/node_modules
+          key: ${{ runner.os }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-nodemodules-
 
       - name: Create rails app
         run: |
