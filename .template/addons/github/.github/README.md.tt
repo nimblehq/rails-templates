@@ -1,0 +1,16 @@
+# Github Actions
+
+## Requirements:
+
+- Generate new token on docker registry, support `docker.io`, `ghcr.io`, `azurecr.io`, `gcr.io`, `registry.gitlab.com`
+- Generate new Heroku API key
+
+## Setup the CI
+
+### Secrets
+
+Setup the following secrets in order to run the workflows:
+
+- DOCKER_REGISTRY
+- DOCKER_TOKEN
+- HEROKU_API_KEY
