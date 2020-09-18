@@ -49,7 +49,8 @@ jobs:
         if: ${{ matrix.variant == 'web' }}
         uses: actions/cache@v2
         with:
-          path: ${{ env.APP_NAME }}/yarn.lock
+          path: |
+            **/yarn.lock
           key: ${{ runner.os }}-yarn-lock-${{ hashFiles('**/package.json*') }}
           restore-keys: |
             ${{ runner.os }}-yarn-lock-
@@ -64,7 +65,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/package.json*') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
@@ -72,8 +73,9 @@ jobs:
         if: ${{ matrix.variant == 'web' }}
         uses: actions/cache@v2
         with:
-          path: ${{ env.APP_NAME }}/node_modules
-          key: ${{ runner.os }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-nodemodules-${{ hashFiles('**/package.json*') }}
           restore-keys: |
             ${{ runner.os }}-nodemodules-
 
