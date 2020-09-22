@@ -12,8 +12,6 @@ detectors:
 ### Directory specific configuration
 directories:
   "app/controllers":
-    IrresponsibleModule:
-      enabled: false
     NestedIterators:
       max_allowed_nesting: 2
     UnusedPrivateMethod:
@@ -21,8 +19,6 @@ directories:
     InstanceVariableAssumption:
       enabled: false
   "app/helpers":
-    IrresponsibleModule:
-      enabled: false
     UtilityFunction:
       enabled: false
   "app/mailers":
