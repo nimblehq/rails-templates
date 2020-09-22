@@ -10,13 +10,7 @@
 
 require 'yaml'
 
-rails_env = ENV.fetch('RAILS_ENV', 'production')
-env_config = YAML.load_file('config/application.yml')[rails_env]
-
-if rails_env == 'production'
-  env_config.keys.each { |name| ENV[name] = 'dummy_value' }
-else
-  env_config.each { |name, value| ENV[name] = value }
-end
+env_keys = YAML.load_file('config/application.yml')['docker_build'].keys
+env_keys.each { |name| ENV[name] = 'dummy_value' }
 
 exit system('bin/rails i18n:js:export && bin/rails assets:precompile')
