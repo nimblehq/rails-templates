@@ -14,6 +14,11 @@ jobs:
     name: Build docker image
     runs-on: ubuntu-latest
     steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.5.0
+        with:
+          access_token: ${{ github.token }}
+
       - uses: actions/checkout@v2.3.2
 
       - uses: nimblehq/branch-tag-action@v1.1
@@ -29,6 +34,9 @@ jobs:
         run: |
           bin/docker-prepare
           docker-compose build
+
+      - name: Docker push
+        run: |
           docker-compose push test
 
   unit_test:
@@ -36,11 +44,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.5.0
-        with:
-          access_token: ${{ github.token }}
-
       - uses: actions/checkout@v2.3.2
 
       - uses: nimblehq/branch-tag-action@v1.1
@@ -49,7 +52,7 @@ jobs:
         run: echo "$DOCKER_TOKEN" | docker login $DOCKER_REGISTRY --username=$DOCKER_USERNAME --password-stdin
 
       - name: Docker pull
-        run: docker-compose pull
+        run: docker-compose pull test || true
 
       - name: Linters
         run: docker-compose run test yarn lint
@@ -70,7 +73,7 @@ jobs:
         run: echo "$DOCKER_TOKEN" | docker login $DOCKER_REGISTRY --username=$DOCKER_USERNAME --password-stdin
 
       - name: Docker pull
-        run: docker-compose pull
+        run: docker-compose pull test || true
 
       - name: RSpec
         run: docker-compose run test bundle exec rspec spec/systems --profile

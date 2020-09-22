@@ -47,11 +47,18 @@ jobs:
         run: |
           bin/docker-prepare
           docker-compose build
+
+      - name: Docker push
+        run: |
           docker-compose push web
+
       - name: Heroku login
         run: heroku container:login
 
-      - name: Heroku release
+      - name: Heroku push
         run: |
           heroku container:push --arg DOCKER_REGISTRY=$DOCKER_REGISTRY,DOCKER_IMAGE=$DOCKER_IMAGE,BRANCH_TAG=$BRANCH_TAG --recursive
+
+      - name: Heroku release
+        run: |
           heroku container:release web worker
