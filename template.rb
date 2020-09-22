@@ -124,7 +124,7 @@ require "#{template_root}/.template/lib/template/errors"
 if ENV['ADDON']
   addon_template_path = ".template/addons/#{ENV['ADDON']}/template.rb"
 
-  abort 'This addon is not supported' unless File.exist?(addon_template_path)
+  abort 'This addon is not supported' unless File.exist?(File.expand_path(addon_template_path, template_root))
 
   apply addon_template_path
 else
