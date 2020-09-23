@@ -13,3 +13,9 @@ development:
 test:
   <<: *default
   TEST_RETRY: "0"
+
+# Set environment variables required in the initializers in order to precompile the assets.
+# Because it initializes the app, so all variables need to exist in the Docker build stage (used in bin/docker-assets-precompile).
+docker_build:
+  <<: *default
+  SECRET_KEY_BASE:

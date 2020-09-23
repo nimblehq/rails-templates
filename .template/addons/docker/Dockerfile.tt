@@ -3,14 +3,9 @@ FROM ruby:<%= RUBY_VERSION %>-slim
 ARG BUILD_ENV=development
 ARG RUBY_ENV=development
 ARG APP_HOME=/<%= APP_NAME %>
-ARG SECRET_KEY_BASE=secret_key_base
 <%- if WEB_VARIANT -%>
 ARG NODE_ENV=development
 ARG ASSET_HOST=http://localhost
-# Set environment varaibles required in the initializers in order to precompile the assets.
-# Because it initializes the app, so all variables need to exist in the build stage.
-ARG MAILER_DEFAULT_HOST=http://localhost
-ARG MAILER_DEFAULT_PORT=3000
 <%- end -%>
 
 # Define all the envs here
@@ -104,8 +99,7 @@ RUN rm -rf tmp/docker
 
 <%- if WEB_VARIANT -%>
 # Compile assets
-RUN bundle exec rails i18n:js:export && \
-    bundle exec rails assets:precompile
+RUN bin/docker-assets-precompile
 
 <%- end -%>
 EXPOSE $PORT

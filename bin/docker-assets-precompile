@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+# For building production docker image
+#
+# It sets the envs inside the docker image for precompiling the assets
+# Because to precompile the assets, Rails initializes the app.
+# And it requires the envs as we always use `ENV.fetch` to setup the variables
+#
+# Related issue: https://github.com/rails/rails/issues/32947
+
+require 'yaml'
+
+rails_env = ENV.fetch('RAILS_ENV', 'production')
+
+if rails_env == 'production'
+  env_keys = YAML.load_file('config/application.yml')['docker_build'].keys
+  env_keys.each { |name| ENV[name] = 'dummy_value' }
+end
+
+exit system('bin/rails i18n:js:export && bin/rails assets:precompile')
