@@ -54,9 +54,6 @@ jobs:
       - name: Docker pull
         run: docker-compose pull test || true
 
-      - name: Linters
-        run: docker-compose run test yarn lint
-
       - name: RSpec
         run: docker-compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
 
