@@ -27,7 +27,7 @@ jobs:
         run: echo "$DOCKER_REGISTRY_TOKEN" | docker login $DOCKER_REGISTRY_HOST --username=$DOCKER_REGISTRY_USERNAME --password-stdin
 
       - name: Docker pull
-        if: env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development'
+        if: ${{ env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development' }}
         run: docker-compose pull test || true
 
       - name: Docker build
