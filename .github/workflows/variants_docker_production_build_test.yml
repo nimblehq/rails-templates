@@ -1,4 +1,4 @@
-name: Variants docker build test
+name: Variants docker production build test
 
 on: push
 
