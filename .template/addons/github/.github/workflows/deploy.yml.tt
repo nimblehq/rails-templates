@@ -12,9 +12,9 @@ on:
   workflow_dispatch:
 
 env:
-  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-  DOCKER_USERNAME: ${{ github.repository_owner }}
-  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+  DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
+  DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
+  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
   DOCKER_IMAGE: ${{ github.repository }}
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
@@ -41,7 +41,7 @@ jobs:
             echo "::set-env name=HEROKU_APP::<%= APP_NAME %>-staging"
           fi
       - name: Docker login
-        run: echo "$DOCKER_TOKEN" | docker login $DOCKER_REGISTRY --username=$DOCKER_USERNAME --password-stdin
+        run: echo "$DOCKER_REGISTRY_TOKEN" | docker login $DOCKER_REGISTRY_HOST --username=$DOCKER_REGISTRY_USERNAME --password-stdin
 
       - name: Docker build
         run: |
@@ -57,7 +57,7 @@ jobs:
 
       - name: Heroku push
         run: |
-          heroku container:push --arg DOCKER_REGISTRY=$DOCKER_REGISTRY,DOCKER_IMAGE=$DOCKER_IMAGE,BRANCH_TAG=$BRANCH_TAG --recursive
+          heroku container:push --arg DOCKER_REGISTRY_HOST=$DOCKER_REGISTRY_HOST,DOCKER_IMAGE=$DOCKER_IMAGE,BRANCH_TAG=$BRANCH_TAG --recursive
 
       - name: Heroku release
         run: |

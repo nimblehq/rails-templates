@@ -3,9 +3,9 @@ name: Test
 on: push
 
 env:
-  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-  DOCKER_USERNAME: ${{ github.repository_owner }}
-  DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+  DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
+  DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
+  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
   COMPOSE_FILE: docker-compose.test.yml
   DOCKER_IMAGE: ${{ github.repository }}
 
@@ -24,7 +24,7 @@ jobs:
       - uses: nimblehq/branch-tag-action@v1.1
 
       - name: Docker login
-        run: echo "$DOCKER_TOKEN" | docker login $DOCKER_REGISTRY --username=$DOCKER_USERNAME --password-stdin
+        run: echo "$DOCKER_REGISTRY_TOKEN" | docker login $DOCKER_REGISTRY_HOST --username=$DOCKER_REGISTRY_USERNAME --password-stdin
 
       - name: Docker pull
         if: env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development'
@@ -49,7 +49,7 @@ jobs:
       - uses: nimblehq/branch-tag-action@v1.1
 
       - name: Docker login
-        run: echo "$DOCKER_TOKEN" | docker login $DOCKER_REGISTRY --username=$DOCKER_USERNAME --password-stdin
+        run: echo "$DOCKER_REGISTRY_TOKEN" | docker login $DOCKER_REGISTRY_HOST --username=$DOCKER_REGISTRY_USERNAME --password-stdin
 
       - name: Docker pull
         run: docker-compose pull test || true
@@ -70,7 +70,7 @@ jobs:
       - uses: nimblehq/branch-tag-action@v1.1
 
       - name: Docker login
-        run: echo "$DOCKER_TOKEN" | docker login $DOCKER_REGISTRY --username=$DOCKER_USERNAME --password-stdin
+        run: echo "$DOCKER_REGISTRY_TOKEN" | docker login $DOCKER_REGISTRY_HOST --username=$DOCKER_REGISTRY_USERNAME --password-stdin
 
       - name: Docker pull
         run: docker-compose pull test || true

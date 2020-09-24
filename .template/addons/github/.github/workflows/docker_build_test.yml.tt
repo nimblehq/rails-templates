@@ -7,7 +7,7 @@ on:
       - development
 
 env:
-  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+  DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
   DOCKER_IMAGE: ${{ github.repository }}
 
 jobs:
@@ -29,4 +29,3 @@ jobs:
           export BRANCH_TAG=${{ env.BRANCH_TAG }}-production-image-test
           bin/docker-prepare
           docker-compose build
-          docker-compose push web

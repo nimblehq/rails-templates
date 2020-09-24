@@ -11,6 +11,6 @@
 
 Setup the following secrets in order to run the workflows:
 
-- DOCKER_REGISTRY
-- DOCKER_TOKEN
+- DOCKER_REGISTRY_HOST
+- DOCKER_REGISTRY_TOKEN
 - HEROKU_API_KEY
