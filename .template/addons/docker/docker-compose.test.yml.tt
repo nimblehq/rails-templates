@@ -19,14 +19,14 @@ services:
     build:
       context: .
       cache_from:
-        - ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${BRANCH_TAG}-test
+        - ${DOCKER_REGISTRY_HOST}/${DOCKER_IMAGE}:${BRANCH_TAG}-test
       args:
         - BUILD_ENV=test
         - RUBY_ENV=test
         <%- if WEB_VARIANT -%>
         - NODE_ENV=test
         <%- end -%>
-    image: ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${BRANCH_TAG}-test
+    image: ${DOCKER_REGISTRY_HOST}/${DOCKER_IMAGE}:${BRANCH_TAG}-test
     container_name: <%= APP_NAME %>_test
     command: bin/test.sh
     stdin_open: true

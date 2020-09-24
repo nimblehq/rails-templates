@@ -1,0 +1,64 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows:
+      - Test
+    branches:
+      - master
+      - development
+    types:
+      - completed
+  workflow_dispatch:
+
+env:
+  DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
+  DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
+  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+  DOCKER_IMAGE: ${{ github.repository }}
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.5.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2.3.2
+
+      - uses: nimblehq/branch-tag-action@v1.1
+
+      - name: Set HEROKU_APP
+        run: |
+          if [[ $BRANCH_TAG = "latest" ]]
+          then
+            echo "::set-env name=HEROKU_APP::<%= APP_NAME %>"
+          else
+            echo "::set-env name=HEROKU_APP::<%= APP_NAME %>-staging"
+          fi
+      - name: Docker login
+        run: echo "$DOCKER_REGISTRY_TOKEN" | docker login $DOCKER_REGISTRY_HOST --username=$DOCKER_REGISTRY_USERNAME --password-stdin
+
+      - name: Docker build
+        run: |
+          bin/docker-prepare
+          docker-compose build
+
+      - name: Docker push
+        run: |
+          docker-compose push web
+
+      - name: Heroku login
+        run: heroku container:login
+
+      - name: Heroku push
+        run: |
+          heroku container:push --arg DOCKER_REGISTRY_HOST=$DOCKER_REGISTRY_HOST,DOCKER_IMAGE=$DOCKER_IMAGE,BRANCH_TAG=$BRANCH_TAG --recursive
+
+      - name: Heroku release
+        run: |
+          heroku container:release web worker
