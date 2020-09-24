@@ -1,4 +1,4 @@
-name: Docker build test
+name: Docker production build test
 
 on:
   push:
@@ -11,8 +11,8 @@ env:
   DOCKER_IMAGE: ${{ github.repository }}
 
 jobs:
-  docker_production_test:
-    name: Docker production test
+  docker_production_build_test:
+    name: Build docker production image
     runs-on: ubuntu-latest
     steps:
       - name: Cancel previous runs
@@ -26,6 +26,5 @@ jobs:
 
       - name: Docker build
         run: |
-          export BRANCH_TAG=${{ env.BRANCH_TAG }}-production-image-test
           bin/docker-prepare
           docker-compose build
