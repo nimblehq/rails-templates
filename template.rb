@@ -59,7 +59,18 @@ def apply_template!(template_root)
   # Add-ons - [Default]
   apply '.template/addons/docker/template.rb'
   apply '.template/addons/semaphore/template.rb'
-
+  
+  # Add-ons - [Optional]
+  # We don't ask the user input because we can't enter the answer on CI.
+  # Also on CI, we try to apply all addons so the test can run for all addons
+  if ENV['CI']
+    apply '.template/addons/phrase_app/template.rb' 
+  else
+    if yes?("Would you like to add PhraseApp configuration?")
+      apply '.template/addons/phrase_app/template.rb' 
+    end
+  end
+  
   # Variants
   apply '.template/variants/api/template.rb' if API_VARIANT
   apply '.template/variants/web/template.rb' if WEB_VARIANT
