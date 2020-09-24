@@ -1,5 +1,6 @@
 require 'simplecov'
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::HTMLFormatter])
+require 'simplecov-json'
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::HTMLFormatter, SimpleCov::Formatter::JSONFormatter])
 
 if ENV['CIRCLE_ARTIFACTS']
   dir = File.join('..', '..', '..', ENV['CIRCLE_ARTIFACTS'], 'coverage')
