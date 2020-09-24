@@ -5,7 +5,7 @@ on: push
 env:
   APP_NAME: rails_templates
   DOCKER_IMAGE: ${{ github.repository }}
-  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+  DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
   RUBY_VERSION: 2.7.1
   NODE_VERSION: 12
 
