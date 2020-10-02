@@ -60,6 +60,12 @@ def apply_template!(template_root)
   apply '.template/addons/docker/template.rb'
   apply '.template/addons/semaphore/template.rb'
 
+  if ENV['CI']
+    apply '.template/addons/heroku/template.rb'
+  elsif yes?("Would you like to add heroku?")
+    apply '.template/addons/heroku/template.rb'
+  end
+
   # Variants
   apply '.template/variants/api/template.rb' if API_VARIANT
   apply '.template/variants/web/template.rb' if WEB_VARIANT
