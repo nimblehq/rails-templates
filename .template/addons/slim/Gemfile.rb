@@ -1,8 +1,8 @@
 insert_into_file 'Gemfile', after: %r{gem 'sass-rails'.*\n} do
   <<-EOT
 
-  # Templating
-  gem 'slim' # light weight template engine
+# Templating
+gem 'slim' # light weight template engine
   EOT
 end
 

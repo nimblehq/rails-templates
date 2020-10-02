@@ -17,7 +17,7 @@ def apply_web_variant!
   # Add-ons - [Optional]
   apply '.template/addons/bootstrap/template.rb' if yes? install_addon_prompt 'Bootstrap'
 
-  if yes?('Would you like to add Slim Template Engine')
+  if yes?('Would you like to add Slim Template Engine(yes/no)')
     apply '.template/addons/slim/template.rb'
   end
 

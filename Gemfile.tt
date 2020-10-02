@@ -23,7 +23,7 @@ gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
 
 group :development do
   gem 'foreman' # Manage Procfile-based applications
-  gem 'better_errors' # Better error page for Rails and other Rack apps
+  gem 'better_errors', '2.8.1' # Better error page for Rails and other Rack apps
   gem 'binding_of_caller' # Retrieve the binding of a method's caller in MRI 1.9.2+
   gem 'awesome_print' # Pretty print your Ruby objects with style -- in full color and with proper indentation
   gem 'roadie-rails' # Mailers
