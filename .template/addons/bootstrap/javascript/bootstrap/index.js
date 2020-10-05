@@ -1,4 +1,4 @@
-import bootstrap from 'bootstrap.native/dist/bootstrap-native-v4';
+import bootstrap from 'bootstrap.native/dist/bootstrap-native';
 
 export const Alert = bootstrap.Alert;
 export const Button = bootstrap.Button;
