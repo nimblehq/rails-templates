@@ -1,17 +1,19 @@
-insert_into_file 'Gemfile', after: %r{gem 'sass-rails'.*\n} do
-  <<-EOT
+# frozen_string_literal: true
 
-# Templating
-gem 'slim' # light weight template engine
-  EOT
+insert_into_file 'Gemfile', after: /gem 'sass-rails'.*\n/ do
+  <<~GEM
+
+    # Templating
+    gem 'slim' # light weight template engine
+  GEM
 end
 
 ############################
 # Group: :development, :test
 ############################
 
-insert_into_file 'Gemfile', after: %r{gem 'danger'.*\n} do
-  <<-EOT
-  gem 'danger-slim_lint' # Lint slim files.
-  EOT
+insert_into_file 'Gemfile', after: /gem 'danger'.*\n/ do
+  <<~GEM.indent(2)
+    gem 'danger-slim_lint' # Lint slim files.
+  GEM
 end

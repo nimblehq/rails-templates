@@ -1,7 +1,9 @@
-insert_into_file 'Dangerfile', after: %r{eslint.lint.*\n} do
-  <<~EOT
+# frozen_string_literal: true
 
-  # Runs slim-lint on modified and added files in the PR
-  slim_lint.lint
-  EOT
+insert_into_file 'Dangerfile', after: /eslint.lint.*\n/ do
+  <<~DANGER_PLUGIN
+
+    # Runs slim-lint on modified and added files in the PR
+    slim_lint.lint
+  DANGER_PLUGIN
 end
