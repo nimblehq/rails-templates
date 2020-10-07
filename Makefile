@@ -2,7 +2,8 @@
 common_addon_prompts = Y\n
 
 # Y - in response to Would you like to add the Bootstrap addon?
-web_addon_prompts = Y\n
+# Y - in response to Would you like to add Slim Template Engine addon?
+web_addon_prompts = Y\nY\n
 
 create_web:
 	printf "${common_addon_prompts}${web_addon_prompts}" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
