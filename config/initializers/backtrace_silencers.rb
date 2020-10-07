@@ -1,8 +1,8 @@
-gsub_file 'config/initializers/backtrace_silencers.rb', '# Rails.backtrace_cleaner.remove_silencers!', "Rails.backtrace_cleaner.remove_silencers!\n"
-
-insert_into_file 'config/initializers/backtrace_silencers.rb', after: "Rails.backtrace_cleaner.remove_silencers!\n" do
+gsub_file 'config/initializers/backtrace_silencers.rb', 
+  "# Rails.backtrace_cleaner.remove_silencers!",
   <<-EOT
-  
+Rails.backtrace_cleaner.remove_silencers!
+
 # Add backtrace silencer
 # Default silencer is removing backtrace involving engines files
 # Our silencer also checks for engines directory
@@ -12,4 +12,3 @@ Rails.backtrace_cleaner.add_silencer do |line|
 end
   
   EOT
-end
