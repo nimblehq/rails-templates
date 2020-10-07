@@ -14,11 +14,8 @@ def apply_web_variant!
   apply 'package.json.rb'
   apply 'Dangerfile.rb'
 
-  if ENV['CI']
-    apply '.template/addons/bootstrap/template.rb'
-  elsif yes?('Would you like to add Bootstrap(yes/no)')
-    apply '.template/addons/bootstrap/template.rb'
-  end
+  # Add-ons - [Optional]
+  apply '.template/addons/bootstrap/template.rb' if yes?('Would you like to add Bootstrap(yes/no)')
 
   remove_turbolinks
 
