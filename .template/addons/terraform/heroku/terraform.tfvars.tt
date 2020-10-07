@@ -1,0 +1,2 @@
+heroku_email = "dev@nimblehq.co"
+app_name     = "<%= APP_NAME.gsub(/_/, '-') %>"

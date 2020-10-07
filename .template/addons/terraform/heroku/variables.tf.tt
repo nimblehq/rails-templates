@@ -1,0 +1,41 @@
+variable "heroku_email" {
+  description = "Heroku email address"
+}
+
+variable "heroku_token" {
+  description = "Heroku access token"
+}
+
+variable "app_name" {
+  description = "Application name"
+}
+
+variable "app_organization" {
+  description = "Organization name"
+  default     = "nimblehq"
+}
+
+variable "app_region" {
+  description = "Heroku region"
+  default     = "us"
+}
+
+variable "postgresql_plan" {
+  description = "Heroku PostgreSQL addon plan"
+  default     = "hobby-dev" # Free
+}
+
+variable "redis_plan" {
+  description = "Heroku Redis addon plan"
+  default     = "hobby-dev" # Free
+}
+
+variable "dyno_size" {
+  description = "Heroku Formation dyno size"
+  default     = "Free"
+}
+
+variable "dyno_quantity" {
+  description = "Heroku Formation dyno quantity"
+  default     = 2
+}

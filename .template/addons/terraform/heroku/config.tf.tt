@@ -1,0 +1,14 @@
+resource "heroku_config" "common" {
+  vars = {
+    RAILS_LOG_TO_STDOUT      = "true"
+    RAILS_SERVE_STATIC_FILES = "true"
+    MAILER_DEFAULT_HOST      = "localhost"
+    MAILER_DEFAULT_PORT      = "3000"
+  }
+}
+
+resource "heroku_app_config_association" "default" {
+  app_id = heroku_app.default.id
+
+  vars = heroku_config.common.vars
+}

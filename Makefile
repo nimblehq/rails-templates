@@ -1,7 +1,8 @@
 # Y - in response to Would you like to add the Nginx addon?
 # Y - in response to Would you like to add the PhraseApp addon?
-# Y - in response to Would you like to add the Devise addon?
-common_addon_prompts = Y\nY\nY\n
+# Y - in response to Would you like to add the PhraseApp addon?
+# Y - in response to Would you like to provision application to Heroku with Terraform?
+common_addon_prompts = Y\nY\nY\nY\n
 
 # Y - in response to Would you like to add the Bootstrap addon?
 # Y - in response to Would you like to add the Slim Template Engine addon?
@@ -25,6 +26,7 @@ test_variant_app:
 base_addon_spec = spec/addons/base/**/*_spec.rb
 web_addon_spec = spec/addons/variants/web/**/*_spec.rb
 api_addon_spec = spec/addons/variants/api/**/*_spec.rb
+terraform_addon_spec = spec/addons/terraform/**/*_spec.rb
 
 base_spec = spec/base/**/*_spec.rb
 web_spec = spec/variants/web/**/*_spec.rb
@@ -38,9 +40,9 @@ test_template:
 	cd ../.template && \
 	bundle install; \
 	if [ $(VARIANT) = web ]; then \
-		bundle exec rspec --pattern="${base_spec}, ${web_spec}, ${base_addon_spec}, ${web_addon_spec}"; \
+		bundle exec rspec --pattern="${base_spec}, ${web_spec}, ${base_addon_spec}, ${web_addon_spec}, ${terraform_addon_spec}"; \
 	elif [ $(VARIANT) = api ]; then \
-		bundle exec rspec --pattern="${base_spec}, ${api_spec}, ${base_addon_spec}, ${api_addon_spec}"; \
+		bundle exec rspec --pattern="${base_spec}, ${api_spec}, ${base_addon_spec}, ${api_addon_spec}, ${terraform_addon_specs}"; \
 	fi;
 
 cleanup:

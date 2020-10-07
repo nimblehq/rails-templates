@@ -1,0 +1,10 @@
+resource "heroku_formation" "web_formation" {
+  app      = heroku_app.default.name
+  type     = "web"
+  quantity = var.dyno_quantity
+  size     = var.dyno_size
+
+  depends_on = [
+    heroku_build.default
+  ]
+}

@@ -1,0 +1,30 @@
+provider "heroku" {
+  version = "~> 2.0"
+
+  email   = var.heroku_email
+  api_key = var.heroku_token
+}
+
+resource "heroku_app" "default" {
+  name   = var.app_name
+  region = var.app_region
+  stack  = "container"
+}
+
+resource "heroku_addon" "postgresql" {
+  app  = heroku_app.default.name
+  plan = "heroku-postgresql:${var.postgresql_plan}"
+}
+
+resource "heroku_addon" "redis" {
+  app  = heroku_app.default.name
+  plan = "heroku-redis:${var.redis_plan}"
+}
+
+resource "heroku_build" "default" {
+  app = heroku_app.default.name
+
+  source = {
+    path = "../../<%= File.basename(File.expand_path('.')) %>"
+  }
+}

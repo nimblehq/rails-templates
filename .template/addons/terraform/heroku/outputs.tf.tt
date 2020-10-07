@@ -1,0 +1,3 @@
+output "app_url" {
+  value = "https://${heroku_app.default.name}.herokuapp.com"
+}

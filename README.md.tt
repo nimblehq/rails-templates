@@ -101,3 +101,22 @@ docker-compose -f docker-compose.test.yml run test bin/bundle exec spec [rspec-p
 
 - Create a [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
 from bot account with `public_repo` scope, and set it as `DANGER_GITHUB_API_TOKEN` secret on Semaphore Environment Settings.
+
+#### Deploy to Heroku with Terraform
+
+To deploy the application to Heroku with helps from Terraform, we need to create the Heroku API Key first:
+
+```bash
+$ heroku authorizations:create --description <api key description>
+```
+
+And then, move to the `deploy` folder, initialize the Terraform project and apply it:
+
+```bash
+$ cd deploy
+$ terraform init
+$ terraform plan
+$ terraform apply
+```
+
+During deploying, you need to enter the generated Heroku API Key from the previous step.
