@@ -1,6 +1,7 @@
+# Y - in response to Would you like to add Nginx configuration?
 # Y - in response to Would you like to add the PhraseApp addon?
 # Y - in response to Would you like to add the Devise addon?
-common_addon_prompts = Y\nY\n
+common_addon_prompts = Y\nY\nY\n
 
 # Y - in response to Would you like to add the Bootstrap addon?
 # Y - in response to Would you like to add the Slim Template Engine addon?
