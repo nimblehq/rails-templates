@@ -1,4 +1,6 @@
-require: rubocop-rails
+require: 
+  - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
   Exclude:
@@ -33,3 +35,11 @@ Style/FormatStringToken:
 
 Rails/FilePath:
   EnforcedStyle: arguments
+
+RSpec/HookArgument:
+  EnforcedStyle: each
+
+RSpec/ContextWording:
+  Prefixes:
+    - when
+    - given
