@@ -22,15 +22,13 @@ describe 'Codebase', codebase: true do
     expect(invalid_engine_paths).to be_empty
   end
 
-  context 'respond_to blocks' do
-    it 'does not contain respond_to blocks' do
-      find_results = `grep -r 'respond_to do' app/`
-      expect(find_results).to be_empty
-    end
+  it 'does not contain respond_to blocks' do
+    find_results = `grep -r 'respond_to do' app/`
+    expect(find_results).to be_empty
+  end
 
-    it 'does not contain format blocks' do
-      find_results = `grep -r 'format.json' app/`
-      expect(find_results).to be_empty
-    end
+  it 'does not contain format blocks' do
+    find_results = `grep -r 'format.json' app/`
+    expect(find_results).to be_empty
   end
 end

@@ -40,4 +40,6 @@ RSpec/HookArgument:
   EnforcedStyle: each
 
 RSpec/ContextWording:
-  Enabled: false
+  Prefixes:
+    - when
+    - given
