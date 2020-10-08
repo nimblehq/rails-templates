@@ -51,6 +51,7 @@ group :development, :test do
   gem 'danger-reek' # Detect code smell.
   gem 'danger-brakeman_scanner' # Security static analysis scanner in danger.
   gem 'danger-suggester' # Suggest code changes based on configured code formatter.
+  gem 'danger-simplecov_json' # Report your Ruby app test suite code coverage in Danger.
 end
 
 group :test do
@@ -60,6 +61,7 @@ group :test do
   gem 'json_matchers' # Validate the JSON returned by your Rails JSON APIs
   gem 'webmock' # Library for stubbing and setting expectations on HTTP requests in Ruby
   gem 'simplecov', require: false # code coverage analysis tool for Ruby
+  gem 'simplecov-json', require: false # JSON formatter for simplecov
   gem 'vcr' # Gem for recording test suite's HTTP interactions
   gem 'timecop' # Gem for time travel
 end

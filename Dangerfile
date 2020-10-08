@@ -14,3 +14,6 @@ reek.lint
 
 # Suggests code changes in the PR
 suggester.suggest
+
+# Report your Ruby app test suite code coverage in Danger.
+simplecov.report 'coverage/coverage.json'
