@@ -23,7 +23,7 @@ module Rack
     private
 
     def html?
-      @headers['Content-Type'] =~ /html/
+      @headers['Content-Type'].include?(/html/)
     end
 
     # rubocop:disable Metrics/MethodLength
