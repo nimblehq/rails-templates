@@ -25,7 +25,9 @@ def apply_template!(template_root)
   directory '.github'
 
   template 'Gemfile.tt', force: true
-
+  
+  apply 'config/initializers/backtrace_silencers.rb'
+  
   copy_file '.flayignore'
   copy_file 'Dangerfile'
   copy_file '.rubocop.yml'
