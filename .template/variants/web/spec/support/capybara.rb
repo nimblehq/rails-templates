@@ -27,7 +27,7 @@ Capybara.register_driver(:headless_chrome) do |app|
   options.add_argument('no-sandbox')
 
   # Run headless by default unless CHROME_HEADLESS specified
-  options.add_argument('headless') unless ENV['CHROME_HEADLESS'] =~ /^(false|no|0)$/i
+  options.add_argument('headless') unless /^(false|no|0)$/i.match?(ENV['CHROME_HEADLESS'])
 
   # Disable /dev/shm use in CI
   options.add_argument('disable-dev-shm-usage') if ENV['CI']
