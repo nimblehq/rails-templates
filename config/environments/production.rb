@@ -1,3 +1,6 @@
+# Allow Rails serve static file by default, this can be disable on Nginx addon
+gsub_file('config/environments/production.rb', "ENV['RAILS_SERVE_STATIC_FILES'].present?", 'true')
+
 insert_into_file 'config/environments/production.rb', after: %r{config.action_mailer.perform_caching.+\n} do
   <<-EOT
 

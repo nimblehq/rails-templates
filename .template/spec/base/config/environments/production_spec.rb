@@ -9,6 +9,10 @@ describe 'config/environments/production.rb' do
     expect(subject).to contain(mailer_default_url_config)
   end
 
+  it 'allows Rails serve static file' do
+    expect(subject).to contain('config.public_file_server.enabled = true')
+  end
+  
   private
 
   def mailer_default_url_config
