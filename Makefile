@@ -1,8 +1,11 @@
 # Y - in response to Would you like to add PhraseApp configuration?
 # Y - in response to Would you like to add Bootstrap(yes/no)
 
-create:
+create_web:
 	printf "Y\n" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
+
+create_api:
+	rails new $(APP_NAME) -m ./template.rb -T --api ${OPTIONS}
 
 build:
 	cd $(APP_NAME) && \
