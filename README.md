@@ -44,6 +44,7 @@ rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-tem
 
 Available Addons:
 - `docker`
+- `nginx`
 - `phrase_app`
 - `semaphore`
 - `bootstrap`
