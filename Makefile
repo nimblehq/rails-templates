@@ -2,7 +2,7 @@
 common_addon_prompts = Y\n
 
 # Y - in response to Would you like to add the Bootstrap addon?
-# Y - in response to Would you like to add Slim Template Engine addon?
+# Y - in response to Would you like to add the Slim Template Engine addon?
 web_addon_prompts = Y\nY\n
 
 create_web:
