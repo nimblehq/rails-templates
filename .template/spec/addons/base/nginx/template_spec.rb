@@ -1,6 +1,6 @@
 describe 'Nginx addon - template' do
-  it 'creates .config/nginx/app.conf.template file' do
-    expect(file('.config/nginx/app.conf.template')).to exist
+  it 'creates config/nginx/app.conf.template file' do
+    expect(file('config/nginx/app.conf.template')).to exist
   end
   
   it 'disables Rails serve static file' do

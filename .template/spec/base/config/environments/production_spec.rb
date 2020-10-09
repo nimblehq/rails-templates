@@ -16,10 +16,6 @@ describe 'config/environments/production.rb' do
   it 'removes the config.i18n.fallbacks = true' do
     expect(subject).not_to contain("config.i18n.fallbacks = true")
   end
-
-  it 'allows Rails serve static file' do
-    expect(subject).to contain('config.public_file_server.enabled = true')
-  end
   
   private
 
