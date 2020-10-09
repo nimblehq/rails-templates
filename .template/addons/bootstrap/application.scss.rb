@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-insert_into_file 'app/assets/stylesheets/application.scss', after: /@import 'variables'.+\n/ do
+insert_into_file 'app/assets/stylesheets/application.scss', after: /\/\/ Dependencies\n/ do
   <<~SCSS
-    // Dependencies
     @import 'vendor/bootstrap/bootstrap';
   SCSS
 end
