@@ -7,5 +7,9 @@ describe 'Bootstrap addon - package.json' do
     it 'adds bootstrap.native dependency' do
       expect(subject['dependencies']).to include('bootstrap.native')
     end
+
+    it 'adds bootstrap.native dependency' do
+      expect(subject['dependencies']).to include('bootstrap')
+    end
   end
 end
