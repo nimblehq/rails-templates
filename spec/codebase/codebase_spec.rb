@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# rubocop:disable RSpec/ExampleLength
 describe 'Codebase', codebase: true do
   it 'does not offend Rubocop' do
     expect(`rubocop --parallel --format simple`).to include 'no offenses detected'
@@ -32,3 +33,4 @@ describe 'Codebase', codebase: true do
     expect(find_results).to be_empty
   end
 end
+# rubocop:enable RSpec/ExampleLength
