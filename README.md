@@ -103,7 +103,44 @@ There are 2 template file types:
 ### Template specs
 
 We are using [Serverspec](https://serverspec.org/) to test the template.
-For any changes made, you **must** a spec for it.
+For any changes made, you **must** add a spec for it.
+
+Test files are located under `.template/spec` folder
+
+```
+.
+├── ...
+├── .template
+│   ├── ...
+│   ├── spec
+│   │   └── addons
+│   │   │   └── base
+│   │   │   │   └── docker
+│   │   │   │   │   ├── ...
+│   │   │   │   │   └── template_spec.rb
+│   │   │   │   └── semaphore
+│   │   │   │   │   ├── ...
+│   │   │   │   │   └── template_spec.rb
+│   │   │   └── variants
+│   │   │   │   └── web
+│   │   │   │   │   └── boostrap
+│   │   │   │   │       ├── ...
+│   │   │   │   │       └── template_spec.rb
+│   │   │   │   └── api
+│   │   │   │   │   └── addon
+│   │   │   │   │       ├── ...
+│   │   │   │   │       └── template_spec.rb
+│   │   └── base
+│   │   │   ├── ...
+│   │   │   └── template_spec.rb
+│   │   └── variants
+│   │   │   └── web
+│   │   │   │   ├── ...
+│   │   │   │   └── template_spec.rb
+│   │   │   └── api
+│   │   │   │   ├── ...
+│   │   │   │   └── template_spec.rb
+```
 
 ## License
 

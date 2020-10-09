@@ -62,12 +62,12 @@ blocks:
           - cache restore web-$CACHE_NAME
           - cd $APP_NAME && docker-compose pull test && cd ..
       jobs:
-        - name: Run template specs
+        - name: Template Test
           commands:
-            - make test VARIANT=web
-        - name: Run codebase specs
+            - make test_template VARIANT=web
+        - name: Variant Test
           commands:
-            - make run
+            - make test_variant_app
 
   #############################
   ######## Api Variant ########
@@ -102,9 +102,9 @@ blocks:
           - cache restore api-$CACHE_NAME
           - cd $APP_NAME && docker-compose pull test && cd ..
       jobs:
-        - name: Run template specs
+        - name: Template Test
           commands:
-            - make test VARIANT=api
-        - name: Run codebase specs
+            - make test_template VARIANT=api
+        - name: Variant Test
           commands:
-            - make run
+            - make test_variant_app
