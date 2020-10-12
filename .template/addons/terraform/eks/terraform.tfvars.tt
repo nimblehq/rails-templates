@@ -1,0 +1,2 @@
+app_name = "<%= DASHERIZED_APP_NAME %>"
+region       = "us-east-1"

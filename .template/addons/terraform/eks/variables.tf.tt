@@ -1,0 +1,21 @@
+variable "app_name" {
+  description = "App name"
+  default     = "<%= DASHERIZED_APP_NAME %>"
+}
+
+variable "region" {
+  default     = "us-east-1"
+  description = "AWS region"
+}
+
+variable "rds_username" {
+  description = "RDS username"
+}
+
+variable "rds_password" {
+  description = "RDS password"
+}
+
+variable "rds_db_name" {
+  description = "RDS database name"
+}

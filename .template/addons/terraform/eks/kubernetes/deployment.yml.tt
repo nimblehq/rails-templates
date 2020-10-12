@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: <%= DASHERIZED_APP_NAME %>-deployment
+  namespace: <%= DASHERIZED_APP_NAME %>-namespace
+  labels:
+    app: <%= DASHERIZED_APP_NAME %>
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: <%= DASHERIZED_APP_NAME %>
+  template:
+    metadata:
+      labels:
+        app: <%= DASHERIZED_APP_NAME %>
+    spec:
+      containers:
+        - name: rails-template
+          image: nimblehq/<%= DASHERIZED_APP_NAME %>:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: <%= DASHERIZED_APP_NAME %>-config-map
+            - secretRef:
+                name: <%= DASHERIZED_APP_NAME %>-secret

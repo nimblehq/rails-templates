@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: <%= DASHERIZED_APP_NAME %>-ingress
+  namespace: <%= DASHERIZED_APP_NAME %>-namespace
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/scheme: internet-facing
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: <%= DASHERIZED_APP_NAME %>-service
+              servicePort: 80

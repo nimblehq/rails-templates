@@ -4,6 +4,7 @@ require 'shellwords'
 APP_NAME = app_name
 # Transform the app name from slug to human-readable name e.g. nimble-web -> Nimble
 APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
+DASHERIZED_APP_NAME = app_name.gsub(/_/, '-')
 DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
 RUBY_VERSION = '2.7.1'.freeze
 POSTGRES_VERSION = '12.1'.freeze
@@ -59,6 +60,11 @@ def apply_template!(template_root)
   # Add-ons - [Default]
   apply '.template/addons/docker/template.rb'
   apply '.template/addons/semaphore/template.rb'
+
+  # Add-ons - [Optional]
+  if ENV['CI'] || yes?("Would you like to provision #{APP_NAME} to Amazon EKS with Terraform?")
+    apply '.template/addons/terraform/eks/template.rb'
+  end
 
   # Variants
   apply '.template/variants/api/template.rb' if API_VARIANT

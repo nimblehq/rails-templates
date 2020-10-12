@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: <%= DASHERIZED_APP_NAME %>-config-map
+  namespace: <%= DASHERIZED_APP_NAME %>-namespace
+data:
+  MAILER_DEFAULT_HOST: "localhost"
+  MAILER_DEFAULT_PORT: "3000"
+  RAILS_LOG_TO_STDOUT: "true"
+  RAILS_SERVE_STATIC_FILES: "true"
