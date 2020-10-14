@@ -1,5 +1,6 @@
+# Y - in response to Would you like to add PhraseApp configuration?
 create:
-	rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
+	printf "Y\n" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
 
 build:
 	cd $(APP_NAME) && \
