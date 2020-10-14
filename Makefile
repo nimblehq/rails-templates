@@ -1,4 +1,5 @@
 # Y - in response to Would you like to add the PhraseApp addon?
+# Y - in response to Would you like to add Devise addon?
 common_addon_prompts = Y\n
 
 # Y - in response to Would you like to add the Bootstrap addon?
