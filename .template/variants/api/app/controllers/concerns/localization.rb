@@ -7,13 +7,13 @@ module Localization
     protected
 
     def switch_locale(&action)
-      locale = extract_locale_from_param || I18n.default_locale
+      locale = extract_locale_from_header || I18n.default_locale
 
       I18n.with_locale(locale, &action)
     end
 
-    def extract_locale_from_param
-      return params[:locale] if I18n.locale_available?(params[:locale])
+    def extract_locale_from_header
+      return request.headers[:'Accept-Language'] if I18n.locale_available?(request.headers[:'Accept-Language'])
       
       nil
     end
