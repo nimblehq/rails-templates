@@ -13,7 +13,9 @@ module Localization
     end
 
     def extract_locale_from_param
-      I18n.locale_available?(params[:locale]) ? params[:locale].to_sym : nil
+      return params[:locale] if I18n.locale_available?(params[:locale])
+      
+      nil
     end
 
     private
