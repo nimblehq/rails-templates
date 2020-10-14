@@ -48,8 +48,6 @@ def apply_template!(template_root)
   after_bundle do
     use_source_path template_root
 
-    generate 'devise:install' if @add_devise
-
     # Stop the spring before using the generators as it might hang for a long time
     # Issue: https://github.com/rails/spring/issues/486
     run 'spring stop'
