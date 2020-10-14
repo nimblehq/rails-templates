@@ -14,6 +14,9 @@ def apply_web_variant!
   apply 'package.json.rb'
   apply 'Dangerfile.rb'
 
+  # Add-ons - [Optional]
+  apply '.template/addons/bootstrap/template.rb' if yes? install_addon_prompt 'Bootstrap'
+
   remove_turbolinks
 
   after_bundle do

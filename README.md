@@ -46,6 +46,7 @@ Available Addons:
 - `docker`
 - `phrase_app`
 - `semaphore`
+- `bootstrap`
 
 Read more about Rails Application Template in the [official Rails Guides](https://guides.rubyonrails.org/rails_application_templates.html).
 
