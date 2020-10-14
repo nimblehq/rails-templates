@@ -15,7 +15,7 @@ def apply_web_variant!
   apply 'Dangerfile.rb'
 
   # Add-ons - [Optional]
-  apply '.template/addons/bootstrap/template.rb' if yes?('Would you like to add Bootstrap(yes/no)')
+  apply '.template/addons/bootstrap/template.rb' if yes? install_addon_prompt 'Bootstrap'
 
   remove_turbolinks
 
