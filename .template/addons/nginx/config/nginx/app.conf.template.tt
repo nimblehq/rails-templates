@@ -62,9 +62,9 @@ http {
 
     location @app {
       proxy_pass http://app;
-      proxy_buffer_size          12k;
-      proxy_buffers              8 12k;
-      proxy_busy_buffers_size    24k;
+      proxy_buffer_size 12k;
+      proxy_buffers 8 12k;
+      proxy_busy_buffers_size 24k;
     }
 
     # Static files
