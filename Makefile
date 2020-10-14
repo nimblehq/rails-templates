@@ -1,4 +1,4 @@
-# Y - in response to Would you like to add Nginx configuration?
+# Y - in response to Would you like to add the Nginx addon?
 # Y - in response to Would you like to add the PhraseApp addon?
 # Y - in response to Would you like to add the Devise addon?
 common_addon_prompts = Y\nY\nY\n
