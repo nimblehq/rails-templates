@@ -20,9 +20,14 @@ gsub_file('config/environments/production.rb', 'config.i18n.fallbacks = true', '
 # Adding the correct fallback configuration along with default locale and available locales
 environment do
   <<~EOT
-    config.i18n.available_locales = ENV.fetch('AVAILABLE_LOCALES').split(', ')
+    # eg: AVAILABLE_LOCALES = 'en,th'
+    config.i18n.available_locales = ENV.fetch('AVAILABLE_LOCALES').split(',')
+    
+    # eg: DEFAULT_LOCALE = 'en'
     config.i18n.default_locale = ENV.fetch('DEFAULT_LOCALE')
-    config.i18n.fallbacks = ENV.fetch('FALLBACK_LOCALES').split(', ')
+    
+    # eg: FALLBACK_LOCALES = 'en,th'
+    config.i18n.fallbacks = ENV.fetch('FALLBACK_LOCALES').split(',')
     
   EOT
 end

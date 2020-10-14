@@ -34,9 +34,14 @@ describe 'config/environments/production.rb' do
   
   def i18n_config
     <<~EOT
-      config.i18n.available_locales = ENV.fetch('AVAILABLE_LOCALES').split(', ')
+      # eg: AVAILABLE_LOCALES = 'en,th'
+      config.i18n.available_locales = ENV.fetch('AVAILABLE_LOCALES').split(',')
+      
+      # eg: DEFAULT_LOCALE = 'en'
       config.i18n.default_locale = ENV.fetch('DEFAULT_LOCALE')
-      config.i18n.fallbacks = ENV.fetch('FALLBACK_LOCALES').split(', ')
+      
+      # eg: FALLBACK_LOCALES = 'en,th'
+      config.i18n.fallbacks = ENV.fetch('FALLBACK_LOCALES').split(',')
     EOT
   end
 end
