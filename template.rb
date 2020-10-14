@@ -25,9 +25,9 @@ def apply_template!(template_root)
   directory '.github'
 
   template 'Gemfile.tt', force: true
-  
+
   apply 'config/initializers/backtrace_silencers.rb'
-  
+
   copy_file '.flayignore'
   copy_file 'Dangerfile'
   copy_file '.rubocop.yml'
@@ -45,14 +45,23 @@ def apply_template!(template_root)
   apply 'config/template.rb'
   apply '.gitignore.rb'
 
+  if ENV['CI']
+    @add_devise = true
+    apply '.template/addons/devise/template.rb'
+  elsif yes?("Would you like to add Devise gem?")
+    @add_devise = true
+    apply '.template/addons/devise/template.rb'
+  end
+
   after_bundle do
     use_source_path template_root
+
+    generate 'devise:install' if @add_devise
 
     # Stop the spring before using the generators as it might hang for a long time
     # Issue: https://github.com/rails/spring/issues/486
     run 'spring stop'
 
-    generate 'devise:install'
     apply 'spec/template.rb'
   end
 

@@ -14,12 +14,10 @@ gem 'sidekiq' # background processing for Ruby
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
 
 # Authentications & Authorizations
-gem 'devise' # Authentication solution for Rails with Warden
 gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
 
 # Translations
 # gem 'rails-i18n', '~> 6.0.0' # Translations for Rails
-# gem 'devise-i18n' # Translations for Devise
 
 group :development do
   gem 'foreman' # Manage Procfile-based applications

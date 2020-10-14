@@ -16,6 +16,7 @@ def apply_web_variant!
 
   # Add-ons - [Optional]
   apply '.template/addons/bootstrap/template.rb' if yes? install_addon_prompt 'Bootstrap'
+  apply '.template/addons/slim/template.rb' if yes? install_addon_prompt 'Slim Template Engine'
 
   remove_turbolinks
 
