@@ -1,11 +1,14 @@
-# Y - in response to Would you like to add PhraseApp configuration?
-# Y - in response to Would you like to add Bootstrap(yes/no)
+# Y - in response to Would you like to add the PhraseApp addon?
+common_addon_prompts = Y\n
+
+# Y - in response to Would you like to add the Bootstrap addon?
+web_addon_prompts = Y\n
 
 create_web:
-	printf "Y\nY\n" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
+	printf "${common_addon_prompts}${web_addon_prompts}" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
 
 create_api:
-	rails new $(APP_NAME) -m ./template.rb -T --api ${OPTIONS}
+	printf "${common_addon_prompts}" | rails new $(APP_NAME) -m ./template.rb -T --api ${OPTIONS}
 
 build:
 	cd $(APP_NAME) && \
