@@ -14,7 +14,7 @@ module Localization
 
     def extract_locale_from_header
       return request.headers[:'Accept-Language'] if I18n.locale_available?(request.headers[:'Accept-Language'])
-      
+
       nil
     end
   end
