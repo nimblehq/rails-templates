@@ -37,5 +37,5 @@ variable "dyno_size" {
 
 variable "dyno_quantity" {
   description = "Heroku Formation dyno quantity"
-  default     = 2
+  default     = 1
 }

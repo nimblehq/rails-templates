@@ -3,7 +3,7 @@ resource "heroku_config" "common" {
     RAILS_LOG_TO_STDOUT      = "true"
     RAILS_SERVE_STATIC_FILES = "true"
     MAILER_DEFAULT_HOST      = "localhost"
-    MAILER_DEFAULT_PORT      = "3000"
+    MAILER_DEFAULT_PORT      = "587"
   }
 }
 

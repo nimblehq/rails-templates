@@ -11,5 +11,10 @@ append_to_file '.gitignore' do
 
       # Ignore the test coverage results from SimpleCov
       /coverage
+
+      # Terraform generated files
+      /deploy/.terraform/
+      /deploy/terraform.tfstate
+      /deploy/terraform.tfstate.backup
   EOT
 end

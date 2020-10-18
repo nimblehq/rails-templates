@@ -1,5 +1,7 @@
 build:
   docker:
-    web: Dockerfile
+    web: Dockerfile.web
+    worker: Dockerfile.worker
 run:
   web: bin/start.sh
+  worker: bin/sidekiq.sh

@@ -63,7 +63,7 @@ def apply_template!(template_root)
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
   apply '.template/addons/phrase_app/template.rb' if yes?(install_addon_prompt('PhraseApp'))
   apply '.template/addons/devise/template.rb' if yes?(install_addon_prompt('Devise'))
-  apply '.template/addons/terraform/heroku/template.rb' yes?("Would you like to provision #{APP_NAME} to Heroku with Terraform?")
+  apply '.template/addons/terraform/heroku/template.rb' if yes?("Would you like to provision #{APP_NAME} to Heroku with Terraform?")
 
   # Variants
   apply '.template/variants/api/template.rb' if API_VARIANT

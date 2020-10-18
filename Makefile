@@ -26,7 +26,6 @@ test_variant_app:
 base_addon_spec = spec/addons/base/**/*_spec.rb
 web_addon_spec = spec/addons/variants/web/**/*_spec.rb
 api_addon_spec = spec/addons/variants/api/**/*_spec.rb
-terraform_addon_spec = spec/addons/terraform/**/*_spec.rb
 
 base_spec = spec/base/**/*_spec.rb
 web_spec = spec/variants/web/**/*_spec.rb
@@ -40,9 +39,9 @@ test_template:
 	cd ../.template && \
 	bundle install; \
 	if [ $(VARIANT) = web ]; then \
-		bundle exec rspec --pattern="${base_spec}, ${web_spec}, ${base_addon_spec}, ${web_addon_spec}, ${terraform_addon_spec}"; \
+		bundle exec rspec --pattern="${base_spec}, ${web_spec}, ${base_addon_spec}, ${web_addon_spec}"; \
 	elif [ $(VARIANT) = api ]; then \
-		bundle exec rspec --pattern="${base_spec}, ${api_spec}, ${base_addon_spec}, ${api_addon_spec}, ${terraform_addon_specs}"; \
+		bundle exec rspec --pattern="${base_spec}, ${api_spec}, ${base_addon_spec}, ${api_addon_spec}"; \
 	fi;
 
 cleanup:
