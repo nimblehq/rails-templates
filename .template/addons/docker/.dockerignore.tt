@@ -13,3 +13,6 @@ docker-compose.dev.yml
 docker-compose.test.yml
 docker-compose.yml
 README.md
+deploy/.terraform/
+deploy/terraform.tfstate
+deploy/terraform.tfstate.backup
