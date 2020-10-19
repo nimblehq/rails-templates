@@ -5,6 +5,7 @@ events {
 }
 
 http {
+  <%- if WEB_VARIANT -%>
   include /etc/nginx/mime.types;
 
   gzip on;
@@ -41,6 +42,7 @@ http {
     text/x-component
     text/x-cross-domain-policy;
 
+  <%- end -%>
   upstream app {
     server localhost:3000;
   }
@@ -66,7 +68,8 @@ http {
       proxy_buffers 8 12k;
       proxy_busy_buffers_size 24k;
     }
-
+  
+    <%- if WEB_VARIANT -%>
     # Static files
     location ~ ^\/(assets|packs)\/.* {
       gzip_static on;
@@ -109,5 +112,6 @@ http {
     keepalive_timeout 60s;
 
     error_page 500 502 503 504 /500.html;
+    <%- end -%>
   }
 }
