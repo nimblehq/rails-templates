@@ -7,6 +7,7 @@ project_settings:
     AWS_ACCESS_KEY_ID: # (Optional) For uploading the failed example screenshots
     AWS_SECRET_ACCESS_KEY: # (Optional) For uploading the failed example screenshots
     AWS_ARTIFACTS_BUCKET: s3://nimbl3-semaphore-artifacts # (Optional) For uploading the failed example screenshots
+    DANGER_GITHUB_API_TOKEN: <The github bot account api token for Danger> # Required
 
   build_settings:
     setup:
@@ -15,9 +16,8 @@ project_settings:
       - docker-compose -f docker-compose.test.yml build
       - docker push $DOCKER_IMAGE:$BRANCH_TAG
 
-    # In order to run proto, the `.pronto.yml` needs to be set
     unit_tests:
-      - if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then (echo "Running pronto"; docker-compose -f docker-compose.test.yml run test bundle exec pronto run -f bitbucket_pr -c origin/development); else (echo "Escaping pronto"); fi || true
+      - if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then (echo "Running Danger"; docker-compose -f docker-compose.test.yml run test bundle exec danger); else (echo "Escaping Danger"); fi || true
       - docker-compose -f docker-compose.test.yml run test yarn lint
       - docker-compose -f docker-compose.test.yml run test yarn test
       - docker-compose -f docker-compose.test.yml run test rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile

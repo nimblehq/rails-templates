@@ -2,12 +2,20 @@ module Localization
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_locale
+    around_action :switch_locale
 
     protected
 
-    def set_locale
-      I18n.locale = params[:locale] || I18n.default_locale
+    def switch_locale(&action)
+      locale = extract_locale_from_param || I18n.default_locale
+
+      I18n.with_locale(locale, &action)
+    end
+
+    def extract_locale_from_param
+      return params[:locale] if I18n.locale_available?(params[:locale])
+
+      nil
     end
 
     private

@@ -1,5 +1,5 @@
 RSpec.configure do |config|
-  config.before(:suite) do
+  config.when_first_matching_example_defined(type: :system) do
     if ENV['TEST_SKIP_ASSET'].blank?
       puts 'Prepare webpack assets for test environment'
 

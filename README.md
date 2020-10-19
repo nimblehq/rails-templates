@@ -16,8 +16,8 @@ with building complex applications over the years.
 
 ### Requirements
 
-- Install ruby and set your local ruby version to `2.6.5`
-- Install rails > `6.0.0`, recommended version `6.0.1`
+- Install ruby and set your local ruby version to `2.7.1`
+- Install rails > `6.0.0`, recommended version `6.0.3.2`
 
 ### Use the template
 
@@ -44,6 +44,12 @@ rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-tem
 
 Available Addons:
 - `docker`
+- `nginx`
+- `phrase_app`
+- `semaphore`
+- `bootstrap`
+- `slim`
+- `devise`
 
 Read more about Rails Application Template in the [official Rails Guides](https://guides.rubyonrails.org/rails_application_templates.html).
 
@@ -103,7 +109,44 @@ There are 2 template file types:
 ### Template specs
 
 We are using [Serverspec](https://serverspec.org/) to test the template.
-For any changes made, you **must** a spec for it.
+For any changes made, you **must** add a spec for it.
+
+Test files are located under `.template/spec` folder
+
+```
+.
+├── ...
+├── .template
+│   ├── ...
+│   ├── spec
+│   │   └── addons
+│   │   │   └── base
+│   │   │   │   └── docker
+│   │   │   │   │   ├── ...
+│   │   │   │   │   └── template_spec.rb
+│   │   │   │   └── semaphore
+│   │   │   │   │   ├── ...
+│   │   │   │   │   └── template_spec.rb
+│   │   │   └── variants
+│   │   │   │   └── web
+│   │   │   │   │   └── boostrap
+│   │   │   │   │       ├── ...
+│   │   │   │   │       └── template_spec.rb
+│   │   │   │   └── api
+│   │   │   │   │   └── addon
+│   │   │   │   │       ├── ...
+│   │   │   │   │       └── template_spec.rb
+│   │   └── base
+│   │   │   ├── ...
+│   │   │   └── template_spec.rb
+│   │   └── variants
+│   │   │   └── web
+│   │   │   │   ├── ...
+│   │   │   │   └── template_spec.rb
+│   │   │   └── api
+│   │   │   │   ├── ...
+│   │   │   │   └── template_spec.rb
+```
 
 ## License
 

@@ -5,6 +5,9 @@ if File.exist?('app/javascript/packs/application.js')
   insert_into_file 'app/javascript/packs/application.js', after: %r{require\("channels"\)\n} do
     <<~EOT
 
+      import 'core-js/stable';
+      import 'regenerator-runtime/runtime';
+
       import 'translations/translations';
 
       import 'initializers/';
@@ -14,7 +17,10 @@ if File.exist?('app/javascript/packs/application.js')
 else
   @template_errors.add <<~EOT
     Cannot import the dependencies to `app/javascript/packs/application.js`
-    Content: import 'translations/translations';
+    Content: import 'core-js/stable';
+             import 'regenerator-runtime/runtime';
+             
+             import 'translations/translations';
 
              import 'initializers/';
              import 'screens/';

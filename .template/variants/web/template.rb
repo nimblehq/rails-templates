@@ -3,15 +3,20 @@ def apply_web_variant!
 
   copy_file '.eslintignore'
   copy_file '.eslintrc'
-  copy_file '.pronto_eslint_npm.yml'
   copy_file '.scss-lint.yml'
 
+  template '.nvmrc.tt'
   copy_file '.npmrc'
 
   apply 'Gemfile.rb'
   apply 'app/template.rb'
   apply 'config/template.rb'
   apply 'package.json.rb'
+  apply 'Dangerfile.rb'
+
+  # Add-ons - [Optional]
+  apply '.template/addons/bootstrap/template.rb' if yes? install_addon_prompt 'Bootstrap'
+  apply '.template/addons/slim/template.rb' if yes? install_addon_prompt 'Slim Template Engine'
 
   remove_turbolinks
 
@@ -35,7 +40,7 @@ def remove_turbolinks
       Content: 'data-turbolinks-track': 'reload'
     EOT
   end
-  
+
   if File.exist?('app/javascript/packs/application.js')
     gsub_file('app/javascript/packs/application.js', %r{^require\(\"turbolinks\"\).start\(\)\n}, '')
   else

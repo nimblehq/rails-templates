@@ -18,12 +18,12 @@ describe 'Web variant - Gemfile' do
       expect(subject).to contain('sassc-rails').after('^group :development, :test')
     end
 
-    it 'adds pronto-scss gem' do
-      expect(subject).to contain('pronto-scss').after('^group :development, :test')
+    it 'adds danger-eslint gem' do
+      expect(subject).to contain('danger-eslint').after('^group :development, :test')
     end
 
-    it 'adds pronto-eslint_npm gem' do
-      expect(subject).to contain('pronto-eslint_npm').after('^group :development, :test')
+    it 'adds scss_lint gem' do
+      expect(subject).to contain('scss_lint').after('^group :development, :test')
     end
   end
 

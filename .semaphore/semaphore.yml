@@ -13,7 +13,7 @@ global_job_config:
   prologue:
     commands:
       - checkout
-      - sem-version ruby 2.6.5
+      - sem-version ruby 2.7.1
       - sem-version node 12.16.1
       - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
       - export CACHE_NAME=$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
@@ -24,7 +24,7 @@ global_job_config:
     - name: COMPOSE_FILE
       value: docker-compose.test.yml
     - name: RAILS_VERSION
-      value: 6.0.1
+      value: 6.0.3.2
   secrets:
     - name: rails-templates
 
@@ -39,7 +39,7 @@ blocks:
         - name: Create
           commands:
             - gem install rails -v $RAILS_VERSION --no-document
-            - make create
+            - make create_web
             - cache store web-$CACHE_NAME $APP_NAME/
 
   - name: Web Variant - Build
@@ -62,12 +62,12 @@ blocks:
           - cache restore web-$CACHE_NAME
           - cd $APP_NAME && docker-compose pull test && cd ..
       jobs:
-        - name: Run template specs
+        - name: Template Test
           commands:
-            - make test VARIANT=web
-        - name: Run codebase specs
+            - make test_template VARIANT=web
+        - name: Variant Test
           commands:
-            - make run
+            - make test_variant_app
 
   #############################
   ######## Api Variant ########
@@ -79,7 +79,7 @@ blocks:
         - name: Create
           commands:
             - gem install rails -v $RAILS_VERSION --no-document
-            - make create OPTIONS="--api"
+            - make create_api
             - cache store api-$CACHE_NAME $APP_NAME/
 
   - name: Api Variant - Build
@@ -102,9 +102,9 @@ blocks:
           - cache restore api-$CACHE_NAME
           - cd $APP_NAME && docker-compose pull test && cd ..
       jobs:
-        - name: Run template specs
+        - name: Template Test
           commands:
-            - make test VARIANT=api
-        - name: Run codebase specs
+            - make test_template VARIANT=api
+        - name: Variant Test
           commands:
-            - make run
+            - make test_variant_app

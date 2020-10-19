@@ -2,12 +2,20 @@ module Localization
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_locale
+    around_action :switch_locale
 
     protected
 
-    def set_locale
-      I18n.locale = request.headers[:'Accept-Language'] || I18n.default_locale
+    def switch_locale(&action)
+      locale = extract_locale_from_header || I18n.default_locale
+
+      I18n.with_locale(locale, &action)
+    end
+
+    def extract_locale_from_header
+      return request.headers[:'Accept-Language'] if I18n.locale_available?(request.headers[:'Accept-Language'])
+
+      nil
     end
   end
 end

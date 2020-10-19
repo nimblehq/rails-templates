@@ -1,4 +1,7 @@
-require: rubocop-rails
+require: 
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
 
 AllCops:
   Exclude:
@@ -11,7 +14,9 @@ AllCops:
     - 'Guardfile'
     - 'node_modules/**/*'
     - 'config/**/*'
-  TargetRubyVersion: 2.6
+    - 'tmp/**/*'
+  TargetRubyVersion: 2.7
+  NewCops: enable
 
 Style/Documentation:
   Enabled: false
@@ -26,11 +31,16 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 Style/FormatStringToken:
   EnforcedStyle: template
 
 Rails/FilePath:
   EnforcedStyle: arguments
+
+RSpec/HookArgument:
+  EnforcedStyle: each
+
+RSpec/ContextWording:
+  Prefixes:
+    - when
+    - given

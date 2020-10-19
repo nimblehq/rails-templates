@@ -8,7 +8,7 @@ insert_into_file 'Gemfile', after: %r{gem 'pundit'.*\n} do
   <<~EOT
 
     # Assets
-    gem 'webpacker', '4.0' # Transpile app-like JavaScript
+    gem 'webpacker', '~>5.2.0' # Transpile app-like JavaScript
     gem 'sass-rails' # SASS
   EOT
 end
@@ -23,10 +23,10 @@ insert_into_file 'Gemfile', after: %r{gem 'letter_opener'.*\n} do
   EOT
 end
 
-insert_into_file 'Gemfile', after: %r{gem 'pronto-reek'.*\n} do
+insert_into_file 'Gemfile', after: %r{gem 'danger'.*\n} do
   <<-EOT
-  gem 'pronto-scss', require: false
-  gem 'pronto-eslint_npm', require: false
+  gem 'danger-eslint' # ESLint
+  gem 'scss_lint' # SCSS lint
   EOT
 end
 

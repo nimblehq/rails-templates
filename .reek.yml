@@ -1,0 +1,37 @@
+---
+
+### Generic smell configuration
+detectors:
+  IrresponsibleModule:
+    enabled: false
+
+  DataClump:
+    max_copies: 3
+    min_clump_size: 3
+
+### Directory specific configuration
+directories:
+  "app/controllers":
+    NestedIterators:
+      max_allowed_nesting: 2
+    UnusedPrivateMethod:
+      enabled: false
+    InstanceVariableAssumption:
+      enabled: false
+  "app/helpers":
+    UtilityFunction:
+      enabled: false
+  "app/mailers":
+    InstanceVariableAssumption:
+      enabled: false
+  "db/migrate/":
+    FeatureEnvy:
+      enabled: false
+    TooManyStatements:
+      enabled: false
+    UncommunicativeVariableName:
+      enabled: false
+
+# Directories below will not be scanned at all
+exclude_paths:
+  - spec/support/

@@ -23,7 +23,7 @@ module Rack
     private
 
     def html?
-      @headers['Content-Type'] =~ /html/
+      @headers['Content-Type'].include?(/html/)
     end
 
     # rubocop:disable Metrics/MethodLength
@@ -52,7 +52,7 @@ module Rack
   }
 </style>
       EOF
-      fragment.gsub(%r{</head>}, disable_animations + '</head>')
+      fragment.gsub(%r{</head>}, "#{disable_animations}</head>")
     end
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Naming/HeredocDelimiterNaming

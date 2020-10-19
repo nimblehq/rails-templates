@@ -38,6 +38,7 @@ services:
       <%- if WEB_VARIANT -%>
       - "${PWD}/tmp/screenshots:/<%= APP_NAME %>/tmp/screenshots"
       <%- end -%>
+      - "${PWD}/coverage:/<%= APP_NAME %>/coverage"
       - "${PWD}/log:/<%= APP_NAME %>/log"
     environment:
       - RACK_ENV=test
@@ -48,6 +49,7 @@ services:
       - DB_HOST=db
       - CI=$CI
       - TEST_RETRY=$TEST_RETRY
-
+      - DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN
+      
 volumes:
   ruby-bundle:

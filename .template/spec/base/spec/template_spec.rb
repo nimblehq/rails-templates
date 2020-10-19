@@ -11,7 +11,6 @@ describe '/spec template' do
   it 'creates spec support files' do
     expect(file('spec/support/bullet.rb')).to exist
     expect(file('spec/support/database_cleaner.rb')).to exist
-    expect(file('spec/support/devise.rb')).to exist
     expect(file('spec/support/request_helpers.rb')).to exist
     expect(file('spec/support/retry.rb')).to exist
     expect(file('spec/support/shoulda_matchers.rb')).to exist
