@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rubocop-rspec', require: false # Code style checking for RSpec files
   gem 'rubocop-performance', require: false # An extension of RuboCop focused on code performance checks.
 
+  gem 'undercover' # Report missing test coverage in new changes
   gem 'danger' # Automated code review.
   gem 'danger-rubocop' # A Danger plugin for Rubocop.
   gem 'danger-rails_best_practices' # Analyze code regarding best practices.
@@ -51,6 +52,7 @@ group :development, :test do
   gem 'danger-brakeman_scanner' # Security static analysis scanner in danger.
   gem 'danger-suggester' # Suggest code changes based on configured code formatter.
   gem 'danger-simplecov_json' # Report your Ruby app test suite code coverage in Danger.
+  gem 'danger-undercover' # Report missing test coverage of new changes in Danger
 end
 
 group :test do
@@ -61,6 +63,7 @@ group :test do
   gem 'webmock' # Library for stubbing and setting expectations on HTTP requests in Ruby
   gem 'simplecov', require: false # code coverage analysis tool for Ruby
   gem 'simplecov-json', require: false # JSON formatter for simplecov
+  gem 'simplecov-lcov', require: false # LCOV report for undercover
   gem 'vcr' # Gem for recording test suite's HTTP interactions
   gem 'timecop' # Gem for time travel
   gem 'rails-controller-testing' # Gem that allow to use assigns as well ass assert_template
