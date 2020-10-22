@@ -17,10 +17,11 @@ project_settings:
       - docker push $DOCKER_IMAGE:$BRANCH_TAG
 
     unit_tests:
-      - if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then (echo "Running Danger"; docker-compose -f docker-compose.test.yml run test bundle exec danger); else (echo "Escaping Danger"); fi || true
       - docker-compose -f docker-compose.test.yml run test yarn lint
       - docker-compose -f docker-compose.test.yml run test yarn test
       - docker-compose -f docker-compose.test.yml run test rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
+      - if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then (echo "Running Undercover"; docker-compose -f docker-compose.test.yml run test bundle exec undercover-report -c origin/development); else (echo "Escaping Undercover"); fi || true
+      - if ([ $BRANCH_NAME != 'master' ] && [ $BRANCH_NAME != 'development' ]); then (echo "Running Danger"; docker-compose -f docker-compose.test.yml run test bundle exec danger); else (echo "Escaping Danger"); fi || true
 
     system_tests:
       - docker-compose -f docker-compose.test.yml run test rspec spec/systems/ --profile
