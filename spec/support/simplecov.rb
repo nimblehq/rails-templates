@@ -1,7 +1,8 @@
 require 'simplecov'
 require 'simplecov-json'
+require 'simplecov-lcov'
 
-formatters = [SimpleCov::Formatter::HTMLFormatter, SimpleCov::Formatter::JSONFormatter]
+formatters = [SimpleCov::Formatter::HTMLFormatter, SimpleCov::Formatter::JSONFormatter, SimpleCov::Formatter::LcovFormatter]
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(formatters)
 
 if ENV['CIRCLE_ARTIFACTS']
