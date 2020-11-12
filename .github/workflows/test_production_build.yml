@@ -66,7 +66,7 @@ jobs:
       - name: Create rails app
         run: |
           gem install rails --no-document
-          make create OPTIONS="--${{ matrix.variant }}"
+          make create_${{ matrix.variant }}
 
       - name: Docker build production image
         run: |
