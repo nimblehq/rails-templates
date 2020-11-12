@@ -69,7 +69,7 @@ jobs:
       - name: Create rails app
         run: |
           gem install rails --no-document
-          make create OPTIONS="--${{ matrix.variant }}"
+          make create_${{ matrix.variant }}
 
       - name: Docker login
         run: echo "$DOCKER_REGISTRY_TOKEN" | docker login $DOCKER_REGISTRY_HOST --username=$DOCKER_REGISTRY_USERNAME --password-stdin
