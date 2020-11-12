@@ -1,20 +1,17 @@
-name: Variants test
+name: Test production build
 
 on: push
 
 env:
-  COMPOSE_FILE: docker-compose.test.yml
   APP_NAME: rails_templates
   DOCKER_IMAGE: ${{ github.repository }}
   DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
-  DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
-  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
   RUBY_VERSION: 2.7.1
   NODE_VERSION: 12
 
 jobs:
-  test:
-    name: Test ${{ matrix.variant }} variant
+  build_production:
+    name: Build docker production image for ${{ matrix.variant }} variant
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -71,29 +68,7 @@ jobs:
           gem install rails --no-document
           make create OPTIONS="--${{ matrix.variant }}"
 
-      - name: Docker login
-        run: echo "$DOCKER_REGISTRY_TOKEN" | docker login $DOCKER_REGISTRY_HOST --username=$DOCKER_REGISTRY_USERNAME --password-stdin
-
-      - name: Docker pull
-        if: env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development'
+      - name: Docker build production image
         run: |
           export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
-          cd $APP_NAME
-          docker-compose pull test || true
-
-      - name: Docker build
-        run: |
-          export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
-          make build
-
-      - name: Docker push
-        run: |
-          export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
-          cd $APP_NAME
-          docker-compose push test
-
-      - name: Test
-        run: |
-          export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
-          make test VARIANT=${{ matrix.variant }}
-          make run
+          make build_production
