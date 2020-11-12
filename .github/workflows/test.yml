@@ -92,8 +92,12 @@ jobs:
           cd $APP_NAME
           docker-compose push test
 
-      - name: Test
+      - name: Template test
         run: |
           export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
-          make test VARIANT=${{ matrix.variant }}
-          make run
+          make test_template VARIANT=${{ matrix.variant }}
+
+      - name: Variant test
+        run: |
+          export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
+          make test_variant_app
