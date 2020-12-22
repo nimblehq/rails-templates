@@ -10,4 +10,8 @@ describe '/config template' do
   it 'creates the Sidekiq configuration' do
     expect(file('config/sidekiq.yml')).to exist
   end
+
+  it 'creates the Rails Best Practices configuration' do
+    expect(file('config/rails_best_practices.yml')).to exist
+  end
 end
