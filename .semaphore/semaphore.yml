@@ -24,7 +24,7 @@ global_job_config:
     - name: COMPOSE_FILE
       value: docker-compose.test.yml
     - name: RAILS_VERSION
-      value: 6.0.3.2
+      value: 6.1.0
   secrets:
     - name: rails-templates
 
