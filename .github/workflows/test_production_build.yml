@@ -19,24 +19,27 @@ jobs:
         variant: [web, api]
     steps:
       - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.5.0
+        uses: styfle/cancel-workflow-action@0.6.0
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
 
-      - uses: nimblehq/branch-tag-action@v1.2
+      - name: Set env BRANCH_TAG
+        uses: nimblehq/branch-tag-action@v1.2
 
-      - uses: ruby/setup-ruby@v1.61.1
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.61.1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
-      - uses: actions/setup-node@v2-beta
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.4
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Gems cache
+      - name: Cache gems
         uses: actions/cache@v2
         with:
           path: /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
@@ -45,7 +48,6 @@ jobs:
             ${{ runner.os }}-gems-${{ env.RUBY_VERSION }}-
 
       - name: Create app folder
-        if: ${{ matrix.variant == 'web' }}
         run: mkdir $APP_NAME
 
       - name: Get yarn cache directory path
@@ -53,7 +55,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
 
-      - name: npm packages cache
+      - name: Cache npm packages
         if: ${{ matrix.variant == 'web' }}
         uses: actions/cache@v2
         with:
@@ -70,7 +72,7 @@ jobs:
           gem install rails -v ${{ env.RAILS_VERSION }} --no-document
           make create_${{ matrix.variant }}
 
-      - name: Docker build production image
+      - name: Build production image
         run: |
           export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
           make build_production

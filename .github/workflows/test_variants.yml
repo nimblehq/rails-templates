@@ -22,24 +22,27 @@ jobs:
         variant: [web, api]
     steps:
       - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.5.0
+        uses: styfle/cancel-workflow-action@0.6.0
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
 
-      - uses: nimblehq/branch-tag-action@v1.2
+      - name: Set env BRANCH_TAG
+        uses: nimblehq/branch-tag-action@v1.2
 
-      - uses: ruby/setup-ruby@v1.61.1
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.61.1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
-      - uses: actions/setup-node@v2-beta
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.4
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Gems cache
+      - name: Cache gems
         uses: actions/cache@v2
         with:
           path: /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
@@ -55,7 +58,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
 
-      - name: npm packages cache
+      - name: Cache npm packages
         if: ${{ matrix.variant == 'web' }}
         uses: actions/cache@v2
         with:
@@ -72,33 +75,37 @@ jobs:
           gem install rails -v ${{ env.RAILS_VERSION }} --no-document
           make create_${{ matrix.variant }}
 
-      - name: Docker login
-        run: echo "$DOCKER_REGISTRY_TOKEN" | docker login $DOCKER_REGISTRY_HOST --username=$DOCKER_REGISTRY_USERNAME --password-stdin
+      - name: Login to docker registry
+        uses: docker/login-action@v1.6.0
+        with:
+          registry: $DOCKER_REGISTRY_HOST
+          username: $DOCKER_REGISTRY_USERNAME
+          password: $DOCKER_REGISTRY_TOKEN
 
-      - name: Docker pull
+      - name: Pull docker image
         if: env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development'
         run: |
           export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
           cd $APP_NAME
           docker-compose pull test || true
 
-      - name: Docker build
+      - name: Build docker image
         run: |
           export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
           make build
 
-      - name: Docker push
+      - name: Push docker image to docker registry
         run: |
           export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
           cd $APP_NAME
           docker-compose push test
 
-      - name: Template test
+      - name: Test template
         run: |
           export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
           make test_template VARIANT=${{ matrix.variant }}
 
-      - name: Variant test
+      - name: Test variants
         run: |
           export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
           make test_variant_app
