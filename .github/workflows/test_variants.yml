@@ -19,6 +19,7 @@ jobs:
     strategy:
       matrix:
         variant: [web, api]
+        rails_version: ["6.0.3"]
     steps:
       - name: Cancel previous runs
         uses: styfle/cancel-workflow-action@0.5.0
@@ -68,7 +69,7 @@ jobs:
 
       - name: Create rails app
         run: |
-          gem install rails --no-document
+          gem install rails -v ${{ matrix.rails_version }} --no-document
           make create_${{ matrix.variant }}
 
       - name: Docker login
