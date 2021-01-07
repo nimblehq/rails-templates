@@ -38,7 +38,7 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_branch || github.ref }}
 
-      - name: Set HEROKU_APP
+      - name: Set env HEROKU_APP
         run: |
           if [[ $BRANCH_TAG = "latest" ]]
           then
@@ -47,25 +47,29 @@ jobs:
             echo "HEROKU_APP=<%= APP_NAME %>-staging" >> $GITHUB_ENV
           fi
 
-      - name: Docker login
-        run: echo "$DOCKER_REGISTRY_TOKEN" | docker login $DOCKER_REGISTRY_HOST --username=$DOCKER_REGISTRY_USERNAME --password-stdin
+      - name: Login to docker registry
+        uses: docker/login-action@v1.6.0
+        with:
+          registry: ${{ env.DOCKER_REGISTRY_HOST }}
+          username: ${{ env.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
-      - name: Docker build
+      - name: Build docker image
         run: |
           bin/docker-prepare
           docker-compose build
 
-      - name: Docker push
+      - name: Push docker image
         run: |
           docker-compose push web
 
-      - name: Heroku login
+      - name: Login to Heroku
         run: heroku container:login
 
-      - name: Heroku push
+      - name: Push images to Heroku
         run: |
           heroku container:push --arg DOCKER_REGISTRY_HOST=$DOCKER_REGISTRY_HOST,DOCKER_IMAGE=$DOCKER_IMAGE,BRANCH_TAG=$BRANCH_TAG --recursive
 
-      - name: Heroku release
+      - name: Release
         run: |
           heroku container:release web worker
