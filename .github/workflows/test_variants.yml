@@ -78,9 +78,9 @@ jobs:
       - name: Login to docker registry
         uses: docker/login-action@v1.6.0
         with:
-          registry: $DOCKER_REGISTRY_HOST
-          username: $DOCKER_REGISTRY_USERNAME
-          password: $DOCKER_REGISTRY_TOKEN
+          registry: ${{ env.DOCKER_REGISTRY_HOST }}
+          username: ${{ env.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Pull docker image
         if: env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development'
