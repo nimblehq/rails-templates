@@ -46,7 +46,6 @@ jobs:
             ${{ runner.os }}-gems-${{ env.RUBY_VERSION }}-
 
       - name: Create app folder
-        if: ${{ matrix.variant == 'web' }}
         run: mkdir $APP_NAME
 
       - name: Get yarn cache directory path
