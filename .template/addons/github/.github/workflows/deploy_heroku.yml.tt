@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Heroku
 
 on:
   workflow_run:
@@ -47,29 +47,24 @@ jobs:
             echo "HEROKU_APP=<%= APP_NAME %>-staging" >> $GITHUB_ENV
           fi
 
-      - name: Login to docker registry
+      - name: Login to Docker registry
         uses: docker/login-action@v1.6.0
         with:
           registry: ${{ env.DOCKER_REGISTRY_HOST }}
           username: ${{ env.DOCKER_REGISTRY_USERNAME }}
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
-      - name: Build docker image
-        run: |
-          bin/docker-prepare
-          docker-compose build
+      - name: Build Docker image
+        run: bin/docker-prepare && docker-compose build
 
-      - name: Push docker image
-        run: |
-          docker-compose push web
+      - name: Push Docker image
+        run: docker-compose push web
 
       - name: Login to Heroku
         run: heroku container:login
 
       - name: Push images to Heroku
-        run: |
-          heroku container:push --arg DOCKER_REGISTRY_HOST=$DOCKER_REGISTRY_HOST,DOCKER_IMAGE=$DOCKER_IMAGE,BRANCH_TAG=$BRANCH_TAG --recursive
+        run: heroku container:push --arg DOCKER_REGISTRY_HOST=$DOCKER_REGISTRY_HOST,DOCKER_IMAGE=$DOCKER_IMAGE,BRANCH_TAG=$BRANCH_TAG --recursive
 
       - name: Release
-        run: |
-          heroku container:release web worker
+        run: heroku container:release web worker

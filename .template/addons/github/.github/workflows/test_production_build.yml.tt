@@ -13,7 +13,7 @@ env:
 
 jobs:
   docker_production_build_test:
-    name: Build docker production image
+    name: Build Docker production image
     runs-on: ubuntu-latest
     steps:
       - name: Cancel previous runs
@@ -26,7 +26,5 @@ jobs:
       - name: Set env BRANCH_TAG
         uses: nimblehq/branch-tag-action@v1.2
 
-      - name: Build docker image
-        run: |
-          bin/docker-prepare
-          docker-compose build
+      - name: Build Docker image
+        run: bin/docker-prepare && docker-compose build

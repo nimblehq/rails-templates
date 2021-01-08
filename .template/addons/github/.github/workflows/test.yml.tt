@@ -13,7 +13,7 @@ env:
 
 jobs:
   build:
-    name: Build docker image
+    name: Build Docker image
     runs-on: ubuntu-latest
     steps:
       - name: Cancel previous runs
@@ -26,25 +26,22 @@ jobs:
       - name: Set env BRANCH_TAG
         uses: nimblehq/branch-tag-action@v1.2
 
-      - name: Login to docker registry
+      - name: Login to Docker registry
         uses: docker/login-action@v1.6.0
         with:
           registry: ${{ env.DOCKER_REGISTRY_HOST }}
           username: ${{ env.DOCKER_REGISTRY_USERNAME }}
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
-      - name: Pull docker image
+      - name: Pull Docker image
         if: ${{ env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development' }}
         run: docker-compose pull test || true
 
-      - name: Build docker image
-        run: |
-          bin/docker-prepare
-          docker-compose build
+      - name: Build Docker image
+        run: bin/docker-prepare && docker-compose build
 
-      - name: Push docker image
-        run: |
-          docker-compose push test
+      - name: Push Docker image
+        run: docker-compose push test
 
   unit_tests:
     name: Unit tests
@@ -56,14 +53,14 @@ jobs:
       - name: Set env BRANCH_TAG
         uses: nimblehq/branch-tag-action@v1.2
 
-      - name: Login to docker registry
+      - name: Login to Docker registry
         uses: docker/login-action@v1.6.0
         with:
           registry: ${{ env.DOCKER_REGISTRY_HOST }}
           username: ${{ env.DOCKER_REGISTRY_USERNAME }}
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
-      - name: Pull docker image
+      - name: Pull Docker image
         run: docker-compose pull test || true
 
       - name: Run unit tests
@@ -79,14 +76,14 @@ jobs:
       - name: Set env BRANCH_TAG
         uses: nimblehq/branch-tag-action@v1.2
 
-      - name: Login to docker registry
+      - name: Login to Docker registry
         uses: docker/login-action@v1.6.0
         with:
           registry: ${{ env.DOCKER_REGISTRY_HOST }}
           username: ${{ env.DOCKER_REGISTRY_USERNAME }}
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
-      - name: Pull docker image
+      - name: Pull Docker image
         run: docker-compose pull test || true
 
       - name: Run system tests
