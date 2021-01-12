@@ -42,11 +42,13 @@ def remove_turbolinks
   end
 
   if File.exist?('app/javascript/packs/application.js')
-    gsub_file('app/javascript/packs/application.js', %r{^require\(\"turbolinks\"\).start\(\)\n}, '')
+    gsub_file('app/javascript/packs/application.js', %r{import Turbolinks from "turbolinks"\n}, '')
+    gsub_file('app/javascript/packs/application.js', %r{Turbolinks.start\(\)\n}, '')
   else
     @template_errors.add <<~EOT
       Cannot Remove turbolinks from `app/javascript/packs/application.js`
-      Content: require("turbolinks").start()
+      Content: import Turbolinks from 'turbolinks';
+      Content: Turbolinks.start();
     EOT
   end
 
