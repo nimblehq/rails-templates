@@ -3,10 +3,11 @@ def fixing_rubocop
     use_source_path __dir__
 
     cops = %w(
-      Style/FrozenStringLiteralComment 
+      Style/FrozenStringLiteralComment
+      Style/StringLiterals
       Layout/EmptyLineAfterMagicComment
     ).join(',')
-  
+
     run "rubocop --only #{cops} --auto-correct-all"
   end
 end
