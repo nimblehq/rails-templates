@@ -10,8 +10,8 @@ env:
   DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
   DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
   RUBY_VERSION: 2.7.1
-  NODE_VERSION: 12
-  RAILS_VERSION: 6.0.3
+  NODE_VERSION: 14
+  RAILS_VERSION: 6.1.0
 
 jobs:
   test:
