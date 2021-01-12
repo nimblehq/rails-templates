@@ -18,6 +18,11 @@ build:
 	bin/docker-prepare && \
 	docker-compose -f docker-compose.test.yml build
 
+build_production:
+	cd $(APP_NAME) && \
+	bin/docker-prepare && \
+	docker-compose build
+
 test_variant_app:
 	cd $(APP_NAME) && \
 	docker-compose -f docker-compose.test.yml run test

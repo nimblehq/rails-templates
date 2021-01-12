@@ -1,4 +1,0 @@
-ARG BRANCH_TAG=latest
-FROM <%= DOCKER_IMAGE %>:${BRANCH_TAG}
-
-CMD ./bin/sidekiq.sh

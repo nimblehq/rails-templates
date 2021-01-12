@@ -1,0 +1,111 @@
+name: Test Variants
+
+on: push
+
+env:
+  COMPOSE_FILE: docker-compose.test.yml
+  APP_NAME: rails_templates
+  DOCKER_IMAGE: ${{ github.repository }}
+  DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
+  DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
+  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+  RUBY_VERSION: 2.7.1
+  NODE_VERSION: 14
+  RAILS_VERSION: 6.1.0
+
+jobs:
+  test:
+    name: Test ${{ matrix.variant }} variant
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        variant: [web, api]
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2.3.4
+
+      - name: Set env BRANCH_TAG
+        uses: nimblehq/branch-tag-action@v1.2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.61.1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache gems
+        uses: actions/cache@v2
+        with:
+          path: /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
+          key: ${{ runner.os }}-gems-${{ env.RUBY_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-${{ env.RUBY_VERSION }}-
+
+      - name: Create app folder
+        run: mkdir $APP_NAME
+
+      - name: Get yarn cache directory path
+        if: ${{ matrix.variant == 'web' }}
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
+
+      - name: Cache npm packages
+        if: ${{ matrix.variant == 'web' }}
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
+            **/yarn.lock
+            **/node_modules
+          key: ${{ runner.os }}-npm-packages-${{ hashFiles('**/package.json*') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-packages-
+
+      - name: Create rails app
+        run: |
+          gem install rails -v ${{ env.RAILS_VERSION }} --no-document
+          make create_${{ matrix.variant }}
+
+      - name: Login to docker registry
+        uses: docker/login-action@v1.6.0
+        with:
+          registry: ${{ env.DOCKER_REGISTRY_HOST }}
+          username: ${{ env.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ env.DOCKER_REGISTRY_TOKEN }}
+
+      - name: Pull docker image
+        if: env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development'
+        run: |
+          export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
+          cd $APP_NAME
+          docker-compose pull test || true
+
+      - name: Build docker image
+        run: |
+          export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
+          make build
+
+      - name: Push docker image to docker registry
+        run: |
+          export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
+          cd $APP_NAME
+          docker-compose push test
+
+      - name: Test template
+        run: |
+          export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
+          make test_template VARIANT=${{ matrix.variant }}
+
+      - name: Test variants
+        run: |
+          export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
+          make test_variant_app

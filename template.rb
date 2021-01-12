@@ -4,6 +4,7 @@ require 'shellwords'
 APP_NAME = app_name
 # Transform the app name from slug to human-readable name e.g. nimble-web -> Nimble
 APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
+DOCKER_REGISTRY_HOST = 'docker.io'.freeze
 DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
 RUBY_VERSION = '2.7.1'.freeze
 POSTGRES_VERSION = '12.1'.freeze
@@ -21,8 +22,6 @@ def apply_template!(template_root)
   use_source_path template_root
 
   delete_test_folder
-
-  directory '.github'
 
   template 'Gemfile.tt', force: true
 
@@ -57,6 +56,8 @@ def apply_template!(template_root)
 
   # Add-ons - [Default]
   apply '.template/addons/docker/template.rb'
+  apply '.template/addons/heroku/template.rb'
+  apply '.template/addons/github/template.rb'
   apply '.template/addons/semaphore/template.rb'
 
   # Add-ons - [Optional]
