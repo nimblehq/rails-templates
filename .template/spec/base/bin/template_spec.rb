@@ -13,6 +13,11 @@ describe '/bin template' do
     expect(file('bin/test.sh')).to exist
     expect(file('bin/test.sh')).to be_executable
   end
+  
+  it 'creates the worker script' do
+    expect(file('bin/worker.sh')).to exist
+    expect(file('bin/worker.sh')).to be_executable
+  end
 
   it 'creates the docker prepare script' do
     expect(file('bin/docker-prepare')).to exist
