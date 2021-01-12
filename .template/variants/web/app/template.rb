@@ -2,7 +2,7 @@
 directory 'app/javascript'
 
 if File.exist?('app/javascript/packs/application.js')
-  insert_into_file 'app/javascript/packs/application.js', after: %r{require\("channels"\)\n} do
+  insert_into_file 'app/javascript/packs/application.js', after: %r{import "channels"\n} do
     <<~EOT
 
       import 'core-js/stable';
@@ -19,7 +19,7 @@ else
     Cannot import the dependencies to `app/javascript/packs/application.js`
     Content: import 'core-js/stable';
              import 'regenerator-runtime/runtime';
-             
+
              import 'translations/translations';
 
              import 'initializers/';
