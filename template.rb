@@ -6,7 +6,7 @@ APP_NAME = app_name
 APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
 DOCKER_REGISTRY_HOST = 'docker.io'.freeze
 DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
-RUBY_VERSION = '2.7.1'.freeze
+RUBY_VERSION = '2.7.2'.freeze
 POSTGRES_VERSION = '12.1'.freeze
 REDIS_VERSION = '5.0.7'.freeze
 # Variants
@@ -14,8 +14,8 @@ API_VARIANT = options[:api] || ENV['API'] == 'true'
 WEB_VARIANT = !API_VARIANT
 
 if WEB_VARIANT
-  NODE_VERSION='12.18.3'.freeze
-  NODE_SOURCE_VERSION='12'.freeze # Used in Dockerfile https://github.com/nodesource/distributions
+  NODE_VERSION='14.15.4'.freeze
+  NODE_SOURCE_VERSION='14'.freeze # Used in Dockerfile https://github.com/nodesource/distributions
 end
 
 def apply_template!(template_root)

@@ -13,7 +13,7 @@ global_job_config:
   prologue:
     commands:
       - checkout
-      - sem-version ruby 2.7.1
+      - sem-version ruby 2.7.2
       - sem-version node 12.16.1
       - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
       - export CACHE_NAME=$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID
@@ -24,7 +24,7 @@ global_job_config:
     - name: COMPOSE_FILE
       value: docker-compose.test.yml
     - name: RAILS_VERSION
-      value: 6.1.0
+      value: 6.1.1
   secrets:
     - name: rails-templates
 
