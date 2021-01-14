@@ -49,7 +49,9 @@ http {
 
   server {
     server_name _;
-
+    
+    listen $PORT;
+    
     root /<%= APP_NAME %>/public;
 
     proxy_set_header X-Real-IP  $remote_addr;
