@@ -14,8 +14,8 @@ API_VARIANT = options[:api] || ENV['API'] == 'true'
 WEB_VARIANT = !API_VARIANT
 
 if WEB_VARIANT
-  NODE_VERSION='12.18.3'.freeze
-  NODE_SOURCE_VERSION='12'.freeze # Used in Dockerfile https://github.com/nodesource/distributions
+  NODE_VERSION='14.15.4'.freeze
+  NODE_SOURCE_VERSION='14'.freeze # Used in Dockerfile https://github.com/nodesource/distributions
 end
 
 def apply_template!(template_root)
