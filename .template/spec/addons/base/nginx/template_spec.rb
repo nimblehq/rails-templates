@@ -1,10 +1,15 @@
 describe 'Nginx addon - template' do
-  it 'starts nginx in start.sh' do
-    expect(file('bin/start.sh')).to contain('nginx -c /etc/nginx/conf.d/default.conf')
+  it 'creates the inject_port_into_nginx script' do
+    expect(file('bin/inject_port_into_nginx.sh')).to exist
+    expect(file('bin/inject_port_into_nginx.sh')).to be_executable
   end
   
-  it 'sets the HEROKU $PORT as Nginx HTTP listener' do
-    expect(file('bin/start.sh')).to contain(/'sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf/')
+  it 'sets the $PORT as Nginx HTTP listener' do
+    expect(file('bin/start.sh')).to contain('./bin/inject_port_into_nginx.sh')
+  end
+  
+  it 'starts nginx in start.sh' do
+    expect(file('bin/start.sh')).to contain('nginx -c /etc/nginx/conf.d/default.conf')
   end
   
   it 'starts the Puma under PORT 3000' do
