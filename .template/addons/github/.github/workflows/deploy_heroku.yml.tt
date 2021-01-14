@@ -1,0 +1,70 @@
+name: Deploy Heroku
+
+on:
+  workflow_run:
+    workflows:
+      - Test
+    branches:
+      - master
+      - main
+      - development
+    types:
+      - completed
+  workflow_dispatch:
+
+env:
+  DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
+  DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
+  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+  DOCKER_IMAGE: ${{ github.repository }}
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2.3.4
+        with:
+          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
+
+      - name: Set env BRANCH_TAG
+        uses: nimblehq/branch-tag-action@v1.2
+        with:
+          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
+
+      - name: Set env HEROKU_APP
+        run: |
+          if [[ $BRANCH_TAG = "latest" ]]
+          then
+            echo "HEROKU_APP=<%= APP_NAME %>" >> $GITHUB_ENV
+          else
+            echo "HEROKU_APP=<%= APP_NAME %>-staging" >> $GITHUB_ENV
+          fi
+
+      - name: Login to Docker registry
+        uses: docker/login-action@v1.6.0
+        with:
+          registry: ${{ env.DOCKER_REGISTRY_HOST }}
+          username: ${{ env.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ env.DOCKER_REGISTRY_TOKEN }}
+
+      - name: Build Docker image
+        run: bin/docker-prepare && docker-compose build
+
+      - name: Push Docker image
+        run: docker-compose push web
+
+      - name: Login to Heroku
+        run: heroku container:login
+
+      - name: Push images to Heroku
+        run: heroku container:push --arg DOCKER_REGISTRY_HOST=$DOCKER_REGISTRY_HOST,DOCKER_IMAGE=$DOCKER_IMAGE,BRANCH_TAG=$BRANCH_TAG --recursive
+
+      - name: Release
+        run: heroku container:release web worker

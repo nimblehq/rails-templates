@@ -1,0 +1,90 @@
+name: Test
+
+on: push
+
+env:
+  DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
+  DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
+  DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+  DOCKER_IMAGE: ${{ github.repository }}
+
+  # Set the default docker-compose file
+  COMPOSE_FILE: docker-compose.test.yml
+
+jobs:
+  build:
+    name: Build Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2.3.4
+
+      - name: Set env BRANCH_TAG
+        uses: nimblehq/branch-tag-action@v1.2
+
+      - name: Login to Docker registry
+        uses: docker/login-action@v1.6.0
+        with:
+          registry: ${{ env.DOCKER_REGISTRY_HOST }}
+          username: ${{ env.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ env.DOCKER_REGISTRY_TOKEN }}
+
+      - name: Pull Docker image
+        if: ${{ env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development' }}
+        run: docker-compose pull test || true
+
+      - name: Build Docker image
+        run: bin/docker-prepare && docker-compose build
+
+      - name: Push Docker image
+        run: docker-compose push test
+
+  unit_tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v2.3.4
+
+      - name: Set env BRANCH_TAG
+        uses: nimblehq/branch-tag-action@v1.2
+
+      - name: Login to Docker registry
+        uses: docker/login-action@v1.6.0
+        with:
+          registry: ${{ env.DOCKER_REGISTRY_HOST }}
+          username: ${{ env.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ env.DOCKER_REGISTRY_TOKEN }}
+
+      - name: Pull Docker image
+        run: docker-compose pull test || true
+
+      - name: Run unit tests
+        run: docker-compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
+
+  system_tests:
+    name: System tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v2.3.4
+
+      - name: Set env BRANCH_TAG
+        uses: nimblehq/branch-tag-action@v1.2
+
+      - name: Login to Docker registry
+        uses: docker/login-action@v1.6.0
+        with:
+          registry: ${{ env.DOCKER_REGISTRY_HOST }}
+          username: ${{ env.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ env.DOCKER_REGISTRY_TOKEN }}
+
+      - name: Pull Docker image
+        run: docker-compose pull test || true
+
+      - name: Run system tests
+        run: docker-compose run test bundle exec rspec spec/systems --profile
