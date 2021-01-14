@@ -49,6 +49,7 @@ services:
       - DB_HOST=db
       - CI=$CI
       - TEST_RETRY=$TEST_RETRY
+      - PORT=$PORT
       - DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN
 
 volumes:

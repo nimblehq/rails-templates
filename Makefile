@@ -38,7 +38,7 @@ api_spec = spec/variants/api/**/*_spec.rb
 test_template:
 	cd $(APP_NAME) && \
 	docker-compose -f docker-compose.test.yml up --detach db redis && \
-	docker-compose -f docker-compose.test.yml run test nginx -c /etc/nginx/conf.d/default.conf -t && \
+	docker-compose -f docker-compose.test.yml run test bash -c "./bin/inject_port_into_nginx.sh && nginx -c /etc/nginx/conf.d/default.conf -t" && \
 	docker-compose -f docker-compose.test.yml run --detach test bin/start.sh && \
 	cd ../.template && \
 	bundle install; \
