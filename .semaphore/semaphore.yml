@@ -13,7 +13,7 @@ global_job_config:
   prologue:
     commands:
       - checkout
-      - sem-version ruby 2.7.2
+      - sem-version ruby 3.0.0
       - sem-version node 12.16.1
       - export BRANCH_TAG=${SEMAPHORE_GIT_BRANCH/\//-}
       - export CACHE_NAME=$SEMAPHORE_GIT_BRANCH-$SEMAPHORE_PIPELINE_ID

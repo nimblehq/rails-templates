@@ -6,7 +6,7 @@ env:
   APP_NAME: rails_templates
   DOCKER_IMAGE: ${{ github.repository }}
   DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
-  RUBY_VERSION: 2.7.2
+  RUBY_VERSION: 3.0.0
   NODE_VERSION: 14
   RAILS_VERSION: 6.1.1
 
