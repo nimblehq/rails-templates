@@ -3,11 +3,11 @@ describe 'Nginx addon - template' do
     expect(file('bin/start.sh')).to contain('nginx -c /etc/nginx/conf.d/default.conf')
   end
   
-  it 'assigns the $PORT as Nginx HTTP listener' do
+  it 'sets the HEROKU $PORT as Nginx HTTP listener' do
     expect(file('bin/start.sh')).to contain(/'sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf/')
   end
   
-  it 'starts the puma as PORT 3000' do
+  it 'starts the Puma under PORT 3000' do
     expect(file('bin/start.sh')).to contain('bundle exec rails s -p 3000 -b 0.0.0.0')
   end
   
