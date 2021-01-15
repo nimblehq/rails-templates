@@ -6,6 +6,13 @@
 
 ## Project Setup
 
+### Prerequisites
+
+- Ruby version: <%= RUBY_VERSION %>
+<%- if WEB_VARIANT -%>
+- Node version: <%= NODE_VERSION %>
+<%- end -%>
+
 ### Docker
 
 * Install [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
@@ -61,7 +68,7 @@ it first to leverage the `cache_from` settings of Docker Compose which avoids re
 * Build the Docker image:
 
 ```sh
-docker-compose -f docker-compose.test.yml build
+./bin/docker-prepare && docker-compose -f docker-compose.test.yml build
 ```
 
 Upon the first build, the whole Docker image is built from the ground up and tagged using `$BRANCH_TAG`.
@@ -91,13 +98,21 @@ To setup Github actions for the project, please follow [this guideline](.github/
 * Run all tests:
 
 ```sh
+# Docker way
 docker-compose -f docker-compose.test.yml run test
+
+# Non-Docker way
+rspec
 ```
 
 * Run a specific test:
 
 ```sh
-docker-compose -f docker-compose.test.yml run test bin/bundle exec spec [rspec-params]
+# Docker way
+docker-compose -f docker-compose.test.yml run test bin/bundle exec rspec [rspec-params]
+
+# Non-Docker way
+rspec [rspec-params]
 ```
 
 ### Automated Code Review Setup
