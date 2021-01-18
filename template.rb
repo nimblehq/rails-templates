@@ -32,7 +32,6 @@ def apply_template!(template_root)
   copy_file '.rubocop.yml'
   copy_file '.reek.yml'
 
-  copy_file '.semaphore.yml'
   template '.ruby-gemset.tt'
   template '.ruby-version.tt', force: true
   copy_file '.editorconfig'
@@ -58,9 +57,9 @@ def apply_template!(template_root)
   apply '.template/addons/docker/template.rb'
   apply '.template/addons/heroku/template.rb'
   apply '.template/addons/github/template.rb'
-  apply '.template/addons/semaphore/template.rb'
 
   # Add-ons - [Optional]
+  apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
   apply '.template/addons/phrase_app/template.rb' if yes?(install_addon_prompt('PhraseApp'))
   apply '.template/addons/devise/template.rb' if yes?(install_addon_prompt('Devise'))
