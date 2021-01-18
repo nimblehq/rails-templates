@@ -48,7 +48,10 @@ Add the following build settings to run the tests in the Docker environment via 
 * Configure the environment variable `BRANCH_TAG` to tag Docker images per branch, e.g:
 
 ```sh
-export BRANCH_TAG=$SEMAPHORE_BRANCH_ID
+# a unique `BRANCH_TAG` value to tag the Docker image
+# e.g $SEMAPHORE_BRANCH_ID or using the
+# or using nimblehq/branch-tag-action@v1.2 Github action
+export BRANCH_TAG= # unique value for tagging Docker image
 ```
 
 Each branch needs to have its own Docker image to avoid build settings disparities and leverage Docker image caching.
