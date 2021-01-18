@@ -27,11 +27,11 @@
 
 * Setup the databases:
 
-    * Postgres:
+  * Postgres:
 
-    ```sh
-    rake db:setup
-    ```
+  ```sh
+  rake db:setup
+  ```
 
 * Run the Rails app
 
@@ -45,10 +45,13 @@ foreman start -f Procfile.dev
 
 Add the following build settings to run the tests in the Docker environment via Docker Compose (configuration in `docker-compose.test.yml`):
 
-* Configure the environment variable `BRANCH_TAG` to tag Docker images per branch:
+* Configure the environment variable `BRANCH_TAG` to tag Docker images per branch, e.g:
 
 ```sh
-export BRANCH_TAG=$SEMAPHORE_BRANCH_ID
+# a unique `BRANCH_TAG` value to tag the Docker image
+# e.g $SEMAPHORE_BRANCH_ID or using the
+# or using nimblehq/branch-tag-action@v1.2 Github action
+export BRANCH_TAG= # unique value for tagging Docker image
 ```
 
 Each branch needs to have its own Docker image to avoid build settings disparities and leverage Docker image caching.
@@ -119,4 +122,4 @@ rspec [rspec-params]
 - Add a bot (i.e. `team-nimblehq`) to this repository or to the organization. The bot requires permission level “Write” to be able to set a PR’s status.
 
 - Create a [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
-from bot account with `public_repo` scope, and set it as `DANGER_GITHUB_API_TOKEN` secret on Semaphore Environment Settings.
+from bot account with `public_repo` scope, and set it as `DANGER_GITHUB_API_TOKEN` secret on the CI Environment Settings.

@@ -3,10 +3,6 @@ describe 'Base template' do
     expect(file('.rubocop.yml')).to exist
   end
 
-  it 'creates Semaphore configuration example file' do
-    expect(file('.semaphore.yml')).to exist
-  end
-
   it 'creates Ruby configuration files' do
     expect(file('.ruby-gemset')).to exist
     expect(file('.ruby-version')).to exist
