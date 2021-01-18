@@ -12,6 +12,12 @@ REDIS_VERSION = '5.0.7'.freeze
 # Variants
 API_VARIANT = options[:api] || ENV['API'] == 'true'
 WEB_VARIANT = !API_VARIANT
+# Addons
+DEFAULT_ADDONS = {
+  docker: 'Docker',
+  heroku: 'Heroku',
+  github: 'Github along with Github Action'
+}.freeze
 
 if WEB_VARIANT
   NODE_VERSION='14.15.4'.freeze
@@ -54,11 +60,11 @@ def apply_template!(template_root)
   end
 
   # Add-ons - [Default]
-  apply '.template/addons/docker/template.rb'
-  apply '.template/addons/heroku/template.rb'
-  apply '.template/addons/github/template.rb'
+  DEFAULT_ADDONS.each_key do |addon|
+    apply ".template/addons/#{addon.to_s}/template.rb"
+  end
 
-  print_default_addons_message
+  post_default_addons_install
 
   # Add-ons - [Optional]
   apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
@@ -121,13 +127,15 @@ def print_error_message
   EOT
 end
 
-def print_default_addons_message
+def post_default_addons_install
+  addons = ""
+  DEFAULT_ADDONS.each_value do |addon|
+    addons << "* #{addon}\n  "
+  end
+
   puts <<-EOT
   These default addons were installed:
-  * Docker
-  * Heroku
-  * Github (along with Github Action)
-
+  #{addons}
   EOT
 end
 
