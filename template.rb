@@ -58,6 +58,8 @@ def apply_template!(template_root)
   apply '.template/addons/heroku/template.rb'
   apply '.template/addons/github/template.rb'
 
+  print_default_addons_message
+
   # Add-ons - [Optional]
   apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
@@ -116,6 +118,16 @@ def print_error_message
 
     #{@template_errors}
     #{'=' * 80}
+  EOT
+end
+
+def print_default_addons_message
+  puts <<-EOT
+  These default addons were installed:
+  * Docker
+  * Heroku
+  * Github (along with Github Action)
+
   EOT
 end
 
