@@ -1,7 +1,8 @@
+# Y - in response to Would you like to add the SemaphoreCI addon?
 # Y - in response to Would you like to add the Nginx addon?
 # Y - in response to Would you like to add the PhraseApp addon?
 # Y - in response to Would you like to add the Devise addon?
-common_addon_prompts = Y\nY\nY\n
+common_addon_prompts = Y\nY\nY\nY\n
 
 # Y - in response to Would you like to add the Bootstrap addon?
 # Y - in response to Would you like to add the Slim Template Engine addon?
@@ -18,6 +19,11 @@ build:
 	bin/docker-prepare && \
 	docker-compose -f docker-compose.test.yml build
 
+build_production:
+	cd $(APP_NAME) && \
+	bin/docker-prepare && \
+	docker-compose build
+
 test_variant_app:
 	cd $(APP_NAME) && \
 	docker-compose -f docker-compose.test.yml run test
@@ -33,7 +39,7 @@ api_spec = spec/variants/api/**/*_spec.rb
 test_template:
 	cd $(APP_NAME) && \
 	docker-compose -f docker-compose.test.yml up --detach db redis && \
-	docker-compose -f docker-compose.test.yml run test nginx -c /etc/nginx/conf.d/default.conf -t && \
+	docker-compose -f docker-compose.test.yml run test bash -c "./bin/inject_port_into_nginx.sh && nginx -c /etc/nginx/conf.d/default.conf -t" && \
 	docker-compose -f docker-compose.test.yml run --detach test bin/start.sh && \
 	cd ../.template && \
 	bundle install; \

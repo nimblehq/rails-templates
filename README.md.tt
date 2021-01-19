@@ -6,6 +6,13 @@
 
 ## Project Setup
 
+### Prerequisites
+
+- Ruby version: <%= RUBY_VERSION %>
+<%- if WEB_VARIANT -%>
+- Node version: <%= NODE_VERSION %>
+<%- end -%>
+
 ### Docker
 
 * Install [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
@@ -20,11 +27,11 @@
 
 * Setup the databases:
 
-    * Postgres:
+  * Postgres:
 
-    ```sh
-    rake db:setup
-    ```
+  ```sh
+  rake db:setup
+  ```
 
 * Run the Rails app
 
@@ -38,10 +45,13 @@ foreman start -f Procfile.dev
 
 Add the following build settings to run the tests in the Docker environment via Docker Compose (configuration in `docker-compose.test.yml`):
 
-* Configure the environment variable `BRANCH_TAG` to tag Docker images per branch:
+* Configure the environment variable `BRANCH_TAG` to tag Docker images per branch, e.g:
 
 ```sh
-export BRANCH_TAG=$SEMAPHORE_BRANCH_ID
+# a unique `BRANCH_TAG` value to tag the Docker image
+# e.g $SEMAPHORE_BRANCH_ID or using the
+# or using nimblehq/branch-tag-action@v1.2 Github action
+export BRANCH_TAG= # unique value for tagging Docker image
 ```
 
 Each branch needs to have its own Docker image to avoid build settings disparities and leverage Docker image caching.
@@ -61,7 +71,7 @@ it first to leverage the `cache_from` settings of Docker Compose which avoids re
 * Build the Docker image:
 
 ```sh
-docker-compose -f docker-compose.test.yml build
+./bin/docker-prepare && docker-compose -f docker-compose.test.yml build
 ```
 
 Upon the first build, the whole Docker image is built from the ground up and tagged using `$BRANCH_TAG`.
@@ -82,22 +92,34 @@ docker-compose -f docker-compose.test.yml run test bin/bundle exec rake db:test:
 
 To setup the semaphore CI 2.0 for the project, please follow [this guideline](.semaphore/README.md)
 
+#### Github actions
+
+To setup Github actions for the project, please follow [this guideline](.github/README.md)
+
 ### Test
 
 * Run all tests:
 
 ```sh
+# Docker way
 docker-compose -f docker-compose.test.yml run test
+
+# Non-Docker way
+rspec
 ```
 
 * Run a specific test:
 
 ```sh
-docker-compose -f docker-compose.test.yml run test bin/bundle exec spec [rspec-params]
+# Docker way
+docker-compose -f docker-compose.test.yml run test bin/bundle exec rspec [rspec-params]
+
+# Non-Docker way
+rspec [rspec-params]
 ```
 
 ### Automated Code Review Setup
 - Add a bot (i.e. `team-nimblehq`) to this repository or to the organization. The bot requires permission level “Write” to be able to set a PR’s status.
 
 - Create a [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
-from bot account with `public_repo` scope, and set it as `DANGER_GITHUB_API_TOKEN` secret on Semaphore Environment Settings.
+from bot account with `public_repo` scope, and set it as `DANGER_GITHUB_API_TOKEN` secret on the CI Environment Settings.

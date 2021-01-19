@@ -2,12 +2,12 @@ source 'https://rubygems.org'
 ruby '<%= RUBY_VERSION %>'
 
 # Backend
-gem 'rails', '6.0.3.2' # Latest stable
+gem 'rails', '6.1.1' # Latest stable
 gem 'pg' # Use Postgresql as database
 gem 'puma' # Use Puma as the app server
 gem 'mini_magick' # A ruby wrapper for ImageMagick or GraphicsMagick command line
 gem 'pagy' # A pagination gem that is very light and fast
-gem 'paranoia', '2.4.2' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3 and Rails 4. Soft-deletion of records
+gem 'paranoia' # Paranoia is a re-implementation of acts_as_paranoid for Rails 3 and Rails 4. Soft-deletion of records
 gem 'ffaker' # A library for generating fake data such as names, addresses, and phone numbers.
 gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs.
 gem 'sidekiq' # background processing for Ruby

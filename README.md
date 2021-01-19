@@ -16,8 +16,8 @@ with building complex applications over the years.
 
 ### Requirements
 
-- Install ruby and set your local ruby version to `2.7.1`
-- Install rails > `6.0.0`, recommended version `6.0.3.2`
+- Install ruby and set your local ruby version to `2.7.2`
+- Install rails > `6.0.0`, recommended version `6.1.1`
 
 ### Use the template
 
@@ -150,7 +150,7 @@ Test files are located under `.template/spec` folder
 
 ## License
 
-This project is Copyright (c) 2014-2020 Nimble. It is free software,
+This project is Copyright (c) 2014 and onwards. It is free software,
 and may be redistributed under the terms specified in the [LICENSE] file.
 
 [LICENSE]: /LICENSE

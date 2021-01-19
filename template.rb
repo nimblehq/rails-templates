@@ -4,25 +4,30 @@ require 'shellwords'
 APP_NAME = app_name
 # Transform the app name from slug to human-readable name e.g. nimble-web -> Nimble
 APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
+DOCKER_REGISTRY_HOST = 'docker.io'.freeze
 DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
-RUBY_VERSION = '2.7.1'.freeze
+RUBY_VERSION = '2.7.2'.freeze
 POSTGRES_VERSION = '12.1'.freeze
 REDIS_VERSION = '5.0.7'.freeze
 # Variants
 API_VARIANT = options[:api] || ENV['API'] == 'true'
 WEB_VARIANT = !API_VARIANT
+# Addons
+DEFAULT_ADDONS = {
+  docker: 'Docker',
+  heroku: 'Heroku',
+  github: 'Github along with Github Action'
+}.freeze
 
 if WEB_VARIANT
-  NODE_VERSION='12.18.3'.freeze
-  NODE_SOURCE_VERSION='12'.freeze # Used in Dockerfile https://github.com/nodesource/distributions
+  NODE_VERSION='14.15.4'.freeze
+  NODE_SOURCE_VERSION='14'.freeze # Used in Dockerfile https://github.com/nodesource/distributions
 end
 
 def apply_template!(template_root)
   use_source_path template_root
 
   delete_test_folder
-
-  directory '.github'
 
   template 'Gemfile.tt', force: true
 
@@ -33,7 +38,6 @@ def apply_template!(template_root)
   copy_file '.rubocop.yml'
   copy_file '.reek.yml'
 
-  copy_file '.semaphore.yml'
   template '.ruby-gemset.tt'
   template '.ruby-version.tt', force: true
   copy_file '.editorconfig'
@@ -56,10 +60,14 @@ def apply_template!(template_root)
   end
 
   # Add-ons - [Default]
-  apply '.template/addons/docker/template.rb'
-  apply '.template/addons/semaphore/template.rb'
+  DEFAULT_ADDONS.each_key do |addon|
+    apply ".template/addons/#{addon.to_s}/template.rb"
+  end
+
+  post_default_addons_install
 
   # Add-ons - [Optional]
+  apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
   apply '.template/addons/phrase_app/template.rb' if yes?(install_addon_prompt('PhraseApp'))
   apply '.template/addons/devise/template.rb' if yes?(install_addon_prompt('Devise'))
@@ -116,6 +124,18 @@ def print_error_message
 
     #{@template_errors}
     #{'=' * 80}
+  EOT
+end
+
+def post_default_addons_install
+  addons = ""
+  DEFAULT_ADDONS.each_value do |addon|
+    addons << "* #{addon}\n  "
+  end
+
+  puts <<-EOT
+  These default addons were installed:
+  #{addons}
   EOT
 end
 

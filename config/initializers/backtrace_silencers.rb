@@ -1,5 +1,5 @@
-gsub_file 'config/initializers/backtrace_silencers.rb', 
-  "# Rails.backtrace_cleaner.remove_silencers!",
+gsub_file 'config/initializers/backtrace_silencers.rb',
+  "Rails.backtrace_cleaner.remove_silencers! if ENV[\"BACKTRACE\"]",
   <<-EOT
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -10,5 +10,5 @@ Rails.backtrace_cleaner.remove_silencers!
 Rails.backtrace_cleaner.add_silencer do |line|
   !(Rails::BacktraceCleaner::APP_DIRS_PATTERN.match?(line) || /^engines/.match?(line))
 end
-  
+
   EOT
