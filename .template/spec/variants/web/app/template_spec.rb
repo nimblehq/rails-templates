@@ -32,7 +32,7 @@ describe 'Web variant - /app template' do
         expect(file('app/javascript/packs/application.js')).to contain('import \'regenerator-runtime/runtime\';')
 
         expect(file('app/javascript/packs/application.js')).to contain('import \'translations/translations\';')
-        
+
         expect(file('app/javascript/packs/application.js')).to contain('import \'initializers/\';')
         expect(file('app/javascript/packs/application.js')).to contain('import \'screens/\';')
       end
@@ -40,8 +40,8 @@ describe 'Web variant - /app template' do
   end
 
   context 'Stylesheets' do
-    it 'creates the variables.scss file' do
-      expect(file('app/assets/stylesheets/variables.scss')).to exist
+    it 'creates the _variables.scss file' do
+      expect(file('app/assets/stylesheets/_variables.scss')).to exist
     end
 
     it 'creates the application.scss file' do
