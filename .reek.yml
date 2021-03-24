@@ -24,6 +24,22 @@ directories:
   "app/mailers":
     InstanceVariableAssumption:
       enabled: false
+  "app/model":
+    InstanceVariableAssumption:
+      enabled: false
+  "engines/**/app/controllers/**":
+    NestedIterators:
+      max_allowed_nesting: 2
+    UnusedPrivateMethod:
+      enabled: false
+    InstanceVariableAssumption:
+      enabled: false
+  "engines/**/app/helpers/**":
+    UtilityFunction:
+      enabled: false
+  "engines/**/app/mailers/**":
+    InstanceVariableAssumption:
+      enabled: false
   "db/migrate/":
     FeatureEnvy:
       enabled: false
