@@ -49,10 +49,8 @@ jobs:
             ${{ runner.os }}-nodemodules-
 
       - name: Yarn install
+        if: steps.yarn-cache.outputs.cache-hit != 'true' || steps.node-modules-cache.outputs.cache-hit != 'true'
         run: yarn
-        if: |
-          steps.yarn-cache.outputs.cache-hit != 'true' ||
-          steps.node-modules-cache.outputs.cache-hit != 'true'
 
       <%- end -%>
       - name: Run Danger
