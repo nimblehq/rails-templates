@@ -6,6 +6,7 @@ on:
       - Test
     branches:
       - main
+      - master
     types:
       - completed
   workflow_dispatch:
