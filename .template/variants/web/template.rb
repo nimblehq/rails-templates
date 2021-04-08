@@ -23,7 +23,10 @@ def apply_web_variant!
   after_bundle do
     use_source_path __dir__
 
-    # Fix the default rails template that does not put trailing commas
+    # Use TypeScript by default
+    rails_command('webpacker:install:typescript')
+
+    # Fix the default Rails template that does not put trailing commas
     run 'yarn run lint --fix'
 
     apply 'config/webpack/template.rb'
