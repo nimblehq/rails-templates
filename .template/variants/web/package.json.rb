@@ -9,7 +9,7 @@ end
 
 insert_into_file 'package.json', after: %r{"@rails/ujs":.+\n} do
   <<~EOT
-    "i18n-js": "3.5.1",
+    "i18n-js": "3.8.0",
   EOT
 end
 
