@@ -37,6 +37,12 @@ describe 'Web variant - /app template' do
         expect(file('app/javascript/packs/application.js')).to contain('import \'screens/\';')
       end
     end
+
+    context 'packs/hello_typescript.ts' do
+      it 'creates the default pack file for TypeScript' do
+        expect(file('app/javascript/packs/hello_typescript.ts')).to exist
+      end
+    end
   end
 
   context 'Stylesheets' do

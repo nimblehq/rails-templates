@@ -16,6 +16,10 @@ describe 'Web variant - template' do
     expect(file('.npmrc'))
   end
 
+  it 'creates the TypeScript config file' do
+    expect(file('tsconfig.json'))
+  end
+
   context 'Turbolinks' do
     it 'removes data-turbolinks-track attribute from the layout' do
       expect(file('app/views/layouts/application.html.erb')).not_to contain('data-turbolinks-track')

@@ -12,6 +12,11 @@ describe 'Web variant - package.json' do
     it 'adds I18n-js dependency' do
       expect(subject['dependencies']).to include('i18n-js')
     end
+
+    it 'adds typescript dependencies' do
+      expect(subject['dependencies']).to include('@babel/preset-typescript')
+      expect(subject['dependencies']).to include('typescript')
+    end
   end
 
   describe 'Development Dependencies' do
