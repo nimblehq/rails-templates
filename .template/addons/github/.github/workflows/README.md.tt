@@ -17,6 +17,3 @@ Depending on the workflow used in the project, set up the following secrets:
 - DOCKER_IMAGE (Default: ${{ github. repository }})
 - HEROKU_API_KEY (for deployment)
 - DANGER_GITHUB_API_TOKEN (Default: ${{ github.repository_owner }})
-- ECR_REPO
-- ECS_CLUSTER
-- ECS_SERVICE
