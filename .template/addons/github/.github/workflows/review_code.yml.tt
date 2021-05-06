@@ -1,7 +1,6 @@
 name: Review code
 
-on:
-  pull_request:
+on: push
 
 env:
   DANGER_GITHUB_API_TOKEN: ${{ github.token }}
