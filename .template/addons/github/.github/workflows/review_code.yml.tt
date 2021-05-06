@@ -1,6 +1,8 @@
 name: Review code
 
-on: push
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 env:
   DANGER_GITHUB_API_TOKEN: ${{ github.token }}
