@@ -32,16 +32,22 @@ describe 'Web variant - /app template' do
         expect(file('app/javascript/packs/application.js')).to contain('import \'regenerator-runtime/runtime\';')
 
         expect(file('app/javascript/packs/application.js')).to contain('import \'translations/translations\';')
-        
+
         expect(file('app/javascript/packs/application.js')).to contain('import \'initializers/\';')
         expect(file('app/javascript/packs/application.js')).to contain('import \'screens/\';')
+      end
+    end
+
+    context 'packs/hello_typescript.ts' do
+      it 'creates the default pack file for TypeScript' do
+        expect(file('app/javascript/packs/hello_typescript.ts')).to exist
       end
     end
   end
 
   context 'Stylesheets' do
-    it 'creates the variables.scss file' do
-      expect(file('app/assets/stylesheets/variables.scss')).to exist
+    it 'creates the _variables.scss file' do
+      expect(file('app/assets/stylesheets/_variables.scss')).to exist
     end
 
     it 'creates the application.scss file' do
