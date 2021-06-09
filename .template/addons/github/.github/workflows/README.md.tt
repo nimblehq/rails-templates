@@ -25,10 +25,10 @@ Use the `deploy_heroku.yml` GitHub Action to deploy your app in Heroku.
 
 - If needed, create an account on [Heroku.com](https://www.heroku.com/)
 - Add your Heroku API Key (`HEROKU_API_KEY`) in GitHub Secrets
-- Create 2 new Heroku apps: 
+- Create 2 new Heroku apps:
     - {your-project-name}
     - {your-project-name}-staging
-- If needed, update the `.github\workflow\deploy_heroku.yml` file to matches your Heroku apps names: 
+- If needed, update the `.github\workflow\deploy_heroku.yml` file to matches your Heroku apps names:
 ```yml
 [...]
       - name: Set env HEROKU_APP
@@ -57,8 +57,3 @@ Once all setup, give it a try by running manually the GitHub Action 'Deploy Hero
 
 > **Troubleshooting:**
 > You can check at Heroku's logs from your application dashboard, in 'More > View logs'
-
-
-
-
-
