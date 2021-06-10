@@ -44,10 +44,10 @@ Use the `deploy_heroku.yml` GitHub Action to deploy your app in Heroku.
 > This step might simply be changing '_' to '-' in the app name
 
 - Now you still need to attach a database to **each** app.
-    - From [Heroku Dashboard](https://dashboard.heroku.com/apps), open the app
-    - Go to the 'Resources' tab
-    - In the 'Add-ons' section, search for 'Postgres' and select 'Heroku Postgres'
-    - You can select a free plan to start (Hobby Dev - Free) and 'Submit Order Form'
+  - From [Heroku Dashboard](https://dashboard.heroku.com/apps), open the app
+  - Go to the 'Resources' tab
+  - In the 'Add-ons' section, search for 'Postgres' and select 'Heroku Postgres'
+  - You can select a free plan to start (Hobby Dev - Free) and 'Submit Order Form'
 
 > Note that in 'Settings > Config vars', your now have the `DATABASE_URL` variable (which is used by your Web Container)
 
