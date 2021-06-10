@@ -22,7 +22,6 @@ Depending on the workflow used in the project, set up the following secrets:
 
 Use the `deploy_heroku.yml` GitHub Action to deploy your app in Heroku.
 
-
 - If needed, create an account on [Heroku.com](https://www.heroku.com/)
 - Add your Heroku API Key (`HEROKU_API_KEY`) in GitHub Secrets
 - Create 2 new Heroku apps:
@@ -52,7 +51,6 @@ Use the `deploy_heroku.yml` GitHub Action to deploy your app in Heroku.
 > Note that in 'Settings > Config vars', your now have the `DATABASE_URL` variable (which is used by your Web Container)
 
 Once all setup, give it a try by running manually the GitHub Action 'Deploy Heroku'!
-
 
 > **Troubleshooting:**
 > You can check at Heroku's logs from your application dashboard, in 'More > View logs'
