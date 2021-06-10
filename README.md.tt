@@ -92,7 +92,7 @@ docker-compose -f docker-compose.test.yml run test bin/bundle exec rake db:test:
 
 To setup the semaphore CI 2.0 for the project, please follow [this guideline](.semaphore/README.md)
 
-#### Github actions
+#### Github actions & Heroku Deployment
 
 To setup Github actions for the project, please follow [this guideline](.github/README.md)
 
