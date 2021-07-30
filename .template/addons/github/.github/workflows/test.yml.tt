@@ -88,3 +88,10 @@ jobs:
 
       - name: Run system tests
         run: docker-compose run test bundle exec rspec spec/systems --profile
+
+      - name: Upload system tests screenshots artifact
+        uses: actions/upload-artifact@v2
+        if: ${{ failure() }}
+        with:
+          name: system_tests_screenshots
+          path: tmp/screenshots/*
