@@ -28,16 +28,17 @@ Use the `deploy_heroku.yml` GitHub Action to deploy your app in Heroku.
     - {your-project-name}
     - {your-project-name}-staging
 - If needed, update the `.github\workflow\deploy_heroku.yml` file to matches your Heroku apps names:
+
   ```yml
   [...]
-        - name: Set env HEROKU_APP
-          run: |
-            if [[ $BRANCH_TAG = "latest" ]]
-            then
-              echo "HEROKU_APP=HERE" >> $GITHUB_ENV
-            else
-              echo "HEROKU_APP=HERE-staging" >> $GITHUB_ENV
-            fi
+  - name: Set env HEROKU_APP
+    run: |
+      if [[ $BRANCH_TAG = "latest" ]]
+      then
+        echo "HEROKU_APP=HERE" >> $GITHUB_ENV
+      else
+        echo "HEROKU_APP=HERE-staging" >> $GITHUB_ENV
+      fi
   [...]
 
 > This step might simply be changing '_' to '-' in the app name
