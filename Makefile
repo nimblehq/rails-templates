@@ -2,6 +2,7 @@
 # Y - in response to Would you like to add the Nginx addon?
 # Y - in response to Would you like to add the PhraseApp addon?
 # Y - in response to Would you like to add the Devise addon?
+# Y - in response to Would you like to add the ECS deploy addon?
 common_addon_prompts = Y\nY\nY\nY\n
 
 # Y - in response to Would you like to add the Bootstrap addon?
