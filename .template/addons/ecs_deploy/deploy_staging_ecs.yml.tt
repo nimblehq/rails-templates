@@ -1,4 +1,4 @@
-name: Deploy ECR
+name: Deploy to ECS staging
 
 on:
   workflow_run:
@@ -19,7 +19,7 @@ env:
 
 jobs:
   deploy:
-    name: Deploy to staging
+    name: Deploy to ECS staging
     runs-on: ubuntu-latest
     steps:
       - name: Cancel previous runs
@@ -45,6 +45,3 @@ jobs:
 
       - name: Push to ECR
         run: docker push $DOCKER_REGISTRY_HOST/$DOCKER_IMAGE:$BRANCH_TAG
-
-      - name: Update Service
-        run: aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
