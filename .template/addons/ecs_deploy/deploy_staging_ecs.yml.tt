@@ -45,3 +45,6 @@ jobs:
 
       - name: Push to ECR
         run: docker push $DOCKER_REGISTRY_HOST/$DOCKER_IMAGE:$BRANCH_TAG
+
+      - name: Update Service
+        run: aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
