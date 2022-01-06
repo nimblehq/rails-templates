@@ -21,7 +21,8 @@ def apply_web_variant!
   after_bundle do
     use_source_path __dir__
 
-    # Use TypeScript by default
+    # Install Webpacker and Typescript
+    rails_command('webpacker:install')
     rails_command('webpacker:install:typescript')
 
     # Fix the default Rails template that does not put trailing commas
