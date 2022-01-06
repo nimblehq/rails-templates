@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-insert_into_file 'Gemfile', after: /gem 'sass-rails'.*\n/ do
+insert_into_file 'Gemfile', after: /gem 'pundit'.*\n/ do
   <<~GEM
 
     # Templating
