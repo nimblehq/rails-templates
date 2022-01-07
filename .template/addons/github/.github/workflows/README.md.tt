@@ -3,6 +3,7 @@ The following workflows are supported. Depends on what you choose when generatin
 - [Test](#test-workflow)
 - [Test Production Build](#test-production-build-workflow)
 - [Deploy to Heroku](#deploy-to-heroku-workflow)
+- [Publish to Wiki](#publish-to-wiki-workflow)
 
 Please refer to the following sections for usage instruction.
 
@@ -62,3 +63,10 @@ Once all setup, give it a try by running manually the GitHub Action 'Deploy Hero
 
 > **Troubleshooting:**
 > You can check at Heroku's logs from your application dashboard, in 'More > View logs'
+
+## Publish to Wiki workflow
+- Setup the Github Wiki by following this [official guide](https://docs.github.com/en/communities/documenting-your-project-with-wikis/adding-or-editing-wiki-pages#adding-wiki-pages)
+- Create [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) with `repo` scope enabled - a bot account is recommended to generate that token
+- Set up the following GitHub repository secrets
+  - GH_EMAIL (an email to identify the bot that publish the wiki content in the git history)
+  - GH_TOKEN (the above generated token)
