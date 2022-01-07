@@ -2,9 +2,8 @@
 directory 'app/javascript'
 
 if File.exist?('app/javascript/packs/application.js')
-  insert_into_file 'app/javascript/packs/application.js', after: %r{import "channels"\n} do
+  append_to_file 'app/javascript/packs/application.js' do
     <<~EOT
-
       import 'core-js/stable';
       import 'regenerator-runtime/runtime';
 
@@ -44,9 +43,16 @@ if File.exist?('app/views/layouts/application.html.erb')
   gsub_file 'app/views/layouts/application.html.erb', /<html>/ do
     "<html lang='<%= I18n.locale %>'>"
   end
+
+  insert_into_file 'app/views/layouts/application.html.erb', before: %r{</head>} do
+    <<~EOT.indent(2)
+      <%= javascript_pack_tag 'application' %>
+    EOT
+  end
 else
   @template_errors.add <<~EOT
     Cannot insert the lang attribute into html tag into `app/views/layouts/application.html.erb`
     Content: <html lang='<%= I18n.locale %>'>
+             <%= javascript_pack_tag 'application' %>
   EOT
 end
