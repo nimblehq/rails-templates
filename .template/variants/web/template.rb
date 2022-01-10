@@ -13,6 +13,7 @@ def apply_web_variant!
   apply 'config/template.rb'
   apply 'package.json.rb'
   apply 'Dangerfile.rb'
+  apply 'Procfile.dev.rb'
 
   # Add-ons - [Optional]
   apply '.template/addons/bootstrap/template.rb' if yes? install_addon_prompt 'Bootstrap'
