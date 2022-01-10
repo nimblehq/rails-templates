@@ -17,7 +17,7 @@ with building complex applications over the years.
 ### Requirements
 
 - Install ruby and set your local ruby version to `2.7.2`
-- Install rails `7.0.0`
+- Install rails `7.0.1`
 
 ### Use the template
 
