@@ -29,7 +29,6 @@ rails new <app_name> -m https://raw.githubusercontent.com/nimblehq/rails-templat
 
 Supported template options:
 - `--api` - create an api-only application
-- `--skip-hotwire` - create application without Hotwire integration
 
 To apply the template on an existing application, run following rails command:
 

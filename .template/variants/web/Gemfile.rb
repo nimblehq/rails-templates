@@ -10,8 +10,8 @@ insert_into_file 'Gemfile', after: %r{gem 'pundit'.*\n} do
     # Assets
     gem 'webpacker', '5.4.3' # Transpile app-like JavaScript
     gem "sassc-rails" # Use Sass to process CSS
-    gem "turbo-rails" # Hotwire's SPA-like page accelerator
-    gem "stimulus-rails" # Hotwire's modest JavaScript framework
+    # gem "turbo-rails" # Hotwire's SPA-like page accelerator
+    # gem "stimulus-rails" # Hotwire's modest JavaScript framework
     # gem "sprockets-rails" # The original asset pipeline for Rails
     # gem "jsbundling-rails" # Bundle and transpile JavaScript
     # gem "cssbundling-rails" # Bundle and process CSS

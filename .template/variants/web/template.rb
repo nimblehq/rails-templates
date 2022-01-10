@@ -25,6 +25,9 @@ def apply_web_variant!
     rails_command('webpacker:install')
     rails_command('webpacker:install:typescript')
 
+    # Generate translation file
+    run 'bin/rake i18n:js:export'
+
     # Fix the default Rails template that does not put trailing commas
     run 'yarn run lint --fix'
 
