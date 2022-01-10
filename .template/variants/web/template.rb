@@ -25,18 +25,6 @@ def apply_web_variant!
     rails_command('webpacker:install')
     rails_command('webpacker:install:typescript')
 
-    # To fix webpack CLI that is raising `The command moved into a separate package: @webpack-cli/serve`.
-    # This should be resolved after upgrading Webpacker > 6 but it is not stable yet.
-    run 'yarn add webpack-cli'
-
-    insert_into_file 'config/webpack/development.js', after: %r{const environment.*\n} do
-      <<~EOT
-
-        const config = environment.toWebpackConfig();
-        config.output.filename = "js/[name]-[hash].js"
-      EOT
-    end
-
     # Fix the default Rails template that does not put trailing commas
     run 'yarn run lint --fix'
 
