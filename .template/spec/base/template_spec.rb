@@ -24,5 +24,4 @@ describe 'Base template' do
   it 'creates Reek configuration files' do
     expect(file('.reek.yml')).to exist
   end
-
 end
