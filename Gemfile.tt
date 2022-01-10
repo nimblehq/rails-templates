@@ -11,10 +11,10 @@ gem 'discard' # Soft deletes for ActiveRecord
 gem 'sidekiq' # background processing for Ruby
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-# gem "jbuilder" # Build JSON APIs with ease
-# gem "redis" # Use Redis adapter to run Action Cable in production
-# gem "kredis" # Use Kredis to get higher-level data types in Redis
-# gem "bcrypt" # Use Active Model has_secure_password
+# gem 'jbuilder' # Build JSON APIs with ease
+# gem 'redis' # Use Redis adapter to run Action Cable in production
+# gem 'kredis' # Use Kredis to get higher-level data types in Redis
+# gem 'bcrypt' # Use Active Model has_secure_password
 
 # Authentications & Authorizations
 gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
@@ -37,7 +37,7 @@ group :development, :test do
   # Debugging
   gem 'pry-rails' # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
   gem 'pry-byebug' # Step by step debugging and stack navigation in Pry
-  # gem "debug", platforms: %i[ mri mingw x64_mingw ] # Official debug
+  # gem 'debug', platforms: %i[ mri mingw x64_mingw ] # Official debug
 
   # Utilities
   gem 'figaro' # Simple Rails app configuration

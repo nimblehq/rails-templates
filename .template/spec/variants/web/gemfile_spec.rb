@@ -9,15 +9,11 @@ describe 'Web variant - Gemfile' do
     expect(subject).to contain('webpacker')
   end
 
-  it 'adds sass-rails gem' do
-    expect(subject).to contain('sass-rails')
+  it 'adds sassc-rails gem' do
+    expect(subject).to contain('sassc-rails')
   end
 
   describe 'Development + Test Environment' do
-    it 'adds sassc-rails gem' do
-      expect(subject).to contain('sassc-rails').after('^group :development, :test')
-    end
-
     it 'adds danger-eslint gem' do
       expect(subject).to contain('danger-eslint').after('^group :development, :test')
     end
@@ -28,8 +24,16 @@ describe 'Web variant - Gemfile' do
   end
 
   describe 'Test Environment' do
-    it 'adds rspec-retry gem' do
-      expect(subject).to contain('rspec-retry').after('^group :test')
+    it 'adds capybara gem' do
+      expect(subject).to contain('capybara').after('^group :test')
+    end
+
+    it 'adds selenium-webdriver gem' do
+      expect(subject).to contain('selenium-webdriver').after('^group :test')
+    end
+
+    it 'adds webdrivers gem' do
+      expect(subject).to contain('webdrivers').after('^group :test')
     end
   end
 end
