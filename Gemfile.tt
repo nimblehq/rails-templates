@@ -47,7 +47,7 @@ group :development, :test do
   gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs
 
   # Testing
-  gem 'rspec-rails', '~> 4.0.1' # Rails testing engine
+  gem 'rspec-rails', '~> 5.0.2' # Rails testing engine
 
   # Code Analysis
   gem 'bullet' # help to kill N+1 queries and unused eager loading
