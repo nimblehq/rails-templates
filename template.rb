@@ -6,7 +6,7 @@ APP_NAME = app_name
 APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
 DOCKER_REGISTRY_HOST = 'docker.io'.freeze
 DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
-RUBY_VERSION = '2.7.2'.freeze
+RUBY_VERSION = '3.0.1'.freeze
 POSTGRES_VERSION = '12.1'.freeze
 REDIS_VERSION = '5.0.7'.freeze
 # Variants
