@@ -10,6 +10,10 @@ describe 'Web variant - /app template' do
       expect(file('app/javascript/screens')).to be_directory
     end
 
+    it 'creates javascript entry file' do
+      expect(file('app/javascript/packs/application.js')).to exist
+    end
+
     context 'Initializers' do
       it 'creates main initializer file' do
         expect(file('app/javascript/initializers/index.js')).to exist
@@ -41,6 +45,12 @@ describe 'Web variant - /app template' do
     context 'packs/hello_typescript.ts' do
       it 'creates the default pack file for TypeScript' do
         expect(file('app/javascript/packs/hello_typescript.ts')).to exist
+      end
+    end
+
+    context 'translations/translations.js' do
+      it 'creates the translation.js file' do
+        expect(file('app/javascript/translations/translations.js')).to exist
       end
     end
   end
@@ -85,6 +95,10 @@ describe 'Web variant - /app template' do
   context 'Views' do
     it 'modifies the html tag to attach the current locale' do
       expect(file('app/views/layouts/application.html.erb')).to contain("<html lang='<%= I18n.locale %>'>")
+    end
+
+    it 'loads the javascript entry file' do
+      expect(file('app/views/layouts/application.html.erb')).to contain("<%= javascript_pack_tag 'application' %>")
     end
   end
 end
