@@ -65,7 +65,7 @@ group :development, :test do
   gem 'danger-brakeman_scanner' # Security static analysis scanner in danger.
   gem 'danger-suggester' # Suggest code changes based on configured code formatter.
   gem 'danger-simplecov_json' # Report your Ruby app test suite code coverage in Danger.
-  gem 'danger-undercover', git: 'https://github.com/nimblehq/danger-undercover.git', branch: 'chore/add-support-for-ruby-3' # Report missing test coverage of new changes in Danger
+  gem 'danger-undercover' # Report missing test coverage of new changes in Danger
 end
 
 group :test do
