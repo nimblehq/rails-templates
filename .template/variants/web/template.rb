@@ -7,6 +7,7 @@ def apply_web_variant!
 
   template '.nvmrc.tt'
   copy_file '.npmrc'
+  apply '.tool-versions.rb'
 
   apply 'Gemfile.rb'
   apply 'app/template.rb'

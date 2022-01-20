@@ -3,9 +3,13 @@ describe 'Base template' do
     expect(file('.rubocop.yml')).to exist
   end
 
-  it 'creates Ruby configuration files' do
+  it 'creates RVM configuration files' do
     expect(file('.ruby-gemset')).to exist
     expect(file('.ruby-version')).to exist
+  end
+
+  it 'creates ASDF configuration files' do
+    expect(file('.tool-versions')).to exist
   end
 
   it 'creates editor configuration file' do
