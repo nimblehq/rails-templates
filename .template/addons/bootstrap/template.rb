@@ -6,5 +6,5 @@ apply '.template/addons/bootstrap/application.scss.rb'
 apply '.template/addons/bootstrap/package.json.rb'
 apply '.template/addons/bootstrap/application.js.rb'
 
-directory('stylesheets/bootstrap', 'app/assets/stylesheets/vendor/bootstrap')
-directory('javascript/bootstrap', 'app/javascript/vendor/bootstrap')
+directory('stylesheets/vendor', 'app/assets/stylesheets/vendor')
+directory('javascript/vendor', 'app/javascript/vendor')
