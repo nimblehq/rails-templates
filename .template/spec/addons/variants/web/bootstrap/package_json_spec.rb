@@ -4,12 +4,12 @@ describe 'Bootstrap addon - package.json' do
   end
 
   describe 'Dependencies' do
-    it 'adds bootstrap.native dependency' do
-      expect(subject['dependencies']).to include('bootstrap.native')
-    end
-
     it 'adds bootstrap dependency' do
       expect(subject['dependencies']).to include('bootstrap')
+    end
+
+    it 'adds @popperjs/core dependency' do
+      expect(subject['dependencies']).to include('@popperjs/core')
     end
   end
 end
