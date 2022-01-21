@@ -3,9 +3,15 @@ describe 'Web variant - package.json' do
     JSON.parse(file('package.json').content)
   end
 
-  it 'adds the script for running eslint' do
-    expect(subject['scripts']).to include('lint')
-    expect(subject['scripts']).to include('lint:fix')
+  describe 'Scripts' do
+    it 'adds the script for running eslint' do
+      expect(subject['scripts']).to include('lint')
+      expect(subject['scripts']).to include('lint:fix')
+    end
+
+    it 'adds the script for bundling css' do
+      expect(subject['scripts']).to include('build:css')
+    end
   end
 
   describe 'Dependencies' do
@@ -16,6 +22,10 @@ describe 'Web variant - package.json' do
     it 'adds typescript dependencies' do
       expect(subject['dependencies']).to include('@babel/preset-typescript')
       expect(subject['dependencies']).to include('typescript')
+    end
+
+    it 'adds sass dependencies' do
+      expect(subject['dependencies']).to include('sass')
     end
   end
 

@@ -9,8 +9,12 @@ describe 'Web variant - Gemfile' do
     expect(subject).to contain('webpacker')
   end
 
-  it 'adds sassc-rails gem' do
-    expect(subject).to contain('sassc-rails')
+  it 'adds sprockets-rails gem' do
+    expect(subject).to contain('sprockets-rails')
+  end
+
+  it 'adds cssbundling-rails gem' do
+    expect(subject).to contain('cssbundling-rails')
   end
 
   describe 'Development + Test Environment' do
