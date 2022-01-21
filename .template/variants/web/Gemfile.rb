@@ -23,15 +23,14 @@ end
 ############################
 
 insert_into_file 'Gemfile', after: %r{gem 'danger'.*\n} do
-  <<-EOT
-  gem 'danger-eslint' # ESLint
-  gem 'scss_lint' # SCSS lint
+  <<~EOT.indent(2)
+    gem 'danger-eslint' # ESLint
   EOT
 end
 
 insert_into_file 'Gemfile', after: %r{gem 'spring-watcher-listen'.*\n} do
-  <<-EOT
-  # gem 'web-console' # Use console on exceptions pages
+  <<~EOT.indent(2)
+    # gem 'web-console' # Use console on exceptions pages
   EOT
 end
 
