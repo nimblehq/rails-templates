@@ -56,3 +56,9 @@ else
              <%= javascript_pack_tag 'application' %>
   EOT
 end
+
+# Asset manifest
+run 'yarn build:css'
+
+gsub_file 'app/assets/config/manifest.js', "//= link_directory ../stylesheets .css\n", ''
+append_to_file 'app/assets/config/manifest.js', '//= link_tree ../builds'

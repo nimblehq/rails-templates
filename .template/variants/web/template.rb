@@ -10,9 +10,9 @@ def apply_web_variant!
   apply '.tool-versions.rb'
 
   apply 'Gemfile.rb'
+  apply 'package.json.rb'
   apply 'app/template.rb'
   apply 'config/template.rb'
-  apply 'package.json.rb'
   apply 'Dangerfile.rb'
   apply 'Procfile.dev.rb'
 
