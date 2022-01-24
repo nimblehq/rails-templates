@@ -2,6 +2,6 @@
 
 insert_into_file 'app/javascript/packs/application.js', before: %r{import 'translations/translations'.+\n} do
   <<~JAVASCRIPT
-    import 'vendor/bootstrap';
+    import 'vendor/';
   JAVASCRIPT
 end
