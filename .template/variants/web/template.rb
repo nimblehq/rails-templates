@@ -26,17 +26,16 @@ def apply_web_variant!
   after_bundle do
     use_source_path __dir__
 
-    # Install Webpacker and Typescript
-    rails_command('webpacker:install')
-    rails_command('webpacker:install:typescript')
-
     # Generate translation file
     run 'bin/rake i18n:js:export'
+
+    # If Typescript is enabled
+    Dir.glob('app/javascript/**/*.js').each { |file| File.rename(file, file.sub('.js', '.ts')) }
+    gsub_file 'package.json', 'application.js', 'application.ts'
 
     # Fix the default Rails template that does not put trailing commas
     run 'yarn run lint:fix'
 
-    apply 'config/webpack/template.rb'
     apply 'spec/template.rb'
   end
 end

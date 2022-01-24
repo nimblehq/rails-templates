@@ -6,5 +6,8 @@ append_to_file '.gitignore' do
 
       # Ignore asset builds
       /app/assets/builds/*
+
+      # Ignore Node dependencies
+      /node_modules
   EOT
 end

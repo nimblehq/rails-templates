@@ -11,7 +11,7 @@ describe 'Web variant - /app template' do
     end
 
     it 'creates javascript entry file' do
-      expect(file('app/javascript/packs/application.js')).to exist
+      expect(file('app/javascript/application.js')).to exist
     end
 
     context 'Initializers' do
@@ -30,21 +30,12 @@ describe 'Web variant - /app template' do
       end
     end
 
-    context 'packs/application.js' do
+    context 'app/javascript/application.ts' do
       it 'includes necessary modules' do
-        expect(file('app/javascript/packs/application.js')).to contain('import \'core-js/stable\';')
-        expect(file('app/javascript/packs/application.js')).to contain('import \'regenerator-runtime/runtime\';')
+        expect(file('app/javascript/application.ts')).to contain('import \'translations/translations\';')
 
-        expect(file('app/javascript/packs/application.js')).to contain('import \'translations/translations\';')
-
-        expect(file('app/javascript/packs/application.js')).to contain('import \'initializers/\';')
-        expect(file('app/javascript/packs/application.js')).to contain('import \'screens/\';')
-      end
-    end
-
-    context 'packs/hello_typescript.ts' do
-      it 'creates the default pack file for TypeScript' do
-        expect(file('app/javascript/packs/hello_typescript.ts')).to exist
+        expect(file('app/javascript/application.ts')).to contain('import \'initializers/\';')
+        expect(file('app/javascript/application.ts')).to contain('import \'screens/\';')
       end
     end
 

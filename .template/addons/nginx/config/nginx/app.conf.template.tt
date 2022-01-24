@@ -49,9 +49,9 @@ http {
 
   server {
     server_name _;
-    
+
     listen $PORT;
-    
+
     root /<%= APP_NAME %>/public;
 
     proxy_set_header X-Real-IP  $remote_addr;
@@ -70,9 +70,10 @@ http {
       proxy_buffers 8 12k;
       proxy_busy_buffers_size 24k;
     }
-  
+
     <%- if WEB_VARIANT -%>
     # Static files
+    # TODO: To remove packs
     location ~ ^\/(assets|packs)\/.* {
       gzip_static on;
 

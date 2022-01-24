@@ -8,12 +8,11 @@ insert_into_file 'Gemfile', after: %r{gem 'pundit'.*\n} do
   <<~EOT
 
     # Assets
-    gem 'webpacker', '5.4.3' # Transpile app-like JavaScript
     gem 'sprockets-rails' # The original asset pipeline for Rails
     gem 'cssbundling-rails' # Bundle and process CSS
+    gem 'jsbundling-rails' # Bundle and transpile JavaScript
     # gem 'turbo-rails' # Hotwire's SPA-like page accelerator
     # gem 'stimulus-rails' # Hotwire's modest JavaScript framework
-    # gem 'jsbundling-rails' # Bundle and transpile JavaScript
     # gem 'image_processing' # Use Active Storage variants
   EOT
 end
