@@ -39,9 +39,9 @@ end
 ##############
 
 insert_into_file 'Gemfile', after: %r{gem 'rspec-retry'.*\n} do
-  <<-EOT
-  gem 'capybara' # Integration testing
-  gem 'selenium-webdriver' # Ruby bindings for Selenium/WebDriver
-  gem 'webdrivers' # Run Selenium tests more easily with automatic installation and updates for all supported webdrivers
+  <<~EOT.indent(2)
+    gem 'capybara' # Integration testing
+    gem 'selenium-webdriver' # Ruby bindings for Selenium/WebDriver
+    gem 'webdrivers' # Run Selenium tests more easily with automatic installation and updates for all supported webdrivers
   EOT
 end

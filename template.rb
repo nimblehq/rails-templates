@@ -40,7 +40,6 @@ def apply_template!(template_root)
   template '.ruby-version.tt', force: true
   template '.tool-versions.tt'
   copy_file '.editorconfig'
-  copy_file '.stylelintrc'
   copy_file 'Procfile'
   copy_file 'Procfile.dev'
   template 'README.md.tt', force: true

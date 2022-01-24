@@ -21,10 +21,6 @@ describe 'Web variant - Gemfile' do
     it 'adds danger-eslint gem' do
       expect(subject).to contain('danger-eslint').after('^group :development, :test')
     end
-
-    it 'adds scss_lint gem' do
-      expect(subject).to contain('scss_lint').after('^group :development, :test')
-    end
   end
 
   describe 'Test Environment' do

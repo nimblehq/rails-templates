@@ -1,11 +1,12 @@
 describe 'Web variant - template' do
   it 'creates the eslint configuration files' do
-    expect(file('.eslintignore')).to exist
     expect(file('.eslintrc')).to exist
+    expect(file('.eslintignore')).to exist
   end
 
-  it 'creates sass lint configuration file' do
-    expect(file('.scss-lint.yml')).to exist
+  it 'creates the stylelint configuration files' do
+    expect(file('.stylelintrc')).to exist
+    expect(file('.stylelintignore')).to exist
   end
 
   it 'creates the .nvmrc file' do
@@ -21,7 +22,7 @@ describe 'Web variant - template' do
   end
 
   it 'creates the asset manifest file' do
-    expect(file('test')).to exist
+    expect(file('app/assets/config/manifest.js')).to exist
     expect(file('app/assets/config/manifest.js')).not_to contain('//= link_directory ../stylesheets .css')
     expect(file('app/assets/config/manifest.js')).to contain('//= link_tree ../builds')
   end

@@ -30,6 +30,10 @@ end
 remove_file 'app/assets/stylesheets/application.css'
 directory 'app/assets/stylesheets'
 
+run 'yarn build:css'
+gsub_file 'app/assets/config/manifest.js', "//= link_directory ../stylesheets .css\n", ''
+append_to_file 'app/assets/config/manifest.js', '//= link_tree ../builds'
+
 # Controllers
 directory 'app/controllers/concerns'
 inject_into_class 'app/controllers/application_controller.rb', 'ApplicationController' do
@@ -57,8 +61,3 @@ else
   EOT
 end
 
-# Asset manifest
-run 'yarn build:css'
-
-gsub_file 'app/assets/config/manifest.js', "//= link_directory ../stylesheets .css\n", ''
-append_to_file 'app/assets/config/manifest.js', '//= link_tree ../builds'

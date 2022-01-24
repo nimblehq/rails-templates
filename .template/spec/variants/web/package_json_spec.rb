@@ -5,6 +5,16 @@ describe 'Web variant - package.json' do
 
   describe 'Scripts' do
     it 'adds the script for running eslint' do
+      expect(subject['scripts']).to include('eslint')
+      expect(subject['scripts']).to include('eslint:fix')
+    end
+
+    it 'adds the script for running stylelint' do
+      expect(subject['scripts']).to include('stylelint')
+      expect(subject['scripts']).to include('stylelint:fix')
+    end
+
+    it 'adds the script for all lints' do
       expect(subject['scripts']).to include('lint')
       expect(subject['scripts']).to include('lint:fix')
     end
@@ -32,6 +42,17 @@ describe 'Web variant - package.json' do
   describe 'Development Dependencies' do
     it 'adds Nimble eslint config dependency' do
       expect(subject['devDependencies']).to include('@nimblehq/eslint-config-nimble')
+    end
+
+    it 'adds stylelint dependencies' do
+      expect(subject['dependencies']).to include('stylelint')
+      expect(subject['dependencies']).to include('stylelint-config-sass-guidelines')
+      expect(subject['dependencies']).to include('stylelint-config-property-sort-order-smacss')
+    end
+
+    it 'adds postcss 8 dependencies' do
+      expect(subject['dependencies']).to include('postcss')
+      expect(subject['dependencies']['postcss']).to eq('8.4.5')
     end
   end
 end

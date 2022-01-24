@@ -1,9 +1,10 @@
 def apply_web_variant!
   use_source_path __dir__
 
-  copy_file '.eslintignore'
   copy_file '.eslintrc'
-  copy_file '.scss-lint.yml'
+  copy_file '.eslintignore'
+  copy_file '.stylelintrc'
+  copy_file '.stylelintignore'
 
   template '.nvmrc.tt'
   copy_file '.npmrc'
