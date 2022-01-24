@@ -13,8 +13,8 @@ describe 'Web variant - spec/codebase/codebase_spec.rb' do
 
   def scss_lint_example
     <<~EOT
-      it 'does not offend scss-lint' do
-        expect(`scss-lint`).to be_empty
+      it 'does not offend stylelint' do
+        expect(`yarn run stylelint ./`).to be_empty
       end
     EOT
   end

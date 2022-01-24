@@ -45,14 +45,14 @@ describe 'Web variant - package.json' do
     end
 
     it 'adds stylelint dependencies' do
-      expect(subject['dependencies']).to include('stylelint')
-      expect(subject['dependencies']).to include('stylelint-config-sass-guidelines')
-      expect(subject['dependencies']).to include('stylelint-config-property-sort-order-smacss')
+      expect(subject['devDependencies']).to include('stylelint')
+      expect(subject['devDependencies']).to include('stylelint-config-sass-guidelines')
+      expect(subject['devDependencies']).to include('stylelint-config-property-sort-order-smacss')
     end
 
     it 'adds postcss 8 dependencies' do
-      expect(subject['dependencies']).to include('postcss')
-      expect(subject['dependencies']['postcss']).to eq('8.4.5')
+      expect(subject['devDependencies']).to include('postcss')
+      expect(subject['devDependencies']['postcss']).to eq('8.4.5')
     end
   end
 end

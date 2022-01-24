@@ -26,8 +26,8 @@ bundled_stylesheet = "./app/assets/builds/application.css"
 
 run 'npm set-script eslint "eslint . --color"'
 run 'npm set-script eslint:fix "eslint . --color --fix"'
-run 'npm set-script stylelint "stylelint app/assets --color"'
-run 'npm set-script stylelint:fix "stylelint app/assets --color --fix"'
+run 'npm set-script stylelint "stylelint **/*.scss --color"'
+run 'npm set-script stylelint:fix "stylelint **/*.scss --color --fix"'
 run 'npm set-script lint "yarn eslint && yarn stylelint"'
 run 'npm set-script lint:fix "yarn eslint:fix && yarn stylelint:fix"'
 run %(npm set-script build:css "sass #{source_stylesheet} #{bundled_stylesheet} --no-source-map --load-path=node_modules")

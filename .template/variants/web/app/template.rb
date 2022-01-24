@@ -60,4 +60,3 @@ else
              <%= javascript_pack_tag 'application' %>
   EOT
 end
-
