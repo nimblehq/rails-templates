@@ -6,7 +6,7 @@ env:
   APP_NAME: rails_templates
   DOCKER_IMAGE: ${{ github.repository }}
   DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
-  RUBY_VERSION: 2.7.2
+  RUBY_VERSION: 3.0.1
   NODE_VERSION: 14
   RAILS_VERSION: 7.0.1
 
@@ -29,7 +29,7 @@ jobs:
         uses: nimblehq/branch-tag-action@v1.2
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.61.1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
