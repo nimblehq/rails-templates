@@ -23,11 +23,6 @@ run 'yarn add --dev stylelint-config-property-sort-order-smacss'
 run 'yarn add --dev postcss@8.4.5'
 
 # Setup scripts
-source_javascript = 'app/javascript/application.js'
-bundled_javascript = 'app/assets/builds'
-source_stylesheet = 'app/assets/stylesheets/application.scss'
-bundled_stylesheet = 'app/assets/builds/application.css'
-
 run 'npm set-script eslint "eslint . --color"'
 run 'npm set-script eslint:fix "eslint . --color --fix"'
 run 'npm set-script stylelint "stylelint **/*.scss --color"'
@@ -35,5 +30,13 @@ run 'npm set-script stylelint:fix "stylelint **/*.scss --color --fix"'
 run 'npm set-script lint "yarn eslint && yarn stylelint"'
 run 'npm set-script lint:fix "yarn eslint:fix && yarn stylelint:fix"'
 
-run %(npm set-script build "esbuild #{source_javascript} --bundle --sourcemap --outdir=#{bundled_javascript}")
+source_javascript = 'app/javascript/application.js'
+inject_javascript = 'app/javascript/global.js'
+bundled_javascript = 'app/assets/builds'
+
+run %(npm set-script build "esbuild #{source_javascript} --bundle --sourcemap --inject:#{inject_javascript} --outdir=#{bundled_javascript}")
+
+source_stylesheet = 'app/assets/stylesheets/application.scss'
+bundled_stylesheet = 'app/assets/builds/application.css'
+
 run %(npm set-script build:css "sass #{source_stylesheet} #{bundled_stylesheet} --no-source-map --load-path=node_modules")
