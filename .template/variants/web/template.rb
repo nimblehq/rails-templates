@@ -29,10 +29,6 @@ def apply_web_variant!
     # Generate translation file
     run 'bin/rake i18n:js:export'
 
-    # If Typescript is enabled
-    Dir.glob('app/javascript/**/*.js').each { |file| File.rename(file, file.sub('.js', '.ts')) }
-    gsub_file 'package.json', 'application.js', 'application.ts'
-
     # Fix the default Rails template that does not put trailing commas
     run 'yarn run lint:fix'
 
