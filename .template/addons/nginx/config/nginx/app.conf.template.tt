@@ -73,8 +73,7 @@ http {
 
     <%- if WEB_VARIANT -%>
     # Static files
-    # TODO: To remove packs
-    location ~ ^\/(assets|packs)\/.* {
+    location ~ ^\/assets\/.* {
       gzip_static on;
 
       sendfile on;
