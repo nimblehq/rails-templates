@@ -30,13 +30,8 @@ run 'npm set-script stylelint:fix "stylelint **/*.scss --color --fix"'
 run 'npm set-script lint "yarn eslint && yarn stylelint"'
 run 'npm set-script lint:fix "yarn eslint:fix && yarn stylelint:fix"'
 
-source_javascript = 'app/javascript/application.js'
-inject_javascript = 'app/javascript/global.js'
-bundled_javascript = 'app/assets/builds'
-
-run %(npm set-script build "esbuild #{source_javascript} --bundle --sourcemap --inject:#{inject_javascript} --outdir=#{bundled_javascript}")
-
 source_stylesheet = 'app/assets/stylesheets/application.scss'
 bundled_stylesheet = 'app/assets/builds/application.css'
 
+run %(npm set-script build "node app/javascript/build.js")
 run %(npm set-script build:css "sass #{source_stylesheet} #{bundled_stylesheet} --no-source-map --load-path=node_modules")

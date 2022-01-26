@@ -10,6 +10,10 @@ describe 'Web variant - /app template' do
       expect(file('app/javascript/screens')).to be_directory
     end
 
+    it 'creates build script' do
+      expect(file('app/javascript/build.js')).to exist
+    end
+
     context 'Entry file' do
       it 'creates javascript entry file' do
         expect(file('app/javascript/application.js')).to exist
@@ -19,7 +23,7 @@ describe 'Web variant - /app template' do
         expect(file('app/views/layouts/application.html.erb')).to contain('<%= javascript_include_tag "application"')
       end
 
-      it 'includes necessary modules' do
+      it 'imports necessary modules' do
         expect(file('app/javascript/application.js')).to contain('import \'./translations/translations\';')
 
         expect(file('app/javascript/application.js')).to contain('import \'./initializers/\';')
