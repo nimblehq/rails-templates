@@ -36,7 +36,7 @@
 - Run the Rails app
 
 ```sh
-foreman start -f Procfile.dev
+./bin/dev
 ```
 
 ## Tests
