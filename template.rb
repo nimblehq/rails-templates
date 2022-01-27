@@ -16,7 +16,7 @@ WEB_VARIANT = !API_VARIANT
 DEFAULT_ADDONS = {
   docker: 'Docker',
   heroku: 'Heroku',
-  github: 'Github along with Github Action'
+  github: 'Github along with Github Action and Wiki'
 }.freeze
 
 if WEB_VARIANT
