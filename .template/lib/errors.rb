@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Template
   class Errors
     delegate :empty?, to: :errors

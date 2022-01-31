@@ -1,3 +1,6 @@
+INSTALL_BOOTSTRAP_ADDON = @cli.install_addon?('Bootstrap')
+INSTALL_SLIM_TEMPLATE_ADDON = @cli.install_addon?('Slim Template Engine')
+
 def apply_web_variant!
   use_source_path __dir__
 
@@ -20,8 +23,8 @@ def apply_web_variant!
   apply '.gitignore.rb'
 
   # Add-ons - [Optional]
-  apply '.template/addons/bootstrap/template.rb' if yes? install_addon_prompt 'Bootstrap'
-  apply '.template/addons/slim/template.rb' if yes? install_addon_prompt 'Slim Template Engine'
+  apply '.template/addons/bootstrap/template.rb' if INSTALL_BOOTSTRAP_ADDON
+  apply '.template/addons/slim/template.rb' if INSTALL_SLIM_TEMPLATE_ADDON
 
   after_bundle do
     use_source_path __dir__
