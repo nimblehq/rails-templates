@@ -18,6 +18,7 @@ with building complex applications over the years.
 
 - Install ruby and set your local ruby version to `3.0.1`
 - Install rails `7.0.1`
+- Install node `16.13.2` (For creating web application)
 
 ### Use the template
 

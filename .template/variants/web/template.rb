@@ -1,20 +1,23 @@
 def apply_web_variant!
   use_source_path __dir__
 
-  copy_file '.eslintignore'
   copy_file '.eslintrc'
-  copy_file '.scss-lint.yml'
+  copy_file '.eslintignore'
+  copy_file '.stylelintrc'
+  copy_file '.stylelintignore'
 
   template '.nvmrc.tt'
   copy_file '.npmrc'
   apply '.tool-versions.rb'
 
   apply 'Gemfile.rb'
+  apply 'package.json.rb'
   apply 'app/template.rb'
   apply 'config/template.rb'
-  apply 'package.json.rb'
   apply 'Dangerfile.rb'
   apply 'Procfile.dev.rb'
+
+  apply '.gitignore.rb'
 
   # Add-ons - [Optional]
   apply '.template/addons/bootstrap/template.rb' if yes? install_addon_prompt 'Bootstrap'
@@ -31,7 +34,7 @@ def apply_web_variant!
     run 'bin/rake i18n:js:export'
 
     # Fix the default Rails template that does not put trailing commas
-    run 'yarn run lint --fix'
+    run 'yarn run lint:fix'
 
     apply 'config/webpack/template.rb'
     apply 'spec/template.rb'

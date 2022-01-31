@@ -55,10 +55,10 @@ jobs:
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Build Docker image
-        run: bin/docker-prepare && docker-compose build
+        run: bin/docker-prepare && docker compose build
 
       - name: Push Docker image
-        run: docker-compose push web
+        run: docker compose push web
 
       - name: Login to Heroku
         run: heroku container:login

@@ -29,31 +29,31 @@ blocks:
           commands:
             - >-
               if ([ $SEMAPHORE_GIT_BRANCH != 'master' ] && [ $SEMAPHORE_GIT_BRANCH != 'development' ]);
-                then (echo "Pulling built image for the branch"; docker-compose pull test || true);
+                then (echo "Pulling built image for the branch"; docker compose pull test || true);
                 else (echo "Skipping docker pull");
               fi || true
             - bin/docker-prepare
-            - docker-compose build
-            - docker-compose push test
+            - docker compose build
+            - docker compose push test
 
   - name: Tests
     task:
       prologue:
         commands:
-          - docker-compose pull
+          - docker compose pull
       jobs:
         - name: Linters
           commands:
-            - docker-compose run test yarn lint
+            - docker compose run test yarn lint
         - name: Nginx configuration validate
           commands:
-            - docker-compose run test nginx -c /etc/nginx/conf.d/default.conf -t
+            - docker compose run test nginx -c /etc/nginx/conf.d/default.conf -t
         - name: Unit tests
           commands:
-            - docker-compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
+            - docker compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
         - name: System tests
           commands:
-            - docker-compose run test bundle exec rspec spec/systems --profile
+            - docker compose run test bundle exec rspec spec/systems --profile
       epilogue:
         on_fail:
           commands:

@@ -35,13 +35,13 @@ jobs:
 
       - name: Pull Docker image
         if: ${{ env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development' }}
-        run: docker-compose pull test || true
+        run: docker compose pull test || true
 
       - name: Build Docker image
-        run: bin/docker-prepare && docker-compose build
+        run: bin/docker-prepare && docker compose build
 
       - name: Push Docker image
-        run: docker-compose push test
+        run: docker compose push test
 
   unit_tests:
     name: Unit tests
@@ -61,10 +61,10 @@ jobs:
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Pull Docker image
-        run: docker-compose pull test || true
+        run: docker compose pull test || true
 
       - name: Run unit tests
-        run: docker-compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
+        run: docker compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
 
   system_tests:
     name: System tests
@@ -84,10 +84,10 @@ jobs:
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Pull Docker image
-        run: docker-compose pull test || true
+        run: docker compose pull test || true
 
       - name: Run system tests
-        run: docker-compose run test bundle exec rspec spec/systems --profile
+        run: docker compose run test bundle exec rspec spec/systems --profile
 
       - name: Upload system tests screenshots artifact
         uses: actions/upload-artifact@v2
