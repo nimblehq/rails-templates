@@ -15,8 +15,8 @@ describe 'Web variant - package.json' do
     end
 
     it 'adds the script for all lints' do
-      expect(subject['scripts']).to include('lint')
-      expect(subject['scripts']).to include('lint:fix')
+      expect(subject['scripts']).to include('codebase')
+      expect(subject['scripts']).to include('codebase:fix')
     end
 
     it 'adds the script for bundling js' do

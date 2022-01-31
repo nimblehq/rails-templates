@@ -30,7 +30,7 @@ def apply_web_variant!
     run 'bin/rake i18n:js:export'
 
     # Fix the default Rails template that does not put trailing commas
-    run 'yarn run lint:fix'
+    run 'yarn run codebase:fix'
 
     apply 'spec/template.rb'
   end
