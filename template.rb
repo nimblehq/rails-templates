@@ -15,8 +15,7 @@ WEB_VARIANT = !API_VARIANT
 # Addons
 DEFAULT_ADDONS = {
   docker: 'Docker',
-  heroku: 'Heroku',
-  github: 'Github along with Github Action and Wiki'
+  heroku: 'Heroku'
 }.freeze
 
 if WEB_VARIANT
@@ -66,6 +65,7 @@ def apply_template!(template_root)
   post_default_addons_install
 
   # Add-ons - [Optional]
+  apply '.template/addons/github/template.rb' if yes?(install_addon_prompt('Github workflow and wiki'))
   apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
   apply '.template/addons/phrase_app/template.rb' if yes?(install_addon_prompt('PhraseApp'))
@@ -136,6 +136,10 @@ def post_default_addons_install
   These default addons were installed:
   #{addons}
   EOT
+end
+
+def get_content_between(content, string_start, string_end)
+  content[/#{Regexp.escape(string_start)}(.*)#{Regexp.escape(string_end)}/m, 1].strip
 end
 
 # Init the source path
