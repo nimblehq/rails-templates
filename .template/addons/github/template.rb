@@ -6,11 +6,11 @@ directory '.github'
 original_readme = File.read 'README.md'
 
 create_file '.github/wiki/Getting-Started.md' do
-  get_content_between(original_readme, "## Getting Started", "## Testing")
+  get_content_between(original_readme, '## Getting Started', '## Testing')
 end
 
 create_file '.github/wiki/Testing.md' do
-  get_content_between(original_readme, "## Testing", "## CI/CD")
+  get_content_between(original_readme, '## Testing', '## CI/CD')
 end
 
 FileUtils.mv '.github/workflows/README.md', '.github/wiki/CI-CD.md'
