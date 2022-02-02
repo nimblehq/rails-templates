@@ -22,3 +22,16 @@ gsub_file 'README.md', /## Getting Started.*/m do
     Please check out full documentation on the [wiki](link to github wiki goes here).
   README
 end
+
+@template_instructions.add(
+  <<~INSTRUCTION
+    * Github wiki
+
+    1. On the repository, create an empty wiki page to init the wiki directory
+    2. Pick an account to commit the wiki (your own account or a bot account)
+    3. On the selected account, generate the Github token with `repo` scope
+    4. Set up secrets
+      - `GH_EMAIL`: an email of the account
+      - `GH_TOKEN`: the generated Github token from step 3
+  INSTRUCTION
+)
