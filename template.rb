@@ -65,7 +65,7 @@ def apply_template!(template_root)
   post_default_addons_install
 
   # Add-ons - [Optional]
-  apply '.template/addons/github/template.rb' if yes?(install_addon_prompt('Github workflow and wiki'))
+  apply '.template/addons/github/template.rb' if yes?(install_addon_prompt('Github Action and Wiki'))
   apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
   apply '.template/addons/phrase_app/template.rb' if yes?(install_addon_prompt('PhraseApp'))
