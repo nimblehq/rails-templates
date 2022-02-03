@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    ast (2.4.2)
     diff-lcs (1.4.4)
     docker-api (2.2.0)
       excon (>= 0.47.0)
@@ -11,6 +12,12 @@ GEM
       net-ssh (>= 2.6.5, < 7.0.0)
     net-ssh (6.1.0)
     net-telnet (0.1.1)
+    parallel (1.21.0)
+    parser (3.1.0.0)
+      ast (~> 2.4.1)
+    rainbow (3.1.1)
+    regexp_parser (2.2.0)
+    rexml (3.2.5)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
@@ -29,6 +36,18 @@ GEM
     rspec-support (3.9.3)
     rspec-wait (0.0.9)
       rspec (>= 3, < 4)
+    rubocop (1.25.0)
+      parallel (~> 1.10)
+      parser (>= 3.1.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.15.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.15.1)
+      parser (>= 3.0.1.1)
+    ruby-progressbar (1.11.0)
     serverspec (2.41.5)
       multi_json
       rspec (~> 3.0)
@@ -40,6 +59,7 @@ GEM
       net-ssh (>= 2.7)
       net-telnet (= 0.1.1)
       sfl
+    unicode-display_width (2.1.0)
 
 PLATFORMS
   ruby
@@ -48,6 +68,7 @@ DEPENDENCIES
   docker-api
   rspec
   rspec-wait
+  rubocop
   serverspec
 
 BUNDLED WITH

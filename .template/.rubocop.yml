@@ -1,0 +1,31 @@
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.7
+  Exclude:
+    - 'vendor/**/*'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false
+
+# TODO: Enable this rule later
+Style/RegexpLiteral:
+  Enabled: false
+
+# TODO: Enable this rule later
+Style/GlobalVars:
+  Enabled: false

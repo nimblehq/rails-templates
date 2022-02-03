@@ -1,3 +1,4 @@
+# rubocop:todo Style/ClassAndModuleChildren
 class Template::Messages
   delegate :empty?, to: :messages
 
@@ -17,3 +18,4 @@ class Template::Messages
 
   attr_reader :messages
 end
+# rubocop:enable Style/ClassAndModuleChildren

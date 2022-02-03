@@ -14,7 +14,7 @@ describe 'config/environments/production.rb' do
   end
 
   it 'removes the config.i18n.fallbacks = true' do
-    expect(subject).not_to contain("config.i18n.fallbacks = true")
+    expect(subject).not_to contain('config.i18n.fallbacks = true')
   end
 
   private

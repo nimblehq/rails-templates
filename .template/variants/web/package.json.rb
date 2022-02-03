@@ -34,4 +34,7 @@ source_stylesheet = 'app/assets/stylesheets/application.scss'
 bundled_stylesheet = 'app/assets/builds/application.css'
 
 run %(npm set-script build "node app/javascript/build.js")
-run %(npm set-script build:css "sass #{source_stylesheet} #{bundled_stylesheet} --no-source-map --load-path=node_modules")
+run %(
+  npm set-script build:css
+  "sass #{source_stylesheet} #{bundled_stylesheet} --no-source-map --load-path=node_modules"
+)

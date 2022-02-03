@@ -20,11 +20,11 @@ describe 'Github addon - template' do
 
   # TODO: Can't test this as it is now ignored by `.dockerignore`
   xit 'modifies the README.md' do
-    expect(file('README.md')).to contain("## Documentation")
+    expect(file('README.md')).to contain('## Documentation')
 
-    expect(file('README.md')).not_to contain("## Getting Started")
-    expect(file('README.md')).not_to contain("## Testing")
-    expect(file('README.md')).not_to contain("## CI/CD")
+    expect(file('README.md')).not_to contain('## Getting Started')
+    expect(file('README.md')).not_to contain('## Testing')
+    expect(file('README.md')).not_to contain('## CI/CD')
   end
 
   describe '.github/wiki/Getting-Started.md' do
@@ -33,9 +33,9 @@ describe 'Github addon - template' do
     end
 
     it 'contains the correct content extracted from README.md' do
-      expect(file('.github/wiki/Getting-Started.md')).to contain("### Prerequisites")
-      expect(file('.github/wiki/Getting-Started.md')).to contain("### Docker")
-      expect(file('.github/wiki/Getting-Started.md')).to contain("### Development")
+      expect(file('.github/wiki/Getting-Started.md')).to contain('### Prerequisites')
+      expect(file('.github/wiki/Getting-Started.md')).to contain('### Docker')
+      expect(file('.github/wiki/Getting-Started.md')).to contain('### Development')
     end
   end
 
@@ -51,10 +51,10 @@ describe 'Github addon - template' do
     end
 
     it 'contains the correct content extracted from the workflow README.md' do
-      expect(file('.github/wiki/CI-CD.md')).to contain("## Test workflow")
-      expect(file('.github/wiki/CI-CD.md')).to contain("## Test production build workflow")
-      expect(file('.github/wiki/CI-CD.md')).to contain("## Deploy to Heroku workflow")
-      expect(file('.github/wiki/CI-CD.md')).to contain("## Publish to Wiki workflow")
+      expect(file('.github/wiki/CI-CD.md')).to contain('## Test workflow')
+      expect(file('.github/wiki/CI-CD.md')).to contain('## Test production build workflow')
+      expect(file('.github/wiki/CI-CD.md')).to contain('## Deploy to Heroku workflow')
+      expect(file('.github/wiki/CI-CD.md')).to contain('## Publish to Wiki workflow')
     end
 
     it 'deletes the workflow README.md' do
@@ -68,9 +68,9 @@ describe 'Github addon - template' do
     end
 
     it 'contains the correct content extracted from README.md' do
-      expect(file('.github/wiki/Testing.md')).to contain("### Docker-based tests on the CI server")
-      expect(file('.github/wiki/Testing.md')).to contain("### Test")
-      expect(file('.github/wiki/Testing.md')).to contain("### Automated Code Review Setup")
+      expect(file('.github/wiki/Testing.md')).to contain('### Docker-based tests on the CI server')
+      expect(file('.github/wiki/Testing.md')).to contain('### Test')
+      expect(file('.github/wiki/Testing.md')).to contain('### Automated Code Review Setup')
     end
   end
 end
