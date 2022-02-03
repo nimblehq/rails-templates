@@ -18,6 +18,7 @@ describe 'Github addon - template' do
     expect(file('.github/wiki/assets/images/.keep')).to exist
   end
 
+  # TODO: Can't test this as it is now ignored by `.dockerignore`
   xit 'modifies the README.md' do
     expect(file('README.md')).to contain("## Documentation")
 
