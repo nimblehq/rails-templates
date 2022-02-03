@@ -1,6 +1,6 @@
 append_to_file 'Procfile.dev' do
-  <<~EOT
+  <<~PROCFILE
     js: yarn build --watch
     css: yarn build:css --watch
-  EOT
+  PROCFILE
 end

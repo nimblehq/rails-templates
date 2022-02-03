@@ -1,5 +1,5 @@
 append_to_file '.gitignore' do
-  <<~EOT
+  <<~IGNORE
       # Ignore i18n.js generated files
       # If deploy to heroku with git, please remove this as it prevents the files to be committed
       /app/javascript/translations/*
@@ -9,5 +9,5 @@ append_to_file '.gitignore' do
 
       # Ignore Node dependencies
       /node_modules
-  EOT
+  IGNORE
 end

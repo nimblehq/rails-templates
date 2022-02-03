@@ -1,11 +1,11 @@
 insert_into_file 'Gemfile', after: /# Authentications & Authorizations.*\n/ do
-  <<~GEM
+  <<~RUBY
     gem 'devise' # Authentication solution for Rails with Warden
-  GEM
+  RUBY
 end
 
 insert_into_file 'Gemfile', after: /# Translations.*\n/ do
-  <<~GEM
+  <<~RUBY
     # gem 'devise-i18n' # Translations for Devise
-  GEM
+  RUBY
 end

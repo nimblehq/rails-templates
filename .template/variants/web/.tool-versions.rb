@@ -1,5 +1,5 @@
 append_to_file '.tool-versions' do
-  <<~EOT
+  <<~TOOL_VERSION
     nodejs #{NODE_VERSION}
-  EOT
+  TOOL_VERSION
 end
