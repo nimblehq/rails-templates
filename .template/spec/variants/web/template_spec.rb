@@ -17,10 +17,6 @@ describe 'Web variant - template' do
     expect(file('.npmrc')).to exist
   end
 
-  it 'creates the TypeScript config file' do
-    expect(file('tsconfig.json')).to exist
-  end
-
   it 'creates the asset manifest file' do
     expect(file('app/assets/config/manifest.js')).to exist
     expect(file('app/assets/config/manifest.js')).not_to contain('//= link_directory ../stylesheets .css')

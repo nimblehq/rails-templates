@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-insert_into_file 'app/javascript/packs/application.js', before: %r{import 'translations/translations'.+\n} do
+insert_into_file 'app/javascript/application.js', before: %r{import './translations/translations'.+\n} do
   <<~JAVASCRIPT
-    import 'vendor/';
+    import './vendor/';
   JAVASCRIPT
 end

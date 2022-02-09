@@ -10,8 +10,35 @@ describe 'Web variant - /app template' do
       expect(file('app/javascript/screens')).to be_directory
     end
 
-    it 'creates javascript entry file' do
-      expect(file('app/javascript/packs/application.js')).to exist
+    it 'creates build script' do
+      expect(file('app/javascript/build.js')).to exist
+    end
+
+    context 'Entry file' do
+      it 'creates javascript entry file' do
+        expect(file('app/javascript/application.js')).to exist
+      end
+
+      it 'loads the javascript entry file in the layout' do
+        expect(file('app/views/layouts/application.html.erb')).to contain('<%= javascript_include_tag "application"')
+      end
+
+      it 'imports necessary modules' do
+        expect(file('app/javascript/application.js')).to contain('import \'./translations/translations\';')
+
+        expect(file('app/javascript/application.js')).to contain('import \'./initializers/\';')
+        expect(file('app/javascript/application.js')).to contain('import \'./screens/\';')
+      end
+    end
+
+    context 'Global file' do
+      it 'creates javascript global file' do
+        expect(file('app/javascript/global.js')).to exist
+      end
+
+      it 'exports necessary global modules' do
+        expect(file('app/javascript/global.js')).to contain('I18n')
+      end
     end
 
     context 'Initializers' do
@@ -27,30 +54,6 @@ describe 'Web variant - /app template' do
     context 'Screens' do
       it 'creates main screens file' do
         expect(file('app/javascript/screens/index.js')).to exist
-      end
-    end
-
-    context 'packs/application.js' do
-      it 'includes necessary modules' do
-        expect(file('app/javascript/packs/application.js')).to contain('import \'core-js/stable\';')
-        expect(file('app/javascript/packs/application.js')).to contain('import \'regenerator-runtime/runtime\';')
-
-        expect(file('app/javascript/packs/application.js')).to contain('import \'translations/translations\';')
-
-        expect(file('app/javascript/packs/application.js')).to contain('import \'initializers/\';')
-        expect(file('app/javascript/packs/application.js')).to contain('import \'screens/\';')
-      end
-    end
-
-    context 'packs/hello_typescript.ts' do
-      it 'creates the default pack file for TypeScript' do
-        expect(file('app/javascript/packs/hello_typescript.ts')).to exist
-      end
-    end
-
-    context 'translations/translations.js' do
-      it 'creates the translation.js file' do
-        expect(file('app/javascript/translations/translations.js')).to exist
       end
     end
   end
@@ -80,25 +83,21 @@ describe 'Web variant - /app template' do
     end
   end
 
-  context 'Controllers' do
+  context 'I18n' do
+    it 'creates the translation.js file' do
+      expect(file('app/javascript/translations/translations.js')).to exist
+    end
+
     it 'creates the localization concern' do
       expect(file('app/controllers/concerns/localization.rb')).to exist
     end
 
-    context 'Application controller' do
-      it 'includes the localization concern' do
-        expect(file('app/controllers/application_controller.rb')).to contain('include Localization')
-      end
+    it 'includes the localization concern in the application controller' do
+      expect(file('app/controllers/application_controller.rb')).to contain('include Localization')
     end
-  end
 
-  context 'Views' do
     it 'modifies the html tag to attach the current locale' do
       expect(file('app/views/layouts/application.html.erb')).to contain("<html lang='<%= I18n.locale %>'>")
-    end
-
-    it 'loads the javascript entry file' do
-      expect(file('app/views/layouts/application.html.erb')).to contain("<%= javascript_pack_tag 'application' %>")
     end
   end
 end

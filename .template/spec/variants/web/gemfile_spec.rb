@@ -5,16 +5,16 @@ describe 'Web variant - Gemfile' do
     expect(subject).to contain('i18n-js')
   end
 
-  it 'adds webpacker gem' do
-    expect(subject).to contain('webpacker')
-  end
-
   it 'adds sprockets-rails gem' do
     expect(subject).to contain('sprockets-rails')
   end
 
   it 'adds cssbundling-rails gem' do
     expect(subject).to contain('cssbundling-rails')
+  end
+
+  it 'adds jsbundling-rails gem' do
+    expect(subject).to contain('jsbundling-rails')
   end
 
   describe 'Development + Test Environment' do

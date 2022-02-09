@@ -15,8 +15,12 @@ describe 'Web variant - package.json' do
     end
 
     it 'adds the script for all lints' do
-      expect(subject['scripts']).to include('lint')
-      expect(subject['scripts']).to include('lint:fix')
+      expect(subject['scripts']).to include('codebase')
+      expect(subject['scripts']).to include('codebase:fix')
+    end
+
+    it 'adds the script for bundling js' do
+      expect(subject['scripts']).to include('build')
     end
 
     it 'adds the script for bundling css' do
@@ -29,13 +33,12 @@ describe 'Web variant - package.json' do
       expect(subject['dependencies']).to include('i18n-js')
     end
 
-    it 'adds typescript dependencies' do
-      expect(subject['dependencies']).to include('@babel/preset-typescript')
-      expect(subject['dependencies']).to include('typescript')
-    end
-
     it 'adds sass dependencies' do
       expect(subject['dependencies']).to include('sass')
+    end
+
+    it 'adds esbuild dependencies' do
+      expect(subject['dependencies']).to include('esbuild')
     end
   end
 
