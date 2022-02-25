@@ -1,11 +1,11 @@
 def report
   after_bundle do
-    say "\n🚀 The project has successfully created 🚀\n", :green
+    say "\n🚀 The project has been successfully created 🚀\n", :green
 
     # Report errors
     unless @template_errors.empty?
       print_separator
-      say "\n📍 There are some errors when templating the application, Please fix them manually:\n"
+      say "\n📍 There were some errors when templating the application, please fix them manually:\n"
       say_error "\n#{@template_errors}\n"
     end
 
