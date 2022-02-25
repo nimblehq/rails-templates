@@ -19,7 +19,7 @@ gsub_file 'README.md', /## Getting Started.*/m do
   <<~README
     ## Documentation
 
-    Please check out full documentation on the [wiki](link to github wiki goes here).
+    Please check out full documentation on the [wiki](../../wiki).
   README
 end
 
