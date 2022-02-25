@@ -39,6 +39,12 @@ describe 'Github addon - template' do
     end
   end
 
+  describe '.github/wiki/Authentication.md' do
+    it 'exists' do
+      expect(file('.github/wiki/Authentication.md')).to exist
+    end
+  end
+
   describe '.github/wiki/CI-CD.md' do
     it 'exists' do
       expect(file('.github/wiki/CI-CD.md')).to exist
