@@ -149,6 +149,29 @@ Test files are located under `.template/spec` folder
 │   │   │   │   └── template_spec.rb
 ```
 
+### Template Strings
+
+When using template string with heredoc, use the proper name following the file type / content.
+
+This provides the meaningful context to the content and some IDEs also support to highlight the content depending on the type.
+
+- `DOCKERFILE`
+- `ERB`
+- `HTML`
+- `IGNORE` - For any ignore file e.g. `.gitignore`, `.eslintignore`
+- `JAVASCRIPT`
+- `JSON`
+- `PROCFILE`
+- `RUBY`
+- `SCSS`
+- `SHELL`
+
+For other files that are not fit the types above, use the extension as the name
+e.g. `TOOL_VERSION` for `.tool-version` file.
+
+For the normal string, name it after the content
+e.g. `ERROR` for template error message.
+
 ## License
 
 This project is Copyright (c) 2014 and onwards. It is free software,
