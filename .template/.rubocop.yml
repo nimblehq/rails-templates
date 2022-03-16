@@ -19,13 +19,25 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Enabled: false
 
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - '../template.rb'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - '../template.rb'
+
 Naming/FileName:
+  Enabled: false
+
+# TODO: Enable this rule later
+Style/GlobalVars:
   Enabled: false
 
 # TODO: Enable this rule later
 Style/RegexpLiteral:
   Enabled: false
 
-# TODO: Enable this rule later
-Style/GlobalVars:
-  Enabled: false
+Style/TrivialAccessors:
+  Exclude:
+    - '../template.rb'
