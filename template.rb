@@ -122,10 +122,10 @@ def post_default_addons_install
     addons << "* #{addon}\n  "
   end
 
-  puts <<-EOT
-  These default addons were installed:
-  #{addons}
-  EOT
+  puts <<~INFO
+    These default addons were installed:
+    #{addons}
+  INFO
 end
 
 def get_content_between(content, string_start, string_end)

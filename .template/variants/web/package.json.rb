@@ -1,12 +1,12 @@
 # Create package.json file
 unless File.exist?('package.json')
   create_file 'package.json',
-              <<~EOT
+              <<~JSON
                 {
                   "name": "#{APP_NAME}",
                   "private": "true"
                 }
-              EOT
+              JSON
 end
 
 # Install dependencies

@@ -1,11 +1,11 @@
 insert_into_file 'Gemfile', after: %r{gem 'rails-i18n'.*\n} do
-  <<~EOT
+  <<~RUBY
     gem 'i18n-js', '3.9.0' # A library to provide the I18n translations on the Javascript
-  EOT
+  RUBY
 end
 
 insert_into_file 'Gemfile', after: %r{gem 'pundit'.*\n} do
-  <<~EOT
+  <<~RUBY
 
     # Assets
     gem 'sprockets-rails' # The original asset pipeline for Rails
@@ -14,7 +14,7 @@ insert_into_file 'Gemfile', after: %r{gem 'pundit'.*\n} do
     # gem 'turbo-rails' # Hotwire's SPA-like page accelerator
     # gem 'stimulus-rails' # Hotwire's modest JavaScript framework
     # gem 'image_processing' # Use Active Storage variants
-  EOT
+  RUBY
 end
 
 ############################
@@ -22,15 +22,15 @@ end
 ############################
 
 insert_into_file 'Gemfile', after: %r{gem 'danger'.*\n} do
-  <<~EOT.indent(2)
+  <<~RUBY.indent(2)
     gem 'danger-eslint' # ESLint
-  EOT
+  RUBY
 end
 
 insert_into_file 'Gemfile', after: %r{gem 'spring-watcher-listen'.*\n} do
-  <<~EOT.indent(2)
+  <<~RUBY.indent(2)
     # gem 'web-console' # Use console on exceptions pages
-  EOT
+  RUBY
 end
 
 ##############
@@ -38,9 +38,9 @@ end
 ##############
 
 insert_into_file 'Gemfile', after: %r{gem 'rspec-retry'.*\n} do
-  <<~EOT.indent(2)
+  <<~RUBY.indent(2)
     gem 'capybara' # Integration testing
     gem 'selenium-webdriver' # Ruby bindings for Selenium/WebDriver
     gem 'webdrivers' # Run Selenium tests more easily with automatic installation and updates for all supported webdrivers
-  EOT
+  RUBY
 end
