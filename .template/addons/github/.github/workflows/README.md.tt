@@ -70,4 +70,4 @@ Once all setup, give it a try by running manually the GitHub Action 'Deploy Hero
 - Set up the following GitHub repository secrets
   - GH_EMAIL (an email to identify the bot that publish the wiki content in the git history)
   - GH_TOKEN (the above generated token)
-- Creat a `.github/wiki` directory to store the documents to be published to Wiki.
+- Create a `.github/wiki` directory to store the documents to be published to Wiki.

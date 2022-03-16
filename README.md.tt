@@ -4,7 +4,7 @@
 
 > *App introduction goes here ...*
 
-## Project Setup
+## Getting Started
 
 ### Prerequisites
 
@@ -39,7 +39,7 @@
 ./bin/dev
 ```
 
-## Tests
+## Testing
 
 ### Docker-based tests on the CI server
 
@@ -88,14 +88,6 @@ docker push $DOCKER_IMAGE:$BRANCH_TAG
 docker compose -f docker-compose.test.yml run test bin/bundle exec rake db:test:prepare
 ```
 
-#### Semaphore CI 2.0
-
-To setup the semaphore CI 2.0 for the project, please follow [this guideline](.semaphore/README.md)
-
-#### Github actions & Heroku Deployment
-
-To setup Github actions for the project, please follow [this guideline](.github/workflows/README.md)
-
 ### Test
 
 - Run all tests:
@@ -123,3 +115,9 @@ rspec [rspec-params]
 
 - Create a [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
 from bot account with `public_repo` scope, and set it as `DANGER_GITHUB_API_TOKEN` secret on the CI Environment Settings.
+
+## CI/CD
+
+The project relies entirely on [Github Actions](https://github.com/features/actions) for CI/CD via multiple workflows located under the [`.github/workflows/`](.github/workflows) directory.
+
+Please check out the [`.github/workflows/README.md`](.github/workflows/README.md) file for further instructions.
