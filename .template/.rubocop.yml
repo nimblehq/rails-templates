@@ -4,11 +4,9 @@ AllCops:
   Exclude:
     - 'vendor/**/*'
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Style/Documentation:
-  Enabled: false
+Lint/NonDeterministicRequireOrder:
+  Exclude:
+    - '../spec/rails_helper.rb'
 
 Metrics/MethodLength:
   Enabled: false
@@ -28,6 +26,12 @@ Metrics/PerceivedComplexity:
     - '../template.rb'
 
 Naming/FileName:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false
 
 # TODO: Enable this rule later

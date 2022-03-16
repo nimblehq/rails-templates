@@ -20,6 +20,9 @@ with building complex applications over the years.
 - Install rails `7.0.1`
 - Install node `16.13.2` (For creating web application)
 
+> 📝 If running on Apple M1, please also set bundle platform to ruby
+> `bundle config set --global force_ruby_platform true`
+
 ### Use the template
 
 In order to use the template, initialize a new app with the following parameters:
