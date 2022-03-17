@@ -20,8 +20,10 @@ with building complex applications over the years.
 - Install rails `7.0.1`
 - Install node `16.13.2` (For creating web application)
 
-> 📝 If running on Apple M1, please also set bundle platform to ruby
-> `bundle config set --global force_ruby_platform true`
+If running on Apple M1:
+
+- Set bundle platform to ruby `bundle config set --global force_ruby_platform true`
+- To build docker image, please make sure to set platform to AMD64 `export DOCKER_DEFAULT_PLATFORM=linux/amd64`
 
 ### Use the template
 

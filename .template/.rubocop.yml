@@ -9,7 +9,10 @@ Lint/NonDeterministicRequireOrder:
     - '../spec/rails_helper.rb'
 
 Metrics/MethodLength:
-  Enabled: false
+  Exclude:
+    - '../template.rb'
+    - '**/template.rb'
+    - 'hooks/**/*'
 
 Metrics/AbcSize:
   Enabled: false
@@ -20,10 +23,12 @@ Metrics/BlockLength:
 Metrics/CyclomaticComplexity:
   Exclude:
     - '../template.rb'
+    - '**/template.rb'
 
 Metrics/PerceivedComplexity:
   Exclude:
     - '../template.rb'
+    - '**/template.rb'
 
 Naming/FileName:
   Enabled: false
@@ -45,3 +50,4 @@ Style/RegexpLiteral:
 Style/TrivialAccessors:
   Exclude:
     - '../template.rb'
+    - '**/template.rb'

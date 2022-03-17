@@ -26,6 +26,7 @@ module Rack
       @headers['Content-Type']&.include?('html')
     end
 
+    # rubocop:disable Metrics/MethodLength
     def inject(fragment)
       disable_animations = <<~HTML
         <script type="text/javascript">(typeof jQuery !== 'undefined') && (jQuery.fx.off = true);</script>
@@ -52,5 +53,6 @@ module Rack
 
       fragment.gsub(%r{</head>}, "#{disable_animations}</head>")
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end
