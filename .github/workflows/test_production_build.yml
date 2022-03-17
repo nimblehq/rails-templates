@@ -1,6 +1,6 @@
 name: Test production build
 
-on: pull_request
+on: push
 
 env:
   APP_NAME: rails_templates

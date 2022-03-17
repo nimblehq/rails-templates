@@ -1,6 +1,6 @@
 name: Test Variants
 
-on: pull_request
+on: push
 
 env:
   COMPOSE_FILE: docker-compose.test.yml

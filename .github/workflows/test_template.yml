@@ -1,6 +1,6 @@
 name: Test Template
 
-on: pull_request
+on: push
 
 env:
   RUBY_VERSION: 3.0.1
