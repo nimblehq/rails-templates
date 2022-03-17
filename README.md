@@ -29,7 +29,7 @@ If running on Apple M1:
 
 In order to use the template, initialize a new app with the following parameters:
 
-```
+```sh
 rails new <app_name> -m https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb
 ```
 
@@ -38,7 +38,7 @@ Supported template options:
 
 To apply the template on an existing application, run following rails command:
 
-```
+```sh
 rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb
 
 # To apply on an api application
@@ -176,6 +176,14 @@ e.g. `TOOL_VERSION` for `.tool-version` file.
 
 For the normal string, name it after the content
 e.g. `ERROR` for template error message.
+
+## Testing the Template
+
+To run [RuboCop](https://github.com/rubocop/rubocop) against the template:
+
+```sh
+.template/bin/rubocop
+```
 
 ## License
 
