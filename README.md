@@ -185,6 +185,13 @@ To run [RuboCop](https://github.com/rubocop/rubocop) against the template:
 .template/bin/rubocop
 ```
 
+Any RuboCop command options can be passed:
+
+```sh
+# Run RuboCop with auto correct
+.template/bin/rubocop -a
+```
+
 ## License
 
 This project is Copyright (c) 2014 and onwards. It is free software,
