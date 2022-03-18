@@ -39,10 +39,6 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-# TODO: Enable this rule later
-Style/GlobalVars:
-  Enabled: false
-
 Style/TrivialAccessors:
   Exclude:
     - '../template.rb'
