@@ -1,6 +1,6 @@
 require 'rspec/wait'
 
-Dir[[__dir__, 'support', '**', '*.rb'].join('/')].sort.each { |f| require f }
+Dir[[__dir__, 'support', '**', '*.rb'].join('/')].each { |f| require f }
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
