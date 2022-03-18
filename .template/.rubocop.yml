@@ -43,10 +43,6 @@ Style/FrozenStringLiteralComment:
 Style/GlobalVars:
   Enabled: false
 
-# TODO: Enable this rule later
-Style/RegexpLiteral:
-  Enabled: false
-
 Style/TrivialAccessors:
   Exclude:
     - '../template.rb'

@@ -1,10 +1,10 @@
-insert_into_file 'Gemfile', after: %r{gem 'rails-i18n'.*\n} do
+insert_into_file 'Gemfile', after: /gem 'rails-i18n'.*\n/ do
   <<~RUBY
     gem 'i18n-js', '3.9.0' # A library to provide the I18n translations on the Javascript
   RUBY
 end
 
-insert_into_file 'Gemfile', after: %r{gem 'pundit'.*\n} do
+insert_into_file 'Gemfile', after: /gem 'pundit'.*\n/ do
   <<~RUBY
 
     # Assets
@@ -21,13 +21,13 @@ end
 # Group: :development, :test
 ############################
 
-insert_into_file 'Gemfile', after: %r{gem 'danger'.*\n} do
+insert_into_file 'Gemfile', after: /gem 'danger'.*\n/ do
   <<~RUBY.indent(2)
     gem 'danger-eslint' # ESLint
   RUBY
 end
 
-insert_into_file 'Gemfile', after: %r{gem 'spring-watcher-listen'.*\n} do
+insert_into_file 'Gemfile', after: /gem 'spring-watcher-listen'.*\n/ do
   <<~RUBY.indent(2)
     # gem 'web-console' # Use console on exceptions pages
   RUBY
@@ -37,7 +37,7 @@ end
 # Group: :test
 ##############
 
-insert_into_file 'Gemfile', after: %r{gem 'rspec-retry'.*\n} do
+insert_into_file 'Gemfile', after: /gem 'rspec-retry'.*\n/ do
   <<~RUBY.indent(2)
     gem 'capybara' # Integration testing
     gem 'selenium-webdriver' # Ruby bindings for Selenium/WebDriver

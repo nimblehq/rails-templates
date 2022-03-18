@@ -1,4 +1,4 @@
-insert_into_file 'spec/codebase/codebase_spec.rb', before: %r{end\Z} do
+insert_into_file 'spec/codebase/codebase_spec.rb', before: /end\Z/ do
   <<~RUBY.indent(2)
 
     it 'does not offend stylelint' do
