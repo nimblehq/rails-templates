@@ -121,7 +121,7 @@ end
 def post_default_addons_install
   puts <<~INFO
     These default addons were installed:
-    #{DEFAULT_ADDONS.each_value { |addon| "* #{addon}\n  " }}
+    #{DEFAULT_ADDONS.values.map { |addon| "* #{addon}" }.join("\n")}
   INFO
 end
 
