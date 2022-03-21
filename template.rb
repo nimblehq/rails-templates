@@ -19,8 +19,8 @@ DEFAULT_ADDONS = {
 }.freeze
 
 if WEB_VARIANT
-  NODE_VERSION='16.13.2'.freeze
-  NODE_SOURCE_VERSION='16'.freeze # Used in Dockerfile https://github.com/nodesource/distributions
+  NODE_VERSION = '16.13.2'.freeze
+  NODE_SOURCE_VERSION = '16'.freeze # Used in Dockerfile https://github.com/nodesource/distributions
 end
 
 def apply_template!(template_root)
@@ -59,7 +59,7 @@ def apply_template!(template_root)
 
   # Add-ons - [Default]
   DEFAULT_ADDONS.each_key do |addon|
-    apply ".template/addons/#{addon.to_s}/template.rb"
+    apply ".template/addons/#{addon}/template.rb"
   end
 
   post_default_addons_install
@@ -117,7 +117,7 @@ def install_addon_prompt(addon)
 end
 
 def post_default_addons_install
-  addons = ""
+  addons = ''
   DEFAULT_ADDONS.each_value do |addon|
     addons << "* #{addon}\n  "
   end

@@ -32,6 +32,13 @@ run 'npm set-script codebase:fix "yarn eslint:fix && yarn stylelint:fix"'
 
 source_stylesheet = 'app/assets/stylesheets/application.scss'
 bundled_stylesheet = 'app/assets/builds/application.css'
+bundled_stylesheet_options = [
+  '--no-source-map',
+  '--load-path=node_modules'
+]
 
 run %(npm set-script build "node app/javascript/build.js")
-run %(npm set-script build:css "sass #{source_stylesheet} #{bundled_stylesheet} --no-source-map --load-path=node_modules")
+run %(
+  npm set-script build:css \
+  "sass #{source_stylesheet} #{bundled_stylesheet} #{bundled_stylesheet_options.join(' ')}"
+)

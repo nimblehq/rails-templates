@@ -1,0 +1,53 @@
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3
+  Exclude:
+    - 'vendor/**/*'
+
+Lint/NonDeterministicRequireOrder:
+  Exclude:
+    - '../spec/rails_helper.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - '../template.rb'
+    - '**/template.rb'
+    - 'hooks/**/*'
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - '../template.rb'
+    - '**/template.rb'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - '../template.rb'
+    - '**/template.rb'
+
+Naming/FileName:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# TODO: Enable this rule later
+Style/GlobalVars:
+  Enabled: false
+
+# TODO: Enable this rule later
+Style/RegexpLiteral:
+  Enabled: false
+
+Style/TrivialAccessors:
+  Exclude:
+    - '../template.rb'
+    - '**/template.rb'

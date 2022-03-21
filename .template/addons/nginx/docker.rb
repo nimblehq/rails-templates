@@ -2,7 +2,7 @@ insert_into_file 'Dockerfile', after: 'unzip ' do
   'nginx '
 end
 
-insert_into_file 'Dockerfile', after: %r(WORKDIR.+\n) do
+insert_into_file 'Dockerfile', after: %r{WORKDIR.+\n} do
   <<~DOCKERFILE
 
     # Nginx config
