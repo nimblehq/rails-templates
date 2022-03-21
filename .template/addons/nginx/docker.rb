@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 insert_into_file 'Dockerfile', after: 'unzip ' do
   'nginx '
 end

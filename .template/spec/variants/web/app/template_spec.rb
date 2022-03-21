@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - /app template' do
   context 'Javascript' do
     it 'creates base javascript directory' do

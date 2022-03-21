@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - package.json' do
   subject do
     JSON.parse(file('package.json').content)

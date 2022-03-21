@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 insert_into_file 'config/environments/test.rb', before: /Rails.application.configure do/ do
   <<~RUBY
     require_relative '../../spec/support/disable_animation'

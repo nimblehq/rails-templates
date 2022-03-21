@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 insert_into_file 'Dangerfile', after: /suggester.suggest.*\n/ do
   <<~RUBY
 

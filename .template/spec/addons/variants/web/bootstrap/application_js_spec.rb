@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Bootstrap Addon - application.js' do
   subject { file('app/javascript/application.js') }
 

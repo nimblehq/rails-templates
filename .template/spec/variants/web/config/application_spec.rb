@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - config/application.rb' do
   subject { file('config/application.rb') }
 

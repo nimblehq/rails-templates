@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Base template' do
   it 'creates Rubocop configuration files' do
     expect(file('.rubocop.yml')).to exist

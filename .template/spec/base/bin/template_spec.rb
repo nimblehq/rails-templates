@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe '/bin template' do
   it 'creates the envsetup script' do
     expect(file('bin/envsetup.sh')).to exist

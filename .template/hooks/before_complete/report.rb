@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def report
   after_bundle do
     say "\n🚀 The project has been successfully created 🚀\n", :green

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'PhraseApp addon - template' do
   it 'creates .phraseapp.yml file' do
     expect(file('.phraseapp.yml')).to exist

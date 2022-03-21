@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - Procfile.dev' do
   subject { file('Procfile.dev') }
 

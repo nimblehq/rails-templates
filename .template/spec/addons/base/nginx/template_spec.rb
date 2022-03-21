@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Nginx addon - template' do
   it 'creates the inject_port_into_nginx script' do
     expect(file('bin/inject_port_into_nginx.sh')).to exist

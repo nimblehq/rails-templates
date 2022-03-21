@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 insert_into_file 'bin/start.sh', after: "fi\n" do
   <<~SHELL
 

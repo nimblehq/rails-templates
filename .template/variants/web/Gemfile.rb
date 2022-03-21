@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 insert_into_file 'Gemfile', after: /gem 'rails-i18n'.*\n/ do
   <<~RUBY
     gem 'i18n-js', '3.9.0' # A library to provide the I18n translations on the Javascript

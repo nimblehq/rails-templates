@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:todo Style/ClassAndModuleChildren
 class Template::Messages
   delegate :empty?, to: :messages

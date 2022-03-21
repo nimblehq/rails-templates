@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Javascript
 directory 'app/javascript'
 

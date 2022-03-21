@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe '/spec template' do
   it 'creates the base spec directory' do
     expect(file('spec/codebase')).to be_directory

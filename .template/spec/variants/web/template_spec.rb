@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - template' do
   it 'creates the eslint configuration files' do
     expect(file('.eslintrc')).to exist

@@ -36,9 +36,6 @@ Naming/FileName:
 Style/Documentation:
   Enabled: false
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 Style/TrivialAccessors:
   Exclude:
     - '../template.rb'

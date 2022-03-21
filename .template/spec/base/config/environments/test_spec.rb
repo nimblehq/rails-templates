@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'config/environments/test.rb' do
   subject { file('config/environments/test.rb') }
 

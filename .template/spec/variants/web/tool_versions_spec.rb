@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - .tool-versions' do
   subject { file('.tool-versions') }
 

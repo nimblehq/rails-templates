@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Api variant - template' do
   context 'Controllers' do
     it 'creates the localization concern' do

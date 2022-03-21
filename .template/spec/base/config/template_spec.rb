@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe '/config template' do
   it 'creates the Figaro configuration for application variables' do
     expect(file('config/application.yml')).to exist

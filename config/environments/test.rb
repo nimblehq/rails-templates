@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 insert_into_file 'config/environments/test.rb', after: /config.action_mailer.perform_caching.+\n/ do
   <<~RUBY.indent(2)
 
