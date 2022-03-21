@@ -27,8 +27,8 @@ blocks:
         - name: Build
           commands:
             - bin/docker-prepare
-            - docker-compose build
-            - docker-compose push web
+            - docker compose build
+            - docker compose push web
 
   - name: Deploy
     task:

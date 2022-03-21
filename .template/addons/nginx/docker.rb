@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 insert_into_file 'Dockerfile', after: 'unzip ' do
   'nginx '
 end
 
-insert_into_file 'Dockerfile', after: %r(WORKDIR.+\n) do
-  <<-EOT
+insert_into_file 'Dockerfile', after: /WORKDIR.+\n/ do
+  <<~DOCKERFILE
 
-# Nginx config
-COPY config/nginx/app.conf.template /etc/nginx/conf.d/default.conf
-  EOT
+    # Nginx config
+    COPY config/nginx/app.conf.template /etc/nginx/conf.d/default.conf
+  DOCKERFILE
 end
 
 gsub_file 'Dockerfile', /PORT=80/ do

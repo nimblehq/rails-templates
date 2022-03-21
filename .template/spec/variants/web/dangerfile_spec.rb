@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - Dangerfile' do
   subject { file('Dangerfile') }
 

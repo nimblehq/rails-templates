@@ -1,15 +1,13 @@
+# frozen_string_literal: true
+
 append_to_file '.gitignore' do
-  <<~EOT
+  <<~IGNORE
 
-      # Ignore i18n.js generated files
-      # If deploy to heroku with git, please remove this as it prevents the files to be committed
-      /app/javascript/translations/translations.js
+    # Ignore folder information and IDE-specific files
+    .DS_Store
+    .idea/*
 
-      # Ignore folder information and IDE-specific files
-      .DS_Store
-      .idea/*
-
-      # Ignore the test coverage results from SimpleCov
-      /coverage
-  EOT
+    # Ignore the test coverage results from SimpleCov
+    /coverage
+  IGNORE
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Devise Addon - Gemfile' do
   subject { file('Gemfile') }
 

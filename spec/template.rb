@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 generate 'rspec:install'
 
 directory 'spec', exclude_pattern: 'template.rb', force: true

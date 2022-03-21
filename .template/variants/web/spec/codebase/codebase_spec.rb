@@ -1,12 +1,14 @@
-insert_into_file 'spec/codebase/codebase_spec.rb', before: %r{end\Z} do
-  <<-EOT
+# frozen_string_literal: true
 
-  it 'does not offend scss-lint' do
-    expect(`scss-lint`).to be_empty
-  end
+insert_into_file 'spec/codebase/codebase_spec.rb', before: /end\Z/ do
+  <<~RUBY.indent(2)
 
-  it 'does not offend eslint' do
-    expect(`yarn run eslint ./`).to include 'Done'
-  end
-  EOT
+    it 'does not offend stylelint' do
+      expect(`yarn run stylelint`).to include 'Done'
+    end
+
+    it 'does not offend eslint' do
+      expect(`yarn run eslint`).to include 'Done'
+    end
+  RUBY
 end

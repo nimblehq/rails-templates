@@ -9,9 +9,9 @@ env:
   DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
   DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
   DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
-  RUBY_VERSION: 2.7.2
-  NODE_VERSION: 14
-  RAILS_VERSION: 6.1.1
+  RUBY_VERSION: 3.0.1
+  NODE_VERSION: 16
+  RAILS_VERSION: 7.0.1
 
 jobs:
   test:
@@ -32,7 +32,7 @@ jobs:
         uses: nimblehq/branch-tag-action@v1.2
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.61.1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -87,7 +87,7 @@ jobs:
         run: |
           export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
           cd $APP_NAME
-          docker-compose pull test || true
+          docker compose pull test || true
 
       - name: Build docker image
         run: |
@@ -98,7 +98,7 @@ jobs:
         run: |
           export BRANCH_TAG=${{ env.BRANCH_TAG }}-${{ matrix.variant }}
           cd $APP_NAME
-          docker-compose push test
+          docker compose push test
 
       - name: Test template
         run: |

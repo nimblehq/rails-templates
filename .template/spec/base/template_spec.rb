@@ -1,11 +1,17 @@
+# frozen_string_literal: true
+
 describe 'Base template' do
   it 'creates Rubocop configuration files' do
     expect(file('.rubocop.yml')).to exist
   end
 
-  it 'creates Ruby configuration files' do
+  it 'creates RVM configuration files' do
     expect(file('.ruby-gemset')).to exist
     expect(file('.ruby-version')).to exist
+  end
+
+  it 'creates ASDF configuration files' do
+    expect(file('.tool-versions')).to exist
   end
 
   it 'creates editor configuration file' do
@@ -24,5 +30,4 @@ describe 'Base template' do
   it 'creates Reek configuration files' do
     expect(file('.reek.yml')).to exist
   end
-
 end

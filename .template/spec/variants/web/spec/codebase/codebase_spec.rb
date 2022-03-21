@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - spec/codebase/codebase_spec.rb' do
   subject { file('spec/codebase/codebase_spec.rb') }
 
@@ -12,18 +14,18 @@ describe 'Web variant - spec/codebase/codebase_spec.rb' do
   private
 
   def scss_lint_example
-    <<~EOT
-      it 'does not offend scss-lint' do
-        expect(`scss-lint`).to be_empty
+    <<~RUBY
+      it 'does not offend stylelint' do
+        expect(`yarn run stylelint ./`).to be_empty
       end
-    EOT
+    RUBY
   end
 
   def eslint_example
-    <<~EOT
+    <<~RUBY
       it 'does not offend eslint' do
         expect(`yarn run eslint ./`).to include 'Done'
       end
-    EOT
+    RUBY
   end
 end

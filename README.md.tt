@@ -4,7 +4,7 @@
 
 > *App introduction goes here ...*
 
-## Project Setup
+## Getting Started
 
 ### Prerequisites
 
@@ -36,10 +36,10 @@
 - Run the Rails app
 
 ```sh
-foreman start -f Procfile.dev
+./bin/dev
 ```
 
-## Tests
+## Testing
 
 ### Docker-based tests on the CI server
 
@@ -71,7 +71,7 @@ it first to leverage the `cache_from` settings of Docker Compose which avoids re
 - Build the Docker image:
 
 ```sh
-./bin/docker-prepare && docker-compose -f docker-compose.test.yml build
+./bin/docker-prepare && docker compose -f docker-compose.test.yml build
 ```
 
 Upon the first build, the whole Docker image is built from the ground up and tagged using `$BRANCH_TAG`.
@@ -85,16 +85,8 @@ docker push $DOCKER_IMAGE:$BRANCH_TAG
 - Setup the test database:
 
 ```sh
-docker-compose -f docker-compose.test.yml run test bin/bundle exec rake db:test:prepare
+docker compose -f docker-compose.test.yml run test bin/bundle exec rake db:test:prepare
 ```
-
-#### Semaphore CI 2.0
-
-To setup the semaphore CI 2.0 for the project, please follow [this guideline](.semaphore/README.md)
-
-#### Github actions & Heroku Deployment
-
-To setup Github actions for the project, please follow [this guideline](.github/workflows/README.md)
 
 ### Test
 
@@ -102,7 +94,7 @@ To setup Github actions for the project, please follow [this guideline](.github/
 
 ```sh
 # Docker way
-docker-compose -f docker-compose.test.yml run test
+docker compose -f docker-compose.test.yml run test
 
 # Non-Docker way
 rspec
@@ -112,7 +104,7 @@ rspec
 
 ```sh
 # Docker way
-docker-compose -f docker-compose.test.yml run test bin/bundle exec rspec [rspec-params]
+docker compose -f docker-compose.test.yml run test bin/bundle exec rspec [rspec-params]
 
 # Non-Docker way
 rspec [rspec-params]
@@ -123,3 +115,9 @@ rspec [rspec-params]
 
 - Create a [Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
 from bot account with `public_repo` scope, and set it as `DANGER_GITHUB_API_TOKEN` secret on the CI Environment Settings.
+
+## CI/CD
+
+The project relies entirely on [Github Actions](https://github.com/features/actions) for CI/CD via multiple workflows located under the [`.github/workflows/`](.github/workflows) directory.
+
+Please check out the [`.github/workflows/README.md`](.github/workflows/README.md) file for further instructions.

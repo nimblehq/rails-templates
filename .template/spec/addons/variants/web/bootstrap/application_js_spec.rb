@@ -1,7 +1,9 @@
-describe 'Bootstrap Addon - application.js' do
-  subject { file('app/javascript/packs/application.js') }
+# frozen_string_literal: true
 
-  it 'imports bootstrap native' do
-    expect(subject).to contain("import 'vendor/bootstrap';")
+describe 'Bootstrap Addon - application.js' do
+  subject { file('app/javascript/application.js') }
+
+  it 'imports vendor scripts' do
+    expect(subject).to contain("import './vendor/';")
   end
 end

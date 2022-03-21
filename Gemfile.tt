@@ -2,16 +2,19 @@ source 'https://rubygems.org'
 ruby '<%= RUBY_VERSION %>'
 
 # Backend
-gem 'rails', '6.1.3.1' # Latest stable
+gem 'rails', '7.0.1' # Latest stable
 gem 'pg' # Use Postgresql as database
 gem 'puma' # Use Puma as the app server
 gem 'mini_magick' # A ruby wrapper for ImageMagick or GraphicsMagick command line
 gem 'pagy' # A pagination gem that is very light and fast
 gem 'discard' # Soft deletes for ActiveRecord
-gem 'ffaker' # A library for generating fake data such as names, addresses, and phone numbers.
-gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs.
 gem 'sidekiq' # background processing for Ruby
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# gem 'jbuilder' # Build JSON APIs with ease
+# gem 'redis' # Use Redis adapter to run Action Cable in production
+# gem 'kredis' # Use Kredis to get higher-level data types in Redis
+# gem 'bcrypt' # Use Active Model has_secure_password
 
 # Authentications & Authorizations
 gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
@@ -31,19 +34,29 @@ group :development do
 end
 
 group :development, :test do
-  gem 'bullet' # help to kill N+1 queries and unused eager loading
-  gem 'figaro' # Simple Rails app configuration
+  # Debugging
   gem 'pry-rails' # Call 'binding.pry' anywhere in the code to stop execution and get a debugger console
   gem 'pry-byebug' # Step by step debugging and stack navigation in Pry
-  gem 'listen', '3.1.5' # Listens to file modifications
-  gem 'letter_opener' # Preview mail in the browser instead of sending.
+  # gem 'debug', platforms: %i[ mri mingw x64_mingw ] # Official debug
+
+  # Utilities
+  gem 'figaro' # Simple Rails app configuration
+  gem 'listen' # Listens to file modifications
+  gem 'letter_opener' # Preview mail in the browser instead of sending
+  gem 'ffaker' # A library for generating fake data such as names, addresses, and phone numbers
+  gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs
+
+  # Testing
+  gem 'rspec-rails', '~> 5.0.2' # Rails testing engine
+
+  # Code Analysis
+  gem 'bullet' # help to kill N+1 queries and unused eager loading
   gem 'brakeman', require: false # A static analysis security vulnerability scanner for Ruby on Rails applications
-  gem 'rspec-rails', '~> 4.0.1' # Rails testing engine
+  gem 'parser', '3.0.1.1' # Use correct parser version to avoid parser warnings
   gem 'rubocop', require: false # A Ruby static code analyzer and formatter, based on the community Ruby style guide.
   gem 'rubocop-rails', require: false # A RuboCop extension focused on enforcing Rails best practices and coding conventions.
   gem 'rubocop-rspec', require: false # Code style checking for RSpec files
   gem 'rubocop-performance', require: false # An extension of RuboCop focused on code performance checks.
-
   gem 'undercover' # Report missing test coverage in new changes
   gem 'danger' # Automated code review.
   gem 'danger-rubocop' # A Danger plugin for Rubocop.
@@ -72,6 +85,3 @@ end
 group :production do
   gem 'rack-timeout' # Rack middleware which aborts requests that have been running for longer than a specified timeout.
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

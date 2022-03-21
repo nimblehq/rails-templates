@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Rack
   # disable CSS3 and jQuery animations in test mode for speed, consistency and avoiding timing issues.
   # Usage for Rails:
@@ -27,35 +29,32 @@ module Rack
     end
 
     # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Naming/HeredocDelimiterNaming
-    # rubocop:disable Layout/HeredocIndentation
     def inject(fragment)
-      disable_animations = <<-EOF
-<script type="text/javascript">(typeof jQuery !== 'undefined') && (jQuery.fx.off = true);</script>
-<style>
-  * {
-     -o-transition: none !important;
-     -moz-transition: none !important;
-     -ms-transition: none !important;
-     -webkit-transition: none !important;
-     transition: none !important;
-     -o-transform: none !important;
-     -moz-transform: none !important;
-     -ms-transform: none !important;
-     -webkit-transform: none !important;
-     transform: none !important;
-     -webkit-animation: none !important;
-     -moz-animation: none !important;
-     -o-animation: none !important;
-     -ms-animation: none !important;
-     animation: none !important;
-  }
-</style>
-      EOF
+      disable_animations = <<~HTML
+        <script type="text/javascript">(typeof jQuery !== 'undefined') && (jQuery.fx.off = true);</script>
+        <style>
+          * {
+            -o-transition: none !important;
+            -moz-transition: none !important;
+            -ms-transition: none !important;
+            -webkit-transition: none !important;
+            transition: none !important;
+            -o-transform: none !important;
+            -moz-transform: none !important;
+            -ms-transform: none !important;
+            -webkit-transform: none !important;
+            transform: none !important;
+            -webkit-animation: none !important;
+            -moz-animation: none !important;
+            -o-animation: none !important;
+            -ms-animation: none !important;
+            animation: none !important;
+          }
+        </style>
+      HTML
+
       fragment.gsub(%r{</head>}, "#{disable_animations}</head>")
     end
     # rubocop:enable Metrics/MethodLength
-    # rubocop:enable Naming/HeredocDelimiterNaming
-    # rubocop:enable Layout/HeredocIndentation
   end
 end

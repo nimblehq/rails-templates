@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - /spec template' do
   it 'creates spec support files' do
     expect(file('spec/support/assets.rb')).to exist
@@ -5,7 +7,6 @@ describe 'Web variant - /spec template' do
     expect(file('spec/support/disable_animation.rb')).to exist
     expect(file('spec/support/system.rb')).to exist
     expect(file('spec/support/webdrivers.rb')).to exist
-    expect(file('spec/support/webpack.rb')).to exist
     expect(file('spec/support/sanitize.rb')).to exist
   end
 

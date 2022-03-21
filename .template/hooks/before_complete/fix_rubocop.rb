@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 def fixing_rubocop
   after_bundle do
     use_source_path __dir__
 
-    cops = %w(
+    cops = %w[
       Style/FrozenStringLiteralComment
       Style/StringLiterals
       Layout/EmptyLineAfterMagicComment
-    ).join(',')
+    ].join(',')
 
-    run "rubocop --only #{cops} --auto-correct-all"
+    run "rubocop --only #{cops} --auto-correct-all --out tmp/template_rubocop.txt"
   end
 end
 

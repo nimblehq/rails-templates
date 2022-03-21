@@ -1,6 +1,8 @@
-file 'spec/support/devise.rb', <<-CODE
-RSpec.configure do |config|
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Devise::Test::ControllerHelpers, type: :view
-end
-CODE
+# frozen_string_literal: true
+
+file 'spec/support/devise.rb', <<~RUBY
+  RSpec.configure do |config|
+    config.include Devise::Test::ControllerHelpers, type: :controller
+    config.include Devise::Test::ControllerHelpers, type: :view
+  end
+RUBY

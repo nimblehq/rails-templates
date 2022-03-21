@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 describe 'Bootstrap Addon - application.scss' do
   subject { file('app/assets/stylesheets/application.scss') }
 
-  it 'imports bootstrap stylesheets' do
-    expect(subject).to contain("@import 'vendor/bootstrap/bootstrap'")
+  it 'imports vendor stylesheets' do
+    expect(subject).to contain("@import './vendor';")
   end
 end

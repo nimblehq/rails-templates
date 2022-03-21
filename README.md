@@ -16,14 +16,17 @@ with building complex applications over the years.
 
 ### Requirements
 
-- Install ruby and set your local ruby version to `2.7.2`
-- Install rails > `6.0.0`, recommended version `6.1.3.1`
+- Install ruby and set your local ruby version to `3.0.1`
+- Install rails `7.0.1`
+- Install node `16.13.2` (For creating web application)
+
+> 📝 If running on Apple M1, to build docker image, please make sure to set platform to AMD64 by `export DOCKER_DEFAULT_PLATFORM=linux/amd64`
 
 ### Use the template
 
 In order to use the template, initialize a new app with the following parameters:
 
-```
+```sh
 rails new <app_name> -m https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb
 ```
 
@@ -32,7 +35,7 @@ Supported template options:
 
 To apply the template on an existing application, run following rails command:
 
-```
+```sh
 rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb
 
 # To apply on an api application
@@ -146,6 +149,44 @@ Test files are located under `.template/spec` folder
 │   │   │   └── api
 │   │   │   │   ├── ...
 │   │   │   │   └── template_spec.rb
+```
+
+### Template Strings
+
+When using template string with heredoc, use the proper name following the file type / content.
+
+This provides the meaningful context to the content and some IDEs also support to highlight the content depending on the type.
+
+- `DOCKERFILE`
+- `ERB`
+- `HTML`
+- `IGNORE` - For any ignore file e.g. `.gitignore`, `.eslintignore`
+- `JAVASCRIPT`
+- `JSON`
+- `PROCFILE`
+- `RUBY`
+- `SCSS`
+- `SHELL`
+
+For other files that are not fit the types above, use the extension as the name
+e.g. `TOOL_VERSION` for `.tool-version` file.
+
+For the normal string, name it after the content
+e.g. `ERROR` for template error message.
+
+## Testing the Template
+
+To run [RuboCop](https://github.com/rubocop/rubocop) against the template:
+
+```sh
+.template/bin/rubocop
+```
+
+Any RuboCop command options can be passed:
+
+```sh
+# Run RuboCop with auto correct
+.template/bin/rubocop -a
 ```
 
 ## License

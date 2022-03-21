@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - Gemfile' do
   subject { file('Gemfile') }
 
@@ -5,31 +7,35 @@ describe 'Web variant - Gemfile' do
     expect(subject).to contain('i18n-js')
   end
 
-  it 'adds webpacker gem' do
-    expect(subject).to contain('webpacker')
+  it 'adds sprockets-rails gem' do
+    expect(subject).to contain('sprockets-rails')
   end
 
-  it 'adds sass-rails gem' do
-    expect(subject).to contain('sass-rails')
+  it 'adds cssbundling-rails gem' do
+    expect(subject).to contain('cssbundling-rails')
+  end
+
+  it 'adds jsbundling-rails gem' do
+    expect(subject).to contain('jsbundling-rails')
   end
 
   describe 'Development + Test Environment' do
-    it 'adds sassc-rails gem' do
-      expect(subject).to contain('sassc-rails').after('^group :development, :test')
-    end
-
     it 'adds danger-eslint gem' do
       expect(subject).to contain('danger-eslint').after('^group :development, :test')
-    end
-
-    it 'adds scss_lint gem' do
-      expect(subject).to contain('scss_lint').after('^group :development, :test')
     end
   end
 
   describe 'Test Environment' do
-    it 'adds rspec-retry gem' do
-      expect(subject).to contain('rspec-retry').after('^group :test')
+    it 'adds capybara gem' do
+      expect(subject).to contain('capybara').after('^group :test')
+    end
+
+    it 'adds selenium-webdriver gem' do
+      expect(subject).to contain('selenium-webdriver').after('^group :test')
+    end
+
+    it 'adds webdrivers gem' do
+      expect(subject).to contain('webdrivers').after('^group :test')
     end
   end
 end

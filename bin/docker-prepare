@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'fileutils'
 
 # Copy the project dependencies to build the docker image

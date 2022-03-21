@@ -1,0 +1,42 @@
+name: Test Template
+
+on: push
+
+env:
+  RUBY_VERSION: 3.0.1
+
+jobs:
+  test:
+    name: Test template
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2.3.4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+
+      - name: Cache gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-template-${{ env.RUBY_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-template-${{ env.RUBY_VERSION }}-
+
+      - name: Install gems
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Run RuboCop
+        run: bundle exec rubocop --config .template/.rubocop.yml --parallel
