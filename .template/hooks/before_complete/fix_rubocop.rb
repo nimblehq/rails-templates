@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def fixing_rubocop
   after_bundle do
     use_source_path __dir__

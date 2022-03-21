@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - spec/codebase/codebase_spec.rb' do
   subject { file('spec/codebase/codebase_spec.rb') }
 

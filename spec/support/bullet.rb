@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.configure do |config|
   if Bullet.enable?
     config.before(:each) do

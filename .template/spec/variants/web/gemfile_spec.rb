@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - Gemfile' do
   subject { file('Gemfile') }
 

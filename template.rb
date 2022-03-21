@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'shellwords'
 
 # Variables
 APP_NAME = app_name
 # Transform the app name from slug to human-readable name e.g. nimble-web -> Nimble
 APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
-DOCKER_REGISTRY_HOST = 'docker.io'.freeze
+DOCKER_REGISTRY_HOST = 'docker.io'
 DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
-RUBY_VERSION = '3.0.1'.freeze
-POSTGRES_VERSION = '12.1'.freeze
-REDIS_VERSION = '5.0.7'.freeze
+RUBY_VERSION = '3.0.1'
+POSTGRES_VERSION = '12.1'
+REDIS_VERSION = '5.0.7'
 # Variants
 API_VARIANT = options[:api] || ENV['API'] == 'true'
 WEB_VARIANT = !API_VARIANT
@@ -19,8 +21,8 @@ DEFAULT_ADDONS = {
 }.freeze
 
 if WEB_VARIANT
-  NODE_VERSION = '16.13.2'.freeze
-  NODE_SOURCE_VERSION = '16'.freeze # Used in Dockerfile https://github.com/nodesource/distributions
+  NODE_VERSION = '16.13.2'
+  NODE_SOURCE_VERSION = '16' # Used in Dockerfile https://github.com/nodesource/distributions
 end
 
 def apply_template!(template_root)
@@ -117,14 +119,9 @@ def install_addon_prompt(addon)
 end
 
 def post_default_addons_install
-  addons = ''
-  DEFAULT_ADDONS.each_value do |addon|
-    addons << "* #{addon}\n  "
-  end
-
   puts <<~INFO
     These default addons were installed:
-    #{addons}
+    #{DEFAULT_ADDONS.values.map { |addon| "* #{addon}" }.join("\n")}
   INFO
 end
 

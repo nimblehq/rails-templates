@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Bootstrap Addon - application.scss' do
   subject { file('app/assets/stylesheets/application.scss') }
 

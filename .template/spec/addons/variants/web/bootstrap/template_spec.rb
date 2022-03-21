@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Bootstrap addon - template' do
   it 'creates app/assets/stylesheets/vendor/index.scss' do
     expect(file('app/assets/stylesheets/vendor/index.scss')).to exist

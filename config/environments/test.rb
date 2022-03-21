@@ -1,4 +1,6 @@
-insert_into_file 'config/environments/test.rb', after: %r{config.action_mailer.perform_caching.+\n} do
+# frozen_string_literal: true
+
+insert_into_file 'config/environments/test.rb', after: /config.action_mailer.perform_caching.+\n/ do
   <<~RUBY.indent(2)
 
     config.action_mailer.default_url_options = {
@@ -8,7 +10,7 @@ insert_into_file 'config/environments/test.rb', after: %r{config.action_mailer.p
   RUBY
 end
 
-insert_into_file 'config/environments/test.rb', before: %r{^end} do
+insert_into_file 'config/environments/test.rb', before: /^end/ do
   <<~RUBY.indent(2)
 
     # Configure Bullet gem to detect N+1 queries

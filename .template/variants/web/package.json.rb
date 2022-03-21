@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Create package.json file
 unless File.exist?('package.json')
   create_file 'package.json',

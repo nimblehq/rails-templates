@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 append_to_file 'config/initializers/assets.rb' do
   <<~RUBY
 

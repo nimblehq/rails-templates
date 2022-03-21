@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'fileutils'
 
 # Copy the project dependencies to build the docker image
-DOCKER_TMP_FOLDER = 'tmp/docker'.freeze
-ENGINES_DIRECTORY = 'engines'.freeze
+DOCKER_TMP_FOLDER = 'tmp/docker'
+ENGINES_DIRECTORY = 'engines'
 
 FileUtils.rm_rf DOCKER_TMP_FOLDER
 FileUtils.mkdir DOCKER_TMP_FOLDER

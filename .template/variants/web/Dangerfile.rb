@@ -1,4 +1,6 @@
-insert_into_file 'Dangerfile', after: %r{suggester.suggest.*\n} do
+# frozen_string_literal: true
+
+insert_into_file 'Dangerfile', after: /suggester.suggest.*\n/ do
   <<~RUBY
 
     # Runs ESLint on modified and added files in the PR

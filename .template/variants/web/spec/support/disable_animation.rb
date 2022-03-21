@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Rack
   # disable CSS3 and jQuery animations in test mode for speed, consistency and avoiding timing issues.
   # Usage for Rails:

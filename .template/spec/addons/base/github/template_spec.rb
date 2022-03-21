@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Github addon - template' do
   it 'creates the PULL_REQUEST_TEMPLATE file' do
     expect(file('.github/PULL_REQUEST_TEMPLATE.md')).to exist

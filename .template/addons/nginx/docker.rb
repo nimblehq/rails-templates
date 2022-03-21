@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 insert_into_file 'Dockerfile', after: 'unzip ' do
   'nginx '
 end
 
-insert_into_file 'Dockerfile', after: %r{WORKDIR.+\n} do
+insert_into_file 'Dockerfile', after: /WORKDIR.+\n/ do
   <<~DOCKERFILE
 
     # Nginx config

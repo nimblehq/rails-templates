@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 apply 'config/application.rb'
 
 template 'config/application.yml.tt'

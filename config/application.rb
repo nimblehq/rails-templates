@@ -1,4 +1,6 @@
-insert_into_file 'config/application.rb', before: %r{  end\nend\Z} do
+# frozen_string_literal: true
+
+insert_into_file 'config/application.rb', before: /  end\nend\Z/ do
   <<~RUBY.indent(4)
 
     # Set the queuing backend to `Sidekiq`

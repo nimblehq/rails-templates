@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec/wait'
 
 Dir[[__dir__, 'support', '**', '*.rb'].join('/')].each { |f| require f }

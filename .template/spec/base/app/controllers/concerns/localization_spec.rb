@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'localization concern' do
   subject { file('app/controllers/concerns/localization.rb') }
 

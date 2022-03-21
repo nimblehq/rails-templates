@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Slim Addon - Dangerfile' do
   subject { file('Dangerfile') }
 

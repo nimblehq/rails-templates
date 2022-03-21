@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Configure VCR and WebMock to work with webdrivers
 # https://github.com/titusfortner/webdrivers/wiki/Using-with-VCR-or-WebMock
 if defined?(VCR)

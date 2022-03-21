@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - /spec template' do
   it 'creates spec support files' do
     expect(file('spec/support/assets.rb')).to exist

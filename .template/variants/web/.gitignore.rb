@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 append_to_file '.gitignore' do
   <<~IGNORE
     # Ignore i18n.js generated files

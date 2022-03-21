@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def apply_web_variant!
   use_source_path __dir__
 

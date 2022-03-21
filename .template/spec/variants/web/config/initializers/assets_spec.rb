@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'Web variant - config/initializers/assets.rb' do
   subject { file('config/initializers/assets.rb') }
 
