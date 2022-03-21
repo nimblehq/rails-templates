@@ -31,7 +31,11 @@ Metrics/PerceivedComplexity:
     - '**/template.rb'
 
 Naming/FileName:
-  Enabled: false
+  Exclude:
+    - '**/.tool-versions.rb'
+    - '**/Dangerfile.rb'
+    - '**/Gemfile.rb'
+    - '**/Procfile.dev.rb'
 
 Style/Documentation:
   Enabled: false
