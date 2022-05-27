@@ -26,8 +26,7 @@ end
 insert_into_file 'Gemfile', after: /gem 'danger'.*\n/ do
   <<~RUBY.indent(2)
     gem 'danger-eslint' # ESLint
-    # TODO: Update to the released gem once available
-    gem 'danger-stylelint', git: 'https://github.com/nimblehq/danger-stylelint.git', ref: '3670a95' # Stylelint
+    gem 'danger-stylelint' # Stylelint
   RUBY
 end
 
