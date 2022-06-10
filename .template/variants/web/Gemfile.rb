@@ -13,8 +13,8 @@ insert_into_file 'Gemfile', after: /gem 'pundit'.*\n/ do
     gem 'sprockets-rails' # The original asset pipeline for Rails
     gem 'cssbundling-rails' # Bundle and process CSS
     gem 'jsbundling-rails' # Bundle and transpile JavaScript
-    # gem 'turbo-rails' # Hotwire's SPA-like page accelerator
-    # gem 'stimulus-rails' # Hotwire's modest JavaScript framework
+    gem 'turbo-rails' # Hotwire's SPA-like page accelerator
+    gem 'stimulus-rails' # Hotwire's modest JavaScript framework
     # gem 'image_processing' # Use Active Storage variants
   RUBY
 end
@@ -39,7 +39,7 @@ end
 # Group: :test
 ##############
 
-insert_into_file 'Gemfile', after: /gem 'rspec-retry'.*\n/ do
+insert_into_file 'Gemfile', after: /gem 'json_matchers'.*\n/ do
   <<~RUBY.indent(2)
     gem 'capybara' # Integration testing
     gem 'selenium-webdriver' # Ruby bindings for Selenium/WebDriver

@@ -28,8 +28,6 @@ end
 def apply_template!(template_root)
   use_source_path template_root
 
-  delete_test_folder
-
   template 'Gemfile.tt', force: true
 
   copy_file '.flayignore'
@@ -67,6 +65,10 @@ def apply_template!(template_root)
   post_default_addons_install
 
   # Add-ons - [Optional]
+  if yes?(install_addon_prompt('Rspec'))
+    delete_test_folder
+    apply '.template/addons/rspec/template.rb'
+  end
   apply '.template/addons/github/template.rb' if yes?(install_addon_prompt('Github Action and Wiki'))
   apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
