@@ -115,7 +115,7 @@ def delete_test_folder
 end
 
 def install_addon_prompt(addon)
-  "Would you like to add the #{addon} addon? [Yn]"
+  "Would you like to add the #{addon} addon? [yN]"
 end
 
 def post_default_addons_install
