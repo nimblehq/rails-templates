@@ -26,6 +26,7 @@ end
 insert_into_file 'Gemfile', after: /gem 'danger'.*\n/ do
   <<~RUBY.indent(2)
     gem 'danger-eslint' # ESLint
+    gem 'danger-stylelint' # Stylelint
   RUBY
 end
 

@@ -5,5 +5,8 @@ insert_into_file 'Dangerfile', after: /suggester.suggest.*\n/ do
 
     # Runs ESLint on modified and added files in the PR
     eslint.lint
+
+    # Runs Stylelint on all files
+    stylelint.lint
   RUBY
 end
