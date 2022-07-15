@@ -24,6 +24,7 @@ def apply_web_variant!
   # Add-ons - [Optional]
   apply '.template/addons/bootstrap/template.rb' if yes? install_addon_prompt 'Bootstrap'
   apply '.template/addons/slim/template.rb' if yes? install_addon_prompt 'Slim Template Engine'
+  apply '.template/addons/hotwire/template.rb' if yes? install_addon_prompt 'Hotwire'
 
   after_bundle do
     use_source_path __dir__
