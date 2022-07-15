@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Hotwire Rails
 insert_into_file 'Gemfile', after: /gem 'bcrypt'.*\n/ do
   <<~RUBY

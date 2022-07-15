@@ -135,7 +135,7 @@ end
 
 # Setup the template root path
 # If the template file is the url, clone the repo to the tmp directory
-template_root = __FILE__ =~ %r{\Ahttps?://} ? remote_repository : __dir__
+template_root = __FILE__.match?(%r{\Ahttps?://}) ? remote_repository : __dir__
 use_source_path template_root
 
 # Init the template helpers
