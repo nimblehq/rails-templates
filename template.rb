@@ -67,7 +67,6 @@ def apply_template!(template_root)
   post_default_addons_install
 
   # Add-ons - [Optional]
-  apply '.template/addons/hotwire/template.rb' if WEB_VARIANT && yes?(install_addon_prompt('Hotwire'))
   apply '.template/addons/github/template.rb' if yes?(install_addon_prompt('Github Action and Wiki'))
   apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
@@ -135,7 +134,7 @@ end
 
 # Setup the template root path
 # If the template file is the url, clone the repo to the tmp directory
-template_root = __FILE__ =~ %r{\Ahttps?://} ? remote_repository : __dir__
+template_root = __FILE__.match?(%r{\Ahttps?://}) ? remote_repository : __dir__
 use_source_path template_root
 
 # Init the template helpers
