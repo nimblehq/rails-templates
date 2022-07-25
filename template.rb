@@ -10,7 +10,7 @@ DOCKER_REGISTRY_HOST = 'docker.io'
 DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
 RUBY_VERSION = '3.0.1'
 POSTGRES_VERSION = '14.4'
-REDIS_VERSION = '5.0.7'
+REDIS_VERSION = '6.2.7'
 # Variants
 API_VARIANT = options[:api] || ENV['API'] == 'true'
 WEB_VARIANT = !API_VARIANT
