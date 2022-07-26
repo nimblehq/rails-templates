@@ -6,6 +6,7 @@ services:
     container_name: <%= APP_NAME %>_db
     environment:
       - POSTGRES_DB=<%= APP_NAME %>_development
+      - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
 

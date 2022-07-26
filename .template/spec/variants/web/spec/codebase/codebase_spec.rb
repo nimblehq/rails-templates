@@ -3,8 +3,8 @@
 describe 'Web variant - spec/codebase/codebase_spec.rb' do
   subject { file('spec/codebase/codebase_spec.rb') }
 
-  it 'adds scss lint example' do
-    expect(subject).to contain(scss_lint_example)
+  it 'adds stylelint example' do
+    expect(subject).to contain(stylelint_example)
   end
 
   it 'adds eslint example' do
@@ -13,7 +13,7 @@ describe 'Web variant - spec/codebase/codebase_spec.rb' do
 
   private
 
-  def scss_lint_example
+  def stylelint_example
     <<~RUBY
       it 'does not offend stylelint' do
         expect(`yarn run stylelint ./`).to be_empty

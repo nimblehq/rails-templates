@@ -9,8 +9,8 @@ APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ W
 DOCKER_REGISTRY_HOST = 'docker.io'
 DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
 RUBY_VERSION = '3.0.1'
-POSTGRES_VERSION = '12.1'
-REDIS_VERSION = '5.0.7'
+POSTGRES_VERSION = '14.4'
+REDIS_VERSION = '6.2.7'
 # Variants
 API_VARIANT = options[:api] || ENV['API'] == 'true'
 WEB_VARIANT = !API_VARIANT
@@ -115,7 +115,7 @@ def delete_test_folder
 end
 
 def install_addon_prompt(addon)
-  "Would you like to add the #{addon} addon? [Yn]"
+  "Would you like to add the #{addon} addon? [yN]"
 end
 
 def post_default_addons_install
@@ -134,7 +134,7 @@ end
 
 # Setup the template root path
 # If the template file is the url, clone the repo to the tmp directory
-template_root = __FILE__ =~ %r{\Ahttps?://} ? remote_repository : __dir__
+template_root = __FILE__.match?(%r{\Ahttps?://}) ? remote_repository : __dir__
 use_source_path template_root
 
 # Init the template helpers

@@ -1,13 +1,13 @@
 Add the story URL here. Prefer the short link format, e.g. https://app.clubhouse.io/acme/story/1234/
 
-## What happened
+## What happened 👀
 
-Describe the big picture of your changes here to communicate to the team why we should accept this pull request.
+Provide a description of the **changes** this pull request brings to the codebase. Additionally, when the pull request is still being worked on, a checklist of the planned changes is welcome to track progress.
 
-## Insight
+## Insight 📝
 
-Describe in detail how to test the changes. Referenced documentation is welcome as well.
+Describe in detail why this solution is the most appropriate, which solution you tried but did not go with, and how to test the changes. References to relevant documentation are welcome as well.
 
-## Proof Of Work
+## Proof Of Work 📹
 
-Show us the implementation: screenshots, gif, etc.
+Show us the implementation: screenshots, GIFs, etc.

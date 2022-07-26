@@ -10,7 +10,7 @@ services:
       - "5432:5432"
 
   redis:
-    image: redis:5.0.7
+    image: redis:<%= REDIS_VERSION %>
     container_name: <%= APP_NAME %>_redis
     ports:
       - "6379:6379"
