@@ -66,6 +66,12 @@ jobs:
       - name: Run unit tests
         run: docker compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
 
+      - name: Upload tests coverage artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: coverage
+
   system_tests:
     name: System tests
     runs-on: ubuntu-latest
