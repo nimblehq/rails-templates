@@ -16,7 +16,6 @@ reek.lint
 suggester.suggest
 
 # Report your Ruby app test suite code coverage in Danger.
-# simplecov.report 'coverage/coverage.json'
 # Copied from the report method to fix the wrong method called on line:31
 # https://github.com/marcelofabri/danger-simplecov_json/blob/master/lib/simplecov_json/plugin.rb#L31
 # rubocop:disable Style/GuardClause, Style/SignalException
