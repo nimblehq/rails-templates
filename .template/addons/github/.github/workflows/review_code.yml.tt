@@ -17,6 +17,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           check-name: 'Build Docker image'
           running-workflow-name: 'Wait for test build'
+          allowed-conclusions: success
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 20
 
@@ -32,6 +33,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           check-name: 'Unit tests'
           running-workflow-name: 'Run Danger'
+          allowed-conclusions: success
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 20
 
