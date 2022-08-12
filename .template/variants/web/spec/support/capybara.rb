@@ -9,16 +9,6 @@ CAPYBARA_TIMEOUT = ENV['CI'] ? 60 : 30
 
 # https://github.com/rails/rails/pull/30876
 Capybara.register_driver(:headless_chrome) do |app|
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    # This enables access to logs with `page.driver.manage.get_log(:browser)`
-    loggingPrefs: {
-      browser: 'ALL',
-      client: 'ALL',
-      driver: 'ALL',
-      server: 'ALL'
-    }
-  )
-
   options = Selenium::WebDriver::Chrome::Options.new
 
   # Sets default window size in case the smaller default size is not enough
@@ -41,7 +31,6 @@ Capybara.register_driver(:headless_chrome) do |app|
   Capybara::Selenium::Driver.new(
     app,
     browser: :chrome,
-    desired_capabilities: capabilities,
     options: options
   )
 end
