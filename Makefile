@@ -1,7 +1,7 @@
 # Y - in response to Would you like to add the Github addon?
 # Y - in response to Would you like to add the SemaphoreCI addon?
 # Y - in response to Would you like to add the Nginx addon?
-# Y - in response to Would you like to add the PhraseApp addon?
+# Y - in response to Would you like to add the Phrase addon?
 # Y - in response to Would you like to add the Devise addon?
 common_addon_prompts = Y\nY\nY\nY\nY\n
 

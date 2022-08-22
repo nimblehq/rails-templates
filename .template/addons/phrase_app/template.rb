@@ -3,6 +3,6 @@
 after_bundle do
   use_source_path __dir__
 
-  copy_file '.phraseapp.yml'
+  copy_file '.phrase.yml'
   apply 'spec/template.rb'
 end
