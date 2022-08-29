@@ -8,6 +8,7 @@
 # And it requires the envs as we always use `ENV.fetch` to setup the variables
 #
 # Related issue: https://github.com/rails/rails/issues/32947
+# TODO: https://github.com/nimblehq/rails-templates/issues/326
 
 require 'yaml'
 
