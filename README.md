@@ -27,7 +27,7 @@ with building complex applications over the years.
 In order to use the template, initialize a new app with the following parameters:
 
 ```sh
-rails new <app_name> -m https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb
+rails new <app_name> -m https://raw.githubusercontent.com/nimblehq/rails-templates/main/template.rb
 ```
 
 Supported template options:
@@ -36,13 +36,13 @@ Supported template options:
 To apply the template on an existing application, run following rails command:
 
 ```sh
-rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb
+rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/main/template.rb
 
 # To apply on an api application
-rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb API=true
+rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/main/template.rb API=true
 
 # To apply a specific addon
-rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/master/template.rb ADDON=<addon name>
+rails app:template LOCATION=https://raw.githubusercontent.com/nimblehq/rails-templates/main/template.rb ADDON=<addon name>
 ```
 
 Available Addons:

@@ -7,7 +7,7 @@ agent:
     os_image: ubuntu1804
 auto_cancel:
   running:
-    when: "branch != 'master'"
+    when: "branch != 'main'"
 
 global_job_config:
   env_vars:
@@ -28,7 +28,7 @@ blocks:
         - name: Build
           commands:
             - >-
-              if ([ $SEMAPHORE_GIT_BRANCH != 'master' ] && [ $SEMAPHORE_GIT_BRANCH != 'development' ]);
+              if ([ $SEMAPHORE_GIT_BRANCH != 'main' ] && [ $SEMAPHORE_GIT_BRANCH != 'development' ]);
                 then (echo "Pulling built image for the branch"; docker compose pull test || true);
                 else (echo "Skipping docker pull");
               fi || true
@@ -67,4 +67,4 @@ promotions:
   - name: Production
     pipeline_file: promotion-production.yml
     auto_promote:
-      when: "branch = 'master' AND result = 'passed'"
+      when: "branch = 'main' AND result = 'passed'"

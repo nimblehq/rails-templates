@@ -1,12 +1,19 @@
 name: Test
 
-on: push
+on:
+  pull_request:
+  push:
+    branches:
+      - develop
+      - main
 
 env:
+  DANGER_GITHUB_API_TOKEN: ${{ github.token }}
   DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
   DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
   DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
   DOCKER_IMAGE: ${{ github.repository }}
+  NODE_VERSION: 16
 
   # Set the default docker-compose file
   COMPOSE_FILE: docker-compose.test.yml
@@ -21,7 +28,7 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3
 
       - name: Set env BRANCH_TAG
         uses: nimblehq/branch-tag-action@v1.2
@@ -35,20 +42,20 @@ jobs:
 
       - name: Pull Docker image
         if: ${{ env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development' }}
-        run: docker compose pull test || true
+        run: docker-compose pull test || true
 
       - name: Build Docker image
-        run: bin/docker-prepare && docker compose build
+        run: bin/docker-prepare && docker-compose build
 
       - name: Push Docker image
-        run: docker compose push test
+        run: docker-compose push test
 
   unit_tests:
     name: Unit tests
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3
 
       - name: Set env BRANCH_TAG
         uses: nimblehq/branch-tag-action@v1.2
@@ -61,17 +68,23 @@ jobs:
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Pull Docker image
-        run: docker compose pull test || true
+        run: docker-compose pull test || true
 
       - name: Run unit tests
-        run: docker compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
+        run: docker-compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile
+
+      - name: Upload tests coverage artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: coverage
 
   system_tests:
     name: System tests
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3
 
       - name: Set env BRANCH_TAG
         uses: nimblehq/branch-tag-action@v1.2
@@ -84,10 +97,10 @@ jobs:
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Pull Docker image
-        run: docker compose pull test || true
+        run: docker-compose pull test || true
 
       - name: Run system tests
-        run: docker compose run test bundle exec rspec spec/systems --profile
+        run: docker-compose run test bundle exec rspec spec/systems --profile
 
       - name: Upload system tests screenshots artifact
         uses: actions/upload-artifact@v2
@@ -95,3 +108,53 @@ jobs:
         with:
           name: system_tests_screenshots
           path: tmp/screenshots/*
+  
+  automated_code_review:
+    name: Run Danger
+    needs: unit_tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Download tests coverage artifact
+        uses: actions/download-artifact@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: test.yml
+          workflow_conclusion: success
+          name: coverage
+          path: coverage
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+
+      - name: Cache Node modules
+        id: node-modules-cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-nodemodules-
+
+      - name: Yarn install
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: yarn
+
+      - name: Run Undercover
+        run: bundle exec undercover-report
+
+      - name: Run Danger
+        run: bundle exec danger
