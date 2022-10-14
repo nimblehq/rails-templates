@@ -5,7 +5,7 @@
     @if ($value == 0 or $value == auto) {
       $list: append($list, $value);
     } @else {
-      $em-value: ($value / $base-font-size) + em;
+      $em-value: calc($value / $base-font-size) + em;
       $list: append($list, $em-value);
     }
   }
@@ -20,7 +20,7 @@
     @if ($value == 0 or $value == auto) {
       $list: append($list, $value);
     } @else {
-      $rem-value: ($value / $base-font-size) + rem;
+      $rem-value: calc($value / $base-font-size) + rem;
       $list: append($list, $rem-value);
     }
   }
