@@ -4,6 +4,8 @@
 detectors:
   IrresponsibleModule:
     enabled: false
+  MissingSafeMethod:
+    enabled: false
 
   DataClump:
     max_copies: 3
