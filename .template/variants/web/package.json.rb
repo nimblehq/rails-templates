@@ -18,8 +18,7 @@ run 'yarn add esbuild'
 
 run 'yarn add --dev @nimblehq/eslint-config-nimble@2.2.1'
 run 'yarn add --dev stylelint'
-run 'yarn add --dev stylelint-config-sass-guidelines'
-run 'yarn add --dev stylelint-config-property-sort-order-smacss'
+run 'yarn add --dev @nimblehq/stylelint-config-nimble'
 # TODO: Check again after removing Webpacker, need to use version 8
 # https://github.com/bjankord/stylelint-config-sass-guidelines/issues/203#issuecomment-955620774
 run 'yarn add --dev postcss@8.4.5'

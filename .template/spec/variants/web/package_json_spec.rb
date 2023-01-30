@@ -51,8 +51,7 @@ describe 'Web variant - package.json' do
 
     it 'adds stylelint dependencies' do
       expect(subject['devDependencies']).to include('stylelint')
-      expect(subject['devDependencies']).to include('stylelint-config-sass-guidelines')
-      expect(subject['devDependencies']).to include('stylelint-config-property-sort-order-smacss')
+      expect(subject['devDependencies']).to include('@nimblehq/stylelint-config-nimble')
     end
 
     it 'adds postcss 8 dependencies' do
