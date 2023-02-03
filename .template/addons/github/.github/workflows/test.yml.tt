@@ -34,7 +34,7 @@ jobs:
         uses: nimblehq/branch-tag-action@1.3.0
 
       - name: Login to Docker registry
-        uses: docker/login-action@v1.6.0
+        uses: docker/login-action@v2
         with:
           registry: ${{ env.DOCKER_REGISTRY_HOST }}
           username: ${{ env.DOCKER_REGISTRY_USERNAME }}
@@ -61,7 +61,7 @@ jobs:
         uses: nimblehq/branch-tag-action@1.3.0
 
       - name: Login to Docker registry
-        uses: docker/login-action@v1.6.0
+        uses: docker/login-action@v2
         with:
           registry: ${{ env.DOCKER_REGISTRY_HOST }}
           username: ${{ env.DOCKER_REGISTRY_USERNAME }}
@@ -90,7 +90,7 @@ jobs:
         uses: nimblehq/branch-tag-action@1.3.0
 
       - name: Login to Docker registry
-        uses: docker/login-action@v1.6.0
+        uses: docker/login-action@v2
         with:
           registry: ${{ env.DOCKER_REGISTRY_HOST }}
           username: ${{ env.DOCKER_REGISTRY_USERNAME }}

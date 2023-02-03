@@ -23,7 +23,7 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3
 
       - name: Set env BRANCH_TAG
         uses: nimblehq/branch-tag-action@1.3.0
@@ -35,12 +35,12 @@ jobs:
           bundler-cache: true
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.4
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Cache gems
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
           key: ${{ runner.os }}-gems-${{ env.RUBY_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
@@ -57,7 +57,7 @@ jobs:
 
       - name: Cache npm packages
         if: ${{ matrix.variant == 'web' }}
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
