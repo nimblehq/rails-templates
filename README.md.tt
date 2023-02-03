@@ -50,7 +50,7 @@ Add the following build settings to run the tests in the Docker environment via 
 ```sh
 # a unique `BRANCH_TAG` value to tag the Docker image
 # e.g $SEMAPHORE_BRANCH_ID or using the
-# or using nimblehq/branch-tag-action@v1.2 Github action
+# or using nimblehq/branch-tag-action@1.3.0 Github action
 export BRANCH_TAG= # unique value for tagging Docker image
 ```
 
