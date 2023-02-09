@@ -1,4 +1,4 @@
-https://github.com/nimblehq/rails-templates/issues/??
+Close https://github.com/nimblehq/rails-templates/issues/??
 
 ## What happened 👀
 

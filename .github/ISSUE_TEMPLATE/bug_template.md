@@ -8,13 +8,13 @@ labels: "type : bug"
 ## Issue
 
 Describe the issue you are facing. Show us the implementation: screenshots, gif, etc.
- 
+
 ## Expected
 
 Describe what should be the correct behaviour.
- 
+
 ## Steps to reproduce
 
-1. 
-2. 
-3. 
+1.
+2.
+3.
