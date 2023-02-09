@@ -11,6 +11,10 @@ describe 'config/environments/test.rb' do
     expect(subject).to contain(bullet_config)
   end
 
+  it 'eager load on CI' do
+    expect(subject).to contain('config.eager_load = ENV["C"].present?')
+  end
+
   private
 
   def mailer_default_url_config

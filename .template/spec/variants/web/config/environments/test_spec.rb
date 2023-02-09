@@ -14,8 +14,4 @@ describe 'Web variant - config/environments/test.rb' do
   it 'configures the assets to not compile when asset is missing' do
     expect(subject).to contain('config.assets.compile = false')
   end
-
-  it 'eager load on CI' do
-    expect(subject).to contain('config.eager_load = ENV["C"].present?')
-  end
 end
