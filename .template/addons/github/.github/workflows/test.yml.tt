@@ -18,6 +18,9 @@ env:
   # Set the default docker-compose file
   COMPOSE_FILE: docker-compose.test.yml
 
+  # Set the default CI value despite the Github Action default value
+  CI: true
+
 jobs:
   build:
     name: Build Docker image
