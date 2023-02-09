@@ -12,7 +12,7 @@ describe 'config/environments/test.rb' do
   end
 
   it 'eager load on CI' do
-    expect(subject).to contain('config.eager_load = ENV["C"].present?')
+    expect(subject).to contain('config.eager_load = ENV["CI"].present?')
   end
 
   private

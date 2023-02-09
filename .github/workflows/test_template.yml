@@ -1,4 +1,4 @@
-name: Test Template
+name: Test Template's codebase
 
 on: push
 
@@ -7,7 +7,7 @@ env:
 
 jobs:
   test:
-    name: Test template
+    name: Installation and linting
     runs-on: ubuntu-latest
 
     steps:
