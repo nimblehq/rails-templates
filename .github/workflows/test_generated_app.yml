@@ -9,9 +9,9 @@ env:
   DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
   DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
   DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
-  RUBY_VERSION: 3.0.1
-  NODE_VERSION: 16
-  RAILS_VERSION: 7.0.1
+  RUBY_VERSION: 3.2.2
+  NODE_VERSION: 18
+  RAILS_VERSION: 7.0.6
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
