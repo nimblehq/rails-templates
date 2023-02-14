@@ -1,7 +1,6 @@
 {
   "extends": [
-    "stylelint-config-sass-guidelines",
-    "stylelint-config-property-sort-order-smacss"
+    "@nimblehq/stylelint-config-nimble"
   ],
   "rules": {
     "no-eol-whitespace": true,
