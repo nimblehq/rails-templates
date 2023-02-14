@@ -5,7 +5,10 @@
 
 // Configuration
 @import 'bootstrap/scss/functions';
+// @import 'variables'; // Optional variable overrides here
 @import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+// @import 'sass_maps'; // Optional Sass map overrides here
 @import 'bootstrap/scss/mixins';
 @import 'bootstrap/scss/utilities';
 
