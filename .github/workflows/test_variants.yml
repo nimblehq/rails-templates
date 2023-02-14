@@ -26,10 +26,10 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@v3
 
       - name: Set env BRANCH_TAG
-        uses: nimblehq/branch-tag-action@v1.2
+        uses: nimblehq/branch-tag-action@1
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -38,12 +38,12 @@ jobs:
           bundler-cache: true
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.4
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Cache gems
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /home/runner/.rubies/ruby-${{ env.RUBY_VERSION }}
           key: ${{ runner.os }}-gems-${{ env.RUBY_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
@@ -56,11 +56,11 @@ jobs:
       - name: Get yarn cache directory path
         if: ${{ matrix.variant == 'web' }}
         id: yarn-cache-dir-path
-        run: echo "::set-output name=yarn_cache_dir::$(yarn cache dir)"
+        run: echo "yarn_cache_dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
       - name: Cache npm packages
         if: ${{ matrix.variant == 'web' }}
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.yarn_cache_dir }}
@@ -76,7 +76,7 @@ jobs:
           make create_${{ matrix.variant }}
 
       - name: Login to docker registry
-        uses: docker/login-action@v1.6.0
+        uses: docker/login-action@v2
         with:
           registry: ${{ env.DOCKER_REGISTRY_HOST }}
           username: ${{ env.DOCKER_REGISTRY_USERNAME }}
