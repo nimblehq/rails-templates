@@ -107,7 +107,7 @@ jobs:
   system_tests:
     name: System tests
     runs-on: ubuntu-latest
-    needs: linting
+    needs: build
     timeout-minutes: 15
     env:
       TEST_RETRY: 2
