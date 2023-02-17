@@ -1,4 +1,4 @@
-name: Test Template's codebase
+name: Test the codebase of the template
 
 on: push
 
