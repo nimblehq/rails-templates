@@ -50,10 +50,35 @@ jobs:
       - name: Push Docker image
         run: docker-compose push test
 
+  linting:
+    name: Linting
+    runs-on: ubuntu-latest
+    needs: build
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set env BRANCH_TAG
+        uses: nimblehq/branch-tag-action@v1.2
+
+      - name: Login to Docker registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.DOCKER_REGISTRY_HOST }}
+          username: ${{ env.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ env.DOCKER_REGISTRY_TOKEN }}
+
+      - name: Pull Docker image
+        run: docker-compose pull test || true
+
+      - name: Run codebase test
+        run: docker-compose run test bundle exec rspec spec/codebase/codebase_spec.rb --format progress
+
   unit_tests:
     name: Unit tests
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v3
 
@@ -71,7 +96,7 @@ jobs:
         run: docker-compose pull test || true
 
       - name: Run unit tests
-        run: docker-compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb" --profile --format progress
+        run: docker-compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb, spec/codebase/codebase_spec.rb" --profile --format progress
 
       - name: Upload tests coverage artifact
         uses: actions/upload-artifact@v3
@@ -83,6 +108,7 @@ jobs:
     name: System tests
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 15
     env:
       TEST_RETRY: 2
     steps:
