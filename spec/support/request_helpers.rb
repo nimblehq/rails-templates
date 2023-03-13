@@ -9,6 +9,5 @@ module Request
 end
 
 RSpec.configure do |config|
-  config.include RSpec::Rails::ControllerExampleGroup, type: :request # required to have access to routes block
   config.include Request::JsonHelpers, type: :request
 end

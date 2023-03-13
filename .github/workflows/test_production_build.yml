@@ -1,4 +1,4 @@
-name: Test production build
+name: Test Production Docker Build
 
 on: push
 
@@ -12,7 +12,7 @@ env:
 
 jobs:
   build_production:
-    name: Build docker production image for ${{ matrix.variant }} variant
+    name: ${{ matrix.variant }} variant
     runs-on: ubuntu-latest
     strategy:
       matrix:
