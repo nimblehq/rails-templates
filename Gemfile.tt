@@ -60,7 +60,6 @@ group :development, :test do
   gem 'undercover' # Report missing test coverage in new changes
   gem 'danger' # Automated code review.
   gem 'danger-rubocop' # A Danger plugin for Rubocop.
-  gem 'danger-rails_best_practices' # Analyze code regarding best practices.
   gem 'danger-reek' # Detect code smell.
   gem 'danger-brakeman_scanner' # Security static analysis scanner in danger.
   gem 'danger-suggester' # Suggest code changes based on configured code formatter.
