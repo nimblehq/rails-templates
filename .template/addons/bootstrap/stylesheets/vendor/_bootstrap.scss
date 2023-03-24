@@ -6,6 +6,10 @@
 // Configuration
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
+// @import 'sass_maps'; // Optional Sass map overrides here (See: https://getbootstrap.com/docs/5.2/migration/#new-_mapsscss)
+// e.g., $theme-colors: map-merge($theme-colors, $custom-theme-colors);
+
 @import 'bootstrap/scss/mixins';
 @import 'bootstrap/scss/utilities';
 

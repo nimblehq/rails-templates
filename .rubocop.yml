@@ -44,3 +44,9 @@ RSpec/ContextWording:
   Prefixes:
     - when
     - given
+
+RSpec/NestedGroups:
+  Max: 5
+
+RSpec/MultipleExpectations:
+  Max: 10

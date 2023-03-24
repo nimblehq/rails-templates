@@ -1,4 +1,4 @@
-name: Test Template
+name: Test the codebase of the template
 
 on: push
 
@@ -7,7 +7,7 @@ env:
 
 jobs:
   test:
-    name: Test template
+    name: Installation and linting
     runs-on: ubuntu-latest
 
     steps:
@@ -17,7 +17,7 @@ jobs:
           access_token: ${{ github.token }}
 
       - name: Checkout Repository
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -26,7 +26,7 @@ jobs:
           bundler-cache: true
 
       - name: Cache gems
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-template-${{ env.RUBY_VERSION }}-${{ hashFiles('**/Gemfile.lock') }}
