@@ -3,16 +3,22 @@ phrase:
   file_format: yml
   push:
     sources:
+      - file: ./config/locales/<locale_name>.yml
+        params:
+          skip_upload_tags: true
+          tags: root
+
       - file: ./config/locales/<tag>.<locale_name>.yml
         params:
           skip_upload_tags: true
+
   pull:
     targets:
+      - file: ./config/locales/<locale_name>.yml
+        params:
+          include_empty_translations: true
+          tags: root
       - file: ./config/locales/<tag>.<locale_name>.yml
         params:
           include_empty_translations: true
-          tags: "en"
-      - file: ./config/locales/<tag>.<locale_name>.yml
-        params:
-          include_empty_translations: true
-          tags: "devise"
+          tags: devise
