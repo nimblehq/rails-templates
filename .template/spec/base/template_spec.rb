@@ -30,4 +30,12 @@ describe 'Base template' do
   it 'creates Reek configuration files' do
     expect(file('.reek.yml')).to exist
   end
+
+  it 'creates .env.example file' do
+    expect(file('.env.example')).to exist
+  end
+
+  it 'does NOT creates .env file' do
+    expect(file('.env')).not_to exist
+  end
 end

@@ -8,6 +8,7 @@ gem 'puma' # Use Puma as the app server
 gem 'mini_magick' # A ruby wrapper for ImageMagick or GraphicsMagick command line
 gem 'pagy' # A pagination gem that is very light and fast
 gem 'discard' # Soft deletes for ActiveRecord
+gem 'dotenv-rails' # Shim to load environment variables from .env into ENV in development
 gem 'sidekiq' # background processing for Ruby
 gem 'sassc' # bootsnap dependency
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
@@ -41,7 +42,6 @@ group :development, :test do
   # gem 'debug', platforms: %i[ mri mingw x64_mingw ] # Official debug
 
   # Utilities
-  gem 'figaro' # Simple Rails app configuration
   gem 'listen' # Listens to file modifications
   gem 'letter_opener' # Preview mail in the browser instead of sending
   gem 'ffaker' # A library for generating fake data such as names, addresses, and phone numbers

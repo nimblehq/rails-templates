@@ -34,6 +34,7 @@ def apply_template!(template_root)
 
   copy_file '.flayignore'
   copy_file 'Dangerfile'
+  copy_file '.env.example'
   copy_file '.rubocop.yml'
   copy_file '.reek.yml'
 
