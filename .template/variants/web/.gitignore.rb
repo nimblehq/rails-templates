@@ -8,6 +8,7 @@ append_to_file '.gitignore' do
 
     # Ignore asset builds
     /app/assets/builds/*
+    !/app/assets/builds/.keep
 
     # Ignore Node dependencies
     /node_modules
@@ -25,9 +26,5 @@ append_to_file '.gitignore' do
 
     # Ignore Gemfile.lock file in engines.
     /engines/*/Gemfile.lock
-
-    # Style guide
-    /styleguide/*
-    !/styleguide/README.md
   IGNORE
 end

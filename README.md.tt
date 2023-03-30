@@ -19,10 +19,15 @@
 
 ### Development
 
-- Run the Rails app
+- Run the Rails app:
 
   ```sh
   make dev
+  ```
+- Run the seed:
+
+  ```sh
+  make db/seed
   ```
 
 ## Testing
@@ -80,7 +85,7 @@ Upon the first build, the whole Docker image is built from the ground up and tag
 
   ```sh
   # Docker way
-  make test/docker
+  docker compose -f docker-compose.test.yml run test
 
   # Non-Docker way
   make test
@@ -90,10 +95,24 @@ Upon the first build, the whole Docker image is built from the ground up and tag
 
   ```sh
   # Docker way
-  docker-compose -f docker-compose.test.yml run test bin/bundle exec rspec [rspec-params]
+  docker compose -f docker-compose.test.yml run test bin/bundle exec rspec [rspec-params]
 
   # Non-Docker way
   make test [rspec-params]
+  ```
+
+### Linting
+
+- Run all lint:
+
+  ```sh
+  make codebase
+  ```
+
+- Fix all lint:
+
+  ```sh
+  make codebase/fix
   ```
 
 ### Automated Code Review Setup

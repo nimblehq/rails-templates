@@ -1,6 +1,6 @@
 include .env
 
-.PHONY: db/migrate db/rollback db/wait-for-postgres db/seed dev env/setup env/teardown test test/docker
+.PHONY: db/migrate db/rollback db/wait-for-postgres db/seed dev env/setup env/teardown test test/docker codebase codebase/fix
 
 db/migrate:
 	make db/wait-for-postgres
@@ -28,6 +28,9 @@ env/setup:
 env/teardown:  # this command will delete data
 	./bin/envteardown.sh
 
+generate-sprite:
+	./bin/svg-sprite
+
 install-dependencies:
 	bundle install
 	yarn install
@@ -44,3 +47,11 @@ test/docker:
 	docker-compose -f docker-compose.test.yml run test bin/bundle exec rake db:test:prepare
 	docker-compose -f docker-compose.test.yml run test
 	docker-compose -f docker-compose.test.yml down
+
+codebase:
+	rubocop
+	yarn codebase
+
+codebase/fix:
+	rubocop -a
+	yarn codebase:fix

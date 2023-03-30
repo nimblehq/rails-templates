@@ -6,7 +6,7 @@ append_to_file '.gitignore' do
     # Ignore folder information and IDE-specific files
     .DS_Store
     .idea/*
-    .vscode/*
+    .vscode
 
     # Ignore the test coverage results from SimpleCov
     /coverage
