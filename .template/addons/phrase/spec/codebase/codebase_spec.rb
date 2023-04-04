@@ -6,13 +6,12 @@ insert_into_file 'spec/codebase/codebase_spec.rb', before: /end\Z/ do
     # rubocop:disable RSpec/ExampleLength
     it 'does not offend Phrase Pull configuration' do
       locale_tags = Dir[File.expand_path(Rails.root.join('config', 'locales', '*.yml'))]
-                    # ['campaign.en.yml', 'article.en.yml', 'campaign.th.yml', 'en.yml']
                     .map { |path| path.split('/').last }
-                    # ['campaign', 'article', 'campaign', 'en']
+                    # ['campaign.en.yml', 'article.en.yml', 'campaign.th.yml', 'en.yml']
                     .map { |path| path.split('.').first }
-                    # ['campaign', 'article', 'en']
+                    # ['campaign', 'article', 'campaign', 'en']
                     .uniq
-                    # ['article', 'campaign', 'en']
+                    # ['campaign', 'article', 'en']
                     .sort
       # replace en with root as `en` is not a tag
       locale_tags[locale_tags.index('en')] = 'root'
