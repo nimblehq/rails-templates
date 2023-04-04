@@ -21,16 +21,15 @@ env:
   # Set the default CI value despite the Github Action default value
   CI: true
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Build Docker image
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
       - uses: actions/checkout@v3
 
       - name: Set env BRANCH_TAG

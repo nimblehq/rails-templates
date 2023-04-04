@@ -10,6 +10,10 @@ env:
   NODE_VERSION: 16
   RAILS_VERSION: 7.0.1
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build_production:
     name: ${{ matrix.variant }} variant
@@ -18,11 +22,6 @@ jobs:
       matrix:
         variant: [web, api]
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
       - uses: actions/checkout@v3
 
       - name: Set env BRANCH_TAG
