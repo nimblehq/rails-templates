@@ -1,20 +1,6 @@
 include .env
 
-.PHONY: db/migrate db/rollback db/wait-for-postgres db/seed dev env/setup env/teardown test test/docker codebase codebase/fix
-
-db/migrate:
-	make db/wait-for-postgres
-	rails db:migrate
-
-db/rollback:
-	make db/wait-for-postgres
-	rails db:rollback
-
-db/wait-for-postgres:
-	$(shell DATABASE_URL=$(DATABASE_URL) ./bin/wait-for-postgres.sh)
-
-db/seed:
-	rails db:seed
+.PHONY: dev env/setup env/teardown test test/docker codebase codebase/fix
 
 dev:
 	make install-dependencies
@@ -28,17 +14,14 @@ env/setup:
 env/teardown:  # this command will delete data
 	./bin/envteardown.sh
 
-generate-sprite:
-	./bin/svg-sprite
-
 install-dependencies:
 	bundle install
 	yarn install
 
 test:
-	docker-compose -f docker-compose.test.yml --project-name ewa-payroll-web-test up -d db redis
+	docker-compose -f docker-compose.test.yml --project-name <%= APP_NAME %>_test up -d db redis
 	bundle exec rspec $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
-	docker-compose -f docker-compose.test.yml --project-name ewa-payroll-web-test down
+	docker-compose -f docker-compose.test.yml --project-name <%= APP_NAME %>_test down
 
 test/docker:
 	./bin/docker-prepare
