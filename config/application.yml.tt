@@ -22,4 +22,4 @@ test:
 # Because it initializes the app, so all variables need to exist in the Docker build stage (used in bin/docker-assets-precompile).
 docker_build:
   <<: *default
-  SECRET_KEY_BASE:
+  SECRET_KEY_BASE: dummy_secret_key_base
