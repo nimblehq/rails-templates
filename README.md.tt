@@ -41,7 +41,7 @@ Add the following build settings to run the tests in the Docker environment via 
   ```sh
   # a unique `BRANCH_TAG` value to tag the Docker image
   # e.g $SEMAPHORE_BRANCH_ID or using the
-  # or using nimblehq/branch-tag-action@v1 Github action
+  # or using nimblehq/branch-tag-action@1 Github action
   export BRANCH_TAG= # unique value for tagging Docker image
   ```
 
@@ -88,7 +88,7 @@ Upon the first build, the whole Docker image is built from the ground up and tag
   docker compose -f docker-compose.test.yml run test
 
   # Non-Docker way
-  make test
+  rspec
   ```
 
 - Run a specific test:
@@ -98,7 +98,7 @@ Upon the first build, the whole Docker image is built from the ground up and tag
   docker compose -f docker-compose.test.yml run test bin/bundle exec rspec [rspec-params]
 
   # Non-Docker way
-  make test [rspec-params]
+  rspec [rspec-params]
   ```
 
 ### Linting

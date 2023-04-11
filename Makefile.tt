@@ -1,6 +1,6 @@
 include .env
 
-.PHONY: dev env/setup env/teardown test test/docker codebase codebase/fix
+.PHONY: dev env/setup env/teardown codebase codebase/fix
 
 dev:
 	make install-dependencies
@@ -17,19 +17,6 @@ env/teardown:  # this command will delete data
 install-dependencies:
 	bundle install
 	yarn install
-
-test:
-	docker-compose -f docker-compose.test.yml --project-name <%= APP_NAME %>_test up -d db redis
-	bundle exec rspec $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
-	docker-compose -f docker-compose.test.yml --project-name <%= APP_NAME %>_test down
-
-test/docker:
-	./bin/docker-prepare
-	docker-compose -f docker-compose.test.yml build
-	docker-compose -f docker-compose.test.yml run test make install-dependencies
-	docker-compose -f docker-compose.test.yml run test bin/bundle exec rake db:test:prepare
-	docker-compose -f docker-compose.test.yml run test
-	docker-compose -f docker-compose.test.yml down
 
 codebase:
 	rubocop
