@@ -19,16 +19,11 @@
 
 ### Development
 
-- Run the Rails app:
+Run the Rails app:
 
-  ```sh
-  make dev
-  ```
-- Run the seed:
-
-  ```sh
-  make db/seed
-  ```
+```sh
+make dev
+``
 
 ## Testing
 
