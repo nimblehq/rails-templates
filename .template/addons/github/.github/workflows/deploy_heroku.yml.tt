@@ -19,16 +19,15 @@ env:
   DOCKER_IMAGE: ${{ github.repository }}
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.6.0
-        with:
-          access_token: ${{ github.token }}
-
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.workflow_run.head_branch || github.ref }}

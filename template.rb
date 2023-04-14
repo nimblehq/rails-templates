@@ -70,7 +70,7 @@ def apply_template!(template_root)
   apply '.template/addons/github/template.rb' if yes?(install_addon_prompt('Github Action and Wiki'))
   apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
-  apply '.template/addons/phrase_app/template.rb' if yes?(install_addon_prompt('PhraseApp'))
+  apply '.template/addons/phrase/template.rb' if yes?(install_addon_prompt('Phrase'))
   apply '.template/addons/devise/template.rb' if yes?(install_addon_prompt('Devise'))
 
   # Variants
