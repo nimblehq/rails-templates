@@ -43,6 +43,7 @@ def apply_template!(template_root)
   copy_file '.editorconfig'
   copy_file 'Procfile'
   copy_file 'Procfile.dev'
+  template 'Makefile.tt'
   template 'README.md.tt', force: true
 
   apply 'bin/template.rb'

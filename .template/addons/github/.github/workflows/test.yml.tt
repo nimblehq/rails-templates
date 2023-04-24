@@ -137,7 +137,7 @@ jobs:
         if: ${{ failure() }}
         with:
           name: system_tests_screenshots
-          path: tmp/screenshots/*
+          path: tmp/screenshots/
 
   automated_code_review:
     name: Run Danger

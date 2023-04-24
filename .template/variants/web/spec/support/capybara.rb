@@ -37,3 +37,4 @@ end
 
 Capybara.javascript_driver = :chrome
 Capybara.default_max_wait_time = CAPYBARA_TIMEOUT
+Capybara.save_path = 'tmp/screenshots'

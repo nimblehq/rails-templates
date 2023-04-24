@@ -8,8 +8,23 @@ append_to_file '.gitignore' do
 
     # Ignore asset builds
     /app/assets/builds/*
+    !/app/assets/builds/.keep
 
     # Ignore Node dependencies
     /node_modules
+
+    # debug
+    yarn-debug.log*
+    yarn-error.log*
+    .yarn-integrity
+
+    # Ignore Byebug history.
+    .byebug_history
+
+    # Ignore master keys for decrypting credentials and more.
+    /config/credentials/*.key
+
+    # Ignore Gemfile.lock file in engines.
+    /engines/*/Gemfile.lock
   IGNORE
 end
