@@ -35,7 +35,7 @@ describe 'Base template' do
     expect(file('.env.example')).to exist
   end
 
-  it 'does NOT creates .env file' do
-    expect(file('.env')).not_to exist
+  it 'creates .env file' do
+    expect(file('.env')).to exist
   end
 end
