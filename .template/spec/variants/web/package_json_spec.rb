@@ -28,6 +28,11 @@ describe 'Web variant - package.json' do
     it 'adds the script for bundling css' do
       expect(subject['scripts']).to include('build:css')
     end
+
+    it 'add the script for bundling postcss' do
+      expect(subject['scripts']).to include('postcss')
+      expect(subject['scripts']).to include('build:postcss')
+    end
   end
 
   describe 'Dependencies' do
@@ -57,6 +62,8 @@ describe 'Web variant - package.json' do
     it 'adds postcss 8 dependencies' do
       expect(subject['devDependencies']).to include('postcss')
       expect(subject['devDependencies']['postcss']).to eq('8.4.5')
+      expect(subject['devDependencies']).to include('postcss-cli')
+      expect(subject['devDependencies']).to include('autoprefixer')
     end
   end
 end
