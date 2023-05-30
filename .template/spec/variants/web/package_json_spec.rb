@@ -49,9 +49,9 @@ describe 'Web variant - package.json' do
     end
 
     it 'adds postcss dependencies' do
-      expect(subject['devDependencies']).to include('postcss')
-      expect(subject['devDependencies']).to include('postcss-cli')
-      expect(subject['devDependencies']).to include('autoprefixer')
+      expect(subject['dependencies']).to include('postcss')
+      expect(subject['dependencies']).to include('postcss-cli')
+      expect(subject['dependencies']).to include('autoprefixer')
     end
   end
 
