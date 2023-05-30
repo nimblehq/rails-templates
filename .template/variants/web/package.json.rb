@@ -26,14 +26,11 @@ end
 run 'yarn add i18n-js@3.8.0'
 run 'yarn add sass'
 run 'yarn add esbuild'
+run 'yarn add postcss@8.4.5 postcss-cli autoprefixer'
 
 run 'yarn add --dev @nimblehq/eslint-config-nimble@2.2.1'
 run 'yarn add --dev stylelint'
 run 'yarn add --dev @nimblehq/stylelint-config-nimble'
-# TODO: Check again after removing Webpacker, need to use version 8
-# https://github.com/bjankord/stylelint-config-sass-guidelines/issues/203#issuecomment-955620774
-run 'yarn add --dev postcss@8.4.5 postcss-cli autoprefixer'
-
 # Setup scripts
 run 'npm set-script eslint "eslint . --color"'
 run 'npm set-script eslint:fix "eslint . --color --fix"'
