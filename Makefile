@@ -18,16 +18,19 @@ create_api:
 
 build:
 	cd $(APP_NAME) && \
+	cp .env.example .env && \
 	bin/docker-prepare && \
 	docker-compose -f docker-compose.test.yml build
 
 build_production:
 	cd $(APP_NAME) && \
+	cp .env.example .env && \
 	bin/docker-prepare && \
 	docker-compose build
 
 test_variant_app:
 	cd $(APP_NAME) && \
+	cp .env.example .env && \
 	docker-compose -f docker-compose.test.yml run test
 
 base_addon_spec = spec/addons/base/**/*_spec.rb
@@ -44,6 +47,7 @@ test_template:
 	docker-compose -f docker-compose.test.yml run test bash -c "./bin/inject_port_into_nginx.sh && nginx -c /etc/nginx/conf.d/default.conf -t" && \
 	docker-compose -f docker-compose.test.yml run --detach test bin/start.sh && \
 	cd ../.template && \
+	cp .env.example .env && \
 	bundle install; \
 	if [ $(VARIANT) = web ]; then \
 		bundle exec rspec --pattern="${base_spec}, ${web_spec}, ${base_addon_spec}, ${web_addon_spec}" --format progress; \

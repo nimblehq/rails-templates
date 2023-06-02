@@ -104,7 +104,9 @@ RUN cp .env.example .env
 # Compile assets
 RUN bin/rails i18n:js:export
 RUN bin/rails assets:precompile
-RUN yarn postcss
+RUN bundle exec rake i18n:js:export
+RUN yarn build
+RUN yarn build:css
 
 <%- end -%>
 EXPOSE $PORT
