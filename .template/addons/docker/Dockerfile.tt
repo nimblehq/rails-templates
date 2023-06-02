@@ -98,8 +98,6 @@ COPY . ./
 RUN rm -rf tmp/docker
 
 <%- if WEB_VARIANT -%>
-# Provide fallback for env variables
-RUN cp .env.example .env
 
 # Compile assets
 RUN bin/rails i18n:js:export

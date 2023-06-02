@@ -11,7 +11,7 @@ append_to_file '.gitignore' do
     # Ignore the test coverage results from SimpleCov
     /coverage
 
-    # Ignore environment variables files (as it might contain sensitive data)
-    .env
+    # Ignore environment variables files
+    .env.development
   IGNORE
 end
