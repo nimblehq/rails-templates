@@ -102,9 +102,7 @@ RUN rm -rf tmp/docker
 # Compile assets
 RUN bin/rails i18n:js:export
 RUN bin/rails assets:precompile
-RUN bundle exec rake i18n:js:export
-RUN yarn build
-RUN yarn build:css
+RUN yarn postcss
 
 <%- end -%>
 EXPOSE $PORT
