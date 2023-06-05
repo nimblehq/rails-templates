@@ -28,14 +28,13 @@ def apply_web_variant!
 
   after_bundle do
     use_source_path __dir__
-
-    # Generate translation file
-    run 'bundle exec rake i18n:js:export'
-
     # Fix the default Rails template that does not put trailing commas
     run 'yarn run codebase:fix'
 
     apply 'spec/template.rb'
+
+    # Generate translation file
+    run 'bundle exec rake i18n:js:export'
   end
 end
 
