@@ -101,7 +101,7 @@ RUN rm -rf tmp/docker
 
 # Compile assets
 RUN bundle exec rails i18n:js:export
-RUN bundle exec rails assets:precompile --trace
+RUN bundle exec rails assets:precompile
 RUN yarn postcss
 
 <%- end -%>

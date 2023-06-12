@@ -2,7 +2,7 @@
 
 apply 'config/application.rb'
 
-template 'config/database.yml.tt', force: true
+copy_file 'config/database.yml', force: true
 copy_file 'config/sidekiq.yml'
 
 apply 'config/environments/development.rb'

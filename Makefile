@@ -48,7 +48,7 @@ test_template:
 	if [ $(VARIANT) = web ]; then \
 		bundle exec rspec --pattern="${base_spec}, ${web_spec}, ${base_addon_spec}, ${web_addon_spec}" --format progress; \
 	elif [ $(VARIANT) = api ]; then \
-		bundle exec rspec --pattern="${base_spec}, ${api_spec}, ${base_addon_spec}, ${api_addon_spec}"; \
+		bundle exec rspec --pattern="${base_spec}, ${api_spec}, ${base_addon_spec}, ${api_addon_spec}" --format progress; \
 	fi;
 
 cleanup:
