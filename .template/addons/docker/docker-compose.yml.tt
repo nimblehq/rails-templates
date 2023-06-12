@@ -30,16 +30,12 @@ services:
     image: ${DOCKER_REGISTRY_HOST}/${DOCKER_IMAGE}:${BRANCH_TAG}
     container_name: <%= APP_NAME %>_web
     command: bin/start.sh
-    ports:
-      - "${PORT}:${PORT}"
     stdin_open: true
     tty: true
     depends_on:
       - db
     volumes:
       - "ruby-bundle:/bundle"
-    env_file:
-      - .env.development.local.example
     environment:
       - RACK_ENV=production
       - RAILS_ENV=production

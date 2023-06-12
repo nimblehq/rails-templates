@@ -100,6 +100,7 @@ RUN rm -rf tmp/docker
 <%- if WEB_VARIANT -%>
 
 # Compile assets
+# TODO: Run with bin/docker-assets-precompile
 RUN bundle exec rails i18n:js:export
 RUN bundle exec rails assets:precompile
 RUN yarn postcss
