@@ -26,6 +26,7 @@ build_production:
 	bin/docker-prepare && \
 	docker-compose build
 
+# Test the new generated app could be built and run the test itself.
 test_variant_app:
 	cd $(APP_NAME) && \
 	docker-compose -f docker-compose.test.yml run test
@@ -38,6 +39,7 @@ base_spec = spec/base/**/*_spec.rb
 web_spec = spec/variants/web/**/*_spec.rb
 api_spec = spec/variants/api/**/*_spec.rb
 
+# Test the new generated app could be built and start and test the generated structure.
 test_template:
 	cd $(APP_NAME) && \
 	docker-compose -f docker-compose.test.yml up --detach db redis && \
