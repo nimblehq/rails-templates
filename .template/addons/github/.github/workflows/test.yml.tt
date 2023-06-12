@@ -21,8 +21,6 @@ env:
   # Set the default CI value despite the Github Action default value
   CI: true
 
-  PORT: 3000
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

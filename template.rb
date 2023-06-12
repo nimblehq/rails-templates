@@ -35,7 +35,7 @@ def apply_template!(template_root)
   copy_file '.flayignore'
   copy_file 'Dangerfile'
   template '.env.development.local.example.tt'
-  template '.env.development.local.tt'
+  template '.env.development.local.example.tt', '.env.development.local'
   template '.env.test.local.tt'
   copy_file '.rubocop.yml'
   copy_file '.reek.yml'
