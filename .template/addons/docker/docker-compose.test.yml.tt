@@ -8,13 +8,13 @@ services:
       - POSTGRES_DB=<%= APP_NAME %>_test
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5432"
+      - "5432:5432"
 
   redis:
     image: redis:<%= REDIS_VERSION %>
     container_name: <%= APP_NAME %>_redis
     ports:
-      - "6379"
+      - "6379:6379"
 
   test:
     build:
