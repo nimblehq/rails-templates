@@ -36,6 +36,8 @@ services:
       - db
     volumes:
       - "ruby-bundle:/bundle"
+    env_file:
+      - .env.development.local.example
     environment:
       - RACK_ENV=production
       - RAILS_ENV=production
