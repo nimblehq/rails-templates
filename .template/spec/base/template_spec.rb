@@ -35,6 +35,10 @@ describe 'Base template' do
     expect(file('.env.development.local')).to exist
   end
 
+  it 'creates .env.development.local.example file' do
+    expect(file('.env.development.local.example')).to exist
+  end
+
   it 'creates .env.test.local file' do
     expect(file('.env.test.local')).to exist
   end

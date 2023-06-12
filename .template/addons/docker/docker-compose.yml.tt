@@ -25,6 +25,7 @@ services:
         - RUBY_ENV=production
         <%- if WEB_VARIANT -%>
         - NODE_ENV=production
+        - PORT=80
         - ASSET_HOST
         <%- end -%>
     image: ${DOCKER_REGISTRY_HOST}/${DOCKER_IMAGE}:${BRANCH_TAG}
