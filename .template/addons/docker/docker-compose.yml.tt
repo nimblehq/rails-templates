@@ -43,7 +43,6 @@ services:
       - NODE_ENV=production
       <%- end -%>
       - DATABASE_URL=postgres://postgres@db/<%= APP_NAME %>_production
-      - PORT=80
       <%- if WEB_VARIANT -%>
       - ASSET_HOST
       <%- end -%>
