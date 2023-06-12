@@ -31,11 +31,11 @@ describe 'Base template' do
     expect(file('.reek.yml')).to exist
   end
 
-  it 'creates .env file' do
-    expect(file('.env')).to exist
+  it 'creates .env.development.local file' do
+    expect(file('.env.development.local')).to exist
   end
 
-  it 'creates .env.development.example file' do
-    expect(file('.env.development.example')).to exist
+  it 'creates .env.test.local file' do
+    expect(file('.env.test.local')).to exist
   end
 end

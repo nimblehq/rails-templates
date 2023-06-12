@@ -1,5 +1,3 @@
-include .env
-
 .PHONY: dev env/setup env/teardown codebase codebase/fix
 
 dev:

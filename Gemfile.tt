@@ -8,7 +8,6 @@ gem 'puma' # Use Puma as the app server
 gem 'mini_magick' # A ruby wrapper for ImageMagick or GraphicsMagick command line
 gem 'pagy' # A pagination gem that is very light and fast
 gem 'discard' # Soft deletes for ActiveRecord
-gem 'dotenv-rails' # Shim to load environment variables from .env into ENV in development
 gem 'sidekiq' # background processing for Ruby
 gem 'sassc' # bootsnap dependency
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
@@ -66,6 +65,9 @@ group :development, :test do
   gem 'danger-suggester' # Suggest code changes based on configured code formatter.
   gem 'danger-simplecov_json' # Report your Ruby app test suite code coverage in Danger.
   gem 'danger-undercover' # Report missing test coverage of new changes in Danger
+
+  # Environment loading
+  gem 'dotenv-rails' # Shim to load environment variables from .env into ENV in development
 end
 
 group :test do

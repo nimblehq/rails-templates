@@ -12,6 +12,6 @@ append_to_file '.gitignore' do
     /coverage
 
     # Ignore environment variables files
-    .env.development
+    .env.development.local
   IGNORE
 end
