@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# For building production docker image
+#
+# It sets the envs inside the docker image for precompiling the assets
+# Because to precompile the assets, Rails initializes the app.
+# And it requires the envs as we always use `ENV.fetch` to setup the variables
+#
+# Related issue: https://github.com/rails/rails/issues/32947
+# TODO: https://github.com/nimblehq/rails-templates/issues/326
+
+require 'yaml'
+
+rails_env = ENV.fetch('RAILS_ENV', 'production')
+
+if rails_env == 'production'
+  # Read the contents of the .env file
+  File.readlines('.env.development.local.example').each do |line|
+    # Skip empty lines and comments
+    next if line.strip.empty? || line.start_with?('#')
+
+    # Extract the key and value from each line
+    key, value = line.split('=', 2).map(&:strip)
+
+    # Set the environment variable
+    ENV[key] = value
+  end
+
+  ENV['DATABASE_URL'] = 'postgres://postgres:postgres@postgres:5432/postgres'
+end
+
+exit system('bin/rails i18n:js:export && bin/rails assets:precompile')
