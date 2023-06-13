@@ -47,7 +47,7 @@ services:
       <%- if WEB_VARIANT -%>
       - NODE_ENV=test
       <%- end -%>
-      - DB_HOST=db
+      - DATABASE_URL=postgres://postgres@db/<%= APP_NAME %>_test
       - CI=$CI
       - TEST_RETRY=$TEST_RETRY
       - PORT=$PORT
