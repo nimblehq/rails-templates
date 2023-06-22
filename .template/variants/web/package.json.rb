@@ -41,15 +41,22 @@ run 'npm set-script codebase:fix "yarn eslint:fix && yarn stylelint:fix"'
 
 source_stylesheet = 'app/assets/stylesheets/application.scss'
 bundled_stylesheet = 'app/assets/builds/application.css'
-bundled_stylesheet_options = [
+bundled_stylesheet_base_options = [
   '--no-source-map',
   '--load-path=node_modules'
+]
+production_bundled_stylesheet_options = bundled_stylesheet_base_options + [
+  '--style=compressed'
 ]
 
 run %(npm set-script build "node app/javascript/build.js")
 run %(
+  npm set-script build:css-production \
+  "sass #{source_stylesheet} #{bundled_stylesheet} #{(production_bundled_stylesheet_options).join(' ')}"
+)
+run %(
   npm set-script build:css \
-  "sass #{source_stylesheet} #{bundled_stylesheet} #{bundled_stylesheet_options.join(' ')}"
+  "sass #{source_stylesheet} #{bundled_stylesheet} #{bundled_stylesheet_base_options.join(' ')}"
 )
 run %(npm set-script postcss "postcss public/assets/*.css --dir public/assets --config ./")
 run %(

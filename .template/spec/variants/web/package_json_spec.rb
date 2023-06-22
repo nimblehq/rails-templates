@@ -29,6 +29,10 @@ describe 'Web variant - package.json' do
       expect(subject['scripts']).to include('build:css')
     end
 
+    it 'adds the script for bundling css in production' do
+      expect(subject['scripts']).to include('build:css-production')
+    end
+
     it 'adds the script for bundling postcss' do
       expect(subject['scripts']).to include('postcss')
       expect(subject['scripts']).to include('build:postcss')
