@@ -9,7 +9,7 @@ APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ W
 DOCKER_REGISTRY_HOST = 'docker.io'
 DOCKER_IMAGE = "nimblehq/#{APP_NAME}".freeze
 RUBY_VERSION = '3.0.1'
-POSTGRES_VERSION = '14.4'
+POSTGRES_VERSION = '15.2'
 REDIS_VERSION = '6.2.7'
 # Variants
 API_VARIANT = options[:api] || ENV['API'] == 'true'
@@ -43,6 +43,7 @@ def apply_template!(template_root)
   copy_file '.editorconfig'
   copy_file 'Procfile'
   copy_file 'Procfile.dev'
+  template 'Makefile.tt'
   template 'README.md.tt', force: true
 
   apply 'bin/template.rb'

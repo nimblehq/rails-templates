@@ -54,6 +54,12 @@ Available Addons:
 - `slim`
 - `devise`
 
+After the template finishes generating all the files, run the following command to start the rails server.
+
+```sh
+make dev
+```
+
 Read more about Rails Application Template in the [official Rails Guides](https://guides.rubyonrails.org/rails_application_templates.html).
 
 ## How to contribute
@@ -101,7 +107,7 @@ There are 2 template file types:
 1. **`.tt` files**
 
     This file is used for templating the whole new file.
-    In case if we want to create a new file that Rails does not generated.
+    In case if we want to create a new file that Rails has not generated.
 
 2. **`.rb` files**
 

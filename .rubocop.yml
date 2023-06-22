@@ -22,7 +22,7 @@ Style/Documentation:
   Enabled: false
 
 Layout/LineLength:
-  Max: 120
+  Max: 130
   Exclude:
     - 'spec/**/*'
     - 'config/**/*'

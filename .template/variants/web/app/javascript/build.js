@@ -6,6 +6,7 @@ require('esbuild')
     inject: ['app/javascript/global.js'],
     bundle: true,
     sourcemap: true,
+    minify: !watch,
     outdir: 'app/assets/builds',
   })
   .then((ctx) => {
