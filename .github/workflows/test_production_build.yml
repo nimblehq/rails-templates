@@ -7,7 +7,7 @@ env:
   DOCKER_IMAGE: ${{ github.repository }}
   DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
   RUBY_VERSION: 3.2.2
-  NODE_VERSION: 18
+  NODE_VERSION: 16
   RAILS_VERSION: 7.0.6
 
 concurrency:
