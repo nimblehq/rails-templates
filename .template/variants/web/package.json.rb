@@ -53,7 +53,7 @@ production_bundled_stylesheet_options = bundled_stylesheet_base_options + [
 run %(npm set-script build "node app/javascript/build.js")
 run %(
   npm set-script build:css-production \
-  "sass #{source_stylesheet} #{bundled_stylesheet} #{(production_bundled_stylesheet_options).join(' ')}"
+  "sass #{source_stylesheet} #{bundled_stylesheet} #{production_bundled_stylesheet_options.join(' ')}"
 )
 run %(
   npm set-script build:css \
