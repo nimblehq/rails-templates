@@ -41,7 +41,7 @@ group :development, :test do
   # gem 'debug', platforms: %i[ mri mingw x64_mingw ] # Official debug
 
   # Utilities
-  gem 'figaro' # Simple Rails app configuration
+  gem 'figjam' # ENV configuration for ruby using yaml files
   gem 'listen' # Listens to file modifications
   gem 'letter_opener' # Preview mail in the browser instead of sending
   gem 'ffaker' # A library for generating fake data such as names, addresses, and phone numbers
