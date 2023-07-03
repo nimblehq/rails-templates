@@ -33,12 +33,12 @@ run 'yarn add --dev stylelint'
 # TODO: Bring the `@nimblehq/stylelint-config-nimble` back when it's ready
 
 # Setup scripts
-run 'npm set-script eslint "eslint . --color"'
-run 'npm set-script eslint:fix "eslint . --color --fix"'
-run 'npm set-script stylelint "stylelint **/*.scss --color"'
-run 'npm set-script stylelint:fix "stylelint **/*.scss --color --fix"'
-run 'npm set-script codebase "yarn eslint && yarn stylelint"'
-run 'npm set-script codebase:fix "yarn eslint:fix && yarn stylelint:fix"'
+run 'npm pkg set scripts.eslint="eslint . --color"'
+run 'npm pkg set scripts.eslint:fix="eslint . --color --fix"'
+run 'npm pkg set scripts.stylelint="stylelint **/*.scss --color"'
+run 'npm pkg set scripts.stylelint:fix="stylelint **/*.scss --color --fix"'
+run 'npm pkg set scripts.codebase="yarn eslint && yarn stylelint"'
+run 'npm pkg set scripts.codebase:fix="yarn eslint:fix && yarn stylelint:fix"'
 
 source_stylesheet = 'app/assets/stylesheets/application.scss'
 bundled_stylesheet = 'app/assets/builds/application.css'
@@ -50,17 +50,17 @@ production_bundled_stylesheet_options = bundled_stylesheet_base_options + [
   '--style=compressed'
 ]
 
-run %(npm set-script build "node app/javascript/build.js")
+run %(npm pkg set scripts.build="node app/javascript/build.js")
 run %(
-  npm set-script build:css-production \
+  npm pkg set scripts.build:css-production=\
   "sass #{source_stylesheet} #{bundled_stylesheet} #{production_bundled_stylesheet_options.join(' ')}"
 )
 run %(
-  npm set-script build:css \
+  npm pkg set scripts.build:css=\
   "sass #{source_stylesheet} #{bundled_stylesheet} #{bundled_stylesheet_base_options.join(' ')}"
 )
-run %(npm set-script postcss "postcss public/assets/*.css --dir public/assets --config ./")
+run %(npm pkg set scripts.postcss="postcss public/assets/*.css --dir public/assets --config ./")
 run %(
-  npm set-script build:postcss \
+  npm pkg set scripts.build:postcss=\
   "postcss app/assets/builds/*.css --dir app/assets/builds --config ./",
 )
