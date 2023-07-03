@@ -43,14 +43,6 @@ describe 'Web variant - package.json' do
     it 'adds I18n-js dependency' do
       expect(subject['dependencies']).to include('i18n-js')
     end
-
-    it 'adds sass dependencies' do
-      expect(subject['dependencies']).to include('sass')
-    end
-
-    it 'adds esbuild dependencies' do
-      expect(subject['dependencies']).to include('esbuild')
-    end
   end
 
   describe 'Development Dependencies' do
@@ -62,6 +54,14 @@ describe 'Web variant - package.json' do
       expect(subject['devDependencies']).to include('postcss')
       expect(subject['devDependencies']).to include('postcss-cli')
       expect(subject['devDependencies']).to include('autoprefixer')
+    end
+
+    it 'adds sass dependencies' do
+      expect(subject['devDependencies']).to include('sass')
+    end
+
+    it 'adds esbuild dependencies' do
+      expect(subject['devDependencies']).to include('esbuild')
     end
 
     it 'adds stylelint dependencies' do
