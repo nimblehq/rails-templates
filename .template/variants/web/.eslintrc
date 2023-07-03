@@ -1,7 +1,4 @@
 {
-  "extends": [
-    "@nimblehq/eslint-config-nimble-core"
-  ],
   "globals": {
     "I18n": true
   }

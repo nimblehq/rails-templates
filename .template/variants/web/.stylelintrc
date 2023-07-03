@@ -1,7 +1,4 @@
 {
-  "extends": [
-    "@nimblehq/stylelint-config-nimble"
-  ],
   "rules": {
     "no-eol-whitespace": true,
     "max-nesting-depth": 3,
