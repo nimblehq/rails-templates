@@ -8,7 +8,7 @@ env:
   DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
   RUBY_VERSION: 3.0.1
   NODE_VERSION: 16
-  RAILS_VERSION: 7.0.1
+  RAILS_VERSION: 7.0.6
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
