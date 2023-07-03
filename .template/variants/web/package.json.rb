@@ -24,9 +24,9 @@ end
 
 # Install dependencies
 run 'yarn add i18n-js@4.2.3'
+run 'yarn add sass'
+run 'yarn add esbuild'
 
-run 'yarn add --dev sass'
-run 'yarn add --dev esbuild'
 run 'yarn add --dev postcss postcss-cli autoprefixer'
 run 'yarn add --dev eslint'
 run 'yarn add --dev stylelint'
