@@ -29,6 +29,8 @@ run 'yarn add esbuild'
 run 'yarn add postcss postcss-cli autoprefixer'
 
 run 'yarn add --dev eslint'
+# TODO: Remove the `@typescript-eslint` once the `@nimblehq/eslint-config-nimble-core` includes it
+run 'yarn add --dev @typescript-eslint'
 run 'yarn add --dev @nimblehq/eslint-config-nimble-core@2.6.0'
 run 'yarn add --dev stylelint'
 # TODO: Bring the `@nimblehq/stylelint-config-nimble` back when it's ready
