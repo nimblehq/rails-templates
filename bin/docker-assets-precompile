@@ -15,7 +15,7 @@ require 'yaml'
 rails_env = ENV.fetch('RAILS_ENV', 'production')
 
 if rails_env == 'production'
-  docker_build_envs = YAML.load_file('config/application.yml')['docker_build']
+  docker_build_envs = YAML.load_file('config/application.yml', aliases: true)['docker_build']
   docker_build_envs.each { |name, value| ENV[name] = value }
 
   ENV['DATABASE_URL'] = 'postgres://postgres:postgres@postgres:5432/postgres'
