@@ -28,9 +28,8 @@ run 'yarn add sass'
 run 'yarn add esbuild'
 run 'yarn add postcss postcss-cli autoprefixer'
 
-run 'yarn add --dev @nimblehq/eslint-config-nimble@2.4.0'
+# TODO: Bring the `@nimblehq/stylelint-config-nimble` and `@nimblehq/eslint-config-nimble` back when it's ready
 run 'yarn add --dev stylelint'
-# TODO: Bring the `@nimblehq/stylelint-config-nimble` back when it's ready
 
 # Setup scripts
 run 'npm pkg set scripts.eslint="eslint . --color"'
