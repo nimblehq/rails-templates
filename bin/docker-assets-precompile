@@ -21,4 +21,4 @@ if rails_env == 'production'
   ENV['DATABASE_URL'] = 'postgres://postgres:postgres@postgres:5432/postgres'
 end
 
-exit system('bin/rails i18n:js:export && bin/rails assets:precompile && yarn postcss')
+exit system('bin/rails i18n:js:export && bin/rails assets:precompile')
