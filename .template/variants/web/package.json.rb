@@ -29,6 +29,7 @@ run 'yarn add esbuild'
 run 'yarn add postcss postcss-cli autoprefixer'
 
 # TODO: Bring the `@nimblehq/stylelint-config-nimble` and `@nimblehq/eslint-config-nimble` back when it's ready
+run 'yarn add --dev eslint'
 run 'yarn add --dev stylelint'
 
 # Setup scripts
