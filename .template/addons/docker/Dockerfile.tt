@@ -101,6 +101,8 @@ RUN rm -rf tmp/docker
 <%- if WEB_VARIANT -%>
 ENV NODE_ENV=$NODE_ENV
 
+RUN echo $NODE_ENV
+
 # Compile assets
 RUN bin/docker-assets-precompile
 RUN yarn postcss
