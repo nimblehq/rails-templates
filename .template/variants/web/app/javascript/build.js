@@ -2,7 +2,10 @@ const watch = process.argv.slice(2).includes('--watch');
 
 require('esbuild')
   .context({
-    entryPoints: ['app/javascript/application.js'],
+    entryPoints: [
+      { in: 'app/javascript/application.js', out: 'application.js' },
+      // { in: 'engines/[engine_name]/app/javascript/[engine_name]/application.js', out: '[engine_name]/application.js' },
+    ],
     inject: ['app/javascript/global.js'],
     bundle: true,
     sourcemap: true,
