@@ -23,7 +23,7 @@ unless File.exist?('postcss.config.js')
 end
 
 # Install dependencies
-run 'yarn add i18n-js@4.2.3'
+run 'yarn add i18n-js@3.8.0'
 run 'yarn add sass'
 run 'yarn add esbuild'
 run 'yarn add postcss postcss-cli autoprefixer'
