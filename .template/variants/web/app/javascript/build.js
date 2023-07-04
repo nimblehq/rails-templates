@@ -11,6 +11,9 @@ require('esbuild')
     sourcemap: true,
     minify: !watch,
     outdir: 'app/assets/builds',
+    alias: {
+      'Core': './app/javascript/',
+    },
   })
   .then((ctx) => {
     watch ? ctx.watch() : ctx.rebuild().then(() => process.exit(0));
