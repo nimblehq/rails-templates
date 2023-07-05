@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 # Skip Danger run if the opened pull request has "wip" label, [WIP] in the title, or status is Draft
-if github.pr_labels.include?('wip') || github.pr_title.include?('[WIP]') || github.pr_json['draft']
-  message('Skipping Danger run: Pull request is marked as work-in-progress or draft.')
+has_wip_label = github.pr_labels.any? { |label| label.include? 'wip' }
+has_wip_title = github.pr_title.include? '[WIP]'
+is_draft = github.pr_draft?
+
+if has_wip_label || has_wip_title || is_draft
+  message('Skipping Danger since PR is classed as Work in Progress')
   return
 end
 
