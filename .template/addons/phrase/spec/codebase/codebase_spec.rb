@@ -16,7 +16,7 @@ insert_into_file 'spec/codebase/codebase_spec.rb', before: /end\Z/ do
       # replace en with root as `en` is not a tag
       locale_tags[locale_tags.index('en')] = 'root'
 
-      phrase_pull_tags = YAML.load_file(Rails.root.join('.phrase.yml'))
+      phrase_pull_tags = YAML.load_file(Rails.root.join('.phrase.yml'), aliases: true)
                              .dig('phrase', 'pull', 'targets')
                              .map { |target| target.dig('params', 'tags') }
                              .sort

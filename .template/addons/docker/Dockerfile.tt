@@ -38,7 +38,8 @@ RUN apt-get update -qq && \
 ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
 RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg && \
     echo "deb http://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
-    curl -sL https://deb.nodesource.com/setup_"$NODE_SOURCE_VERSION".x | bash - && \
+    echo 'Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 600' > /etc/apt/preferences.d/nodesource && \
+    curl -fsSL https://deb.nodesource.com/setup_"$NODE_SOURCE_VERSION".x | bash - && \
     apt-get update -qq && \
     apt-get install -y --no-install-recommends nodejs yarn && \
     apt-get clean && \
