@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+# Skip Danger run if the opened pull request has "wip" label, [WIP] in the title, or status is Draft
+if github.pr_labels.include?('wip') || github.pr_title.include?('[WIP]') || github.pr_json['draft']
+  message('Skipping Danger run: Pull request is marked as work-in-progress or draft.')
+  return
+end
+
 # Runs Rubocop and submit comments on modified and added files
 rubocop.lint(inline_comment: true, force_exclusion: true)
 
