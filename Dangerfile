@@ -6,7 +6,8 @@ has_wip_title = github.pr_title.downcase.include? '[wip]'
 is_draft = github.pr_draft?
 
 if has_wip_label || has_wip_title || is_draft
-  return message('Skipping Danger since PR is classed as Work in Progress')
+  message('Skipping Danger since PR is classed as Work in Progress')
+  return
 end
 
 # Runs Rubocop and submit comments on modified and added files
