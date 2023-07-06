@@ -74,4 +74,10 @@ describe 'Github addon - template' do
       expect(file('.github/wiki/Testing.md')).to contain('### Automated Code Review Setup')
     end
   end
+
+  describe '.github/wiki/Contribution_Guide.md' do
+    it 'exists' do
+      expect(file('.github/wiki/Contribution_Guide.md')).to exist
+    end
+  end
 end
