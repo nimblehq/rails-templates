@@ -19,6 +19,7 @@ end
 # Stylesheets
 remove_file 'app/assets/stylesheets/application.css'
 directory 'app/assets/stylesheets'
+directory 'app/assets/builds'
 
 run 'yarn build:css'
 gsub_file 'app/assets/config/manifest.js', "//= link_directory ../stylesheets .css\n", ''

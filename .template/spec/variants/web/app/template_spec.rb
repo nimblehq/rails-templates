@@ -85,6 +85,12 @@ describe 'Web variant - /app template' do
     end
   end
 
+  context 'Assets Builds' do
+    it 'creates the app/assets/builds/.keep file' do
+      expect(file('app/assets/builds/.keep')).to exist
+    end
+  end
+
   context 'I18n' do
     it 'creates the translation.js file' do
       expect(file('app/javascript/translations/translations.js')).to exist
