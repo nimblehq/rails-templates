@@ -53,12 +53,11 @@ production_bundled_stylesheet_options = bundled_stylesheet_base_options + [
 
 run %(npm pkg set scripts.build="node app/javascript/build.js")
 run %(
-  npm pkg set scripts.build:css-production="sass\
-  #{source_stylesheet} #{bundled_stylesheet} #{production_bundled_stylesheet_options.join(' ')}"
+  npm pkg set scripts.build:css-dev="sass\
+  #{source_stylesheet} #{bundled_stylesheet} #{bundled_stylesheet_base_options.join(' ')}"
 )
 run %(
-  npm pkg set scripts.build:css="sass\
-  #{source_stylesheet} #{bundled_stylesheet} #{bundled_stylesheet_base_options.join(' ')}"
+  npm pkg set scripts.build:css="yarn build:css-dev #{production_bundled_stylesheet_options.join(' ')}"
 )
 run %(npm pkg set scripts.postcss="postcss\
   public/assets/*.css --dir public/assets --config ./")
