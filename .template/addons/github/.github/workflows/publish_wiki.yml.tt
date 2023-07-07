@@ -2,18 +2,35 @@ name: Publish Wiki
 
 on:
   push:
-    paths:
-      - .github/wiki/**
     branches:
       - develop
+    paths:
+      - .github/wiki/**
+
 env:
-  USER_EMAIL: ${{ secrets.GH_EMAIL }}
+  USER_NAME: github-wiki-workflow
+  USER_EMAIL: bot@nimblehq.co
+
 jobs:
   publish:
-    name: Publish Wiki
-    uses: nimblehq/github-actions-workflows/.github/workflows/publish_wiki.yml@0.1.0
-    with:
-      USER_NAME: github-wiki-workflow
-      USER_EMAIL: $USER_EMAIL
-    secrets:
-      USER_TOKEN: ${{ secrets.GH_TOKEN }}
+    name: Publish Github Wiki
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.8.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Publish Github Wiki
+        uses: nimblehq/publish-github-wiki-action@v1.0
+        with:
+          user_name: ${{ env.USER_NAME }}
+          user_email: ${{ env.USER_EMAIL }}
+          user_access_token: ${{ secrets.USER_ACCESS_TOKEN }}
