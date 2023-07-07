@@ -16,6 +16,7 @@
 // But DO NOT import the whole framework but instead
 // pick what the project requires
 // and comment out the rest.
+@import 'bootstrap/scss/accordion';
 @import 'bootstrap/scss/alert';
 @import 'bootstrap/scss/badge';
 @import 'bootstrap/scss/breadcrumb';
@@ -24,22 +25,19 @@
 @import 'bootstrap/scss/card';
 @import 'bootstrap/scss/carousel';
 @import 'bootstrap/scss/close';
-@import 'bootstrap/scss/code';
-@import 'bootstrap/scss/custom-forms';
 @import 'bootstrap/scss/containers';
 @import 'bootstrap/scss/dropdown';
 @import 'bootstrap/scss/forms';
 @import 'bootstrap/scss/grid';
 @import 'bootstrap/scss/helpers';
 @import 'bootstrap/scss/images';
-@import 'bootstrap/scss/input-group';
-@import 'bootstrap/scss/jumbotron';
 @import 'bootstrap/scss/list-group';
-@import 'bootstrap/scss/media';
 @import 'bootstrap/scss/modal';
 @import 'bootstrap/scss/nav';
 @import 'bootstrap/scss/navbar';
+@import 'bootstrap/scss/offcanvas';
 @import 'bootstrap/scss/pagination';
+@import 'bootstrap/scss/placeholders';
 @import 'bootstrap/scss/popover';
 @import 'bootstrap/scss/progress';
 @import 'bootstrap/scss/reboot';
