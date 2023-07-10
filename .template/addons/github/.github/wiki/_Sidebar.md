@@ -2,7 +2,7 @@
 
 - [[Home]]
 - [[Getting Started]]
-- [[Contribution_Guide]]
+- [[Contribution Guide]]
 
 ## Architecture
 
