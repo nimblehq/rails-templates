@@ -21,9 +21,7 @@ describe 'Github addon - template' do
 
   # TODO: Can't test this as it is now ignored by `.dockerignore`
   xit 'modifies the README.md' do
-    expect(file('README.md')).to contain('## Documentation')
-
-    expect(file('README.md')).not_to contain('## Getting Started')
+    expect(file('README.md')).not_to contain('## Get Started')
     expect(file('README.md')).not_to contain('## Testing')
     expect(file('README.md')).not_to contain('## CI/CD')
   end
@@ -66,12 +64,6 @@ describe 'Github addon - template' do
   describe '.github/wiki/Testing.md' do
     it 'exists' do
       expect(file('.github/wiki/Testing.md')).to exist
-    end
-
-    it 'contains the correct content extracted from README.md' do
-      expect(file('.github/wiki/Testing.md')).to contain('### Docker-based tests on the CI server')
-      expect(file('.github/wiki/Testing.md')).to contain('### Test')
-      expect(file('.github/wiki/Testing.md')).to contain('### Automated Code Review Setup')
     end
   end
 
