@@ -64,20 +64,7 @@ Read more about Rails Application Template in the [official Rails Guides](https:
 
 See the contribution guidelines in the [Wiki](../../wiki/Contribution_Guide).
 
-## Testing the Template
-
-To run [RuboCop](https://github.com/rubocop/rubocop) against the template:
-
-```sh
-.template/bin/rubocop
-```
-
-Any RuboCop command options can be passed:
-
-```sh
-# Run RuboCop with auto correct
-.template/bin/rubocop -a
-```
+See instructions for testing the template in [Wiki](../../wiki/Testing).
 
 ## License
 
