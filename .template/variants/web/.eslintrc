@@ -4,5 +4,8 @@
   ],
   "globals": {
     "I18n": true
+  },
+  "parserOptions":{
+    "ecmaVersion": "latest"
   }
 }
