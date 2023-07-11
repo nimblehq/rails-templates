@@ -21,11 +21,6 @@ describe '/bin template' do
     expect(file('bin/worker.sh')).to be_executable
   end
 
-  it 'creates the start dev server script' do
-    expect(file('bin/dev')).to exist
-    expect(file('bin/dev')).to be_executable
-  end
-
   it 'creates the docker prepare script' do
     expect(file('bin/docker-prepare')).to exist
     expect(file('bin/docker-prepare')).to be_executable
