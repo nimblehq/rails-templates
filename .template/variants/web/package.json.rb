@@ -44,7 +44,7 @@ run 'npm pkg set scripts.codebase:fix="yarn eslint:fix && yarn stylelint:fix"'
 source_stylesheet = 'app/assets/stylesheets/application.scss'
 bundled_stylesheet = 'app/assets/builds/application.css'
 bundled_stylesheet_base_options = [
-  '--no-source-map',
+  '--source-map-urls=absolute',
   '--load-path=node_modules'
 ]
 production_bundled_stylesheet_options = bundled_stylesheet_base_options + [
