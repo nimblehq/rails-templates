@@ -75,7 +75,7 @@ describe 'Github addon - template' do
     end
   end
 
-  describe './github/wiki/Contribution-Guide.md' do 
+  describe './github/wiki/Contribution-Guide.md' do
     it 'exists' do
       expect(file('.github/wiki/Contribution-Guide.md')).to exist
     end
