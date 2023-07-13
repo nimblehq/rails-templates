@@ -73,6 +73,7 @@ def apply_template!(template_root)
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
   apply '.template/addons/phrase/template.rb' if yes?(install_addon_prompt('Phrase'))
   apply '.template/addons/devise/template.rb' if yes?(install_addon_prompt('Devise'))
+  apply '.template/addons/svg_sprite/template.rb' if yes?(install_addon_prompt('SVG Sprite'))
 
   # Variants
   apply '.template/variants/api/template.rb' if API_VARIANT
