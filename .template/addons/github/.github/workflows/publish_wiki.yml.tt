@@ -7,9 +7,9 @@ on:
     paths:
       - .github/wiki/**
 
-env:
-  USER_NAME: github-wiki-workflow
-  USER_EMAIL: bot@nimblehq.co
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   publish:
@@ -18,11 +18,6 @@ jobs:
     timeout-minutes: 1
 
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.8.0
-        with:
-          access_token: ${{ github.token }}
-
       - name: Checkout the repository
         uses: actions/checkout@v2
         with:
@@ -31,6 +26,6 @@ jobs:
       - name: Publish Github Wiki
         uses: nimblehq/publish-github-wiki-action@v1.0
         with:
-          user_name: ${{ env.USER_NAME }}
-          user_email: ${{ env.USER_EMAIL }}
+          user_name: github-wiki-workflow
+          user_email: bot@nimblehq.co
           user_access_token: ${{ secrets.USER_ACCESS_TOKEN }}
