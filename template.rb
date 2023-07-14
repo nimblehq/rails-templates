@@ -21,7 +21,7 @@ DEFAULT_ADDONS = {
 }.freeze
 
 if WEB_VARIANT
-  NODE_VERSION = '16.20.1'
+  NODE_VERSION = '18.16.1'
   NODE_SOURCE_VERSION = '16' # Used in Dockerfile https://github.com/nodesource/distributions
 end
 

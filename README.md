@@ -18,7 +18,7 @@ with building complex applications over the years.
 
 - Install ruby and set your local ruby version to `3.2.2`
 - Install rails `7.0.6`
-- Install node `16.20.1` (For creating web application)
+- Install node `18.16.1` (For creating web application)
 
 > 📝 If running on Apple M1, to build docker image, please make sure to set platform to AMD64 by `export DOCKER_DEFAULT_PLATFORM=linux/amd64`
 
