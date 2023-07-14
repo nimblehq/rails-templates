@@ -30,7 +30,7 @@ run 'yarn add postcss postcss-cli autoprefixer'
 
 run 'yarn add --dev eslint'
 run 'yarn add --dev stylelint'
-run 'yarn add --dev @nimblehq/eslint-config-nimble@2.2.1'
+run 'yarn add --dev @nimblehq/eslint-config-nimble@2.4.0'
 run 'yarn add --dev @nimblehq/stylelint-config-nimble@1.0.3'
 
 # Setup scripts
