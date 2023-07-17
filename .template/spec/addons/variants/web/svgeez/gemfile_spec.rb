@@ -5,6 +5,9 @@ describe 'Svgeez Addon - Gemfile' do
 
   it 'adds svgeez gem' do
     expect(subject).to contain('svgeez')
+  end
+
+  it 'adds inline_svg gem' do
     expect(subject).to contain('inline_svg')
   end
 end
