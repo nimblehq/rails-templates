@@ -144,7 +144,7 @@ jobs:
     needs: unit_tests
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && !contains(join(github.event.pull_request.labels.*.name, ','), 'wip') && !contains(github.event.pull_request.title, '[wip]') && !github.event.pull_request.draft
     steps:
       - uses: actions/checkout@v3
         with:
