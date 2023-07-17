@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # SVG Sprite
-insert_into_file 'Gemfile', after: /gem 'bcrypt'.*\n/ do
+insert_into_file 'Gemfile', after: /gem 'tzinfo-data'.*\n/ do
   <<~RUBY
 
     # Svgeez
