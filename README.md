@@ -62,9 +62,10 @@ make dev
 
 Read more about Rails Application Template in the [official Rails Guides](https://guides.rubyonrails.org/rails_application_templates.html).
 
-See the contribution guidelines in the [Wiki](../../wiki/Contribution_Guide).
+## Contribution Resources
 
-See instructions for testing the template in [Wiki](../../wiki/Testing).
+- [Contributions Guidelines](../../wiki/Contribution_Guide).
+- [Testing the template](../../wiki/Testing)
 
 ## License
 
