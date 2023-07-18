@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 if Dir.exist?('.github/wiki')
-  # Your existing code here
   use_source_path __dir__
 
   copy_file 'Add-new-svg-icon.md', '.github/wiki/Add-new-svg-icon.md'
@@ -15,4 +14,3 @@ if Dir.exist?('.github/wiki')
     RUBY
   end
 end
-
