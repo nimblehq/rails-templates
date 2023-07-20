@@ -9,7 +9,7 @@ if Dir.exist?('.github/wiki')
   insert_into_file '.github/wiki/_Sidebar.md', after: /## Operations.*\n/ do
     <<~RUBY
 
-      - [[Add new svg icon]]
+      - [[Managing SVG icons]]
     RUBY
   end
 end
