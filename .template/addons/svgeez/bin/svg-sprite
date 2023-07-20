@@ -9,7 +9,4 @@
 #  --with-svgo:	Optimize SVG sprite file with SVGO
 
 # Generate the sprite file which includes the `icon-` prefix
-bin/bundle exec svgeez build --source app/assets/images/icons/ --destination app/assets/images/icon.svg --with-svgo
-
-# Rename the icon.svg to icon-sprite.svg
-mv app/assets/images/icon.svg app/assets/images/icon-sprite.svg
+bin/bundle exec svgeez build --prefix icon --source app/assets/images/icons/ --destination app/assets/images/icon-sprite.svg --with-svgo
