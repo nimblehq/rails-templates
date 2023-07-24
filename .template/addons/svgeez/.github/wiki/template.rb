@@ -8,7 +8,6 @@ if Dir.exist?('.github/wiki')
   # SVG Sprite
   insert_into_file '.github/wiki/_Sidebar.md', after: /## Operations.*\n/ do
     <<~RUBY
-
       - [[Managing SVG icons]]
     RUBY
   end
