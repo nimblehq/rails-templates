@@ -1,0 +1,12 @@
+# Generates an SVG sprite from a folder of SVG icons.
+#
+# Uses `svgeez` gem.
+#   https://github.com/jgarber623/svgeez
+#
+# Usage
+#  -s --source:	Path to the folder of source SVGs (defaults to ./_svgeez).
+#  -d --destination:	Path to the destination file or folder (defaults to ./svgeez.svg)
+#  --with-svgo:	Optimize SVG sprite file with SVGO
+
+# Generate the sprite file which includes the `icon-` prefix
+bin/bundle exec svgeez build --prefix icon --source app/assets/images/icons/ --destination app/assets/images/icon-sprite.svg --with-svgo
