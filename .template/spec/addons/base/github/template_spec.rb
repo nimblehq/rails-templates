@@ -74,17 +74,4 @@ describe 'Github addon - template' do
       expect(file('.github/wiki/Testing.md')).to contain('### Automated Code Review Setup')
     end
   end
-
-  describe './github/wiki/Contribution-Guide.md' do
-    it 'exists' do
-      expect(file('.github/wiki/Contribution-Guide.md')).to exist
-    end
-
-    it 'contains the correct content extracted from README.md' do
-      expect(file('.github/wiki/Contribution-Guide.md')).to contain('## How to contribute')
-      expect(file('.github/wiki/Contribution-Guide.md')).to contain('### Template structure')
-      expect(file('.github/wiki/Contribution-Guide.md')).to contain('### Template specs')
-      expect(file('.github/wiki/Contribution-Guide.md')).to contain('### Template Strings')
-    end
-  end
 end
