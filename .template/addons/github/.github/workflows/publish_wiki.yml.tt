@@ -2,17 +2,30 @@ name: Publish Wiki
 
 on:
   push:
-    paths:
-      - .github/wiki/**
     branches:
       - develop
+    paths:
+      - .github/wiki/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   publish:
-    name: Publish Wiki
-    uses: nimblehq/github-actions-workflows/.github/workflows/publish_wiki.yml@0.1.0
-    with:
-      USER_NAME: github-wiki-workflow
-      USER_EMAIL: ${{ secrets.GH_EMAIL }}
-    secrets:
-      USER_TOKEN: ${{ secrets.GH_TOKEN }}
+    name: Publish Github Wiki
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Publish Github Wiki
+        uses: nimblehq/publish-github-wiki-action@v1.0
+        with:
+          user_name: github-wiki-workflow
+          user_email: bot@nimblehq.co
+          user_access_token: ${{ secrets.USER_ACCESS_TOKEN }}

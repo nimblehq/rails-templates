@@ -5,7 +5,7 @@ include .env
 dev:
 	make install-dependencies
 	make env/setup
-	./bin/dev
+	foreman start -f Procfile.dev
 
 env/setup:
 	./bin/envsetup.sh

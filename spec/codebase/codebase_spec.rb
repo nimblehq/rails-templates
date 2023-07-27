@@ -16,7 +16,7 @@ describe 'Codebase', codebase: true do
   end
 
   it 'does not offend engine prefix name' do
-    engine_paths = Dir[File.expand_path(Rails.root.join('engines', '*'))]
+    engine_paths = Dir[Rails.root.join('engines', '*').expand_path]
                    .select { |f| File.directory? f }
                    .map { |path| path.split('/').last }
     invalid_engine_paths = engine_paths.reject { |path| path.start_with?('APP_NAME_HERE_') }
