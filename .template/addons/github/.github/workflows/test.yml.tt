@@ -153,9 +153,6 @@ jobs:
       - name: Download tests coverage artifact
         uses: actions/download-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: test.yml
-          workflow_conclusion: success
           name: coverage
           path: coverage
 
