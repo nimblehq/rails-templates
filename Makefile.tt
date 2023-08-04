@@ -14,6 +14,7 @@ env/setup:
 env/teardown:  # this command will delete data
 	./bin/envteardown.sh
 
+<%- if WEB_VARIANT -%>
 install-dependencies:
 	bundle install
 	yarn install
@@ -25,3 +26,13 @@ codebase:
 codebase/fix:
 	rubocop -a
 	yarn codebase:fix
+<%- else -%>
+install-dependencies:
+	bundle install
+
+codebase:
+	rubocop
+
+codebase/fix:
+	rubocop -a
+<%- end -%>
