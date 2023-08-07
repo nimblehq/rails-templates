@@ -3,3 +3,7 @@
 :queues:
   - [default, 1]
   - [mailers, 2]
+  - [development_default, 1]
+  - [development_mailers, 2]
+  - [production_default, 1]
+  - [production_mailers, 2]
