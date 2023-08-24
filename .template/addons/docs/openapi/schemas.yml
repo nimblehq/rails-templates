@@ -1,0 +1,12 @@
+---
+#### REQUESTS ####
+
+#### RESPONSES ####
+
+responses_health:
+  $ref: "schemas/responses/health.yml"
+
+#### REUSABLE SCHEMAS ####
+
+error:
+  $ref: "schemas/shared/error.yml"

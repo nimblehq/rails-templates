@@ -1,6 +1,7 @@
 {
   "extends": [
-    "@nimblehq/eslint-config-nimble"
+    "@nimblehq/eslint-config-nimble",
+    "plugin:yml/recommended"
   ],
   "globals": {
     "I18n": true

@@ -1,0 +1,15 @@
+type: object
+
+properties:
+  errors:
+    type: array
+    maxItems: 10
+    items:
+      type: object
+      properties:
+        code:
+          type: string
+          description: an application-specific error code
+        detail:
+          type: string
+          description: "a human-readable explanation specific to this occurrence of the problem. Like title, this field's value can be localized."

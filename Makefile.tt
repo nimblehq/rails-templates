@@ -1,6 +1,6 @@
 include .env
 
-.PHONY: dev env/setup env/teardown codebase codebase/fix
+.PHONY: dev env/setup env/teardown codebase codebase/fix doc/generate
 
 dev:
 	make install-dependencies
@@ -36,3 +36,6 @@ codebase:
 codebase/fix:
 	rubocop -a
 <%- end -%>
+
+doc/generate:
+  yarn run build:docs
