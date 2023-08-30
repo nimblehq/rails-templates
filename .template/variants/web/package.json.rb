@@ -46,8 +46,10 @@ run 'npm pkg set scripts.codebase:fix="yarn eslint:fix && yarn stylelint:fix"'
 run 'npm pkg set scripts.lint:docs:yml="eslint docs/openapi --ext .yml --color"'
 run 'npm pkg set scripts.lint:docs:openapi="spectral lint docs/openapi/openapi.yml -F error"'
 run 'npm pkg set scripts.lint:docs:dev="npm lint:docs:yml && npm lint:docs:openapi"'
-run 'npm pkg set scripts.lint:docs:public="npm build:docs && eslint public/openapi.yml --color --no-ignore && spectral lint public/openapi.yml -F error"'
-run 'npm pkg set scripts.build:docs="swagger-cli bundle docs/openapi/openapi.yml --outfile public/openapi.yml --type yaml"'
+run 'npm pkg set scripts.lint:docs:public="npm build:docs && eslint public/openapi.yml --color --no-ignore && spectral\
+ lint public/openapi.yml -F error"'
+run 'npm pkg set scripts.build:docs="swagger-cli bundle docs/openapi/openapi.yml --outfile public/openapi.yml --type\
+ yaml"'
 
 source_stylesheet = 'app/assets/stylesheets/application.scss'
 bundled_stylesheet = 'app/assets/builds/application.css'
