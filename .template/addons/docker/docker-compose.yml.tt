@@ -53,4 +53,4 @@ services:
       - RAILS_MASTER_KEY
 
 volumes:
-  ruby-bundle:
+  ruby-bundle: ''
