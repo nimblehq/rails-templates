@@ -55,7 +55,7 @@ describe 'Base template' do
 
     context 'given the examples directory' do
       it 'creates the a keep file in the requests folder' do
-        expect(file('docs/openapi/examples/requests/.keep')).to exist
+        expect(file('docs/openapi/examples/requests/.keepfile')).to exist
       end
 
       it 'creates the a health.json file in the responses folder' do
