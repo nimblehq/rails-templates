@@ -7,6 +7,7 @@ describe 'Github addon - template' do
 
   it 'creates Github actions workflows' do
     expect(file('.github/workflows/deploy_heroku.yml')).to exist
+    expect(file('.github/workflows/lint_docs.yml.tt')).to exist
     expect(file('.github/workflows/publish_wiki.yml')).to exist
     expect(file('.github/workflows/test_production_build.yml')).to exist
     expect(file('.github/workflows/test.yml')).to exist
