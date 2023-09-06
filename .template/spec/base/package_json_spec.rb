@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-xdescribe 'package.json' do
+describe 'package.json' do
   subject do
     JSON.parse(file('package.json').content)
   end
