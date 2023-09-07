@@ -5,6 +5,10 @@ describe 'Docker addon - template' do
     expect(file('Dockerfile')).to exist
   end
 
+  it 'creates the Dockerfile.mock' do
+    expect(file('Dockerfile.mock')).to exist
+  end
+
   it 'creates the docker env file' do
     expect(file('.env')).to exist
   end
