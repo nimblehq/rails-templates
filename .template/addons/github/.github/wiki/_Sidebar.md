@@ -2,8 +2,6 @@
 
 - [[Home]]
 - [[Getting Started]]
-- [[Contribution Guide]]
-- [[Testing]]
 
 ## Architecture
 
