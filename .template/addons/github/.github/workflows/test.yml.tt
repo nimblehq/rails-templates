@@ -74,7 +74,7 @@ jobs:
         run: docker-compose pull test || true
 
       - name: Run codebase test
-        run: docker-compose run test bundle exec rspec spec/codebase/codebase_spec.rb --format progress
+        run: docker-compose run test -e DISABLE_SPRING=1 bundle exec rspec spec/codebase/codebase_spec.rb --format progress
 
   unit_tests:
     name: Unit tests
@@ -98,7 +98,7 @@ jobs:
         run: docker-compose pull test || true
 
       - name: Run unit tests
-        run: docker-compose run test bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb, spec/codebase/codebase_spec.rb" --profile --format progress
+        run: docker-compose run test -e DISABLE_SPRING=1 bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb, spec/codebase/codebase_spec.rb" --profile --format progress
 
       - name: Upload tests coverage artifact
         uses: actions/upload-artifact@v3
@@ -153,9 +153,6 @@ jobs:
       - name: Download tests coverage artifact
         uses: actions/download-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: test.yml
-          workflow_conclusion: success
           name: coverage
           path: coverage
 

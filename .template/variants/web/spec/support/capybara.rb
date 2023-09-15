@@ -28,6 +28,9 @@ Capybara.register_driver(:headless_chrome) do |app|
   # Disable /dev/shm use in CI
   options.add_argument('disable-dev-shm-usage') if ENV['CI']
 
+  # Use English locale for displaying page
+  options.add_preference('intl.accept_languages', 'en')
+
   Capybara::Selenium::Driver.new(
     app,
     browser: :chrome,

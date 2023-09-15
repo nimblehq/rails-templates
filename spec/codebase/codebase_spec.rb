@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'Codebase', codebase: true do
+describe 'Codebase', :codebase do
   it 'does not offend Rubocop' do
     expect(`rubocop --parallel --format simple`).to include 'no offenses detected'
   end
