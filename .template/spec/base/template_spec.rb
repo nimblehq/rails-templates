@@ -55,7 +55,7 @@ describe 'Base template' do
 
     context 'given the examples directory' do
       it 'creates the a keep file in the requests folder' do
-        expect(file('docs/openapi/examples/requests/.keepfile')).to exist
+        expect(file('docs/openapi/examples/requests/.keep')).to exist
       end
 
       it 'creates the a health.json file in the responses folder' do
@@ -71,7 +71,7 @@ describe 'Base template' do
 
     context 'given the request_bodies directory' do
       it 'creates the a keep file' do
-        expect(file('docs/openapi/request_bodies/.keepfile')).to exist
+        expect(file('docs/openapi/request_bodies/.keep')).to exist
       end
     end
 
@@ -83,7 +83,7 @@ describe 'Base template' do
 
     context 'given the schemas directory' do
       it 'creates the a keep file in the requests directory' do
-        expect(file('docs/openapi/schemas/requests/.keepfile')).to exist
+        expect(file('docs/openapi/schemas/requests/.keep')).to exist
       end
 
       it 'creates the heath.yml file in the responses directory' do
