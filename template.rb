@@ -14,11 +14,12 @@ REDIS_VERSION = '6.2.7'
 # Variants
 API_VARIANT = options[:api] || ENV['API'] == 'true'
 WEB_VARIANT = !API_VARIANT
+INSTALL_GITHUB_ACTION = false
+INSTALL_OPENAPI = API_VARIANT
 # Addons
 DEFAULT_ADDONS = {
   docker: 'Docker',
-  heroku: 'Heroku',
-  openapi: 'OpenAPI'
+  heroku: 'Heroku'
 }.freeze
 
 if WEB_VARIANT
@@ -37,7 +38,6 @@ def apply_template!(template_root)
   copy_file 'Dangerfile'
   copy_file '.rubocop.yml'
   copy_file '.reek.yml'
-  copy_file '.spectral.yml'
 
   template '.ruby-gemset.tt'
   template '.ruby-version.tt', force: true
@@ -71,7 +71,14 @@ def apply_template!(template_root)
   post_default_addons_install
 
   # Add-ons - [Optional]
-  apply '.template/addons/github/template.rb' if yes?(install_addon_prompt('Github Action and Wiki'))
+  if yes?(install_addon_prompt('Github Action and Wiki'))
+    INSTALL_GITHUB_ACTION = true
+    apply '.template/addons/github/template.rb'
+  end
+  if INSTALL_OPENAPI || yes?(install_addon_prompt('OpenAPI'))
+    INSTALL_OPENAPI = true
+    apply '.template/addons/openapi/template.rb'
+  end
   apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
   apply '.template/addons/phrase/template.rb' if yes?(install_addon_prompt('Phrase'))
