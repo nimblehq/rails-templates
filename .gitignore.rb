@@ -10,8 +10,5 @@ append_to_file '.gitignore' do
 
     # Ignore the test coverage results from SimpleCov
     /coverage
-
-    # Ignore generated OpenAPI file
-    /public/openapi.yml
   IGNORE
 end
