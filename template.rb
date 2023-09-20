@@ -14,8 +14,7 @@ REDIS_VERSION = '6.2.7'
 # Variants
 API_VARIANT = options[:api] || ENV['API'] == 'true'
 WEB_VARIANT = !API_VARIANT
-INSTALL_GITHUB_ACTION = false
-INSTALL_OPENAPI = API_VARIANT
+@install_openapi = API_VARIANT
 # Addons
 DEFAULT_ADDONS = {
   docker: 'Docker',
@@ -71,14 +70,11 @@ def apply_template!(template_root)
   post_default_addons_install
 
   # Add-ons - [Optional]
-  if yes?(install_addon_prompt('Github Action and Wiki'))
-    INSTALL_GITHUB_ACTION = true
-    apply '.template/addons/github/template.rb'
-  end
-  if INSTALL_OPENAPI || yes?(install_addon_prompt('OpenAPI'))
-    INSTALL_OPENAPI = true
+  if @install_openapi || yes?(install_addon_prompt('OpenAPI'))
+    @install_github_action = true
     apply '.template/addons/openapi/template.rb'
   end
+  apply '.template/addons/github/template.rb' if yes?(install_addon_prompt('Github Action and Wiki'))
   apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
   apply '.template/addons/phrase/template.rb' if yes?(install_addon_prompt('Phrase'))

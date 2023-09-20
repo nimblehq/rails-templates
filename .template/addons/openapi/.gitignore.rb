@@ -2,6 +2,7 @@
 
 append_to_file '.gitignore' do
   <<~IGNORE
+
     # Ignore generated OpenAPI file
     /public/openapi.yml
   IGNORE

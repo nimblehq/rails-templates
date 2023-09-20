@@ -3,6 +3,7 @@
 use_source_path __dir__
 
 directory '.github'
+FileUtils.rm_rf '.github/workflows/lint_doc.yml' unless @install_openapi
 
 # Split README.md file to multiple wiki pages
 original_readme = File.read 'README.md'
