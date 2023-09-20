@@ -1,0 +1,16 @@
+{
+  "extends": [
+    <%- if @install_openapi -%>
+      "@nimblehq/eslint-config-nimble",
+      "plugin:yml/recommended"
+    <%- else -%>
+      "@nimblehq/eslint-config-nimble"
+    <%- end -%>
+  ],
+  "globals": {
+    "I18n": true
+  },
+  "parserOptions":{
+    "ecmaVersion": "latest"
+  }
+}

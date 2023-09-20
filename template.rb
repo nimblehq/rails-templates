@@ -71,7 +71,7 @@ def apply_template!(template_root)
 
   # Add-ons - [Optional]
   if @install_openapi || yes?(install_addon_prompt('OpenAPI'))
-    @install_github_action = true
+    @install_openapi = true
     apply '.template/addons/openapi/template.rb'
   end
   apply '.template/addons/github/template.rb' if yes?(install_addon_prompt('Github Action and Wiki'))
