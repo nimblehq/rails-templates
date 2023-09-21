@@ -7,7 +7,7 @@ directory '.github' if @install_github_action
 apply '.gitignore.rb'
 apply 'package.json.rb'
 copy_file '.spectral.yml'
-copy_file 'public/stoplight.html'
+copy_file 'public/openapi.html'
 
 after_bundle do
   run 'yarn build:docs'
@@ -15,7 +15,7 @@ after_bundle do
   insert_into_file 'config/routes.rb', before: /^end/ do
     <<~RUBY.indent(2)
 
-      get '/openapi', to: redirect('/stoplight.html')
+      get '/openapi', to: redirect('/openapi.html')
     RUBY
   end
 end
