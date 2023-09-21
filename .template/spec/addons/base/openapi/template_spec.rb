@@ -5,6 +5,10 @@ describe 'OpenAPI addon - template' do
     expect(file('.spectral.yml')).to exist
   end
 
+  it 'creates Fly deployment files' do
+    expect(file('fly.toml')).to exist
+  end
+
   it 'creates the HTML template file' do
     expect(file('public/openapi.html')).to exist
   end

@@ -36,7 +36,6 @@ def apply_template!(template_root)
   copy_file 'Dangerfile'
   copy_file '.rubocop.yml'
   copy_file '.reek.yml'
-  copy_file 'fly.toml'
 
   template '.ruby-gemset.tt'
   template '.ruby-version.tt', force: true
