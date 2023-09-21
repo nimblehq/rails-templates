@@ -1,10 +1,12 @@
 # Y - in response to Would you like to add the OpenAPI addon?
+openapi_addon_prompt = Y\n
+
 # Y - in response to Would you like to add the Github addon?
 # Y - in response to Would you like to add the SemaphoreCI addon?
 # Y - in response to Would you like to add the Nginx addon?
 # Y - in response to Would you like to add the Phrase addon?
 # Y - in response to Would you like to add the Devise addon?
-common_addon_prompts = Y\nY\nY\nY\nY\nY\n
+common_addon_prompts = Y\nY\nY\nY\nY\n
 
 # Y - in response to Would you like to add the Bootstrap addon?
 # Y - in response to Would you like to add the Slim Template Engine addon?
@@ -12,7 +14,7 @@ common_addon_prompts = Y\nY\nY\nY\nY\nY\n
 web_addon_prompts = Y\nY\nY\n
 
 create_web:
-	printf "${common_addon_prompts}${web_addon_prompts}" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
+	printf "${openapi_addon_prompt}${common_addon_prompts}${web_addon_prompts}" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
 
 create_api:
 	printf "${common_addon_prompts}" | rails new $(APP_NAME) -m ./template.rb -T --api ${OPTIONS}
