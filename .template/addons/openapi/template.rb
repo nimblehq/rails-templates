@@ -15,7 +15,7 @@ after_bundle do
   insert_into_file 'config/routes.rb', before: /^end/ do
     <<~RUBY.indent(2)
 
-      get 'api/docs/openapi', to: redirect('/stoplight.html')
+      get '/openapi', to: redirect('/stoplight.html')
     RUBY
   end
 end
