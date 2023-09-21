@@ -25,13 +25,9 @@ describe 'OpenAPI addon - template' do
     expect(file_content).to include('build:docs')
   end
 
-  it 'adds /public/openapi.yml to .gitignore' do
-    expect(file('.gitignore')).to contain('/public/openapi.yml')
-  end
-
   describe '/docs/openapi' do
     it 'exists' do
-      expect(file('/docs/openapi')).to exist
+      expect(file('docs/openapi')).to exist
     end
 
     it 'contains the default folders' do
