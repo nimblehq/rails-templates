@@ -14,7 +14,6 @@ REDIS_VERSION = '6.2.7'
 # Variants
 API_VARIANT = options[:api] || ENV['API'] == 'true'
 WEB_VARIANT = !API_VARIANT
-@install_openapi = API_VARIANT
 # Addons
 DEFAULT_ADDONS = {
   docker: 'Docker',
@@ -70,7 +69,7 @@ def apply_template!(template_root)
   post_default_addons_install
 
   # Add-ons - [Optional]
-  if @install_openapi || yes?(install_addon_prompt('OpenAPI'))
+  if API_VARIANT || yes?(install_addon_prompt('OpenAPI'))
     @install_openapi = true
     apply '.template/addons/openapi/template.rb'
   end
