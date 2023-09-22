@@ -3,7 +3,6 @@
 use_source_path __dir__
 
 template 'Dockerfile.tt'
-template 'Dockerfile.mock.tt' if @install_openapi
 template 'docker-compose.dev.yml.tt'
 template 'docker-compose.test.yml.tt'
 template 'docker-compose.yml.tt'
