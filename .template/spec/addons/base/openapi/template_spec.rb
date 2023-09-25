@@ -5,6 +5,10 @@ describe 'OpenAPI addon - template' do
     expect(file('.spectral.yml')).to exist
   end
 
+  it 'creates Github actions workflows' do
+    expect(file('.github/workflows/lint_docs.yml')).to exist
+  end
+
   it 'adds dependencies to package.json' do
     file_content = JSON.parse(file('package.json').content)['devDependencies']
 
