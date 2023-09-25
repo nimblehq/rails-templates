@@ -1,23 +1,24 @@
+# Y - in response to Would you like to add the Github addon?
 # Y - in response to Would you like to add the OpenAPI addon?
-openapi_addon_prompt = Y\n
+# Y - in response to Would you like to add the SemaphoreCI addon?
+# Y - in response to Would you like to add the Nginx addon?
+# Y - in response to Would you like to add the Phrase addon?
+# Y - in response to Would you like to add the Devise addon?
+# Y - in response to Would you like to add the Bootstrap addon?
+# Y - in response to Would you like to add the Slim Template Engine addon?
+# Y - in response to Would you like to add the Hotwire addon?
+
+create_web:
+	printf "Y\nY\nY\nY\nY\nY\nY\nY\nY\n" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
 
 # Y - in response to Would you like to add the Github addon?
 # Y - in response to Would you like to add the SemaphoreCI addon?
 # Y - in response to Would you like to add the Nginx addon?
 # Y - in response to Would you like to add the Phrase addon?
 # Y - in response to Would you like to add the Devise addon?
-common_addon_prompts = Y\nY\nY\nY\nY\n
-
-# Y - in response to Would you like to add the Bootstrap addon?
-# Y - in response to Would you like to add the Slim Template Engine addon?
-# Y - in response to Would you like to add the Hotwire addon?
-web_addon_prompts = Y\nY\nY\n
-
-create_web:
-	printf "${openapi_addon_prompt}${common_addon_prompts}${web_addon_prompts}" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
 
 create_api:
-	printf "${common_addon_prompts}" | rails new $(APP_NAME) -m ./template.rb -T --api ${OPTIONS}
+	printf "Y\nY\nY\nY\nY\n" | rails new $(APP_NAME) -m ./template.rb -T --api ${OPTIONS}
 
 build:
 	cd $(APP_NAME) && \
