@@ -34,27 +34,58 @@ describe 'OpenAPI addon - template' do
       expect(file('docs/openapi')).to exist
     end
 
-    it 'contains the default folders' do
-      expect(file('docs/openapi/examples')).to exist
-      expect(file('docs/openapi/paths')).to exist
-      expect(file('docs/openapi/request_bodies')).to exist
-      expect(file('docs/openapi/responses')).to exist
-      expect(file('docs/openapi/schemas')).to exist
+    it 'creates the openapi.yml file' do
+      expect(file('docs/openapi/openapi.yml')).to exist
     end
 
-    it 'contains the default files' do
-      expect(file('docs/openapi/examples/requests/.keep')).to exist
-      expect(file('docs/openapi/examples/responses/health.json')).to exist
-      expect(file('docs/openapi/paths/health.yml')).to exist
-      expect(file('docs/openapi/request_bodies/.keep')).to exist
-      expect(file('docs/openapi/responses/default_error.yml')).to exist
-      expect(file('docs/openapi/schemas/requests/.keep')).to exist
-      expect(file('docs/openapi/schemas/responses/health.yml')).to exist
-      expect(file('docs/openapi/schemas/shared/error.yml')).to exist
-
-      expect(file('docs/openapi/openapi.yml')).to exist
+    it 'creates the responses.yml file' do
       expect(file('docs/openapi/responses.yml')).to exist
+    end
+
+    it 'creates the schemas.yml file' do
       expect(file('docs/openapi/schemas.yml')).to exist
+    end
+
+    context 'given the examples directory' do
+      it 'creates the a keep file in the requests folder' do
+        expect(file('docs/openapi/examples/requests/.keep')).to exist
+      end
+
+      it 'creates the a health.json file in the responses folder' do
+        expect(file('docs/openapi/examples/responses/health.json')).to exist
+      end
+    end
+
+    context 'given the paths directory' do
+      it 'creates the health.yml file' do
+        expect(file('docs/openapi/paths/health.yml')).to exist
+      end
+    end
+
+    context 'given the request_bodies directory' do
+      it 'creates the a keep file' do
+        expect(file('docs/openapi/request_bodies/.keep')).to exist
+      end
+    end
+
+    context 'given the responses directory' do
+      it 'creates the a default_error.yml file' do
+        expect(file('docs/openapi/responses/default_error.yml')).to exist
+      end
+    end
+
+    context 'given the schemas directory' do
+      it 'creates the a keep file in the requests directory' do
+        expect(file('docs/openapi/schemas/requests/.keep')).to exist
+      end
+
+      it 'creates the heath.yml file in the responses directory' do
+        expect(file('docs/openapi/schemas/responses/health.yml')).to exist
+      end
+
+      it 'creates the error.yml file in the shared directory' do
+        expect(file('docs/openapi/schemas/shared/error.yml')).to exist
+      end
     end
   end
 end
