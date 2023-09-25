@@ -12,7 +12,7 @@ copy_file 'public/openapi.html'
 if yes?(install_addon_prompt('Mock Server'))
   @install_mock_server = true
   copy_file 'fly.toml'
-  template 'Dockerfile.mock.tt'
+  copy_file 'Dockerfile.mock'
 end
 
 after_bundle do
