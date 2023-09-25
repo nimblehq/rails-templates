@@ -13,9 +13,9 @@ end
 
 run 'yarn add --dev eslint'
 run 'yarn add --dev @nimblehq/eslint-config-nimble@2.2.1'
-run 'yarn add --dev @apidevtools/swagger-cli@4.0.4'
-run 'yarn add --dev @stoplight/spectral-cli@6.8.0'
-run 'yarn add --dev eslint-plugin-yml@1.8.0'
+run 'yarn add --dev @apidevtools/swagger-cli@4.0'
+run 'yarn add --dev @stoplight/spectral-cli@6.8'
+run 'yarn add --dev eslint-plugin-yml@1.8'
 
 # Setup scripts
 run 'npm pkg set scripts.lint:docs:yml="eslint docs/openapi --ext .yml --color"'
