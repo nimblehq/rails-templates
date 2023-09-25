@@ -30,4 +30,9 @@ describe 'Base template' do
   it 'creates Reek configuration files' do
     expect(file('.reek.yml')).to exist
   end
+
+  it 'creates the .gitattributes without schema.db' do
+    expect(file('.gitattributes')).to exist
+    expect(file('.gitattributes')).not_to contain('db/schema.rb')
+  end
 end

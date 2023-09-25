@@ -49,6 +49,7 @@ def apply_template!(template_root)
   apply 'bin/template.rb'
   apply 'config/template.rb'
   apply '.gitignore.rb'
+  copy_file '.gitattributes', force: true
 
   after_bundle do
     use_source_path template_root
