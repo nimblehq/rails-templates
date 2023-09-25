@@ -15,6 +15,7 @@ describe 'OpenAPI addon - template' do
 
   it 'creates Github actions workflows' do
     expect(file('.github/workflows/lint_docs.yml')).to exist
+    expect(file('.github/workflows/deploy_mock_server.yml')).to exist
   end
 
   it 'adds dependencies to package.json' do
