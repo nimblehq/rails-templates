@@ -5,9 +5,8 @@ on:
     workflows:
       - Test
     branches:
-      - master
       - main
-      - development
+      - develop
     types:
       - completed
   workflow_dispatch:

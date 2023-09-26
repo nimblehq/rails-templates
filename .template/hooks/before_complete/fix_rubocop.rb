@@ -10,7 +10,7 @@ def fixing_rubocop
       Layout/EmptyLineAfterMagicComment
     ].join(',')
 
-    run "rubocop --only #{cops} --auto-correct-all --out tmp/template_rubocop.txt"
+    run "rubocop --only #{cops} --autocorrect-all --out tmp/template_rubocop.txt"
   end
 end
 
