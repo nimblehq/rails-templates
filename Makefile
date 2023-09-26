@@ -13,6 +13,7 @@ create_web:
 	printf "Y\nY\nY\nY\nY\nY\nY\nY\nY\nY\n" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
 
 # Y - in response to Would you like to add the Github addon?
+# Y - in response to Would you like to add the Mock Server addon?
 # Y - in response to Would you like to add the SemaphoreCI addon?
 # Y - in response to Would you like to add the Nginx addon?
 # Y - in response to Would you like to add the Phrase addon?
