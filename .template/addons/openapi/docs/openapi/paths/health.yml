@@ -1,0 +1,20 @@
+---
+get:
+  tags:
+    - Status
+  security: []
+  summary: Get the status of the application.
+  description: Call this API to get the status of the application.
+
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas.yml#/responses_health'
+          examples:
+            $ref: '../examples/responses/health.json'
+
+    default:
+      $ref: '../responses.yml#/responses_default_error'

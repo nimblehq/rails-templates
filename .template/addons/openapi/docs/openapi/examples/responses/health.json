@@ -1,0 +1,24 @@
+{
+  "ok": {
+    "value": {
+      "data": {
+        "id": "1",
+        "type": "health",
+        "attributes": {
+          "message": "OK"
+        }
+      }
+    }
+  },
+  "error": {
+    "value": {
+      "errors": [
+        {
+          "status": "500",
+          "title": "Internal Server Error",
+          "detail": "Something went wrong."
+        }
+      ]
+    }
+  }
+}

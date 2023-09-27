@@ -1,0 +1,31 @@
+---
+openapi: 3.0.0
+info:
+  title: API Documentation
+  description: This is the API documentation for the mock server.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Development Base URL
+
+security:
+  - BearerAuth: []
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    $ref: "schemas.yml"
+  responses:
+    $ref: "responses.yml"
+
+paths:
+  /health:
+    $ref: "paths/health.yml"
+
+tags:
+  - name: Status
+    description: Status APIs of the project

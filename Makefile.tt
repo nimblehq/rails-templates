@@ -1,6 +1,10 @@
 include .env
 
+<%- if @install_openapi -%>
+.PHONY: dev env/setup env/teardown codebase codebase/fix doc/generate
+<%- else -%>
 .PHONY: dev env/setup env/teardown codebase codebase/fix
+<%- end -%>
 
 dev:
 	make install-dependencies
@@ -35,4 +39,9 @@ codebase:
 
 codebase/fix:
 	rubocop -a
+<%- end -%>
+<%- if @install_openapi -%>
+
+doc/generate:
+  yarn run build:docs
 <%- end -%>
