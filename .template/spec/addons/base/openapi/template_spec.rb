@@ -9,6 +9,10 @@ describe 'OpenAPI addon - template' do
     expect(file('fly.toml')).to exist
   end
 
+  it 'creates the Dockerfile.mock' do
+    expect(file('Dockerfile.mock')).to exist
+  end
+
   it 'creates the HTML template file' do
     expect(file('public/openapi.html')).to exist
   end
