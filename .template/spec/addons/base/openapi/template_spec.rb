@@ -5,6 +5,10 @@ describe 'OpenAPI addon - template' do
     expect(file('.spectral.yml')).to exist
   end
 
+  it 'creates the HTML template file' do
+    expect(file('public/openapi.html')).to exist
+  end
+
   it 'creates Github actions workflows' do
     expect(file('.github/workflows/lint_docs.yml')).to exist
   end
