@@ -1,0 +1,24 @@
+---
+type: object
+
+description: A response body for the health API
+
+properties:
+  data:
+    type: object
+    description: The data object
+    properties:
+      id:
+        type: string
+        description: The identifier of the health
+        example: "123"
+      type:
+        type: string
+        description: The type of the health
+        example: 'health'
+      attributes:
+        type: object
+        properties:
+          message:
+            type: string
+            description: The message description of the status

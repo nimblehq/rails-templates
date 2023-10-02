@@ -1,0 +1,13 @@
+app = "api-mock-server"
+primary_region = "sin"
+
+[build]
+  dockerfile = "Dockerfile.mock"
+
+[http_service]
+  internal_port = 80
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]

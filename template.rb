@@ -49,6 +49,7 @@ def apply_template!(template_root)
   apply 'bin/template.rb'
   apply 'config/template.rb'
   apply '.gitignore.rb'
+  copy_file '.gitattributes', force: true
 
   after_bundle do
     use_source_path template_root
@@ -68,7 +69,14 @@ def apply_template!(template_root)
   post_default_addons_install
 
   # Add-ons - [Optional]
-  apply '.template/addons/github/template.rb' if yes?(install_addon_prompt('Github Action and Wiki'))
+  if yes?(install_addon_prompt('Github Action and Wiki'))
+    @install_github_action = true
+    apply '.template/addons/github/template.rb'
+  end
+  if API_VARIANT || yes?(install_addon_prompt('OpenAPI'))
+    @install_openapi = true
+    apply '.template/addons/openapi/template.rb'
+  end
   apply '.template/addons/semaphore/template.rb' if yes?(install_addon_prompt('SemaphoreCI'))
   apply '.template/addons/nginx/template.rb' if yes?(install_addon_prompt('Nginx'))
   apply '.template/addons/phrase/template.rb' if yes?(install_addon_prompt('Phrase'))
