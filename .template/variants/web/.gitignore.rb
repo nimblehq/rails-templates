@@ -26,5 +26,8 @@ append_to_file '.gitignore' do
 
     # Ignore Gemfile.lock file in engines.
     /engines/*/Gemfile.lock
+
+    # Ignore env file
+    .env
   IGNORE
 end

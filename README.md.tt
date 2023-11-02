@@ -19,11 +19,17 @@
 
 ### Development
 
+Copy the contents of `.env.example` to `.env`
+
+```sh
+cp .env.example .env
+```
+
 Run the Rails app:
 
 ```sh
 make dev
-``
+```
 
 ## Testing
 
