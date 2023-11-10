@@ -10,6 +10,7 @@ gem 'pagy' # A pagination gem that is very light and fast
 gem 'discard' # Soft deletes for ActiveRecord
 gem 'sidekiq' # background processing for Ruby
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
+gem 'lograge' # Taming Rails' Default Request Logging
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'jbuilder' # Build JSON APIs with ease
 # gem 'redis' # Use Redis adapter to run Action Cable in production
