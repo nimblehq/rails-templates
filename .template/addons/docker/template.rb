@@ -2,6 +2,9 @@
 
 use_source_path __dir__
 
+remove_file 'Dockerfile'
+remove_file '.dockerignore'
+
 template 'Dockerfile.tt'
 template 'docker-compose.dev.yml.tt'
 template 'docker-compose.test.yml.tt'
