@@ -11,6 +11,10 @@ describe 'config/application.rb' do
     expect(subject).to contain('config.active_job.queue_name_prefix = Rails.env')
   end
 
+  it 'enables lograge' do
+    expect(subject).to contain('config.lograge.enabled = true')
+  end
+
   it 'configures the middleware for rack deflater' do
     expect(subject).to contain('config.middleware.use Rack::Deflater')
   end
