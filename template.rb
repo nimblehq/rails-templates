@@ -82,11 +82,18 @@ end
 def ask_for_optional_addons
   @install_github_action = true if yes?(install_addon_prompt('Github Action and Wiki'))
   @install_openapi = true if API_VARIANT || yes?(install_addon_prompt('OpenAPI'))
-  @install_mock_server if @install_openapi && yes?(install_addon_prompt('Mock Server'))
+  @install_mock_server = true if @install_openapi && yes?(install_addon_prompt('Mock Server'))
   @install_semaphore = true if yes?(install_addon_prompt('SemaphoreCI'))
   @install_nginx = true if yes?(install_addon_prompt('Nginx'))
   @install_phrase = true if yes?(install_addon_prompt('Phrase'))
   @install_devise = true if yes?(install_addon_prompt('Devise'))
+
+  return unless WEB_VARIANT
+
+  @install_bootstrap = true if yes?(install_addon_prompt('Bootstrap'))
+  @install_slim = true if yes?(install_addon_prompt('Slim Template Engine'))
+  @install_hotwire = true if yes?(install_addon_prompt('Hotwire'))
+  @install_svgeez = true if yes?(install_addon_prompt('Svgeez'))
 end
 
 def apply_optional_addons

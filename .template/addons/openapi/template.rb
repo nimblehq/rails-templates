@@ -10,7 +10,6 @@ copy_file '.spectral.yml'
 copy_file 'public/openapi.html'
 
 if @install_mock_server
-  @install_mock_server = true
   copy_file 'fly.toml'
   copy_file 'Dockerfile.mock'
 end
