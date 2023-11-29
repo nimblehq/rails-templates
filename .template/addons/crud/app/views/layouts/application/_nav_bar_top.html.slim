@@ -1,0 +1,33 @@
+.app__nav_bar_top
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      a.navbar-brand[href="#"]
+        | NavbarTop
+      button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#top_navbar_nav" aria-controls="top_navbar_nav" aria-expanded="false" aria-label="Toggle navigation"]
+        span.navbar-toggler-icon
+      #top_navbar_nav.collapse.navbar-collapse
+        ul.navbar-nav.me-auto.mb-2.mb-lg-0
+          li.nav-item
+            a.nav-link.active[aria-current="page" href="#"]
+              | Home
+          li.nav-item
+            a.nav-link[href="#"]
+              | Link
+          li.nav-item
+            a.nav-link.disabled[href="#" tabindex="-1" aria-disabled="true"]
+              | Disabled
+          li.nav-item.dropdown
+            a#dropdown09.nav-link.dropdown-toggle[href="#" data-bs-toggle="dropdown" aria-expanded="false"]
+              | Account
+            ul.dropdown-menu[aria-labelledby="dropdown09"]
+              li
+                a.dropdown-item[href="#"]
+                  | Profile
+              li
+                a.dropdown-item[href="#"]
+                  | Settings
+              li
+                a.dropdown-item[href="#"]
+                  | Logout
+        form
+          input.form-control[type="text" placeholder="Search" aria-label="Search"]

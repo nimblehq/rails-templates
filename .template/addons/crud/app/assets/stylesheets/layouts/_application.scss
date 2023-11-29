@@ -1,0 +1,92 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
+  &__main {
+    padding: rem(16px);
+    margin: rem(16px);
+  }
+
+  &__footer {
+    grid-area: footer;
+    padding: rem(8px);
+  }
+
+  &__nav_bar_top {
+    grid-area: navBar;
+    border-bottom: solid var(--bs-border-width) var(--bs-gray-400);
+  }
+
+  &__side_bar {
+    grid-area: sideBar;
+    display: flex;
+    flex-flow: column;
+    padding: rem(32px);
+    background-color: var(--bs-light);
+    width: rem(280px);
+    height: 100%;
+
+    .dropdown-toggle {
+      outline: 0;
+    }
+
+    .btn-toggle {
+      padding: 0.25rem 0.5rem;
+      font-weight: 600;
+      color: var(--bs-emphasis-color);
+      background-color: transparent;
+    }
+    .btn-toggle:hover,
+    .btn-toggle:focus {
+      color: rgba(var(--bs-emphasis-color-rgb), 0.85);
+      background-color: var(--bs-tertiary-bg);
+    }
+
+    .btn-toggle::before {
+      width: 1.25em;
+      line-height: 0;
+      content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+      transition: transform 0.35s ease;
+      transform-origin: 0.5em 50%;
+    }
+
+    [data-bs-theme="dark"] .btn-toggle::before {
+      content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%28255,255,255,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+    }
+
+    .btn-toggle[aria-expanded="true"] {
+      color: rgba(var(--bs-emphasis-color-rgb), 0.85);
+    }
+    .btn-toggle[aria-expanded="true"]::before {
+      transform: rotate(90deg);
+    }
+
+    .btn-toggle-nav a {
+      padding: 0.1875rem 0.5rem;
+      margin-top: 0.125rem;
+      margin-left: 1.25rem;
+    }
+    .btn-toggle-nav a:hover,
+    .btn-toggle-nav a:focus {
+      background-color: var(--bs-tertiary-bg);
+    }
+
+    .scrollarea {
+      overflow-y: auto;
+    }
+  }
+}

@@ -4,14 +4,15 @@
 # Y - in response to Would you like to add the SemaphoreCI addon?
 # Y - in response to Would you like to add the Nginx addon?
 # Y - in response to Would you like to add the Phrase addon?
-# Y - in response to Would you like to add the Devise addon?
-# Y - in response to Would you like to add the Bootstrap addon?
-# Y - in response to Would you like to add the Slim Template Engine addon?
+# Y - in response to Would you like to add the CRUD addon?
+#   - Devise auto included with the CRUD addon.
+#   - Bootstrap auto included with the CRUD addon.
+#   - Slim Template Engine auto included with the CRUD addon.
 # Y - in response to Would you like to add the Hotwire addon?
 # Y - in response to Would you like to add the Svgeez addon?
 
 create_web:
-	printf "Y\nY\nY\nY\nY\nY\nY\nY\nY\nY\nY\n" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
+	printf "Y\nY\nY\nY\nY\nY\nY\nY\nY\n" | rails new $(APP_NAME) -m ./template.rb -T ${OPTIONS}
 
 # Y - in response to Would you like to add the Github addon?
 # Y - in response to Would you like to add the Mock Server addon?

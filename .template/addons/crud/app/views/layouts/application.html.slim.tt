@@ -1,0 +1,25 @@
+doctype html
+html lang= I18n.locale
+  head
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title= content_for?(:title) ? yield(:title) : '<%= app_name %>'
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', :media => 'all'
+    = javascript_include_tag "application"
+
+  body class=class_names(controller_name.dasherize, action_name.dasherize)
+    header
+      = render('layouts/application/nav_bar_top')
+    .app
+      .side_bar
+        = render('layouts/application/side_bar')
+      .app__container
+        main.app__main
+          = yield
+        footer.app__footer
+            p.text-center.text-muted
+              | &copy;
+              = ' <%= app_name %>'
+              = Date.today.year
