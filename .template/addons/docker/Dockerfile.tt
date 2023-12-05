@@ -18,14 +18,16 @@ ENV BUILD_ENV=$BUILD_ENV \
     <%- if WEB_VARIANT -%>
     ASSET_HOST=$ASSET_HOST \
     NODE_ENV=$NODE_ENV \
+    NODE_VERSION=<%= NODE_VERSION %> \
     NODE_SOURCE_VERSION=<%= NODE_SOURCE_VERSION %> \
     <%- end -%>
     LANG="en_US.UTF-8" \
     LC_ALL="en_US.UTF-8" \
     LANGUAGE="en_US:en"
 
-RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends apt-transport-https curl gnupg net-tools && \
+RUN set -uex; \
+    apt-get update -qq && \
+    apt-get install -y --no-install-recommends ca-certificates curl gnupg && \
     apt-get install -y --no-install-recommends build-essential libpq-dev && \
     apt-get install -y --no-install-recommends rsync locales chrpath pkg-config libfreetype6 libfontconfig1 git cmake wget unzip && \
     apt-get clean && \
@@ -35,13 +37,19 @@ RUN apt-get update -qq && \
 # Add Yarn repository
 # Add the PPA (personal package archive) maintained by NodeSource
 # This will have more up-to-date versions of Node.js than the official Debian repositories
-ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
-RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg && \
-    echo "deb http://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
-    echo 'Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 600' > /etc/apt/preferences.d/nodesource && \
-    curl -fsSL https://deb.nodesource.com/setup_"$NODE_SOURCE_VERSION".x | bash - && \
+RUN mkdir -p /etc/apt/keyrings; \
+    # Download Yarnsource GPG key and add Yarn source to the source list
+    curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg \
+    | gpg --dearmor -o /etc/apt/keyrings/yarnsource.gpg; \
+    echo "deb [signed-by=/etc/apt/keyrings/yarnsource.gpg] http://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+    # Download nodesource GPG key and add nodesource to the source list
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
+    | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg; \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_SOURCE_VERSION.x nodistro main" \
+    > /etc/apt/sources.list.d/nodesource.list; \
     apt-get update -qq && \
-    apt-get install -y --no-install-recommends nodejs yarn && \
+    # Force installing the expected version: https://github.com/nodesource/distributions/wiki/How-to-select-the-Node.js-version-to-install
+    apt-get install -y --no-install-recommends nodejs=${NODE_VERSION}-1nodesource1 yarn && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
