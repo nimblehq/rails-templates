@@ -3,7 +3,6 @@
     "@nimblehq/stylelint-config-nimble"
   ],
   "rules": {
-    "no-eol-whitespace": true,
     "max-nesting-depth": 3,
     "scss/at-extend-no-missing-placeholder": null,
     "order/properties-alphabetical-order": null

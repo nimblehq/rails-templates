@@ -14,7 +14,7 @@ env:
   DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
   DOCKER_IMAGE: ${{ github.repository }}
   <%- if WEB_VARIANT -%>
-  NODE_VERSION: 16
+  NODE_VERSION: 18
   <%- end -%>
 
   # Set the default docker-compose file
