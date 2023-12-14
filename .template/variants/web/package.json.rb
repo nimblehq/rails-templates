@@ -29,9 +29,9 @@ run 'yarn add esbuild'
 run 'yarn add postcss postcss-cli autoprefixer'
 
 run 'yarn add --dev eslint'
-run 'yarn add --dev stylelint'
+run 'yarn add --dev stylelint@^15'
 run 'yarn add --dev @nimblehq/eslint-config-nimble@2.2.1'
-run 'yarn add --dev @nimblehq/stylelint-config-nimble@1.0.2'
+run 'yarn add --dev @nimblehq/stylelint-config-nimble@1.1.0'
 
 # Setup scripts
 run 'npm pkg set scripts.eslint="eslint . --color"'
