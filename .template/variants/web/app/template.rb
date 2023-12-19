@@ -20,7 +20,7 @@ end
 
 if layout_not_found
   @template_errors.add <<~ERROR
-    Cannot include javascript into `app/views/layouts/application.html.erb`
+    Cannot include javascript into `app/views/layouts/application.html.{erb|slim}`
     Content: <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   ERROR
 end
