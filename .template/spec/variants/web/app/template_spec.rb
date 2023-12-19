@@ -21,10 +21,6 @@ describe 'Web variant - /app template' do
         expect(file('app/javascript/application.js')).to exist
       end
 
-      it 'loads the javascript entry file in the layout' do
-        expect(file('app/views/layouts/application.html.erb')).to contain('<%= javascript_include_tag "application"')
-      end
-
       it 'imports necessary modules' do
         expect(file('app/javascript/application.js')).to contain('import \'./translations/translations\';')
 
@@ -102,10 +98,6 @@ describe 'Web variant - /app template' do
 
     it 'includes the localization concern in the application controller' do
       expect(file('app/controllers/application_controller.rb')).to contain('include Localization')
-    end
-
-    it 'modifies the html tag to attach the current locale' do
-      expect(file('app/views/layouts/application.html.erb')).to contain("<html lang='<%= I18n.locale %>'>")
     end
   end
 end

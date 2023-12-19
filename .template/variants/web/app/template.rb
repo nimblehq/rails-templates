@@ -3,15 +3,22 @@
 # Javascript
 directory 'app/javascript'
 
-if File.exist?('app/views/layouts/application.html.erb')
-  insert_into_file 'app/views/layouts/application.html.erb', before: %r{</head>} do
+erb_layout_file = 'app/views/layouts/application.html.erb'
+slim_layout_file = 'app/views/layouts/application.html.slim'
+layout_file = nil
+
+layout_file = erb_layout_file if File.exist?(erb_layout_file)
+layout_file = slim_layout_file if File.exist?(slim_layout_file)
+
+if layout_file
+  insert_into_file layout_file, before: %r{</head>} do
     <<~ERB.indent(2)
       <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     ERB
   end
 else
   @template_errors.add <<~ERROR
-    Cannot include javascript into `app/views/layouts/application.html.erb`
+    Cannot include javascript into `app/views/layouts/application.html.{erb|slim}`
     Content: <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   ERROR
 end
@@ -33,11 +40,12 @@ inject_into_class 'app/controllers/application_controller.rb', 'ApplicationContr
   RUBY
 end
 
-if File.exist?('app/views/layouts/application.html.erb')
+if erb_layout_file
   gsub_file 'app/views/layouts/application.html.erb', /<html>/ do
     "<html lang='<%= I18n.locale %>'>"
   end
-else
+# The slim layout (CRUD addon) already has the lang attribute
+elsif slim_layout_file.blank?
   @template_errors.add <<~ERROR
     Cannot insert the lang attribute into html tag into `app/views/layouts/application.html.erb`
     Content: <html lang='<%= I18n.locale %>'>

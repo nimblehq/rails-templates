@@ -1,5 +1,5 @@
 doctype html
-html lang= I18n.locale
+html lang=I18n.locale
   head
     meta charset="utf-8"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
@@ -7,7 +7,7 @@ html lang= I18n.locale
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', :media => 'all'
-    = javascript_include_tag "application"
+    = javascript_include_tag 'application'
 
   body class=class_names(controller_name.dasherize, action_name.dasherize)
     header
