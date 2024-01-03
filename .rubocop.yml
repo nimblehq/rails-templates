@@ -54,3 +54,6 @@ RSpec/MultipleExpectations:
 
 CustomCops/RequiredInverseOfRelations:
   Enabled: true
+  Include:
+    # Only Rails model files
+    - !ruby/regexp /models\//
