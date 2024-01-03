@@ -27,5 +27,5 @@ jobs:
         uses: nimblehq/publish-github-wiki-action@v1.0
         with:
           user_name: github-wiki-workflow
-          user_email: bot@nimblehq.co
+          user_email: ${{ secrets.USER_EMAIL }}
           user_access_token: ${{ secrets.USER_ACCESS_TOKEN }}
