@@ -2,6 +2,7 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
+  - ./lib/custom_cops/required_inverse_of_relations.rb
 
 AllCops:
   Exclude:
@@ -50,3 +51,6 @@ RSpec/NestedGroups:
 
 RSpec/MultipleExpectations:
   Max: 10
+
+CustomCops/RequiredInverseOfRelations:
+  Enabled: true

@@ -103,6 +103,7 @@ def apply_optional_addons
   apply '.template/addons/nginx/template.rb' if @install_nginx
   apply '.template/addons/phrase/template.rb' if @install_phrase
   apply '.template/addons/devise/template.rb' if @install_devise
+  apply '.template/addons/custom_cops/template.rb'
 end
 
 # Set Thor::Actions source path for looking up the files
