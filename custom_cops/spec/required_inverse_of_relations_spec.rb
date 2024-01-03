@@ -28,7 +28,7 @@ describe CustomCops::RequiredInverseOfRelations, :config do
   end
 
   context 'given an association expression with :inverse_of option' do
-    it 'do NOT register any offenses' do
+    it 'registers NO offenses' do
       expect_no_offenses(<<~RUBY)
         class Test
           has_many :books, inverse_of: :author
@@ -40,6 +40,32 @@ describe CustomCops::RequiredInverseOfRelations, :config do
           belongs_to :author, inverse_of: :books
         end
       RUBY
+    end
+  end
+
+  context 'given a method which have the same name with one of Rails association helpers' do
+    context 'given the method invocation has explicit module/class' do
+      it 'registers NO offenses' do
+        expect_no_offenses(<<~RUBY)
+          class Test
+            def test
+              Module.has_many :books
+            end
+          end
+        RUBY
+      end
+    end
+
+    context 'given the method invocation has explicit receiver' do
+      it 'registers NO offenses' do
+        expect_no_offenses(<<~RUBY)
+          class Test
+            def test
+              self.has_many :books
+            end
+          end
+        RUBY
+      end
     end
   end
 end
