@@ -10,6 +10,6 @@ template 'app/views/layouts/application.html.slim.tt'
 directory 'app/assets/stylesheets/layouts'
 insert_into_file 'app/assets/stylesheets/application.scss', after: %r{// Layouts\n} do
   <<~SCSS
-    @import './layouts';
+    @import 'layouts';
   SCSS
 end

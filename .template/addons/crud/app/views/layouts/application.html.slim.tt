@@ -13,7 +13,7 @@ html lang=I18n.locale
     header
       = render('layouts/application/nav_bar_top')
     .app
-      .side_bar
+      .side-bar
         = render('layouts/application/side_bar')
       .app__container
         main.app__main
