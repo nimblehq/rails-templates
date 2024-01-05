@@ -2,7 +2,7 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
-  - ./lib/custom_cops/required_inverse_of_relations.rb
+  - ./custom_cops/required_inverse_of_relations.rb
 
 AllCops:
   Exclude:
