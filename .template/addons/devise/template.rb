@@ -6,3 +6,7 @@ apply '.template/addons/devise/spec_support.rb'
 after_bundle do
   generate 'devise:install'
 end
+
+create_file 'lib/hello.rb' do
+  ''
+end
