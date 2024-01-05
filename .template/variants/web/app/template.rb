@@ -8,6 +8,7 @@ slim_layout_file = 'app/views/layouts/application.html.slim'
 
 erb_layout_exists = File.exist?(erb_layout_file)
 slim_layout_exists = File.exist?(slim_layout_file)
+layout_not_found = !erb_layout_exists && !slim_layout_exists
 
 if erb_layout_exists
   insert_into_file erb_layout_file, before: %r{</head>} do
@@ -15,8 +16,9 @@ if erb_layout_exists
       <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     ERB
   end
-# The slim layout (CRUD addon) already has the javascript include tag
-elsif !slim_layout_exists
+end
+
+if layout_not_found
   @template_errors.add <<~ERROR
     Cannot include javascript into `app/views/layouts/application.html.erb`
     Content: <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
@@ -44,8 +46,9 @@ if erb_layout_exists
   gsub_file erb_layout_file, /<html>/ do
     "<html lang='<%= I18n.locale %>'>"
   end
-# The slim layout (CRUD addon) already has the lang attribute
-elsif !erb_layout_exists
+end
+
+if layout_not_found
   @template_errors.add <<~ERROR
     Cannot insert the lang attribute into html tag into `app/views/layouts/application.html.erb`
     Content: <html lang='<%= I18n.locale %>'>
