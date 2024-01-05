@@ -8,18 +8,18 @@ module CustomCops
     RESTRICT_ON_SEND = %i[has_many belongs_to].freeze
     ASSOCIATION_METHODS = RESTRICT_ON_SEND.to_set
 
-    def_node_matcher :missing_inverse_of_no_arguments?, <<~PATTERN
+    def_node_matcher :association_expression_no_arguments?, <<~PATTERN
       (send nil? ASSOCIATION_METHODS (sym _))
     PATTERN
 
-    def_node_matcher :missing_inverse_of_with_arguments?, <<~PATTERN
+    def_node_matcher :association_expression_with_arguments?, <<~PATTERN
       (send nil? ASSOCIATION_METHODS (sym _) (hash $...))
     PATTERN
 
     def on_send(node)
-      return add_offense(node) if missing_inverse_of_no_arguments?(node)
+      return add_offense(node) if association_expression_no_arguments?(node)
 
-      return unless (hash_pairs = missing_inverse_of_with_arguments?(node))
+      return unless (hash_pairs = association_expression_with_arguments?(node))
 
       add_offense(node) unless contain_inverse_of?(hash_pairs)
     end
