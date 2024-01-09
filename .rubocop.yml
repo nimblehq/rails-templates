@@ -21,6 +21,9 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+Style/DocumentationMethod:
+  Enabled: true
+
 Layout/LineLength:
   Max: 130
   Exclude:
