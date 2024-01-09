@@ -6,6 +6,10 @@ module SvgHelper
     height: '16'
   }.freeze
 
+  # @param [Hash<String: String>] html
+  # @param [String] icon_id
+  #
+  # @return [String]
   def svg_tag(html: {}, icon_id: '')
     svg_attributes = DEFAULT_SVG_ATTRIBUTES.merge(html)
 
