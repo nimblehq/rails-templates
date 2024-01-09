@@ -2,7 +2,7 @@
 
 require 'rubocop'
 require 'rubocop/rspec/support'
-require_relative '../required_inverse_of_relations'
+require_relative '../cops/required_inverse_of_relations'
 
 RSpec.configure do |config|
   config.include RuboCop::RSpec::ExpectOffense
