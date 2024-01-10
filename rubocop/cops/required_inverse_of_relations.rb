@@ -19,9 +19,9 @@ module CustomCops
     def on_send(node)
       return add_offense(node) if association_expression_no_arguments?(node)
 
-      return unless (hash_pairs = association_expression_with_arguments?(node))
+      hash_pairs = association_expression_with_arguments?(node)
 
-      add_offense(node) unless contain_inverse_of?(hash_pairs)
+      add_offense(node) if hash_pairs && !contain_inverse_of?(hash_pairs)
     end
 
     private
