@@ -45,7 +45,7 @@ jobs:
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Pull Docker image
-        if: ${{ env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'development' }}
+        if: ${{ env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'develop' }}
         run: docker-compose pull test || true
 
       - name: Build Docker image
