@@ -2,4 +2,4 @@
 
 require 'fileutils'
 
-copy_file 'rubocop/cops/required_inverse_of_relations.rb', mode: :preserve
+copy_file 'rubocop/custom_cops/required_inverse_of_relations.rb', mode: :preserve
