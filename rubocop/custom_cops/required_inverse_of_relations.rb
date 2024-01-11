@@ -16,6 +16,7 @@ module CustomCops
       (send nil? ASSOCIATION_METHODS (sym _) (hash $...))
     PATTERN
 
+    # See https://docs.rubocop.org/rubocop/development.html#writing-node-pattern-rules
     def on_send(node)
       return add_offense(node) if association_expression_no_arguments?(node)
 
