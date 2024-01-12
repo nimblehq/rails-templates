@@ -2,6 +2,7 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
+  - ./rubocop/custom_cops/required_inverse_of_relations.rb
 
 AllCops:
   Exclude:
@@ -20,6 +21,9 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: true
 
 Layout/LineLength:
   Max: 130
@@ -50,3 +54,9 @@ RSpec/NestedGroups:
 
 RSpec/MultipleExpectations:
   Max: 10
+
+CustomCops/RequiredInverseOfRelations:
+  Enabled: true
+  Include:
+    # Only Rails model files
+    - !ruby/regexp /models\//
