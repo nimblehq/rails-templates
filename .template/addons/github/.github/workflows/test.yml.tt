@@ -17,7 +17,7 @@ env:
   NODE_VERSION: 18
   <%- end -%>
 
-  # Set the default docker-compose file
+  # Set the default docker compose file
   COMPOSE_FILE: docker-compose.test.yml
 
   # Set the default CI value despite the Github Action default value
@@ -46,13 +46,13 @@ jobs:
 
       - name: Pull Docker image
         if: ${{ env.BRANCH_TAG != 'latest' && env.BRANCH_TAG != 'develop' }}
-        run: docker-compose pull test || true
+        run: docker compose pull test || true
 
       - name: Build Docker image
-        run: bin/docker-prepare && docker-compose build
+        run: bin/docker-prepare && docker compose build
 
       - name: Push Docker image
-        run: docker-compose push test
+        run: docker compose push test
 
   linting:
     name: Linting
@@ -73,10 +73,10 @@ jobs:
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Pull Docker image
-        run: docker-compose pull test || true
+        run: docker compose pull test || true
 
       - name: Run codebase test
-        run: docker-compose run test -e DISABLE_SPRING=1 bundle exec rspec spec/codebase/codebase_spec.rb --format progress
+        run: docker compose run test -e DISABLE_SPRING=1 bundle exec rspec spec/codebase/codebase_spec.rb --format progress
 
   unit_tests:
     name: Unit tests
@@ -97,10 +97,10 @@ jobs:
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Pull Docker image
-        run: docker-compose pull test || true
+        run: docker compose pull test || true
 
       - name: Run unit tests
-        run: docker-compose run test -e DISABLE_SPRING=1 bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb, spec/codebase/codebase_spec.rb" --profile --format progress
+        run: docker compose run test -e DISABLE_SPRING=1 bundle exec rspec --exclude-pattern "spec/systems/**/*_spec.rb, spec/codebase/codebase_spec.rb" --profile --format progress
 
       - name: Upload tests coverage artifact
         uses: actions/upload-artifact@v3
@@ -130,10 +130,10 @@ jobs:
           password: ${{ env.DOCKER_REGISTRY_TOKEN }}
 
       - name: Pull Docker image
-        run: docker-compose pull test || true
+        run: docker compose pull test || true
 
       - name: Run system tests
-        run: docker-compose run test bundle exec rspec spec/systems --profile --format progress
+        run: docker compose run test bundle exec rspec spec/systems --profile --format progress
 
       - name: Upload system tests screenshots artifact
         uses: actions/upload-artifact@v2
