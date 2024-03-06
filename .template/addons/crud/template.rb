@@ -13,3 +13,5 @@ insert_into_file 'app/assets/stylesheets/application.scss', after: %r{// Layouts
     @import 'layouts';
   SCSS
 end
+
+apply 'lib/template.rb'

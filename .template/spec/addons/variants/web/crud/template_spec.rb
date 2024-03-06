@@ -16,4 +16,8 @@ describe 'CRUD addon - template' do
   it 'creates app/views/layouts/application.html.slim' do
     expect(file('app/views/layouts/application.html.slim')).to exist
   end
+
+  it 'creates lib/templates/slim/scaffold/index.html.slim' do
+    expect(file('lib/templates/slim/scaffold/index.html.slim')).to exist
+  end
 end
