@@ -1,24 +1,25 @@
 # frozen_string_literal: true
 
 def copy_template_files
-  copy_non_tt_files
-  copy_tt_files
+  ignore_tt do
+    directory 'lib/templates', renderTemplates: false
+  end
 end
 
-def copy_non_tt_files
-  # The reason we are excluding .tt files is because
-  # this directory method will actually apply the template and remove the .tt extension in the destination
-  directory 'lib/templates', exclude_pattern: /.*\.tt$/
+def ignore_tt
+  # NOTE: change template extension so it would skip
+  #       `when /#{TEMPLATE_EXTNAME}$/` condition and
+  #        fallback to default `copy_file`
+  Thor::TEMPLATE_EXTNAME.concat "_no_match" # => .tt_no_match
+  yield
+ensure
+  # NOTE: make sure to undo our dirty work after the block
+  Thor::TEMPLATE_EXTNAME.chomp! "_no_match" # => .tt
 end
 
-def copy_tt_files
-  src_path = File.join(__dir__, 'templates')
-  dst_path = 'lib/templates'
-
-  Dir.glob("#{src_path}/**/*.tt").each do |file_source|
-    relative_path = file_source.gsub("#{src_path}/", '')
-
-    copy_file(file_source, File.join(dst_path, relative_path))
+def directory_with_tt(...)
+  ignore_tt do
+    directory(...)
   end
 end
 
