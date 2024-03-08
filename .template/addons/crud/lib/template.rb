@@ -17,10 +17,4 @@ ensure
   Thor::TEMPLATE_EXTNAME.chomp! '_no_match' # => .tt
 end
 
-def directory_with_tt(...)
-  ignore_tt do
-    directory(...)
-  end
-end
-
 copy_template_files
