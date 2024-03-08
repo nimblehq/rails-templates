@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ThorUtils
   def self.ignore_tt
     # NOTE: change template extension so it would skip
