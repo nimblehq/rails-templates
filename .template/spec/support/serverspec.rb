@@ -15,7 +15,7 @@ module ServerSpecHelpers
       logger.warn "Container: #{container.id} #{container.info['Names']}"
     end
 
-    container_name = "#{ENV.fetch('APP_NAME')}-test-run"
+    container_name = "rails-template-test-run"
     container_id = `docker ps -qf "name=#{container_name}"`
     logger.warn "Container name: #{container_name}"
     logger.warn "Container ID: #{container_id}"
