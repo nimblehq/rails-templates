@@ -3,7 +3,7 @@ version: '3.2'
 services:
   db:
     image: postgres:<%= POSTGRES_VERSION %>
-    container_name: <%= APP_NAME %>-db
+    container_name: <%= CONTAINERIZED_APP_NAME %>-db
     environment:
       - POSTGRES_DB=<%= APP_NAME %>_production
     ports:
@@ -11,7 +11,7 @@ services:
 
   redis:
     image: redis:<%= REDIS_VERSION %>
-    container_name: <%= APP_NAME %>-redis
+    container_name: <%= CONTAINERIZED_APP_NAME %>-redis
     ports:
       - "6379:6379"
 
@@ -28,7 +28,7 @@ services:
         - ASSET_HOST
         <%- end -%>
     image: ${DOCKER_REGISTRY_HOST}/${DOCKER_IMAGE}:${BRANCH_TAG}
-    container_name: <%= APP_NAME %>-web
+    container_name: <%= CONTAINERIZED_APP_NAME %>-web
     command: bin/start.sh
     ports:
       - "${PORT}:${PORT}"
