@@ -4,7 +4,7 @@ insert_into_file 'Gemfile', after: /gem 'pundit'.*\n/ do
   <<~RUBY
 
     # Templating
-    gem 'slim' # light weight template engine
+    gem 'slim-rails' # Slim generator for Rails
   RUBY
 end
 
