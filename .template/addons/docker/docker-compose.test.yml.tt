@@ -3,7 +3,7 @@ version: '3.2'
 services:
   db:
     image: postgres:<%= POSTGRES_VERSION %>
-    container_name: <%= APP_NAME %>_db
+    container_name: <%= CONTAINERIZED_APP_NAME %>-db
     environment:
       - POSTGRES_DB=<%= APP_NAME %>_test
       - POSTGRES_PASSWORD=postgres
@@ -12,7 +12,7 @@ services:
 
   redis:
     image: redis:<%= REDIS_VERSION %>
-    container_name: <%= APP_NAME %>_redis
+    container_name: <%= CONTAINERIZED_APP_NAME %>-redis
     ports:
       - "6379"
 
@@ -28,7 +28,7 @@ services:
         - NODE_ENV=test
         <%- end -%>
     image: ${DOCKER_REGISTRY_HOST}/${DOCKER_IMAGE}:${BRANCH_TAG}-test
-    container_name: <%= APP_NAME %>_test
+    container_name: <%= CONTAINERIZED_APP_NAME %>-test
     command: bin/test.sh
     stdin_open: true
     tty: true
