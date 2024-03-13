@@ -12,7 +12,7 @@
     = form.label :password, class: 'form-label'
     = form.password_field :password, class: 'form-control'
 
-  .mt-3
+  .mb-3
     = form.label :password_confirmation, class: 'form-label'
     = form.password_field :password_confirmation, class: 'form-control'
 <% elsif attribute.attachments? -%>
