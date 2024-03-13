@@ -3,7 +3,7 @@ version: '3.2'
 services:
   db:
     image: postgres:<%= POSTGRES_VERSION %>
-    container_name: <%= APP_NAME %>_db
+    container_name: <%= APP_NAME %>-db
     environment:
       - POSTGRES_DB=<%= APP_NAME %>_development
       - POSTGRES_PASSWORD=postgres
@@ -12,6 +12,6 @@ services:
 
   redis:
     image: redis:<%= REDIS_VERSION %>
-    container_name: <%= APP_NAME %>_redis
+    container_name: <%= APP_NAME %>-redis
     ports:
       - "6379:6379"
