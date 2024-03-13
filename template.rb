@@ -3,7 +3,7 @@
 require 'shellwords'
 
 # Variables
-APP_NAME = app_name
+APP_NAME = app_name.tr('_', '-')
 # Transform the app name from slug to human-readable name e.g. nimble-web -> Nimble
 APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
 DOCKER_REGISTRY_HOST = 'docker.io'
