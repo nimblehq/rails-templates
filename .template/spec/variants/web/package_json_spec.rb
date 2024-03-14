@@ -61,7 +61,7 @@ describe 'Web variant - package.json' do
 
   describe 'Development Dependencies' do
     it 'adds Nimble eslint config dependency' do
-      expect(subject['devDependencies']).to include('@nimblehq/eslint-config-nimble')
+      expect(subject['devDependencies']).to include('@nimblehq/eslint-config-nimble-core')
     end
 
     it 'adds stylelint dependencies' do
