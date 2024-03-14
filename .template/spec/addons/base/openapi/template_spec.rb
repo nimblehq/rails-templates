@@ -26,7 +26,7 @@ describe 'OpenAPI addon - template' do
     file_content = JSON.parse(file('package.json').content)['devDependencies']
 
     expect(file_content).to include('eslint')
-    expect(file_content).to include('@nimblehq/eslint-config-nimble')
+    expect(file_content).to include('@nimblehq/eslint-config-nimble-core')
     expect(file_content).to include('@apidevtools/swagger-cli')
     expect(file_content).to include('@stoplight/spectral-cli')
     expect(file_content).to include('eslint-plugin-yml')
