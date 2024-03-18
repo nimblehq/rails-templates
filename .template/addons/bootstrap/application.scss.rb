@@ -2,6 +2,6 @@
 
 insert_into_file 'app/assets/stylesheets/application.scss', after: %r{// Dependencies\n} do
   <<~SCSS
-    @import './vendor';
+    @import 'vendor';
   SCSS
 end

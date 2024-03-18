@@ -1,0 +1,74 @@
+.app__side-bar
+  a.d-flex.align-items-center.mb-3.mb-md-0.me-md-auto.link-dark.text-decoration-none[href="/"]
+    svg.bi.pe-none.me-2[width="40" height="32"]
+      use[xlink:href="#bootstrap"]
+    span.fs-4
+      | Sidebar
+  hr
+  ul.list-unstyled.ps-0
+    li.mb-1
+      button.btn.btn-toggle.d-inline-flex.align-items-center.rounded.border-0.collapsed[data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false"]
+        |  Home
+      #home-collapse.collapse[style=""]
+        ul.btn-toggle-nav.list-unstyled.fw-normal.pb-1.small
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Overview
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Updates
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Reports
+    li.mb-1
+      button.btn.btn-toggle.d-inline-flex.align-items-center.rounded.border-0.collapsed[data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false"]
+        |  Dashboard
+      #dashboard-collapse.collapse[style=""]
+        ul.btn-toggle-nav.list-unstyled.fw-normal.pb-1.small
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Overview
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Weekly
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Monthly
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Annually
+    li.mb-1
+      button.btn.btn-toggle.d-inline-flex.align-items-center.rounded.border-0.collapsed[data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false"]
+        |  Orders
+      #orders-collapse.collapse[style=""]
+        ul.btn-toggle-nav.list-unstyled.fw-normal.pb-1.small
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | New
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Processed
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Shipped
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Returned
+    li.border-top.my-3
+    li.mb-1
+      button.btn.btn-toggle.d-inline-flex.align-items-center.rounded.border-0.collapsed[data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false"]
+        |  Account
+      #account-collapse.collapse
+        ul.btn-toggle-nav.list-unstyled.fw-normal.pb-1.small
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | New...
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Profile
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Settings
+          li
+            a.link-body-emphasis.d-inline-flex.text-decoration-none.rounded[href="#"]
+              | Sign out
