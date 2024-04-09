@@ -1,5 +1,5 @@
 export default {
-  "ignorePatterns": [
+  ignores: [
     "/node_modules/",
     "/config/",
     "/coverage/",
