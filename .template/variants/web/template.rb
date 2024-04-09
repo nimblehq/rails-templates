@@ -4,7 +4,7 @@ def apply_web_variant!
   use_source_path __dir__
 
   template '.eslintrc.tt'
-  copy_file '.eslintignore'
+  copy_file 'eslint.config.mjs'
   copy_file '.stylelintrc'
   copy_file '.stylelintignore'
 
