@@ -15,7 +15,7 @@ describe CustomCops::ClassTemplate, :config do
         class Test
           include B
           extend A
-          ^^^^^^^^ extend should come before include.
+          ^^^^^^^^ extend should come before `include B`.
         end
       RUBY
 
@@ -29,7 +29,7 @@ describe CustomCops::ClassTemplate, :config do
           end
 
           CONSTANT = 1
-          ^^^^^^^^^^^^ constant_assignment should come after include and before initialization.
+          ^^^^^^^^^^^^ constant_assignment should come after `include B` and before `def initialize[...]
         end
       RUBY
 
@@ -51,7 +51,7 @@ describe CustomCops::ClassTemplate, :config do
           end
 
           def self.bar
-          ^^^^^^^^^^^^ public_class_method should come after constant_assignment and before initialization.
+          ^^^^^^^^^^^^ public_class_method should come after `CONSTANT = 1` and before `def initialize[...]
             "bar"
           end
         end

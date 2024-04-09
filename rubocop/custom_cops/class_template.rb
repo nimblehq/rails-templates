@@ -61,25 +61,24 @@ module CustomCops
       expressions.each_cons(2) do |first, second|
         next unless EXPRESSION_TYPE_ORDER[first[:category]] > EXPRESSION_TYPE_ORDER[second[:category]]
 
-        categories = expressions.map { |expression| expression[:category] }
         add_offense(
           second[:expression],
-          message: error_message(second[:category], categories)
+          message: error_message(second[:category], expressions)
         )
       end
     end
 
     # Find the correct spot for the out of order expression
     # rubocop:disable Metrics/MethodLength
-    def error_message(out_of_order_expression, expression_types)
-      expression_types.filter { _1 != out_of_order_expression }
-                      .each_with_index do |expression, index|
+    def error_message(out_of_order_expression, expressions)
+      expressions.filter { _1[:category] != out_of_order_expression }
+                 .each_with_index do |expression, index|
         error = if index.zero?
                   before_first_expression(expression, out_of_order_expression)
-                elsif index == expression_types.size - 1
+                elsif index == expressions.size - 1
                   after_last_expression(expression, out_of_order_expression)
                 else
-                  previous_expression = expression_types[index - 1]
+                  previous_expression = expressions[index - 1]
                   in_between_expressions(previous_expression, expression, out_of_order_expression)
                 end
 
@@ -89,22 +88,30 @@ module CustomCops
     # rubocop:enable Metrics/MethodLength
 
     def before_first_expression(current_expression, out_of_order_expression)
-      return unless EXPRESSION_TYPE_ORDER[out_of_order_expression] < EXPRESSION_TYPE_ORDER[current_expression]
+      unless EXPRESSION_TYPE_ORDER[out_of_order_expression] < EXPRESSION_TYPE_ORDER[current_expression[:category]]
+        return
+      end
 
-      "#{out_of_order_expression} should come before #{current_expression}."
+      "#{out_of_order_expression} should come before `#{current_expression[:expression].source}`."
     end
 
     def after_last_expression(current_expression, out_of_order_expression)
-      return unless EXPRESSION_TYPE_ORDER[out_of_order_expression] > EXPRESSION_TYPE_ORDER[current_expression]
+      unless EXPRESSION_TYPE_ORDER[out_of_order_expression] > EXPRESSION_TYPE_ORDER[current_expression[:category]]
+        return
+      end
 
-      "#{out_of_order_expression} should come after #{current_expression}."
+      "#{out_of_order_expression} should come after `#{current_expression[:expression].source}`."
     end
 
     def in_between_expressions(previous_expression, current_expression, out_of_order_expression)
-      return unless EXPRESSION_TYPE_ORDER[out_of_order_expression] < EXPRESSION_TYPE_ORDER[current_expression] &&
-                    EXPRESSION_TYPE_ORDER[out_of_order_expression] > EXPRESSION_TYPE_ORDER[previous_expression]
+      unless EXPRESSION_TYPE_ORDER[out_of_order_expression] < EXPRESSION_TYPE_ORDER[current_expression[:category]] &&
+             EXPRESSION_TYPE_ORDER[out_of_order_expression] > EXPRESSION_TYPE_ORDER[previous_expression[:category]]
+        return
+      end
 
-      "#{out_of_order_expression} should come after #{previous_expression} and before #{current_expression}."
+      "#{out_of_order_expression} should come after " \
+        "`#{previous_expression[:expression].source}` " \
+        "and before `#{current_expression[:expression].source}`."
     end
   end
 end
