@@ -61,9 +61,10 @@ module CustomCops
       expressions.each_cons(2) do |first, second|
         next unless EXPRESSION_TYPE_ORDER[first[:category]] > EXPRESSION_TYPE_ORDER[second[:category]]
 
+        categories = expressions.map { |expression| expression[:category] }
         add_offense(
           second[:expression],
-          message: error_message(second[:category], expressions.pluck(:category))
+          message: error_message(second[:category], categories)
         )
       end
     end
