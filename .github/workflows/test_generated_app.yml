@@ -4,7 +4,7 @@ on: push
 
 env:
   COMPOSE_FILE: docker-compose.test.yml
-  APP_NAME: rails-template
+  APP_NAME: rails-templates
   DOCKER_IMAGE: ${{ github.repository }}
   DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
   DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
