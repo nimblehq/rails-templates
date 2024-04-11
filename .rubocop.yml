@@ -17,6 +17,7 @@ AllCops:
     - 'node_modules/**/*'
     - 'config/**/*'
     - 'tmp/**/*'
+    - 'rubocop/**/*'
   TargetRubyVersion: 3
   NewCops: enable
 
