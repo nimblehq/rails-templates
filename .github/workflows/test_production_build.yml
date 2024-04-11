@@ -3,7 +3,7 @@ name: Test Production Docker Build
 on: push
 
 env:
-  APP_NAME: rails_templates
+  APP_NAME: rails-templates
   DOCKER_IMAGE: ${{ github.repository }}
   DOCKER_REGISTRY_HOST: ${{ secrets.DOCKER_REGISTRY_HOST }}
   RUBY_VERSION: 3.2.2

@@ -7,7 +7,8 @@ module ServerSpecHelpers
   # Prebuild and run docker image before running the test
   # Because the docker api does not support docker compose
   def self.test_container
-    container_id = `docker ps -qf "name=#{ENV.fetch('APP_NAME')}_test"`
+    container_name = "#{ENV.fetch('APP_NAME')}-test"
+    container_id = `docker ps -qf "name=#{container_name}"`
 
     Docker::Container.get(container_id.strip)
   end

@@ -3,7 +3,7 @@
 describe 'Web variant - template' do
   it 'creates the eslint configuration files' do
     expect(file('.eslintrc')).to exist
-    expect(file('.eslintignore')).to exist
+    expect(file('eslint.config.mjs')).to exist
   end
 
   it 'creates the stylelint configuration files' do
