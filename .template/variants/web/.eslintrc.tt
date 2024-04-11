@@ -1,10 +1,10 @@
 {
   "extends": [
     <%- if @install_openapi -%>
-      "@nimblehq/eslint-config-nimble",
+      "@nimblehq/eslint-config-nimble-core",
       "plugin:yml/recommended"
     <%- else -%>
-      "@nimblehq/eslint-config-nimble"
+      "@nimblehq/eslint-config-nimble-core"
     <%- end -%>
   ],
   "globals": {

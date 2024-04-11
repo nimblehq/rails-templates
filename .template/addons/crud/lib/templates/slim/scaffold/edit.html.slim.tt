@@ -1,0 +1,8 @@
+h1 Editing <%= human_name.downcase %>
+
+== render "form", <%= singular_table_name %>: @<%= singular_table_name %>
+
+br
+
+div
+  =< link_to "Back to <%= human_name.pluralize.downcase %>", <%= index_helper(type: :path) %>, class: 'btn btn-secondary'
