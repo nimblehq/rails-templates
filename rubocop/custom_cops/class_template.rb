@@ -88,17 +88,13 @@ module CustomCops
     # rubocop:enable Metrics/MethodLength
 
     def before_first_expression(current_expression, out_of_order_expression)
-      unless EXPRESSION_TYPE_ORDER[out_of_order_expression] < EXPRESSION_TYPE_ORDER[current_expression[:category]]
-        return
-      end
+      return unless EXPRESSION_TYPE_ORDER[out_of_order_expression] < EXPRESSION_TYPE_ORDER[current_expression[:category]]
 
       "#{out_of_order_expression} should come before `#{current_expression[:expression].source}`."
     end
 
     def after_last_expression(current_expression, out_of_order_expression)
-      unless EXPRESSION_TYPE_ORDER[out_of_order_expression] > EXPRESSION_TYPE_ORDER[current_expression[:category]]
-        return
-      end
+      return unless EXPRESSION_TYPE_ORDER[out_of_order_expression] > EXPRESSION_TYPE_ORDER[current_expression[:category]]
 
       "#{out_of_order_expression} should come after `#{current_expression[:expression].source}`."
     end
