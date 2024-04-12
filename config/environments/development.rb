@@ -9,7 +9,7 @@ insert_into_file 'config/environments/development.rb', after: /config.action_mai
 
     config.action_mailer.default_url_options = {
       host: ENV.fetch('MAILER_DEFAULT_HOST', 'localhost'),
-      port: ENV.fetch('MAILER_DEFAULT_PORT')
+      port: ENV.fetch('MAILER_DEFAULT_PORT', '3000')
     }
   RUBY
 end
