@@ -33,13 +33,13 @@ describe 'config/environments/production.rb' do
   def i18n_config
     <<~RUBY
       # eg: AVAILABLE_LOCALES = 'en,th'
-      config.i18n.available_locales = ENV.fetch('AVAILABLE_LOCALES').split(',')
+      config.i18n.available_locales = ENV.fetch('AVAILABLE_LOCALES', 'en').split(',')
 
       # eg: DEFAULT_LOCALE = 'en'
-      config.i18n.default_locale = ENV.fetch('DEFAULT_LOCALE')
+      config.i18n.default_locale = ENV.fetch('DEFAULT_LOCALE', 'en')
 
       # eg: FALLBACK_LOCALES = 'en,th'
-      config.i18n.fallbacks = ENV.fetch('FALLBACK_LOCALES').split(',')
+      config.i18n.fallbacks = ENV.fetch('FALLBACK_LOCALES', 'en').split(',')
     RUBY
   end
 end
