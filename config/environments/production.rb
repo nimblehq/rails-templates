@@ -6,10 +6,10 @@ gsub_file('config/environments/production.rb', "ENV['RAILS_SERVE_STATIC_FILES'].
 insert_into_file 'config/environments/production.rb', after: /config.action_mailer.perform_caching.+\n/ do
   <<~RUBY.indent(2)
 
-    config.action_mailer.asset_host = ENV.fetch('MAILER_DEFAULT_HOST')
+    config.action_mailer.asset_host = ENV.fetch('MAILER_DEFAULT_HOST', 'localhost')
 
     config.action_mailer.default_url_options = {
-      host: ENV.fetch('MAILER_DEFAULT_HOST'),
+      host: ENV.fetch('MAILER_DEFAULT_HOST', 'localhost'),
       port: ENV.fetch('MAILER_DEFAULT_PORT')
     }
   RUBY

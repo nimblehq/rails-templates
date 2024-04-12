@@ -20,7 +20,7 @@ describe 'config/environments/test.rb' do
   def mailer_default_url_config
     <<~RUBY
       config.action_mailer.default_url_options = {
-        host: ENV.fetch('MAILER_DEFAULT_HOST'),
+        host: ENV.fetch('MAILER_DEFAULT_HOST', 'localhost'),
         port: ENV.fetch('MAILER_DEFAULT_PORT')
       }
     RUBY

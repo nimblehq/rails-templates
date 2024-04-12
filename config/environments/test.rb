@@ -4,7 +4,7 @@ insert_into_file 'config/environments/test.rb', after: /config.action_mailer.per
   <<~RUBY.indent(2)
 
     config.action_mailer.default_url_options = {
-      host: ENV.fetch('MAILER_DEFAULT_HOST'),
+      host: ENV.fetch('MAILER_DEFAULT_HOST', 'localhost'),
       port: ENV.fetch('MAILER_DEFAULT_PORT')
     }
   RUBY
