@@ -4,7 +4,7 @@ describe 'config/environments/production.rb' do
   subject { file('config/environments/production.rb') }
 
   it 'configures the mailer asset host' do
-    expect(subject).to contain("config.action_mailer.asset_host = ENV.fetch('MAILER_DEFAULT_HOST')")
+    expect(subject).to contain("config.action_mailer.asset_host = ENV.fetch('MAILER_DEFAULT_HOST', 'localhost')")
   end
 
   it 'configures the mailer default url options' do
@@ -24,8 +24,8 @@ describe 'config/environments/production.rb' do
   def mailer_default_url_config
     <<~RUBY
       config.action_mailer.default_url_options = {
-        host: ENV.fetch('MAILER_DEFAULT_HOST'),
-        port: ENV.fetch('MAILER_DEFAULT_PORT')
+        host: ENV.fetch('MAILER_DEFAULT_HOST', 'localhost'),
+        port: ENV.fetch('MAILER_DEFAULT_PORT', '3000')
       }
     RUBY
   end
@@ -33,13 +33,13 @@ describe 'config/environments/production.rb' do
   def i18n_config
     <<~RUBY
       # eg: AVAILABLE_LOCALES = 'en,th'
-      config.i18n.available_locales = ENV.fetch('AVAILABLE_LOCALES').split(',')
+      config.i18n.available_locales = ENV.fetch('AVAILABLE_LOCALES', 'en').split(',')
 
       # eg: DEFAULT_LOCALE = 'en'
-      config.i18n.default_locale = ENV.fetch('DEFAULT_LOCALE')
+      config.i18n.default_locale = ENV.fetch('DEFAULT_LOCALE', 'en')
 
       # eg: FALLBACK_LOCALES = 'en,th'
-      config.i18n.fallbacks = ENV.fetch('FALLBACK_LOCALES').split(',')
+      config.i18n.fallbacks = ENV.fetch('FALLBACK_LOCALES', 'en').split(',')
     RUBY
   end
 end
