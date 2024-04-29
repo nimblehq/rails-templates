@@ -3,6 +3,7 @@ require:
   - rubocop-rspec
   - rubocop-performance
   - ./rubocop/custom_cops/required_inverse_of_relations.rb
+  - ./rubocop/custom_cops/class_template.rb
 
 AllCops:
   Exclude:
@@ -16,6 +17,7 @@ AllCops:
     - 'node_modules/**/*'
     - 'config/**/*'
     - 'tmp/**/*'
+    - 'rubocop/**/*'
   TargetRubyVersion: 3
   NewCops: enable
 
@@ -60,3 +62,6 @@ CustomCops/RequiredInverseOfRelations:
   Include:
     # Only Rails model files
     - !ruby/regexp /models\//
+
+CustomCops/ClassTemplate:
+  Enabled: true
