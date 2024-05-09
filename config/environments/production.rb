@@ -6,11 +6,11 @@ gsub_file('config/environments/production.rb', "ENV['RAILS_SERVE_STATIC_FILES'].
 insert_into_file 'config/environments/production.rb', after: /config.action_mailer.perform_caching.+\n/ do
   <<~RUBY.indent(2)
 
-    config.action_mailer.asset_host = ENV.fetch('MAILER_DEFAULT_HOST')
+    config.action_mailer.asset_host = ENV.fetch('MAILER_DEFAULT_HOST', 'localhost')
 
     config.action_mailer.default_url_options = {
-      host: ENV.fetch('MAILER_DEFAULT_HOST'),
-      port: ENV.fetch('MAILER_DEFAULT_PORT')
+      host: ENV.fetch('MAILER_DEFAULT_HOST', 'localhost'),
+      port: ENV.fetch('MAILER_DEFAULT_PORT', '3000')
     }
   RUBY
 end
@@ -23,13 +23,13 @@ gsub_file('config/environments/production.rb', 'config.i18n.fallbacks = true', '
 environment do
   <<~RUBY
     # eg: AVAILABLE_LOCALES = 'en,th'
-    config.i18n.available_locales = ENV.fetch('AVAILABLE_LOCALES').split(',')
+    config.i18n.available_locales = ENV.fetch('AVAILABLE_LOCALES', 'en').split(',')
 
     # eg: DEFAULT_LOCALE = 'en'
-    config.i18n.default_locale = ENV.fetch('DEFAULT_LOCALE')
+    config.i18n.default_locale = ENV.fetch('DEFAULT_LOCALE', 'en')
 
     # eg: FALLBACK_LOCALES = 'en,th'
-    config.i18n.fallbacks = ENV.fetch('FALLBACK_LOCALES').split(',')
+    config.i18n.fallbacks = ENV.fetch('FALLBACK_LOCALES', 'en').split(',')
 
   RUBY
 end

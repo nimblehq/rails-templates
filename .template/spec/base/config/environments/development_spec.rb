@@ -8,7 +8,7 @@ describe 'config/environments/development.rb' do
   end
 
   it 'configures the mailer asset host' do
-    expect(subject).to contain("config.action_mailer.asset_host = ENV.fetch('MAILER_DEFAULT_HOST')")
+    expect(subject).to contain("config.action_mailer.asset_host = ENV.fetch('MAILER_DEFAULT_HOST', 'localhost')")
   end
 
   it 'configures the mailer default url options' do
@@ -24,8 +24,8 @@ describe 'config/environments/development.rb' do
   def mailer_default_url_config
     <<~RUBY
       config.action_mailer.default_url_options = {
-        host: ENV.fetch('MAILER_DEFAULT_HOST'),
-        port: ENV.fetch('MAILER_DEFAULT_PORT')
+        host: ENV.fetch('MAILER_DEFAULT_HOST', 'localhost'),
+        port: ENV.fetch('MAILER_DEFAULT_PORT', '3000')
       }
     RUBY
   end
