@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.8'
 
 services:
   db:
@@ -6,6 +6,7 @@ services:
     container_name: <%= CONTAINERIZED_APP_NAME %>-db
     environment:
       - POSTGRES_DB=<%= APP_NAME %>_production
+      - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
 
