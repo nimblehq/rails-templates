@@ -9,9 +9,9 @@ CONTAINERIZED_APP_NAME = app_name.tr('_', '-').downcase
 APP_NAME_HUMANIZED = app_name.split(/[-_]/).map(&:capitalize).join(' ').gsub(/ Web$/, '')
 DOCKER_REGISTRY_HOST = 'docker.io'
 DOCKER_IMAGE = "nimblehq/#{CONTAINERIZED_APP_NAME}".freeze
-RUBY_VERSION = '3.2.2'
-POSTGRES_VERSION = '15.2'
-REDIS_VERSION = '6.2.7'
+RUBY_VERSION = '3.3.1'
+POSTGRES_VERSION = '16.3'
+REDIS_VERSION = '7.0.9'
 # Variants
 API_VARIANT = options[:api] || ENV['API'] == 'true'
 WEB_VARIANT = !API_VARIANT
@@ -22,8 +22,8 @@ DEFAULT_ADDONS = {
 }.freeze
 
 if WEB_VARIANT
-  NODE_VERSION = '18.19.0'
-  NODE_SOURCE_VERSION = '18' # Used in Dockerfile https://github.com/nodesource/distributions
+  NODE_VERSION = '22.1.0'
+  NODE_SOURCE_VERSION = '22' # Used in Dockerfile https://github.com/nodesource/distributions
 end
 
 def apply_template!(template_root)
@@ -95,7 +95,6 @@ def ask_for_all_variant_addons
   @install_github_action = yes?(install_addon_prompt('Github Action and Wiki'))
   @install_openapi = API_VARIANT || yes?(install_addon_prompt('OpenAPI'))
   @install_mock_server = @install_openapi && yes?(install_addon_prompt('Mock Server'))
-  @install_semaphore = yes?(install_addon_prompt('SemaphoreCI'))
   @install_nginx = yes?(install_addon_prompt('Nginx'))
   @install_phrase = yes?(install_addon_prompt('Phrase'))
   @install_crud = WEB_VARIANT && yes?(install_addon_prompt('Crud (includes Devise, Bootstrap and Slim)'))
@@ -112,7 +111,6 @@ end
 def apply_optional_addons
   apply '.template/addons/github/template.rb' if @install_github_action
   apply '.template/addons/openapi/template.rb' if @install_openapi
-  apply '.template/addons/semaphore/template.rb' if @install_semaphore
   apply '.template/addons/nginx/template.rb' if @install_nginx
   apply '.template/addons/phrase/template.rb' if @install_phrase
   apply '.template/addons/devise/template.rb' if @install_devise

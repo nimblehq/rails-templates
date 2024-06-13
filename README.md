@@ -16,9 +16,9 @@ with building complex applications over the years.
 
 ### Requirements
 
-- Install ruby and set your local ruby version to `3.2.2`
-- Install rails `7.1.2`
-- Install node `18.19.0` (For creating web application)
+- Install ruby and set your local ruby version to `3.3.1`
+- Install rails `7.1.3`
+- Install node `22.1.0` (For creating web application)
 
 > 📝 If running on Apple M1, to build docker image, please make sure to set platform to AMD64 by `export DOCKER_DEFAULT_PLATFORM=linux/amd64`
 
@@ -49,7 +49,6 @@ Available Addons:
 - `docker`
 - `nginx`
 - `phrase`
-- `semaphore`
 - `bootstrap`
 - `slim`
 - `devise`
