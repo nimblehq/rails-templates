@@ -52,6 +52,7 @@ Available Addons:
 - `bootstrap`
 - `slim`
 - `devise`
+- `claude`
 
 After the template finishes generating all the files, run the following command to start the rails server.
 
