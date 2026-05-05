@@ -48,6 +48,7 @@ These rules surface conventions enforced by the project's Rubocop/RSpec configs.
 <%- end -%>
 
 <%- if @install_devise -%>
+
 ## Authentication (Devise)
 
 - User model: `app/models/user.rb`. Routes mounted under `/users` (sign-in, sign-out, etc.).
@@ -55,40 +56,47 @@ These rules surface conventions enforced by the project's Rubocop/RSpec configs.
 - Mailer views (password reset, confirmation) are in `app/views/devise/`.
 <%- end -%>
 <%- if @install_crud -%>
+
 ## CRUD scaffolding
 
 - Generated CRUD controllers + views follow the Nimble CRUD addon convention: Slim views, Bootstrap 5 classes, scoped to the resource.
 <%- end -%>
 <%- if WEB_VARIANT && @install_bootstrap -%>
+
 ## Bootstrap
 
 - SCSS entry point: `app/assets/stylesheets/application.scss`.
 - JS entry point: `app/javascript/bootstrap.js`. Loaded via `app/javascript/application.js`.
 <%- end -%>
 <%- if WEB_VARIANT && @install_slim -%>
+
 ## Slim templates
 
 - All views are `.slim`. Layouts under `app/views/layouts/`.
 - The `html2slim` gem is available locally for converting ERB to Slim.
 <%- end -%>
 <%- if WEB_VARIANT && @install_hotwire -%>
+
 ## Hotwire
 
 - Turbo + Stimulus are enabled. Stimulus controllers under `app/javascript/controllers/`.
 - Turbo Frames/Streams are wired through `turbo_stream` partials in views.
 <%- end -%>
 <%- if @install_openapi -%>
+
 ## OpenAPI
 
 - Spec lives under `docs/openapi/openapi.yml`. Regenerate with `make doc/generate`.
 <%- end -%>
 <%- if @install_nginx -%>
+
 ## Nginx
 
 - Production reverse-proxy config: `config/nginx/app.conf.template.tt`.
 - Used by the Heroku Nginx buildpack (see `app.json`).
 <%- end -%>
 <%- if @install_github_action -%>
+
 ## CI
 
 - GitHub Actions workflows: `.github/workflows/`. Lint + tests run on every PR.
