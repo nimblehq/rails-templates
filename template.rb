@@ -22,8 +22,8 @@ DEFAULT_ADDONS = {
 }.freeze
 
 if WEB_VARIANT
-  NODE_VERSION = '22.1.0'
-  NODE_SOURCE_VERSION = '22' # Used in Dockerfile https://github.com/nodesource/distributions
+  NODE_VERSION = '24.14.1'
+  NODE_SOURCE_VERSION = '24' # Used in Dockerfile https://github.com/nodesource/distributions
 end
 
 def apply_template!(template_root)
