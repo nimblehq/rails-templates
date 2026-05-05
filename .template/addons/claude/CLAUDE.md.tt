@@ -40,6 +40,12 @@ These rules surface conventions enforced by the project's Rubocop/RSpec configs.
 - Tests live under `spec/`; fabricators under `spec/fabricators/`; shared helpers under `spec/support/`.
 - Rubocop config: `.rubocop.yml` at project root.
 - Custom cops: `lib/custom_cops/` (shipped via the `custom_cops` template addon).
+<%- if WEB_VARIANT -%>
+- Frontend: Node 22 / Yarn. Asset entry points under `app/javascript/`. JS linting via `yarn codebase`.
+<%- end -%>
+<%- if API_VARIANT -%>
+- JSON-only API — no views, no asset pipeline. Serializers live under `app/serializers/`. Use `render json: ...` and serializers, not view templates.
+<%- end -%>
 
 <%- if @install_devise -%>
 ## Authentication (Devise)
