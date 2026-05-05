@@ -56,7 +56,7 @@ These rules surface conventions enforced by the project's Rubocop/RSpec configs.
 <%- if WEB_VARIANT && @install_bootstrap -%>
 ## Bootstrap
 
-- SCSS entry point: `app/assets/stylesheets/application.bootstrap.scss`.
+- SCSS entry point: `app/assets/stylesheets/application.scss`.
 - JS entry point: `app/javascript/bootstrap.js`. Loaded via `app/javascript/application.js`.
 <%- end -%>
 <%- if WEB_VARIANT && @install_slim -%>
@@ -74,12 +74,12 @@ These rules surface conventions enforced by the project's Rubocop/RSpec configs.
 <%- if @install_openapi -%>
 ## OpenAPI
 
-- Spec lives under `docs/openapi.yaml`. Regenerate with `make doc/generate`.
+- Spec lives under `docs/openapi/openapi.yml`. Regenerate with `make doc/generate`.
 <%- end -%>
 <%- if @install_nginx -%>
 ## Nginx
 
-- Production reverse-proxy config: `config/nginx.conf`.
+- Production reverse-proxy config: `config/nginx/app.conf.template.tt`.
 - Used by the Heroku Nginx buildpack (see `app.json`).
 <%- end -%>
 <%- if @install_github_action -%>
