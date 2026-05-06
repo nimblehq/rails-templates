@@ -14,8 +14,6 @@ RSpec.configure do |config|
   end
 end
 
-private
-
 def precompile_assets
   `bundle exec rails assets:precompile RAILS_ENV=test NODE_ENV=test`
 end
