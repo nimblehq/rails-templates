@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 A Rails Application Template (https://guides.rubyonrails.org/rails_application_templates.html) — not a Rails app itself. The output is consumed by `rails new <app> -m template.rb` to scaffold a Nimble-flavored Rails 7.1 / Ruby 3.3.1 project. There is no `app/`, no database, and no server to run here. The "running" version of this project is the *generated app* produced from it.
 
 Two variants are produced from the same template:
-- **Web variant** (default) — full-stack with Node 22 / Yarn assets
+- **Web variant** (default) — full-stack with Node 24.14.1 / Yarn assets
 - **API variant** — `rails new --api`, JSON-only
 
 Both share a common base; variant-specific code lives under `.template/variants/{api,web}/`.
