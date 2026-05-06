@@ -1,2 +1,2 @@
-nodejs >= 18
+nodejs 24.14.1
 ruby 3.3.1

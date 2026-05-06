@@ -22,8 +22,8 @@ DEFAULT_ADDONS = {
 }.freeze
 
 if WEB_VARIANT
-  NODE_VERSION = '22.1.0'
-  NODE_SOURCE_VERSION = '22' # Used in Dockerfile https://github.com/nodesource/distributions
+  NODE_VERSION = '24.14.1'
+  NODE_SOURCE_VERSION = '24' # Used in Dockerfile https://github.com/nodesource/distributions
 end
 
 def apply_template!(template_root)
@@ -99,6 +99,7 @@ def ask_for_all_variant_addons
   @install_phrase = yes?(install_addon_prompt('Phrase'))
   @install_crud = WEB_VARIANT && yes?(install_addon_prompt('Crud (includes Devise, Bootstrap and Slim)'))
   @install_devise = @install_crud || yes?(install_addon_prompt('Devise'))
+  @install_claude = yes?(install_addon_prompt('Claude Code (CLAUDE.md agent guide)'))
 end
 
 def ask_for_web_variant_addons
@@ -114,6 +115,7 @@ def apply_optional_addons
   apply '.template/addons/nginx/template.rb' if @install_nginx
   apply '.template/addons/phrase/template.rb' if @install_phrase
   apply '.template/addons/devise/template.rb' if @install_devise
+  apply '.template/addons/claude/template.rb' if @install_claude
 end
 
 # Set Thor::Actions source path for looking up the files
