@@ -6,9 +6,11 @@ GEM
     docker-api (2.2.0)
       excon (>= 0.47.0)
       multi_json
-    excon (0.100.0)
+    excon (1.5.0)
+      logger
     json (2.6.3)
     language_server-protocol (3.17.0.3)
+    logger (1.7.0)
     multi_json (1.15.0)
     net-scp (4.0.0)
       net-ssh (>= 2.6.5, < 8.0.0)
